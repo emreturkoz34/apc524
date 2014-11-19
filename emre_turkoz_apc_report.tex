@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{amssymb, amsmath}
+\usepackage{hyperref}
+\begin{document}
+
+
+\title{\textbf{Tabulation of Chemical Source Terms for Combustion Simulations}}
+\author{Emmet Cleary: ecleary@princeton.edu \and Daniel Floryan: dfloryan@princeton.edu \and Jeffry Lew: jflew@princeton.edu \and Bruce Perry: bperry@princeton.edu \and Emre Turkoz: eturkoz@princeton.edu}
+\date{ } 
+\maketitle
+
+\section{Introduction}
+
+The thermochemical state in combustion problems depends on many variables. The trick is to identify a single variable that uniquely identifies this thermochemical state. Temperature is the most obvious one: the more a reaction proceeds, the more heat is released. However, filtering conservations equations of energy for Large Eddy Simulation (LES) leads to a closure problem. It is far easier to filter species conservation equations, but a single chemical species is not sufficient to identify the thermochemical state uniquely. Rather, one must take linear combinations of several species, called a progress variable, to define a mass-based conservation equation that is suitable for turbulent combustion simulations.
+
+Once a progress variable is chosen, the thermochemical states can be sorted, interpolated, and convoluted by a probability density function (PDF) to generate a table for chemical source terms (reaction rates). During LES, one can simply look up the chemical source terms in this table as needed, rather than attempt to close a notoriously complicated term.
+
+Our project will build off outputs from existing codes (FlameMaster) and automate and generalize tabulating these outputs for inputs into another code (NGA). FlameMaster models the chemistry, outputting columns of data (temperatures, species mass fractions, source terms, and more) which define a thermochemical state. NGA takes these inputs, arranges them into a table, and uses the table during simulations. Currently no code exists to identify suitable progress variables, which are instead chosen arbitrarily or by (painfully) plotting many progress variables. The tabulation codes in NGA must be rewritten and/or modified every time a table's dimensionality changes, for different combustion modes (premixed or non-premixed), etc.
+
+
+\section{Architecture}
+Our project consists of two related parts: choosing the progress variable, and generating the tables. We will write different parts of our code in Python and C++. 
+
+
+
+\subsection{Python Interface}
+
+
+
+
+\subsection{C++ Interface}
+
+
+
+\section{Milestones}
+
+
+
+
+\section{Risks and Open Issues}
+
+
+
+
+\end{document}
+
+ 
