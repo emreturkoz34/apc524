@@ -1,0 +1,105 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{amssymb, amsmath}
+\usepackage{hyperref}
+\begin{document}
+
+
+\title{\textbf{Tabulation of Chemical Source Terms for Turbulent
+    Combustion Simulations}}
+
+\author{Emmet Cleary: emcleary@princeton.edu \and Daniel Floryan:
+  dfloryan@princeton.edu \and Jeffry Lew: jflew@princeton.edu \and
+  Bruce Perry: bperry@princeton.edu \and Emre Turkoz:
+  eturkoz@princeton.edu} 
+
+\date{21 November 2014 }
+\maketitle
+
+\section{Introduction}
+
+Turbulent combustion simulations require closure of a chemical source
+term. This is not trivial, as it follows highly nonlinear Arrhenius
+kinetics and can depend on numerous stiffly-coupled chemical
+reactions. One approach, rather than evaluating these terms on the
+fly, is to calculate a set thermochemical states \textit{a priori} and
+to use them when solving conservation equations. When combined with
+flamelet models\footnote{Pierce \textit{et al.}, J. Fluid Mech. (2004)
+  vol. 504, pp. 73-97.}, chemical source term tabulation greatly
+facilitates Large Eddy Simulations (LES) of turbulent reacting flows.
+
+The challenge with these tabulation methods is knowing how to identify
+each tabulated term as needed.  This is done by tabulating source
+terms against a predetermined variable. The trick is to identify a
+single variable that uniquely identifies each thermochemical
+state. Temperature is the most obvious one: the more a reaction
+proceeds, the more heat is released. However, filtering conservations
+equations of energy for LES leads to a closure problem. It is far
+easier to filter species conservation equations, but a single chemical
+species is usually insufficient to identify the thermochemical state
+uniquely. Rather, one must take linear combinations of several
+species, called a progress variable, to define a mass-based
+conservation equation that is suitable for turbulent combustion
+simulations. Once a progress variable is chosen, the thermochemical
+states can be sorted, convoluted by a probability density function
+(PDF), and interpolated as needed to generate a table for chemical
+source terms.
+
+\section{Project Summary}
+
+Our project will build off outputs from existing research codes
+(FlameMaster) to facilitate and even automate the selection of
+progress variable. The codes will also sort chemical source terms into
+a table through a variety of interpolation schemes, integration
+schemes, and PDFs. 
+
+% Insert flow charts here along with descriptions.
+
+
+% Presumably this paragraph can be removed.
+FlameMaster models the chemistry, outputting columns of data
+(temperatures, species mass fractions, source terms, and more) which
+define a thermochemical state. NGA takes these inputs, arranges them
+into a table, and uses the table during simulations. Currently no code
+exists to identify suitable progress variables, which are instead
+chosen arbitrarily or by (painfully) plotting many progress
+variables. The tabulation codes in NGA must be rewritten and/or
+modified every time a table's dimensionality changes, for different
+combustion modes (premixed or non-premixed), etc.
+
+
+\section{Architecture}
+Our project consists of two related parts: choosing the progress
+variable, and generating the tables. We will write different parts of
+our code in Python and C++.
+
+
+
+\subsection{Python Interface}
+
+
+
+
+\subsection{C++ Interface}
+
+
+
+\section{Milestones}
+
+
+
+
+\section{Risks and Open Issues}
+
+% Risks
+% -- handling cases where monotonic progress variables are not possible
+% -- ????
+
+
+
+
+\end{document}
+
+ 
