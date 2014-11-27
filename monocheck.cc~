@@ -1,0 +1,5 @@
+/* monocheck is a program which checks whether a specified progress variable is monotonically increasing with respect to temperature. That is, C(T1)<=C(T2) for T1<=T2, where T1 and T2 are any two temperatures and C is the progress variable.
+
+It takes input arguments in the following format:
+
+monocheck < 
