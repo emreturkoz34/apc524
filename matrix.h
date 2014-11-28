@@ -7,6 +7,9 @@ class Matrix {
   ~Matrix();
   double GetVal(int i, int j);
   void SetVal(int i, int j, double val);
+  int GetNumRows();
+  int GetNumCols();
+  double* GetCol(int j);
 
  private:
   double *matrix_;

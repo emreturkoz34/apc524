@@ -23,4 +23,24 @@ void Matrix::SetVal(int i, int j, double val){
   matrix_[i*ncols_ + j] = val;
 }
 
+/// Return the number of rows
+int Matrix::GetNumRows(){
+  return nrows_;
+}
+
+/// Return the number of columns
+int Matrix::GetNumCols(){
+  return ncols_;
+}
+
+/// Return an array containing column j
+double* Matrix::GetCol(int j){
+  double *colAry = new double[nrows_];
+  for (int i=0; i<nrows_; ++i) {
+    colAry[i] = GetVal(i, j);
+  }
+  return colAry;
+}
+
+
 
