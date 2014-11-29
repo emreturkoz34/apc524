@@ -1,3 +1,6 @@
+/* Matrix is a class which represents a 2D matrix of size rows x cols with a 1D array of length rows*cols.
+
+ */
 #include <assert.h>
 #include "matrix.h"
 
@@ -10,11 +13,11 @@ Matrix::Matrix(int rows, int cols)
 
 /// Destructor
 Matrix::~Matrix(){
-  delete matrix_ [];
+  delete[] matrix_;
 }
 
 /// Get the value at a specified index
-double Matrix::GetVal(int i, int j){
+double Matrix::GetVal(int i, int j) const{
   return matrix_[i*ncols_ + j];
 }
 
@@ -24,17 +27,17 @@ void Matrix::SetVal(int i, int j, double val){
 }
 
 /// Return the number of rows
-int Matrix::GetNumRows(){
+int Matrix::GetNumRows() const{
   return nrows_;
 }
 
 /// Return the number of columns
-int Matrix::GetNumCols(){
+int Matrix::GetNumCols() const{
   return ncols_;
 }
 
 /// Return an array containing column j
-double* Matrix::GetCol(int j){
+double* Matrix::GetCol(int j) const{
   double *colAry = new double[nrows_];
   for (int i=0; i<nrows_; ++i) {
     colAry[i] = GetVal(i, j);
