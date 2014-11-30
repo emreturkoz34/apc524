@@ -37,12 +37,16 @@ int Matrix::GetNumCols() const{
 }
 
 /// Return an array containing column j
-double* Matrix::GetCol(int j) const{
-  double *colAry = new double[nrows_];
+int Matrix::GetCol(int j, double *colAry) const{
+  if (colAry == NULL) {
+    printf("colAry is not initialized properly.\n");
+    exit(1);
+  }
+
   for (int i=0; i<nrows_; ++i) {
     colAry[i] = GetVal(i, j);
   }
-  return colAry;
+  return 0;
 }
 
 
