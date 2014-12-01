@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {2}{Flowcharts}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{Progress Variable}{3}{0}{2}
+\beamer@subsectionintoc {2}{2}{Table Generation}{4}{0}{2}
