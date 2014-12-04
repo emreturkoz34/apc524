@@ -3,10 +3,10 @@
 
 class Matrix4D {
  public:
-  Matrix4(int dim1, int dim2, int dim3);
-  ~Matrix4();
+  Matrix4D(int dim1, int dim2, int dim3, int dim4);
+  ~Matrix4D();
   double GetVal(int i, int j, int k, int l) const;
-  void SetVal(int i, int j, int k, int l, double vol);
+  void SetVal(int i, int j, int k, int l, double val);
   int GetNumDim1() const;
   int GetNumDim2() const;
   int GetNumDim3() const;
