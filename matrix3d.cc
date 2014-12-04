@@ -8,7 +8,7 @@ Matrix3D::Matrix3D(int dim1, int dim2, int dim3)
     dim2_(dim2),
     dim3_(dim3) {
   
-  matrix_ = new double[dim1_*dim2_*dim3];
+  matrix_ = new double[dim1_*dim2_*dim3_];
 }
 
 /// Destructor

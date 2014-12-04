@@ -3,8 +3,8 @@
 
 class Matrix3D {
  public:
-  Matrix(int dim1, int dim2, int dim3);
-  ~Matrix();
+  Matrix3D(int dim1, int dim2, int dim3);
+  ~Matrix3D();
   double GetVal(int i, int j, int k) const;
   void SetVal(int i, int j, int k, double vol);
   int GetNumDim1() const;
