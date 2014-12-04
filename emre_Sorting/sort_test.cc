@@ -8,7 +8,7 @@
 
 // User defined library includes
 #include "matrix.h"
-#include "sort.h"
+#include "brute_sort.h"
 
 
 
@@ -60,8 +60,9 @@ int main(){
   WriteMatrixToFile(data, (std::string)"initialMatrix.txt");
   
 
-  sorting* sort_alg = new sorting(data); 
-  sort_alg -> sortData(0);
+  sorting* sort_alg = new brute_sort(data); 
+  sort_alg -> SetRefColNum(0);
+  sort_alg -> sort_data();
 
   WriteMatrixToFile(data, (std::string)"finalMatrix.txt");
 

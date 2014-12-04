@@ -1,9 +1,9 @@
 
-#include "sort.h"
+#include "brute_sort.h"
 
 
 // Constructor
-sorting::sorting(Matrix* data){
+brute_sort::brute_sort(Matrix* data){
   ncols_ = data->GetNumCols();
   nrows_ = data->GetNumRows();
 
@@ -19,17 +19,23 @@ sorting::sorting(Matrix* data){
 }
 
 // Instructor
-sorting::~sorting(){
+brute_sort::~brute_sort(){
 
 }
 
+// Set the reference column number
+void brute_sort::SetRefColNum(int num){
+  refColNum_ = num;
+}
+
+
 // Main sorting body
-void sorting::sortData(int colNum){
+int brute_sort::sort_data(){
   double *refColumn = new double[nrows_];
   int *indices = new int[nrows_];
 
   for(int i = 0; i<nrows_; i++){
-    refColumn[i] = data_->GetVal(i, colNum);
+    refColumn[i] = data_->GetVal(i, refColNum_);
   }
 
   double max_ = refColumn[0];
@@ -56,4 +62,6 @@ void sorting::sortData(int colNum){
   // delete indices
   // delete refColumn
   
+
+  return 0;
 }
