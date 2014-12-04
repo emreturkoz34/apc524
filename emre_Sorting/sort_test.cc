@@ -22,7 +22,7 @@
   The second column is integers starting from 0 to #nrows-1 to check whether the sorting is performed
   as it should be.
 
-  2. WriteMatrixToFile : 
+  2. WriteMatrixToFile : A routine to write the initial and final matrices to files for testing
 
 
  */
@@ -78,16 +78,17 @@ int main(){
   Matrix* data = new Matrix(9,2);
 
   assert(GenerateMatrix(data) == 0);
-  WriteMatrixToFile(data, (std::string)"initialMatrix.txt");
+  WriteMatrixToFile(data, (std::string)"sorting_initialMatrix.txt");
   
 
   sorting* sort_alg = new brute_sort(data); 
   sort_alg -> SetRefColNum(0);
   sort_alg -> sort_data();
 
-  assert(WriteMatrixToFile(data, (std::string)"finalMatrix.txt") == 0);
+  assert(WriteMatrixToFile(data, (std::string)"sorting_finalMatrix.txt") == 0);
 
-  std::cout<<"Everything seems to be OK!"<<std::endl;
+  std::cout<<"The unsorted matrix is written to: sorting_initialMatrix.txt"<<std::endl
+	   <<"The sorted matrix is written to: sorting_finalMatrix.txt"<<std::endl;
 
   return 0;
 }
