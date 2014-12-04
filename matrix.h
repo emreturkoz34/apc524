@@ -1,6 +1,8 @@
 #ifndef MATRIX_H_
 #define MATRIX_H_
 
+#include <stdio.h>
+
 class Matrix {
  public:
   Matrix(int rows, int cols);
@@ -9,7 +11,7 @@ class Matrix {
   void SetVal(int i, int j, double val);
   int GetNumRows() const;
   int GetNumCols() const;
-  double* GetCol(int j) const;
+  int GetCol(int j, double* colAry) const;
 
  private:
   double *matrix_;

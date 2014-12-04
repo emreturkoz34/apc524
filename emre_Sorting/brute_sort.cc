@@ -39,7 +39,7 @@ int brute_sort::sort_data(){
   }
 
   double max_ = refColumn[0];
-  int index;
+  int index = 0;
   for (int i = 0; i<nrows_; i++){
     for(int j = 0; j<nrows_; j++){
       
@@ -59,9 +59,8 @@ int brute_sort::sort_data(){
     }
   }
 
-  // delete indices
-  // delete refColumn
-  
+  delete [] indices;
+  delete [] refColumn;  
 
   return 0;
 }
