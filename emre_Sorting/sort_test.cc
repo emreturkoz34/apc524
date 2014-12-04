@@ -24,6 +24,8 @@
 
   2. WriteMatrixToFile : A routine to write the initial and final matrices to files for testing
 
+  3. main : The main routine for test. The program generates a simple matrix through generate matrix
+  and it is sorted by the brute_sort algorithm.
 
  */
 
