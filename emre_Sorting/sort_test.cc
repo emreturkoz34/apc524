@@ -5,10 +5,29 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <assert.h>
 
 // User defined library includes
 #include "matrix.h"
 #include "brute_sort.h"
+
+
+
+
+/*
+  Test routine for sorting algorithms. This file includes three functions:
+
+  1. GenerateMatrix : This is a hard-coded (n x 2) matrix generator. 
+  The first column of data is generated using -x(x-#rows) to have a sample data set to be sorted
+  The second column is integers starting from 0 to #nrows-1 to check whether the sorting is performed
+  as it should be.
+
+  2. WriteMatrixToFile : 
+
+
+ */
+
+
 
 
 
@@ -45,6 +64,8 @@ int WriteMatrixToFile(Matrix* mat, std::string path){
     }
     output<<std::endl;
   }
+  
+  return 0;
 
 }
 
@@ -56,7 +77,7 @@ int main(){
 
   Matrix* data = new Matrix(9,2);
 
-  GenerateMatrix(data);
+  assert(GenerateMatrix(data) == 0);
   WriteMatrixToFile(data, (std::string)"initialMatrix.txt");
   
 
@@ -64,7 +85,7 @@ int main(){
   sort_alg -> SetRefColNum(0);
   sort_alg -> sort_data();
 
-  WriteMatrixToFile(data, (std::string)"finalMatrix.txt");
+  assert(WriteMatrixToFile(data, (std::string)"finalMatrix.txt") == 0);
 
   std::cout<<"Everything seems to be OK!"<<std::endl;
 
