@@ -1,6 +1,7 @@
 /* This is the header file linregression.h
    
-   See linregression.cc for detailed information about determining the most monotonic progress variable.
+   See linregression.cc for detailed information about determining the
+   most monotonic progress variable.
  */
 #ifndef LINREGRESSION_H_
 #define LINREGRESSION_H_
@@ -8,7 +9,7 @@
 #include "maxslope.h"
 class Matrix;
 
-class LinRegression {
+class LinRegression : public MaxSlope {
  public:
   LinRegression(const Matrix &progVar);
   ~LinRegression();

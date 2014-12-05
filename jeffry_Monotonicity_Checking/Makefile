@@ -1,4 +1,4 @@
-monoObjects = monocheck_tester.o monocheck.o matrix.o
+monoObjects = monocheck_tester.o monocheck.o matrix.o linregression.o
 
 CXXFLAGS = -g -O3 -Wall -lm
 

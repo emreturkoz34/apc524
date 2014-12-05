@@ -1,10 +1,15 @@
-/* linregression is a class that determines the most monotonic progress variable with respect to temperature (or another specified column). It calculates the slope of the best linear approximation for each progress variable and selects the largest.
-
-   The slope is given by {sum_i=1_i=N (C_i-C_ave)(T_i-T_ave)}/{sum_i=1_i=N (T_i-T_ave)^2}
+/* linregression is a class that determines the most monotonic
+ * progress variable with respect to temperature (or another specified
+ * column). It calculates the slope of the best linear approximation
+ * for each progress variable and selects the largest magnitude.
+ *
+ * The slope is given by 
+ * {sum_i=1_i=N (C_i-C_ave)(T_i-T_ave)}/{sum_i=1_i=N (T_i-T_ave)^2}
  */
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <cmath>
 
 #include "maxslope.h"
 #include "linregression.h"
@@ -23,7 +28,13 @@ LinRegression::~LinRegression() {
   delete [] slopes_;
 }
 
-/// MostMonotonic calculates the slope of the best linear approximation for each progress variable which is strictly increasing. The output array monoAry must be of length ncols_, where each cell holds a value of 3 if C is strictly increasing and has the largest slope, 2 if C is strictly increasing but does not have the largest slope, and 0 for non-monotonic C.
+/// MostMonotonic calculates the slope of the best linear
+/// approximation for each progress variable which is strictly
+/// increasing or strictly decreasing. The output array monoAry must
+/// be of length ncols_, where each cell holds a value of 3 if C is
+/// strictly monotonic and has the largest slope, 2 if C is strictly
+/// monotonic but does not have the largest slope, and 0 for
+/// non-monotonic C.
 int LinRegression::MostMonotonic(const int col, int *monoAry){
   if ((col < 0) || (col >= ncols_)) {
     printf("Column %d is not a valid column number.\n", col);
@@ -36,18 +47,8 @@ int LinRegression::MostMonotonic(const int col, int *monoAry){
     exit(1);
   }
 
-  /*
-  // Check whether monoAry contains any monotonic progress variables
-  int sum = 0;
-  for (int j=0; j<ncols_; ++j) {
-    sum = sum + monoAry[j];
-  }
-  if (sum == 3) {
-
-  }
-  */
-
-  const double *monoDomain = progVar_.GetCol(col); // Domain over which monotonicity is checked (usually the temperature column of progVar_ - it is specified by the input "col")
+  double *monoDomain = new double[nrows_];
+  assert(progVar_.GetCol(col, monoDomain) == 0); // Domain over which monotonicity is checked (usually the temperature column of progVar_ - it is specified by the input "col")
 
   // Calculate average domain value (usually average temperature)
   double Tsum = 0.0;
@@ -58,7 +59,8 @@ int LinRegression::MostMonotonic(const int col, int *monoAry){
 
   for (int j=0; j<ncols_; ++j) { // Loop over cells in monoAry
     if (monoAry[j] == 3) { // Monotonic progress variable
-      const double *progVarCol = progVar_.GetCol(j);
+      double *progVarCol = new double[nrows_];
+      assert(progVar_.GetCol(j, progVarCol) == 0);
 
       // Calculate average progress variable
       double Csum = 0.0;
@@ -70,7 +72,7 @@ int LinRegression::MostMonotonic(const int col, int *monoAry){
       // Calculate slope of best fit line
       double sumNumerator = 0.0;
       double sumDenominator = 0.0;
-      double slope = -1.0;
+      double slope = 0.0;
 
       for (int i=0; i<nrows_; ++i) {
 	sumNumerator = sumNumerator + (progVarCol[i]-Cave)*(monoDomain[i]-Tave);
@@ -87,10 +89,48 @@ int LinRegression::MostMonotonic(const int col, int *monoAry){
 
       slopes_[j] = slope; // Store slope 
     }
+    else { // Not monotonic
+      slopes_[j] = 0.0; // set slope to 0 to indicate a non-monotonic progress variable
+    }
   }
 
-  if (slope == -1.0) {
-    return 1;
+  // Print slopes for testing purposes
+  printf("Linear regression slopes for strictly monotonic C:\n");
+  for (int j = 0; j<ncols_; ++j) {
+    printf("%f\t", slopes_[j]);
   }
+  printf("\n");
+
+  // Find slope with the maximum magnitude in slopes_ array & store
+  // index of location
+  double maxSlope = 0.0; // Stores value of maximum slope of best fit line for monotonic progress variables
+  int index = -1; // Stores location of maximum slope value 
+
+  for (int j=0; j<ncols_; ++j) {
+    if(monoAry[j] == 3 && std::abs(slopes_[j]) > maxSlope) {
+      maxSlope = slopes_[j];
+      index = j;
+    }
+  }
+
+  if (index == -1) {
+    printf("No progress variable is monotonic.\n");
+    exit(1);
+  }
+
+  // Rewrite monoAry to have values of 3 for the best monotonic
+  // progress variable, 2 for progress variables that are monotonic
+  // but not the best, and 0 otherwise
+  for (int j=0; j<ncols_; ++j) {
+    if (j == index) { // Best progress variable
+      monoAry[j] = 3;
+    }
+    else {
+      if (monoAry[j] == 3) {
+	monoAry[j] = 2;
+      }
+    }
+  }
+
   return 0;
 }

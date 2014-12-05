@@ -11,7 +11,7 @@ class MonoCheck {
  public:
   MonoCheck(const Matrix &progVar);
   ~MonoCheck();
-  int CheckIncreasing(const int col, int *monoAry);
+  int CheckStrictMonoticity(const int col, int *monoAry);
 
  private:
   const int nrows_; // number of rows in progVar matrix

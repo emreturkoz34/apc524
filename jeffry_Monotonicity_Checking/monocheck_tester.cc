@@ -1,6 +1,10 @@
-/* monocheck_tester is a program which tests the robustness of monocheck.cc
-
-To run this program, call "check_monotonic" from the terminal after running "make clean" and "make".
+/* monocheck_tester is a program which tests the robustness of
+ * monocheck.cc. For testing purposes, it will also check the
+ * robustness of linregression.cc. In the actual program, monoAry will
+ * be passed to the max slope/least non-monotonic methods by Python.
+ *
+ * To run this program, call "check_monotonic" from the terminal after
+ * running "make clean" and "make".
  */
 
 #include <stdio.h>
@@ -9,6 +13,8 @@ To run this program, call "check_monotonic" from the terminal after running "mak
 
 #include "matrix.h"
 #include "monocheck.h"
+
+#include "linregression.h"
 
 /// Print progVar matrix
 /// progVar[0] progVar[1] ... progVar[ncols-1]
@@ -33,33 +39,46 @@ int main(int argc, char *argv[]) {
 
   // Initialize test matrix progVar with values
   for (int i=0; i<rows-1; ++i) {
-    for (int j=0; j<cols; ++j) {
+    for (int j=0; j<cols-1; ++j) {
       progVar->SetVal(i, j, count);
       count = count + 1;
     }
   }
-  for (int j=0; j<cols; ++j) {
-    progVar->SetVal(rows-1, j, 14.0);
+  for (int j=0; j<cols-1; ++j) {
+    progVar->SetVal(rows-1, j, 11.0);
+  }
+  for (int i=0; i<rows; ++i) { // Set last column as decreasing
+    progVar->SetVal(i, cols-1, count);
+    count = count - 5;
   }
 
   // Print out matrix progVar to ensure proper initialization of values
+  printf("Test matrix:\n");
   PrintState(rows, cols, *progVar);
 
   MonoCheck *checker = new MonoCheck(*progVar);
   int *monoAry = new int[cols]; // Array to store monotonicity output
 
-  int success = checker->CheckIncreasing(0, monoAry); // Check which columns of progVar are monotonically increasing and store result in monoAry
+  assert(checker->CheckStrictMonoticity(0, monoAry) == 0 && "CheckStrictMonoticity ran unsuccessfully.\n"); // Check which columns of progVar are strictly increasing or strictly decreasing and store result in monoAry
 
+  printf("Strictly monotonic progress variables marked:\n");
   for (int j = 0; j<cols; ++j) {
     printf("%d\t", monoAry[j]); // Print output array filled with 3s or 0s
   }
   printf("\n");
 
-  if (success == 1) {
-    printf("CheckIncreasing ran unsuccessfully.\n");
-    exit(1);
+  // Max slope testing commences
+  MaxSlope *maxchecker = new LinRegression(*progVar);
+  assert(maxchecker->MostMonotonic(0, monoAry) == 0 && "MostMonotonic ran unsuccessfully.\n"); // Distinguish the best monotonic progress variables
+
+  printf("Best C indicated:\n");
+  for (int j = 0; j<cols; ++j) {
+    printf("%d\t", monoAry[j]); // Print output array filled with 3s, 2s, and 0s
   }
-  else {
-    return 0;
-  }
+  printf("\n");
+
+  delete checker;
+  delete maxchecker;
+
+  return 0;
 }

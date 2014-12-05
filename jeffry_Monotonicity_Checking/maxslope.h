@@ -1,4 +1,5 @@
-/* maxslope.h is an abstract class which provides the framework to determine the most monotonic progress variable.
+/* maxslope.h is an abstract class which provides the framework to
+   determine the most monotonic progress variable.
  */
 #ifndef MAXSLOPE_H_
 #define MAXSLOPE_H_
