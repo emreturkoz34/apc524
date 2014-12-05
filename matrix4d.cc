@@ -18,7 +18,7 @@ Matrix4D::~Matrix4D(){
 }
 
 /// Get the value at a specified index
-double Matrix4D::GetVal(int i, int j, int k){
+double Matrix4D::GetVal(int i, int j, int k, int l) const{
   return matrix_[i*dim4_*dim3_*dim2_ + j*dim4_*dim3_ + k*dim4_ + l];
 }
 
@@ -28,21 +28,21 @@ void Matrix4D::SetVal(int i, int j, int k, int l, double val){
 }
 
 /// Return dim1
-int Matrix4D::GetNumDim1(){
+int Matrix4D::GetNumDim1() const{
   return dim1_;
 }
 
 /// Return dim2
-int Matrix4D::GetNumDim2(){
+int Matrix4D::GetNumDim2() const{
   return dim2_;
 }
 
 /// Return dim3
-int Matrix4D::GetNumDim3(){
+int Matrix4D::GetNumDim3() const{
   return dim3_;
 }
 
 /// Return dim4
-int Matrix4D::GetNumDim4(){
+int Matrix4D::GetNumDim4() const{
   return dim4_;
 }
