@@ -1,0 +1,8 @@
+junk
+more junk
+
+data files:	CH4_p01_0chi000.1tf0300to0300.kg	CH4_p01_0chi00001tf0300to0300.kg	CH4_p01_0chi00030tf0300to0300.kg
+test species:	Y-N2	Y-CO2	Y-H2O	Y-HO2		
+Zvar_max:	0.5
+Zvar_grid:	20
+Zpdf:	beta
