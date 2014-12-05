@@ -18,7 +18,7 @@ class Matrix4D {
   const int dim3_;
   const int dim4_;
   
-}
+};
 
 
 #endif // MATRIX4D_H_
