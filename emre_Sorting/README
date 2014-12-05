@@ -1,0 +1,23 @@
+
+Usage of the sorting algorithm:
+
+Generated executable through 'make': brute_sort
+Command: ./brute_sort
+Outputs: sorting_initalMatrix.txt
+	 sorting_finalMatrix.txt
+
+Files: sort_test.cc 
+       brute_sort.cc
+       brute_sort.h
+       sorting.h
+
+Functionality: 
+
+sort_test.cc: Includes the main function that runs the sorting test
+	      Generates two files: sorting_initalMatrix.txt is the tested (n x 2) matrix 
+	      		    	   sorting_finalMatrix.txt is the final version of this matrix
+
+brute_sort.cc: A simple sorting algorithm built upon sorting.h  (For details on the algorithm: Check the comments in the file brute_sort.cc)
+
+sorting.h: The interface function that is inherited by the brute_sort algorithm. The upcoming sorting algorithms will be built upon this file.
+
