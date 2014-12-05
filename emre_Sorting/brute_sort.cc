@@ -34,7 +34,8 @@ brute_sort::brute_sort(Matrix* data){
 
 // Instructor
 brute_sort::~brute_sort(){
-
+  //delete data_;
+  delete datacopy_;
 }
 
 // Set the reference column number
