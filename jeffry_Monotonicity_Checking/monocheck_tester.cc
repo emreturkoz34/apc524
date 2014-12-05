@@ -77,6 +77,8 @@ int main(int argc, char *argv[]) {
   }
   printf("\n");
 
+  delete progVar;
+  delete [] monoAry;
   delete checker;
   delete maxchecker;
 
