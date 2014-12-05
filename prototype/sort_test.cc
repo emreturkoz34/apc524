@@ -92,5 +92,8 @@ int main(){
   std::cout<<"The unsorted matrix is written to: sorting_initialMatrix.txt"<<std::endl
 	   <<"The sorted matrix is written to: sorting_finalMatrix.txt"<<std::endl;
 
+  delete data;
+  delete sort_alg;
+
   return 0;
 }

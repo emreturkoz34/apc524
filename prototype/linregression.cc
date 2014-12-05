@@ -88,6 +88,8 @@ int LinRegression::MostMonotonic(const int col, int *monoAry){
       }
 
       slopes_[j] = slope; // Store slope 
+
+      delete [] progVarCol;
     }
     else { // Not monotonic
       slopes_[j] = 0.0; // set slope to 0 to indicate a non-monotonic progress variable
@@ -131,6 +133,8 @@ int LinRegression::MostMonotonic(const int col, int *monoAry){
       }
     }
   }
+
+  delete [] monoDomain;
 
   return 0;
 }

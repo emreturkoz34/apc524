@@ -151,5 +151,19 @@ int main(int argc, char *argv[]) {
     printf("\n");
   }
 
+  delete Z;
+  delete temp;
+  delete pdf;
+  delete intgr;
+  delete pdfValuesM;
+  delete mean;
+  delete var;
+  delete conv;
+  delete rxnRate;
+  delete progVar;
+  for (int r = 0; r < dataSize; r++) {
+    delete postConvVal[r];
+  }
+
   return 0;
 }

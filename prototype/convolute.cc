@@ -51,6 +51,6 @@ int Convolute::convVal(const Matrix3D *pdfValues, const double *rxnRate, const d
 
   // Frees memory allocated within function
   delete integrand;
-
+  delete vars;
   return 0;
 }

@@ -80,8 +80,12 @@ int MonoCheck::CheckStrictMonoticity(const int col, int *monoAry){
       else {
 	monoAry[j] = 0; // Progress variable is not strictly increasing or strictly decreasing
       }
+      
+      delete [] progVarCol;
     }
   }
+
+  delete [] monoDomain;
 
   return 0;
 }

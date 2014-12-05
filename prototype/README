@@ -1,30 +1,174 @@
-Usage for PDF and convolution tester:
+This prototype consists of Python code that provides the user interface and wrapper, and several C++ functions that will be called from Python. Currently, at least one implementation of each polymorphic function has been written. Thus, together the functions included in the prototype provide the capabilities that will be needed for the final version. All goals set out for the prototype in the design document have been accomplished. As was planned, the functions currently operate independently. Every function will be integrated with the Python container using SWIG for the alpha version, which allows the program to run as a single unit rather than as separate functions. Primitive test functions will be written using Python unittest.
 
-Command: ./pdf_convolute_test
-Input: none
-Output: prints 3 samples of data from PDF and Convolute classes
-	1. PDF at Zmean = 0.5 (and Zvar = 0.6 for Beta PDF)
-	2. Convoluted Reaction Rate with above PDF
-	3. Convoluted Progress Variable with above PDF
+To use this code, open the prototype directory and type “make”. This will generate the following executables:
+- check_monotonic     (monotonicity and slope tests)
+- brute_sort         (sorting algorithm)
+    - pdf_convolute_test     (PDFs, integration schemes, convolution)
+    - interp_tester     (interpolation scheme)
+    - fittogrid_tester     (grid fitting function)
 
-Files:	pdf_convolute_test.cc
-	pdf.h
-	betaPDF.h, betaPDF.cc
-	deltaPDF.h, deltaPDF.cc
-	convolute.h, convolute.cc
-	integrator.h
-	trapz.h, trapz.cc
-	simpson.h, simpson.cc
+In addition, there is a script “chemtable_io.py” that runs the Python portions of the program. Detailed descriptions of each of these functions are below. 
+
+-----------------------------------------------------------------------------------------------------------------------
+Usage for PYTHON USER I/O AND WRAPPER:
+
+Command: ./chemtable_io.py
+Input:    "chemtable_inputs" text file. 
+    This file must be in the same directory as "chemtable_io.py". 
+    The directory must also contain any data files referenced in the 
+    input file, for example "CH4_P01_0chi00001tf0300to0300.kg
+Output: CvsT.pdf, a plot of the best progress variable  vs. temperature
+    Printouts indicating details of the best progress variable
+
+Files:    chemtable_io.py
+    findprogvar.py
+    iofuncs.py
+    combinations.py
 
 Functionality:
 
-pdf_convolute_test.cc:	   Contains main function for purposes of using
-                           classes and primitive testing.
-pdf.h:			   Header for PDFs. Defines virtual function 
-			   for evaluating the PDF, stores data in a 3D matrix.
-betaPDF.h, betaPDF.cc: 	   Inherits pdf.h. Calculates PDF for beta distribution.
-deltaPDF.h, deltaPDF.cc:   Inherits pdf.h. Calculates PDF for delta distribution.
-convolute.h, convolute.cc: Inputs data and PDF and convolutes data.
-integrator.h:              Defines virtual function for integrating.
-trapz.h, trapz.cc:         Inherits integrator.h. Called from convolute.cc.
-simpson.h, simpson.cc:     Inherits integrator.h. Called from convolute.cc.
+    NOTE: the Python wrapper has not yet been connected to the C++
+    functions being developed in parallel. Where these functions
+    would be called, instead there are placeholders or dummy functions.
+    However, the key Python functionality has been implemented.
+
+chemtable_io.py: The main user interface functions that parses the inputs file and calls other functions to process the data.
+
+findprogvar.py: Contains a Python function which performs the calculations required for the first part of the program (determining the best progress variable). This function also has placeholders instead of calls to C++ functions.
+
+iofuncs.py: Contains Python functions and classes called by the other files for processing data.
+
+combinations.py: Contains a function that generates a matrix that can be used to calculate all possible combinations of elements in a vector.    
+
+-----------------------------------------------------------------------------------------------------------------------
+Usage of the MONOTONICITY AND SLOPE TESTS:
+
+Generated executable through 'make': check_monotonic
+Command: ./check_monotonic
+Input: None
+Outputs: The following are printed to the terminal 
+     - matrix used to test code
+     - array containing strictly monotonic progress variables (C)
+     - array containing linear regression slopes for above C
+     - array indicating the best C, other monotonic C, and non-monotonic C 
+
+Files: monocheck_tester.cc 
+          monocheck.h, monocheck.cc
+          maxslope.h
+          linregression.h, linregression.cc
+
+Functionality: 
+
+monocheck_tester.cc: Includes the main function that runs the monotonicity check and selects the most monotonic progress progress variable based on the largest linear regression slope magnitude.
+
+monocheck.h/cc: This class is used to determine the strictly monotonic progress variables. More info is found in the comments of the file.
+
+maxslope.h: This abstract class provides virtual methods that determine the most monotonic progress variable as implemented by inheriting classes.
+
+linregression.h/cc: This class inherits from the MaxSlope class. It has methods to calculate the linear regression slopes for strictly monotonic progress variables and select the progress variable with the largest magnitude slope as the best.
+
+-----------------------------------------------------------------------------------------------------------------------
+Usage of the SORTING ALGORITHM:
+
+Generated executable through 'make': brute_sort
+Command: ./brute_sort
+Input: None
+Outputs: sorting_initalMatrix.txt
+       sorting_finalMatrix.txt
+
+Files: sort_test.cc 
+          brute_sort.h, brute_sort.cc
+          sorting.h
+
+Functionality: 
+
+sort_test.cc: Includes the main function that runs the sorting test
+          Generates two files: sorting_initalMatrix.txt is the tested (n x 2) matrix 
+                              sorting_finalMatrix.txt is the final version of this matrix
+
+brute_sort.h/cc: A simple sorting algorithm built upon sorting.h  (For details on the algorithm: Check the comments in the file brute_sort.cc)
+
+sorting.h: The interface function that is inherited by the brute_sort algorithm. The upcoming sorting algorithms will be built upon this file.
+
+-----------------------------------------------------------------------------------------------------------------------    Usage for PDF AND CONVOLUTION TESTER:
+
+Command: ./pdf_convolute_test
+Input: none
+Output: prints 3 samples of data from PDF and Convolute classes to the terminal
+- PDF at Zmean = 0.5 (and Zvar = 0.6 for Beta PDF)
+- Convoluted Reaction Rate with above PDF
+- Convoluted Progress Variable with above PDF
+
+Files:   pdf_convolute_test.cc
+pdf.h
+betaPDF.h, betaPDF.cc
+deltaPDF.h, deltaPDF.cc
+convolute.h, convolute.cc
+integrator.h
+trapz.h, trapz.cc
+simpson.h, simpson.cc
+
+Functionality:
+
+pdf_convolute_test.cc: Contains main function for purposes of using classes and primitive testing. The user must manually change the PDF in this file to be tested. For alpha and beta versions, this will all be done by python.
+
+pdf.h: Header for PDFs. Defines virtual function for evaluating the PDF, stores data in a 3D matrix.
+
+betaPDF.h/cc: Inherits pdf.h. Calculates PDF for beta distribution.
+
+deltaPDF.h/cc: Inherits pdf.h. Calculates PDF for delta distribution.
+
+convolute.h/cc: Inputs data and PDF and convolutes data.
+
+integrator.h: Defines virtual function for integrating.
+
+trapz.h/cc: Inherits integrator.h. Called from convolute.cc.
+
+simpson.h/cc: Inherits integrator.h. Called from convolute.cc.
+
+----------------------------------------------------------------------------------------------------------------------------
+Usage for the INTERPOLATOR TEST:
+
+Generated executable through 'make': interp_tester
+Command: ./interp_tester <interpolating column> <interpolating value>
+Inputs: none
+Outputs: printouts
+
+Files:   interp_tester.cc
+interpolator.h
+       lininterp.h, lininterp.cc
+
+Functionality:
+
+interp_tester.cc: Includes the main function that runs the interpolation test. Prints out a matrix which is hard-coded into the file. It then prints out an interpolated row of the matrix. The user inputs the column along which to interpolate and the value at which to interpolate through command line arguments.
+
+interpolator.h: Abstract Interpolator class definition.
+
+lininterp.h/cc: class derived from Interpolator class. An implementation of a linear interpolator.
+----------------------------------------------------------------------------------------------------------------------------
+Usage for the GRID-FITTING TEST:
+
+Generated executable through 'make': fittogrid_tester
+Command: ./fittogrid_tester
+Inputs: none
+Outputs: printouts
+
+Files:   fittogrid_tester.cc
+       fittogrid.h, fittogrid.cc
+
+Functionality:
+
+fittogrid_tester.cc: Includes the main function that runs the grid-fitting test (tests fittogrid.cc). fittogrid takes a 4d matrix as input and interpolates along a given cgrid. For clarity of presentation, in this case the 4d matrix will be 2-by-1-by-1-by-10, essentially a 2d matrix. The first row will be 10 values of w~, and the second row will be 10 values of c~. fittogrid will interpolate to find values of w~ at values of c~ given by cgrid. This program will print out the w~ values, the corresponding c~ values, the cgrid values, and the w~ values interpolated at the cgrid values.
+
+fittogrid.h/cc: function which fits 4d matrix data to a specified grid using a specified interpolator.
+
+-----------------------------------------------------------------------------------------------------------------------    
+OTHER FILES:
+
+Makefile: generates all above executables from C++ code by typing “make”
+
+The following files define classes which are used in multiple functions as required by the interfaces:
+
+matrix.h/cc: Class used to represent a 2D matrix in a 1D array
+matrix3d.h/cc: Class used to represent a 3D matrix
+    matrix4d.h/cc: Class used to represent a 4D matrix

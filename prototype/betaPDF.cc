@@ -91,5 +91,6 @@ int BetaPDF::pdfVal(const double *Mean, const double *Var, Matrix3D *pdfValM) {
     }
   }
 
+  delete temp;
   return 0;
 }
