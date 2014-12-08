@@ -15,6 +15,16 @@ class standard_sort : public sorting {
   int sort_data();
   void SetRefColNum(int num);
 
+  // unnecessary functions at sorting.h
+  int extractRefCol(){return 0;}
+  int generateIndexArray(){return 0;}
+ 
+  void SetSortStartIndex(int left){};
+  void SetSortEndIndex(int right){};
+
+
+
+
  private:
   Matrix *data_;
   Matrix *datacopy_;

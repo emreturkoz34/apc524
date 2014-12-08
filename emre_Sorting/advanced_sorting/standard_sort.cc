@@ -57,7 +57,6 @@ void standard_sort::SetRefColNum(int num){
 }
 
 /// Main sorting body
-
 int standard_sort::sort_data(){
 
   index_vec_t indices(nrows_);

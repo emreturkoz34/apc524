@@ -11,7 +11,7 @@
 #include "matrix.h"
 #include "brute_sort.h"
 #include "standard_sort.h"
-
+#include "quick_sort.h"
 
 
 /*
@@ -47,7 +47,7 @@ int GenerateMatrix(Matrix* mat){
 
   j = 1;
   for (int i = 0 ; i< mat->GetNumRows(); i++){
-    val = i;
+    val = 10*i;
     mat->SetVal(i,j, val);
   }
 
@@ -72,10 +72,15 @@ int WriteMatrixToFile(Matrix* mat, std::string path){
 }
 
 
-
-
 int main(){
-  
+
+  /*
+  int arr[] = {1, 3, 5, 7, 6, 4, 8, 8};
+  int *indices = new int[8];
+  for(int i = 0 ; i<8; i++){
+    indices[i] = i;
+  }
+  */
 
   Matrix* data = new Matrix(9,2);
 
@@ -83,10 +88,25 @@ int main(){
   WriteMatrixToFile(data, (std::string)"sorting_initialMatrix.txt");
   
 
-  //sorting* sort_alg = new brute_sort(data); 
-  sorting* sort_alg = new standard_sort(data);
+  /* Indicate the sorting class used  */
+
+  sorting* sort_alg = new brute_sort(data); 
+  //sorting* sort_alg = new standard_sort(data);
+  //sorting* sort_alg = new quick_sort(data);
+
+
+  /* Sorting settings and required functions */
+
   sort_alg -> SetRefColNum(0);
+  sort_alg -> SetSortEndIndex(8); 
+  sort_alg -> SetSortStartIndex(0);
+  sort_alg -> generateIndexArray();
+  sort_alg -> extractRefCol();
+
+  /* Main routine  */
   sort_alg -> sort_data();
+
+
 
   assert(WriteMatrixToFile(data, (std::string)"sorting_finalMatrix.txt") == 0);
 
