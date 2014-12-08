@@ -1,10 +1,13 @@
 CXXFLAGS = -Wall -O3 -g
 
-TARGETS = brute_sort
+TARGETS = brute_sort standard_sort
 
 all: $(TARGETS)
 
 brute_sort: sort_test.o brute_sort.o matrix.o
+	$(CXX) -o $@ $^
+
+standard_sort: sort_test.o standard_sort.o matrix.o
 	$(CXX) -o $@ $^
 
 clean:

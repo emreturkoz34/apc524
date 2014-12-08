@@ -32,7 +32,7 @@ brute_sort::brute_sort(Matrix* data){
 
 }
 
-// Instructor
+// Destructor
 brute_sort::~brute_sort(){
   //delete data_;
   delete datacopy_;

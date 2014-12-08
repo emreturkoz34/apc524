@@ -1,3 +1,7 @@
+#ifndef BRUTE_SORT_H
+#define BRUTE_SORT_H
+
+
 #include <iostream>
 #include "sorting.h"
 #include "matrix.h"
@@ -20,3 +24,6 @@ class brute_sort : public sorting {
   
 
 };
+
+
+#endif //BRUTE_SORT_H
