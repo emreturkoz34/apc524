@@ -2,37 +2,37 @@
 
  */
 #include <assert.h>
-#include "vector.h"
+#include "matrix.h"
 
 /// Constructor
-Vector::Vector(int rows, int cols)
+Matrix::Matrix(int rows, int cols)
   : nrows_(rows),
     ncols_(cols) {
-  vector_ = new double[nrows_*ncols_];
+  matrix_ = new double[nrows_*ncols_];
 }
 
 /// Destructor
-Vector::~Vector(){
-  delete[] vector_;
+Matrix::~Matrix(){
+  delete[] matrix_;
 }
 
 /// Get the value at a specified index
-double Vector::GetVal(int i, int j) const{
-  return vector_[i*ncols_ + j];
+double Matrix::GetVal(int i, int j) const{
+  return matrix_[i*ncols_ + j];
 }
 
 /// Set the value at a specific location
-void Vector::SetVal(int i, int j, double val){
-  vector_[i*ncols_ + j] = val;
+void Matrix::SetVal(int i, int j, double val){
+  matrix_[i*ncols_ + j] = val;
 }
 
 /// Return the number of rows
-int Vector::GetNumRows() const{
+int Matrix::GetNumRows() const{
   return nrows_;
 }
 
 /// Return the number of columns
-int Vector::GetNumCols() const{
+int Matrix::GetNumCols() const{
   return ncols_;
 }
 
