@@ -1,10 +1,10 @@
-/* LinRegression is a class that determines the most monotonic
+/* EndPointSlope is a class that determines the most monotonic
  * progress variable with respect to temperature (or another specified
- * column). It calculates the slope of the best linear approximation
- * for each progress variable and selects the largest magnitude.
+ * column). It calculates the slope from the first and last endpoints
+ * of each progress variable column and selects the progress variable
+ * with the largest magnitude slope.
  *
- * The slope is given by 
- * {sum_i=1_i=N (C_i-C_ave)(T_i-T_ave)}/{sum_i=1_i=N (T_i-T_ave)^2}
+ * The slope is given by [C_i(N)-C_i(1)]/N
  */
 #include <assert.h>
 #include <stdio.h>
@@ -12,11 +12,11 @@
 #include <cmath>
 
 #include "maxslope.h"
-#include "linregression.h"
+#include "endpointslope.h"
 #include "matrix.h"
 
 /// Constructor
-LinRegression::LinRegression(const Matrix &progVar)
+EndPointSlope::EndPointSlope(const Matrix &progVar)
   : nrows_(progVar.GetNumRows()),
     ncols_(progVar.GetNumCols()),
     progVar_(progVar) {
@@ -24,7 +24,7 @@ LinRegression::LinRegression(const Matrix &progVar)
 }
 
 /// Destructor
-LinRegression::~LinRegression() {
+EndPointSlope::~EndPointSlope() {
   delete [] slopes_;
 }
 
@@ -35,7 +35,8 @@ LinRegression::~LinRegression() {
 /// strictly monotonic and has the largest slope, 2 if C is strictly
 /// monotonic but does not have the largest slope, and 0 for
 /// non-monotonic C.
-int LinRegression::MostMonotonic(const int col, int *monoAry){
+
+  int EndPointSlope::MostMonotonic(const int col, int *monoAry){
   if ((col < 0) || (col >= ncols_)) {
     printf("Column %d is not a valid column number.\n", col);
     printf("The specified column must lie within 0 < col < %d.\n", ncols_); 
@@ -47,49 +48,12 @@ int LinRegression::MostMonotonic(const int col, int *monoAry){
     exit(1);
   }
 
-  double *monoDomain = new double[nrows_];
-  assert(progVar_.GetCol(col, monoDomain) == 0); // Domain over which monotonicity is checked (usually the temperature column of progVar_ - it is specified by the input "col")
-
-  // Calculate average domain value (usually average temperature)
-  double Tsum = 0.0;
-  for (int itr=0; itr<nrows_; ++itr) {
-    Tsum = Tsum + monoDomain[itr];
-  }
-  double Tave = Tsum/nrows_;
-
-  for (int j=0; j<ncols_; ++j) { // Loop over cells in monoAry
+  for(int j=0; j<ncols_; ++j) {
     if (monoAry[j] == 3) { // Monotonic progress variable
-      double *progVarCol = new double[nrows_];
-      assert(progVar_.GetCol(j, progVarCol) == 0);
-
-      // Calculate average progress variable
-      double Csum = 0.0;
-      for (int i=0; i<nrows_; ++i) {
-	Csum = Csum + progVarCol[i];
-      }
-      double Cave = Csum/nrows_;
-
-      // Calculate slope of best fit line
-      double sumNumerator = 0.0;
-      double sumDenominator = 0.0;
-      double slope = 0.0;
-
-      for (int i=0; i<nrows_; ++i) {
-	sumNumerator = sumNumerator + (progVarCol[i]-Cave)*(monoDomain[i]-Tave);
-	sumDenominator = sumDenominator + (monoDomain[i]-Tave)*(monoDomain[i]-Tave);
-      }
-
-      if (sumDenominator != 0) {
-	slope = sumNumerator/sumDenominator;
-      }
-      else {
-	printf("Unable to calculate slope of best fit line.\n");
-	exit(1);
-      }
-
-      slopes_[j] = slope; // Store slope 
-
-      delete [] progVarCol;
+      const double begin = progVar_.GetVal(0, j);
+      const double end = progVar_.GetVal(nrows_-1, j);
+      double slope = (end - begin)/nrows_;
+      slopes_[j] = slope; // Store slope
     }
     else { // Not monotonic
       slopes_[j] = 0.0; // Set slope to 0 to indicate a non-monotonic progress variable
@@ -97,7 +61,7 @@ int LinRegression::MostMonotonic(const int col, int *monoAry){
   }
 
   // Print slopes for testing purposes
-  printf("Slopes from linear regression for strictly monotonic C:\n");
+  printf("Slopes from endpoints for strictly monotonic C:\n");
   for (int j = 0; j<ncols_; ++j) {
     printf("%f\t", slopes_[j]);
   }
@@ -133,8 +97,6 @@ int LinRegression::MostMonotonic(const int col, int *monoAry){
       }
     }
   }
-
-  delete [] monoDomain;
 
   return 0;
 }

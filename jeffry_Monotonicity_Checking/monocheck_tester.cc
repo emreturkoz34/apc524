@@ -1,7 +1,8 @@
 /* monocheck_tester is a program which tests the robustness of
  * monocheck.cc. For testing purposes, it will also check the
- * robustness of linregression.cc. In the actual program, monoAry will
- * be passed to the max slope/least non-monotonic methods by Python.
+ * robustness of linregression.cc & endpointslope.cc. In the actual
+ * program, monoAry will be passed to the max slope/least
+ * non-monotonic methods by Python.
  *
  * To run this program, call "check_monotonic" from the terminal after
  * running "make clean" and "make".
@@ -15,6 +16,7 @@
 #include "monocheck.h"
 
 #include "linregression.h"
+#include "endpointslope.h"
 
 /// Print progVar matrix
 /// progVar[0] progVar[1] ... progVar[ncols-1]
@@ -37,7 +39,7 @@ int main(int argc, char *argv[]) {
   int count = 0;
   Matrix *progVar = new Matrix(rows, cols);
 
-  // Initialize test matrix progVar with values
+  // ***Initialize test matrix progVar with values***
   for (int i=0; i<rows-1; ++i) {
     for (int j=0; j<cols-1; ++j) {
       progVar->SetVal(i, j, count);
@@ -45,7 +47,7 @@ int main(int argc, char *argv[]) {
     }
   }
   for (int j=0; j<cols-1; ++j) {
-    progVar->SetVal(rows-1, j, 11.0);
+    progVar->SetVal(rows-1, j, 21.0);
   }
   for (int i=0; i<rows; ++i) { // Set last column as decreasing
     progVar->SetVal(i, cols-1, count);
@@ -67,20 +69,36 @@ int main(int argc, char *argv[]) {
   }
   printf("\n");
 
-  // Max slope testing commences
+  // ***Max slope testing commences***
+  int *monoAryCpy = new int[cols]; // Make copy of monoAry
+  for (int j=0; j<cols; ++j) {
+    monoAryCpy[j] = monoAry[j];
+  }
+
   MaxSlope *maxchecker = new LinRegression(*progVar);
   assert(maxchecker->MostMonotonic(0, monoAry) == 0 && "MostMonotonic ran unsuccessfully.\n"); // Distinguish the best monotonic progress variables
 
-  printf("Best C indicated:\n");
+  printf("Best C by linear regression method indicated:\n");
   for (int j = 0; j<cols; ++j) {
     printf("%d\t", monoAry[j]); // Print output array filled with 3s, 2s, and 0s
   }
   printf("\n");
 
+  MaxSlope *maxchecker2 = new EndPointSlope(*progVar);
+  assert(maxchecker2->MostMonotonic(0, monoAryCpy) == 0 && "MostMonotonic ran unsuccessfully.\n"); // Distinguish the best monotonic progress variables
+
+  printf("Best C by endpoint slope method indicated:\n");
+  for (int j = 0; j<cols; ++j) {
+    printf("%d\t", monoAryCpy[j]); // Print output array filled with 3s, 2s, and 0s
+  }
+  printf("\n");
+
   delete progVar;
   delete [] monoAry;
+  delete [] monoAryCpy;
   delete checker;
   delete maxchecker;
+  delete maxchecker2;
 
   return 0;
 }
