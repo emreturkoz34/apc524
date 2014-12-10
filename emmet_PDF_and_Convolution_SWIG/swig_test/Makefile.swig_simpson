@@ -1,7 +1,8 @@
 TARGET     = simpson
 WRAPPER	   = $(TARGET)_wrap.cxx
 SRC	   = $(TARGET).cc 
-OBJ	   = $(SRC:.cc=.o) $(WRAPPER:.cxx=.o)
+MATRIXOBJ  = matrix.o matrix_wrap.o matrix3d.o matrix3d_wrap.o
+OBJ	   = $(SRC:.cc=.o) $(WRAPPER:.cxx=.o) $(MATRIXOBJ)
 CXX        = g++
 CXXFLAGS     = -O3 -fPIC
 INTERFACE  = $(TARGET).i
@@ -12,7 +13,7 @@ PYLIB	   = -I/usr/include/python2.7
 SO	   = so
 
 python_cpp: $(TARGET).i
-	    swig -c++ -python $(INTERFACE)
+	    $(SWIG) -c++ -python $(INTERFACE)
 	    $(CXX) $(CXXFLAGS) -c $(SRC) 
 	    $(CXX) $(CXXFLAGS) -c $(WRAPPER) $(PYLIB)
 	    $(CXX) -shared $(OBJ) -o _$(TARGET).$(SO)
