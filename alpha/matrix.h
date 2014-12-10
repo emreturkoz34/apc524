@@ -2,6 +2,7 @@
 #define MATRIX_H_
 
 #include <stdio.h>
+#include <vector>
 
 class Matrix {
  public:

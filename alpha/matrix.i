@@ -5,9 +5,3 @@
 %}
 
 %include "matrix.h"
- /*
-%module matrix
-%inline %{
-#include "matrix.h"
-%}
- */

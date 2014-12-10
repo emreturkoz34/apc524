@@ -8,6 +8,9 @@
 Vector::Vector(int cols)
   : ncols_(cols) {
   vector_ = new double[ncols_];
+  for (int i = 0; i < cols; i++) {
+    vector_[i] = 0;
+  }
 }
 
 /// Destructor
