@@ -7,7 +7,7 @@ make -f Makefile.swig_matrix3d
 make -f Makefile.swig_vector
 
 shopt -s extglob
-for i in `echo Makefile.swig_!(matrix|matrix3d)`; do
+for i in `echo Makefile.swig_!(matrix|matrix3d|vector)`; do
 #for i in `echo Makefile.swig_*`; do 
     make -f `echo $i`
 done
