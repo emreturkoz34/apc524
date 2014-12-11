@@ -1,7 +1,7 @@
-TARGET     = betaPDF
+TARGET     = deltaPDF
 WRAPPER	   = $(TARGET)_wrap.cxx
 SRC	   = $(TARGET).cc 
-MATRIXOBJ  = matrix.o matrix_wrap.o matrix3d.o matrix3d_wrap.o
+MATRIXOBJ  = vector.o vector_wrap.o matrix.o matrix_wrap.o matrix3d.o matrix3d_wrap.o
 OBJ	   = $(SRC:.cc=.o) $(WRAPPER:.cxx=.o) $(MATRIXOBJ)
 CXX        = g++
 CXXFLAGS     = -O3 -fPIC

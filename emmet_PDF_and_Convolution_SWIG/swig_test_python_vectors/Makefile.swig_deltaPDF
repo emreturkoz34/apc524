@@ -1,4 +1,4 @@
-TARGET     = betaPDF
+TARGET     = deltaPDF
 WRAPPER	   = $(TARGET)_wrap.cxx
 SRC	   = $(TARGET).cc 
 MATRIXOBJ  = matrix.o matrix_wrap.o matrix3d.o matrix3d_wrap.o

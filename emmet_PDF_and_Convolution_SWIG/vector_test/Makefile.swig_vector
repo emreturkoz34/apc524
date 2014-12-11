@@ -1,8 +1,7 @@
-TARGET     = betaPDF
+TARGET     = vector
 WRAPPER	   = $(TARGET)_wrap.cxx
 SRC	   = $(TARGET).cc 
-MATRIXOBJ  = matrix.o matrix_wrap.o matrix3d.o matrix3d_wrap.o
-OBJ	   = $(SRC:.cc=.o) $(WRAPPER:.cxx=.o) $(MATRIXOBJ)
+OBJ	   = $(SRC:.cc=.o) $(WRAPPER:.cxx=.o)
 CXX        = g++
 CXXFLAGS     = -O3 -fPIC
 INTERFACE  = $(TARGET).i
@@ -13,7 +12,7 @@ PYLIB	   = -I/usr/include/python2.7
 SO	   = so
 
 python_cpp: $(TARGET).i
-	    $(SWIG) -c++ -python $(INTERFACE)
+	    swig -c++ -python $(INTERFACE)
 	    $(CXX) $(CXXFLAGS) -c $(SRC) 
 	    $(CXX) $(CXXFLAGS) -c $(WRAPPER) $(PYLIB)
 	    $(CXX) -shared $(OBJ) -o _$(TARGET).$(SO)
