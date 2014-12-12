@@ -95,7 +95,6 @@ int BetaPDF::pdfVal(Vector *Var, Vector *Mean, Matrix3D *pdfValM) {
       for (int k = 0; k < ZPts; k++) {
 	temp[k] = temp[k] / sum;
 	pdfValM->SetVal(n, m, k, temp[k]);
-	printf("Get Z = %f, Zmean = %f, Zvar = %f, pdfValM = %f\n", Z[k], Zmean, Zvar, pdfValM->GetVal(n, m, k));
       }
 
     }
