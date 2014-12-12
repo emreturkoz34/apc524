@@ -1,0 +1,212 @@
+CHEMTABLE GENERATOR - Alpha Version
+
+Emmet Cleary, Daniel Floryan, Jeffry Lew, Bruce Perry, Emre Turkoz
+APC524 - Fall 2014
+
+------------------------------------------------------------------
+
+Building the program: $ make
+
+Generated shared libraries: _bubble_sort.so
+         _convolute.so
+         _betaPDF.so
+         _deltaPDF.so
+         _endpointslope.so
+         _fittogrid.so
+         _helper.so
+         _lininterp.so
+         _linregression.so
+         _vector.so
+         _matrix.so
+         _matrix3d.so
+         _matrix4d.so
+         _monocheck.so
+         _trapz.so
+
+Running the program: $ python chemtable_io.py
+
+IMPORTANT: The matplotlib.pyplot and numpy python modules must be
+installed to run this program.
+
+Capabilities:
+	- Monotonicity checks and slope tests using linear regression or endpoint slopes
+	- Sorting with bubble sort
+	- Probability Density Functions (PDFs) and convolution using delta or beta PDFs
+	- Grid fitting 
+	- Interpolation
+
+This alpha version consists of Python code that provides the user
+interface and wrapper, and several C++ functions that will be called
+from Python. Currently, at least one implementation of each
+polymorphic function has been written. Altogether, the functions
+included in the alpha version provide the capabilities that will be
+needed for the final version. All goals set out for the alpha version
+in the design document have been accomplished. In contrast to the
+prototype, every function has been integrated with the Python
+container using SWIG. This allows the program to run as a single unit
+rather than as separate functions. For the beta version, the user will
+be able to choose from multiple implementations of each
+function. Note: The *.i files in the lists below are SWIG interface
+files containing headers.
+
+The alpha version has surpassed the goals set out in the design
+document in one area: it can process real FlameMaster data output
+files. The program correctly identifies and plots the best progress
+variables. However, there is a known open issue that extrapolation is
+required to generate the chemtable output for the real data
+files. When extrapolation is attempted, the interpolator returns -1;
+this is why the final output matrix has many entries which are
+-1. This issue will be corrected for the beta version.
+
+--------------------------------------------------------------------
+Usage for PYTHON USER I/O AND WRAPPER:
+
+Command: ./chemtable_io.py
+
+Input:   "chemtable_inputs" text file. 
+        This file must be in the same directory as "chemtable_io.py". 
+        The directory must also contain any data files referenced in the input file, for example "CH4_P01_0chi00001tf0300to0300.kg”
+
+Output: CvsT.pdf, a plot of the best progress variable  vs. temperature
+        Printouts indicating details of the best progress variable
+
+Files:   chemtable_io.py
+        findprogvar.py
+        iofuncs.py
+        combinations.py
+
+Functionality:
+
+chemtable_io.py: The main user interface functions that parses the
+inputs file and calls other Python and C++ functions to process the
+data.
+
+findprogvar.py: Contains a Python function which performs the
+calculations required for the first part of the program (determining
+the best progress variable). This function also has calls C++
+functions.
+
+iofuncs.py: Contains Python functions and classes called by the other
+files for processing data.
+
+combinations.py: Contains a function that generates a matrix that can
+be used to calculate all possible combinations of elements in a
+vector.
+
+--------------------------------------------------------------------
+MONOTONICITY AND SLOPE TESTS:
+
+Wrapped Python libraries: _monocheck.so, _endpointslope.so,
+_linregression.so
+
+Files:   monocheck.h, monocheck.cc, monocheck.i
+	 maxslope.h
+	 endpointslope.h, endpointslope.cc, endpointslope.i
+	 linregression.h, linregression.cc, linregression.i
+    
+Functionality: 
+
+monocheck.h/cc/i: MonoCheck is used to determine the strictly
+monotonic progress variables. The method CheckStrictMonotonicity has
+been modified to accept a pointer to Vector as an input in order to
+facilitate interactions between Python and C++.
+
+maxslope.h: MaxSlope is an abstract class that provides virtual
+methods to determine the most monotonic progress variable as
+implemented by inheriting classes.
+
+endpointslope.h/cc/i: EndPointSlope inherits from MaxSlope. It has a
+method to quickly calculate the slopes for strictly monotonic progress
+variables and select the progress variable with the largest magnitude
+slope as the best.
+
+linregression.h/cc/i: LinRegression inherits from MaxSlope. It has a
+method to accurately calculate the linear regression slopes for
+strictly monotonic progress variables and select the progress variable
+with the largest magnitude slope as the best. The method MostMonotonic
+has been modified to accept a pointer to Vector as an input in order
+to facilitate interactions between Python and C++.
+
+--------------------------------------------------------------------
+SORTING ALGORITHM:
+
+Wrapped Python libraries: _bubble_sort.so
+
+Files:  bubble_sort.h, bubble_sort.cc, bubble_sort.i
+           sorting.h
+
+Functionality: 
+
+sorting.h: The interface function that is inherited by the bubble_sort
+algorithm. The upcoming sorting algorithms will be built upon this
+file.
+
+bubble_sort.h/cc/i: Implementation of the bubble sort algorithm built
+upon sorting.h
+
+---------------------------------------------------------------------
+Usage for PDF AND CONVOLUTION TESTER:
+
+Wrapped Python libraries: _betaPDF.so, _deltaPDF.so, _convolute.so, _trapz.so
+
+Files:   pdf.h
+	 betaPDF.h, betaPDF.cc, betaPDF.i
+	 deltaPDF.h, deltaPDF.cc, deltaPDF.i
+	 convolute.h, convolute.cc, convolute.i
+	 integrator.h
+	 trapz.h, trapz.cc, trapz.i
+
+Functionality:
+
+pdf.h: Header for PDFs. Defines virtual function for evaluating the
+PDF, stores data in a 3D matrix.
+
+betaPDF.h/cc/i: Inherits pdf.h. Calculates PDF for beta distribution.
+
+deltaPDF.h/cc/i: Inherits pdf.h. Calculates PDF for delta distribution.
+
+convolute.h/cc/i: Inputs data and PDF and convolutes data.
+
+integrator.h: Defines virtual function for integrating.
+
+trapz.h/cc/i: Inherits integrator.h. Called from convolute.cc.
+
+----------------------------------------------------------------------
+INTERPOLATOR:
+
+Wrapped Python libraries: _lininterp.so
+
+Files:    lininterp.h, lininterp.cc, lininterp.i   
+	  interpolator.h
+       
+Functionality:
+
+interpolator.h: Abstract Interpolator class definition.
+
+lininterp.h/cc/i: class derived from Interpolator class. An implementation of a linear interpolator.
+
+----------------------------------------------------------------------------------------------------------------------------
+GRID-FITTING:
+
+Wrapped Python libraries: _fittogrid.so
+
+Files: fittogrid.h, fittogrid.cc, fittogrid.i
+
+Functionality:
+
+fittogrid.h/cc/i: function which fits 4D matrix data to a specified grid using a specified interpolator.
+
+---------------------------------------------------------------------
+OTHER FILES:
+
+Makefile: generates all above .so files from C++ code by typing “make”
+
+The following files define classes which are used in multiple
+functions as required by the interfaces:
+
+matrix.h/cc/i: Class used to represent a 2D matrix in a 1D array
+matrix3d.h/cc/i: Class used to represent a 3D matrix
+matrix4d.h/cc/i: Class used to represent a 4D matrix
+vector.h/cc/i: Class used to represent a std::vector structure
+helper.h/cc/i: Class used to copy Python vectors (or Matrix objects) to Vector objects
+    numpy.i: Used for passing vectors through SWIG interfaces
