@@ -31,12 +31,12 @@ print bestC
 print "sorting FILESMATRIX by C"
 
 # Calculate PDF matrix
-ZmeanPy = np.genfromtxt(datafiles[0], unpack=False, skiprows=2, delimiter = "\t", usecols = 0)
-Z_grid = iof.read_input("Z_grid:", inputs, minargs = 0, default = 'Zmean') # if no Z_grid is specified, Z and Zmean will be equivalent 
-if "".join(Z_grid) == 'Zmean':
-    ZPy = ZmeanPy
+ZPy = np.genfromtxt(datafiles[0], unpack=False, skiprows=2, delimiter = "\t", usecols = 0)
+Zmean_grid = iof.read_input("Zmean_grid:", inputs, minargs = 0, default = 'Z') # if no Z_grid is specified, Z and Zmean will be equivalent 
+if "".join(Zmean_grid) == 'Z':
+    ZmeanPy = ZPy
 else:
-    ZPy = np.linspace(0,1,int(Z_grid[0]))
+    ZmeanPy = np.linspace(0,1,int(Zmean_grid[0]))
 
 Zpdf = iof.read_input("Zpdf:", inputs)
 if Zpdf[0] == "delta": # delta pdf has variance 0
@@ -84,19 +84,39 @@ for ii in range(len(rxn_rate_locs)):
     if locflag == 0:
         raise IOError("Production rate data for %s is missing" % speciesprodrate)
 
-# obtain relevant Yi and reaction rates from each file
-for kk in filesmatrix[:,1]:
+# obtain relevant Yi and reaction rates from each file, and convolute
+TrapzIntgr = trapz.Trapz(Z, ZPoints)
+Conv = convolute.Convolute(ZPoints)
+convolutedC = [0] * nofiles
+convolutedST = [0] * nofiles
+
+for kk in filesmatrix[:,1]: ### future verisons: add loop over [C ST Y1 Y2 etc]
     file = datafiles[int(kk)]
     massfracs = np.genfromtxt(file, unpack=False, skiprows=2, delimiter = "\t", usecols = bestC[0])
     rxnrates = np.genfromtxt(file, unpack=False, skiprows=2, delimiter = "\t", usecols = rxn_rate_locs)
-    filelength = len(massfracs)
-    progvars = np.zeros(filelength)
-    sourceterm = np.zeros(filelength)
+    if  len(massfracs) != ZPoints:
+        raise IOError("All file lengths must be the same")
+    progvarsPy = np.zeros(ZPoints)
+    sourcetermPy = np.zeros(ZPoints)
+    progvar = vector.Vector(ZPoints)
+    sourceterm = vector.Vector(ZPoints)
     for i in range(len(massfracs)):
-        progvars[i] = massfracs[i,:].sum()
-        sourceterm[i] = rxnrates[i,:].sum()
+        progvarsPy[i] = massfracs[i,:].sum()
+        sourcetermPy[i] = rxnrates[i,:].sum()
+    helper.copy_py_to_vector(progvarsPy,progvar)
+    helper.copy_py_to_vector(sourcetermPy,sourceterm)
+    convolutedC[int(kk)] = matrix.Matrix(ZvarPoints, ZmeanPoints)
+    convolutedST[int(kk)] = matrix.Matrix(ZvarPoints, ZmeanPoints)
+    ConvReturn = Conv.convVal(pdfValM, progvar, convolutedC[int(kk)], TrapzIntgr)
+    ConvReturn = Conv.convVal(pdfValM, sourceterm, convolutedST[int(kk)], TrapzIntgr)
+### test later with Zpts =/= ZmeanPts
+print "convolution completed"
 
-    # data will be extracted from this file and sent to the C++ function Convolute
+#for i in range(ZvarPoints):
+#    for j in range(ZmeanPoints):
+#        print "Cconv", convolutedC[1].GetVal(i,j), "Cpre", progvarsPy[j]
+#        print "STconv", convolutedST[1].GetVal(i,j), "STpre", sourcetermPy[j]
+
 
 # Then, the C++ function FitToGrid will be called to generate the final output data
 # Contour plots will be used to visualize this data
