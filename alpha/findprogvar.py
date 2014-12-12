@@ -102,7 +102,7 @@ def findC(datafiles, testspecies, bestC):
     # Print results
     monoAryflag = 0 
     for i in range(length): 
-        if monoAry[i] == 3: # Find best monotonic progress variable if it exists
+        if monoAry.GetVal(i) == 3.0: # Find best monotonic progress variable if it exists
             if monoAryflag != 0:
                 raise RuntimeError("Error in contents of monoAry vector: multiple best selected.\n")
             monoAryflag = 2
@@ -111,7 +111,7 @@ def findC(datafiles, testspecies, bestC):
             for j in bestC[1][1:]:
                 print "+ %s" % j
             print '\nThe column numbers of these species are ', bestC[0],', respectively.\n'
-        elif monoAry[i] == 1: # Otherwise find least non-monotonic progress variable
+        elif monoAry.GetVal(i) == 1.0: # Otherwise find least non-monotonic progress variable
             if monoAryflag != 0:
                 raise RuntimeError("Error in contents of monoAry vector.\n")
             monoAryflag = 1
@@ -122,7 +122,7 @@ def findC(datafiles, testspecies, bestC):
                 print "+ %s" % j
             print '\nThe column numbers of these species are', bestC[0],', respectively.\n'
     for i in range(length): # Identify other monotonic progress variables 
-        if monoAry[i] == 2:
+        if monoAry.GetVal(i) == 2.0:
             if monoAryflag < 2:
                 raise RuntimeError("Error in contents of monoAry vector.\n")
             else:
@@ -130,7 +130,7 @@ def findC(datafiles, testspecies, bestC):
             otherC = iof.get_progvar(combosmatrix[1:,i], testspecies, locs, i)
             print 'C = %s' % otherC[1][0], 
             for j in otherC[1][1:]: 
-                print "+ %s" % j
+                print "+ %s" % j,
             print "\n"
             monoAryflag = 3
 

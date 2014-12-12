@@ -26,6 +26,8 @@ all	: helper.o deltaPDF.o deltaPDF.py helper.py helper_wrap.o deltaPDF_wrap.o _h
 
 _%.so: %_wrap.o %.o $(MATRIXOBJ)
 	$(CXX) -shared $(OBJ) -o $^
+
+
 #python_clean:
 #	rm -f *_wrap* *.o *~ *$(SO) mypython *.pyc .~* core
 
