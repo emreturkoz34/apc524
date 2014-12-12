@@ -1,5 +1,7 @@
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
+import matrix
+import lininterp
 
 class ProcFile(object):
     """returns interpolated data (in datavec) from the given file 
@@ -43,11 +45,20 @@ class ProcFile(object):
         locs[:] = locations[2:]
         
         # generate data matrix
-        data = np.genfromtxt(self._sfile, unpack=False, skip_header=2, delimiter = "\t", usecols = locations)
-
-        # Here we will carry out the interpolation using the C++ function
-        # for now, a placeholder
-        datavec[:] = data[4,1:]
+        dataPy = np.genfromtxt(self._sfile, unpack=False, skip_header=2, delimiter = "\t", usecols = locations)
+        norows = dataPy.shape[0]
+        nocols = dataPy.shape[1]
+        datavec1 = np.zeros((nocols))
+        data = matrix.Matrix(norows, nocols)
+        for i in range(norows):
+            for j in range(nocols):
+                data.SetVal(i,j,dataPy[i,j])
+        interp = lininterp.LinInterp()
+        flag = 0
+        flag = interp.Interp(data, 0, interpval, datavec1)
+        if flag == 1:
+            raise RuntimeError("Interpolation failed: interpolation value out of bounds")
+        datavec[:] = datavec1[1:]
 
         return 0 # maybe return 1 if fail
 
@@ -87,10 +98,10 @@ def get_progvar(progvarvec, testspecies, locs, index = 1):
 
 # function to plot progress variable vs temp
 def plotCvT(Tvec, Cvec, fname="CvsT"):
-    plt.figure()
-    plt.plot(Tvec, Cvec)
-    plt.xlabel("T (K)")
-    plt.ylabel("C")
-    plt.title("Best Progress Variable")
-    plt.savefig("%s.pdf" % fname)
-    plt.clf()
+    0#plt.figure()
+    #plt.plot(Tvec, Cvec)
+    #plt.xlabel("T (K)")
+    #plt.ylabel("C")
+    #plt.title("Best Progress Variable")
+    #plt.savefig("%s.pdf" % fname)
+    #plt.clf()
