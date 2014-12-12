@@ -121,12 +121,15 @@ def findC(datafiles, testspecies, bestC):
             for j in bestC[1][1:]: 
                 print "+ %s" % j,
             print '\nThe column numbers of these species are', bestC[0],', respectively.\n'
+    
+
+    print "Other candidate monotonic progress variables (if any) are:"
     for i in range(length): # Identify other monotonic progress variables 
         if monoAry.GetVal(i) == 2.0:
             if monoAryflag < 2:
                 raise RuntimeError("Error in contents of monoAry vector.\n")
-            else:
-                print "Other candidate monotonic progress variables are:"
+            #else:
+                #print "Other candidate monotonic progress variables are:"
             otherC = iof.get_progvar(combosmatrix[1:,i], testspecies, locs, i)
             print 'C = %s' % otherC[1][0], 
             for j in otherC[1][1:]: 
