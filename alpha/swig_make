@@ -3,6 +3,7 @@
 # Must be made first
 make -f Makefile.swig_matrix
 make -f Makefile.swig_matrix3d
+make -f Makefile.swig_matrix4d
 make -f Makefile.swig_vector
 
 shopt -s extglob
