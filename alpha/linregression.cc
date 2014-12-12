@@ -211,6 +211,7 @@ int LinRegression::MostMonotonic(const int col, Vector *monoAry){
     }
   }
 
+  /*
   // Print slopes for testing purposes
   printf("Slopes from linear regression for strictly monotonic C:\n");
   for (int j = 0; j<ncols_; ++j) {
@@ -218,6 +219,7 @@ int LinRegression::MostMonotonic(const int col, Vector *monoAry){
     printf("%6.3f\t", slopes_[j]);
   }
   printf("\n");
+  */
 
   // Find slope with the maximum magnitude in slopes_ array & store
   // index of location

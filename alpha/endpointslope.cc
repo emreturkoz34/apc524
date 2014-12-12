@@ -136,6 +136,7 @@ EndPointSlope::~EndPointSlope() {
     }
   }
 
+  /*
   // Print slopes for testing purposes
   printf("Slopes from endpoints for strictly monotonic C:\n");
   for (int j = 0; j<ncols_; ++j) {
@@ -143,6 +144,7 @@ EndPointSlope::~EndPointSlope() {
     printf("%6.3f\t", slopes_[j]);
   }
   printf("\n");
+  */
 
   // Find slope with the maximum magnitude in slopes_ array & store
   // index of location
