@@ -54,11 +54,9 @@ int BetaPDF::pdfVal(Vector *Var, Vector *Mean, Matrix3D *pdfValM) {
 	while (Z[i] < Zmean) {
 	  i = i+1;
 	}
-	printf("TEMP TEST: temp[%d] = %f, temp[%d] = %f, Z[%d] = %f, Z[%d] = %f\n", i, temp[i], i-1, temp[i-1], i, Z[i], i-1, Z[i-1]);
 	temp[i-1] = (Z[i]  - Zmean)  / (Z[i] - Z[i-1]);
 	temp[i]   = (Zmean - Z[i-1]) / (Z[i] - Z[i-1]);
       } else if (Zvar >= Zmean*(1-Zmean)) {
-	printf("IF CONDITION MET: Zmean = %f, Zvar = %f\n", Zmean, Zvar);
 	temp[0] = 1-Zmean;
 	temp[ZmeanPts-1] = Zmean;
       } else {
