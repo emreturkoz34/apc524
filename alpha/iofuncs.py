@@ -59,9 +59,7 @@ class ProcFile(object):
         if flag == 1:
             raise RuntimeError("Interpolation failed: interpolation value out of bounds")
         datavec[:] = datavec1[1:]
-
-        return 0 # maybe return 1 if fail
-
+        return 0 
 
 # define function that extracts an input from the input file data
 def read_input(inputname, inputsarray, minargs = 1, default = None):

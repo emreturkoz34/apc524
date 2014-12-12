@@ -9,6 +9,7 @@ import matrix
 import matrix3d
 import matrix4d
 import deltaPDF
+import betaPDF
 import convolute
 import trapz
 import helper
@@ -17,6 +18,7 @@ import lininterp
 import fittogrid
 
 # read input file
+print " "
 fin1 = open('chemtable_inputs')
 inputs = [line.strip().split('\t') for line in fin1]
 datafiles = iof.read_input("data files:", inputs)
@@ -68,13 +70,18 @@ helper.copy_py_to_vector(ZmeanPy, Zmean)
 helper.copy_py_to_vector(ZvarPy, Zvar)
 
     # generate PDF matrix
-print "Generating PDF matrix"
+print "Generating PDF matrix with", Zpdf[0], "PDF"
 pdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
 for i in range(ZvarPoints):
     for j in range(ZmeanPoints):
         for k in range(ZPoints):
             pdfValM.SetVal(i, j, k, 0)
-d = deltaPDF.DeltaPDF(Z, ZPoints) # currently only supports delta pdf
+if  Zpdf[0] == "delta":
+    import deltaPDF
+    d = deltaPDF.DeltaPDF(Z, ZPoints) 
+elif Zpdf[0] == "beta": # beta PDF support still in progress
+    import betaPDF
+    d = betaPDF.BetaPDF(Z, ZPoints)
 pdfValReturn = d.pdfVal(Zvar, Zmean, pdfValM)
 
 # Find locations of columns of reaction rate data for species in the best progress variable
@@ -153,7 +160,7 @@ FinalData = np.zeros((dim2, lcgrid))
 for i in range(dim2):
     for j in range(lcgrid):
         FinalData[i,j] = dataout.GetVal(i,0,j)
-print "\nFinal Data: \n", FinalData
+print "\nFinal Data: \n", FinalData, "\n "
 
 del convolutedC
 del convolutedST
