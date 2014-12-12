@@ -7,21 +7,19 @@ CXX        = g++
 CXXFLAGS     = -O3 -fPIC
 PYLIB	   = -I/usr/include/python2.7
 
-all	: $(addsuffix .o,$(TARGET)) $(addsuffix .py,$(TARGET)) $(addsuffix .o,$(TARGETWRAP)) $(addsuffix .so,$(TARGETSO))
+all	: $(addsuffix .o,$(TARGET)) $(addsuffix _wrap.cxx,$(TARGET)) $(addsuffix .o,$(TARGETWRAP)) $(addsuffix .so,$(TARGETSO))
 
-_%.so: %_wrap.o %.o $(MATRIXOBJ)
-	$(CXX) -shared $(addsuffix .o,$(TARGET)) $(addsuffix _wrap.o,$(TARGET)) -o $@
-
-%_wrap.o: %_wrap.cxx
-	$(CXX) $(CXXFLAGS) -c $^ $(PYLIB)
-
-%.py: %.i
+%_wrap.cxx: %.i
 	swig -c++ -python $^
 
 %.o: %.cc
 	$(CXX) $(CXXFLAGS) $^ -c
 
+%_wrap.o: %_wrap.cxx
+	$(CXX) $(CXXFLAGS) -c $^ $(PYLIB)
 
+_%.so: %_wrap.o %.o $(MATRIXOBJ)
+	$(CXX) -shared $(addsuffix .o,$(TARGET)) $(addsuffix _wrap.o,$(TARGET)) -o $@
 
 clean:
 	rm -f *o *_wrap.cxx *.so $(addsuffix .py,$(TARGET)) *pyc
