@@ -109,7 +109,7 @@ def findC(datafiles, testspecies, bestC):
             bestC[:] = iof.get_progvar(combosmatrix[1:,i], testspecies, locs, i)
             print 'The best strictly monotonic progress variable is C = %s' % bestC[1][0], 
             for j in bestC[1][1:]:
-                print "+ %s" % j
+                print "+ %s" % j,
             print '\nThe column numbers of these species are ', bestC[0],', respectively.\n'
         elif monoAry.GetVal(i) == 1.0: # Otherwise find least non-monotonic progress variable
             if monoAryflag != 0:
@@ -119,7 +119,7 @@ def findC(datafiles, testspecies, bestC):
             print 'WARNING: no monotonic progress variables found, but proceeding with best alternative.\n'
             print 'The least non-monotonic progress variable is C = %s' % bestC[1][0], 
             for j in bestC[1][1:]: 
-                print "+ %s" % j
+                print "+ %s" % j,
             print '\nThe column numbers of these species are', bestC[0],', respectively.\n'
     for i in range(length): # Identify other monotonic progress variables 
         if monoAry.GetVal(i) == 2.0:
