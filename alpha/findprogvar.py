@@ -134,7 +134,7 @@ def findC(datafiles, testspecies, bestC):
             print 'C = %s' % otherC[1][0], 
             for j in otherC[1][1:]: 
                 print "+ %s" % j,
-            print "\n"
+            print "\n",
             monoAryflag = 3
 
     if monoAryflag < 1: # Give error if no best progress variable is found

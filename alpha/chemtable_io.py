@@ -7,11 +7,14 @@ import findprogvar as fpv
 import vector
 import matrix
 import matrix3d
+import matrix4d
 import deltaPDF
 import convolute
 import trapz
 import helper
 import bubble_sort
+import lininterp
+import fittogrid
 
 # read input file
 fin1 = open('chemtable_inputs')
@@ -70,9 +73,14 @@ helper.copy_py_to_vector(ZmeanPy, Zmean)
 helper.copy_py_to_vector(ZvarPy, Zvar)
 
 pdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
+for i in range(ZvarPoints):
+    for j in range(ZmeanPoints):
+        for k in range(ZPoints):
+            pdfValM.SetVal(i, j, k, 0)
 d = deltaPDF.DeltaPDF(Z, ZPoints) # currently only supports delta pdf
 pdfValReturn = d.pdfVal(Zvar, Zmean, pdfValM)
 
+#print "pdf mat"
 #for i in range(ZvarPoints):
 #    for j in range(ZmeanPoints):
 #        for k in range(ZPoints):
@@ -121,14 +129,54 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     convolutedST[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     ConvReturn = Conv.convVal(pdfValM, progvar, convolutedC[kk], TrapzIntgr)
     ConvReturn = Conv.convVal(pdfValM, sourceterm, convolutedST[kk], TrapzIntgr)
+    #for i in range(ZvarPoints):
+    #    for j in range(ZmeanPoints):
+    #        print convolutedC[kk].GetVal(i,j),
 print "convolution completed"
+
+# Run the fit to grid function to generate final data
+dim1 = 2    # w~ and c~
+dim2 = ZmeanPoints    # dimension of z~
+dim3 = ZvarPoints    # dimension of z_v
+dim4 = nofiles   # number of files
+lcgrid = 10; # length of cgrid ######## Add user input
+cgrid = np.linspace(0.0, 0.15, lcgrid)
+interp = lininterp.LinInterp() # use linear interpolator ### add options for interpolator later
+datain = matrix4d.Matrix4D(dim1, dim2, dim3, dim4)
+dataout = matrix3d.Matrix3D(dim2, dim3, lcgrid)
+
+for i in range(2):
+    for l in range(nofiles):
+        for j in range(ZmeanPoints):
+            for k in range(ZvarPoints):
+                if i == 0:
+                    datain.SetVal(i,j,k,l,convolutedST[l].GetVal(k,j))
+                    #print convolutedST[l].GetVal(k,j),
+                if i == 1:
+                    datain.SetVal(i,j,k,l,convolutedC[l].GetVal(k,j))
+                    #print convolutedC[l].GetVal(k,j),
+                #print datain.GetVal(i,j,k,l),
+        print " "
+    if i == 0:
+        print "W"
+    if i == 1:
+        print "C"
+
+print cgrid
+
+f2gflag = fittogrid.fittogrid_func(datain, cgrid, interp, dataout)
+if f2gflag == 1:
+    print("WARNING: extrapolating to fit to cgrid")
+
+FinalData = np.zeros((dim2, lcgrid))
+for i in range(dim2):
+    for j in range(lcgrid):
+        FinalData[i,j] = dataout.GetVal(i,0,j)
+
+print FinalData
+
 del convolutedC
 del convolutedST
-
-#for i in range(ZvarPoints):
-#    for j in range(ZmeanPoints):
-#        print "Cconv", convolutedC[1].GetVal(i,j), "Cpre", progvarsPy[j]
-#        print "STconv", convolutedST[1].GetVal(i,j), "STpre", sourcetermPy[j]
 
 
 # Then, the C++ function FitToGrid will be called to generate the final output data
