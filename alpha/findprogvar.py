@@ -37,9 +37,27 @@ def findC(datafiles, testspecies, bestC):
     # calculate progress variables
     progvars = np.dot(interpdata,combosmatrix)
 
+    # generate progress variable matrix
+    progVar = matrix.Matrix(nofiles, cs.totnumcoms(nocols-1)+1) 
+    for i in range (nofiles):
+        for j in range(cs.totnumcoms(nocols-1)+1):
+            progVar.SetVal(i,j,progvars[i,j])
+
+    
     # sort PROGVARS and FILESMATRIX by temperature
     # will add connectivity to C++ sort later
     print "sorting PROGVARS by temperature"
+    sortmethod = 'bubble'
+    if "".join(sortmethod) == 'bubble': #only bubble sort supported for this version
+        sorter = bubble_sort.bubble_sort(progvVar)
+    sorter.SetRefColNum(0)
+    sorter.SetSortEndIndex(nofiles)
+    sorter.SetSortStartIndex(0)
+    sorter.generateIndexArray()
+    sorter.extractRefCol()
+    sorter.sort_data()
+
+
     print "sorting FILESMATRIX by temperature"
     sortmethod = 'bubble'
     if "".join(sortmethod) == 'bubble': #only bubble sort supported for this version
