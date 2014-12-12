@@ -53,7 +53,7 @@ def findC(datafiles, testspecies, bestC):
     print "Sorting PROGVARS by temperature:\n"
     sortmethod = 'bubble'
     if "".join(sortmethod) == 'bubble':
-        sorter = bubble_sort.bubble_sort(progvVar)
+        sorter = bubble_sort.bubble_sort(progVar)
     sorter.SetRefColNum(0)
     sorter.SetSortEndIndex(nofiles)
     sorter.SetSortStartIndex(0)
