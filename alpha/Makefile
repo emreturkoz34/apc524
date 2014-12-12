@@ -26,4 +26,4 @@ _%.so: %_wrap.o %.o $(MATRIXOBJ)
 	$(CXX) -shared $(addsuffix .o,$(TARGET)) $(addsuffix _wrap.o,$(TARGET)) -o $@
 
 clean:
-	rm -f *o *_wrap.cxx *.so $(addsuffix .py,$(TARGET)) *pyc
+	rm -f *.o *_wrap.cxx $(addsuffix .py,$(TARGET)) *pyc
