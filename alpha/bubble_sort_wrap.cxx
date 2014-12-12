@@ -2683,10 +2683,11 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_Matrix swig_types[0]
-#define SWIGTYPE_p_char swig_types[1]
-#define SWIGTYPE_p_double swig_types[2]
-static swig_type_info *swig_types[4];
-static swig_module_info swig_module = {swig_types, 3, 0, 0, 0, 0};
+#define SWIGTYPE_p_bubble_sort swig_types[1]
+#define SWIGTYPE_p_char swig_types[2]
+#define SWIGTYPE_p_sorting swig_types[3]
+static swig_type_info *swig_types[5];
+static swig_module_info swig_module = {swig_types, 4, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2699,16 +2700,16 @@ static swig_module_info swig_module = {swig_types, 3, 0, 0, 0, 0};
 #endif
 
 /*-----------------------------------------------
-              @(target):= _matrix.so
+              @(target):= _bubble_sort.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__matrix
+#  define SWIG_init    PyInit__bubble_sort
 
 #else
-#  define SWIG_init    init_matrix
+#  define SWIG_init    init_bubble_sort
 
 #endif
-#define SWIG_name    "_matrix"
+#define SWIG_name    "_bubble_sort"
 
 #define SWIGVERSION 0x010340 
 #define SWIG_VERSION SWIGVERSION
@@ -2783,7 +2784,18 @@ namespace swig {
 }
 
 
-#include "matrix.h"
+#include "sorting.h"
+#include "bubble_sort.h"
+  
+
+  #define SWIG_From_long   PyInt_FromLong 
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_int  (int value)
+{    
+  return SWIG_From_long  (value);
+}
 
 
 #include <limits.h>
@@ -2930,66 +2942,22 @@ SWIG_AsVal_int (PyObject * obj, int *val)
   return res;
 }
 
-
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
-  #define SWIG_From_long   PyInt_FromLong 
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_int  (int value)
-{    
-  return SWIG_From_long  (value);
-}
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_Matrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_sorting(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  int arg1 ;
-  int arg2 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Matrix *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:new_Matrix",&obj0,&obj1)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Matrix" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Matrix" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  result = (Matrix *)new Matrix(arg1,arg2);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Matrix, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_Matrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  sorting *arg1 = (sorting *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_Matrix",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_sorting",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_sorting, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Matrix" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_sorting" "', argument " "1"" of type '" "sorting *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< sorting * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -2998,87 +2966,51 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Matrix_GetVal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_sorting_sort_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
-  int arg2 ;
-  int arg3 ;
+  sorting *arg1 = (sorting *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
   PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  double result;
+  int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Matrix_GetVal",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:sorting_sort_data",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_sorting, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_GetVal" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sorting_sort_data" "', argument " "1"" of type '" "sorting *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_GetVal" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_GetVal" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  result = (double)((Matrix const *)arg1)->GetVal(arg2,arg3);
-  resultobj = SWIG_From_double(static_cast< double >(result));
+  arg1 = reinterpret_cast< sorting * >(argp1);
+  result = (int)(arg1)->sort_data();
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Matrix_SetVal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_sorting_SetRefColNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  sorting *arg1 = (sorting *) 0 ;
   int arg2 ;
-  int arg3 ;
-  double arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  PyObject * obj3 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:Matrix_SetVal",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:sorting_SetRefColNum",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_sorting, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_SetVal" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sorting_SetRefColNum" "', argument " "1"" of type '" "sorting *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< sorting * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_SetVal" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "sorting_SetRefColNum" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_int(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_SetVal" "', argument " "3"" of type '" "int""'");
-  } 
-  arg3 = static_cast< int >(val3);
-  ecode4 = SWIG_AsVal_double(obj3, &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Matrix_SetVal" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  (arg1)->SetVal(arg2,arg3,arg4);
+  (arg1)->SetRefColNum(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -3086,21 +3018,21 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Matrix_GetNumRows(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_sorting_extractRefCol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  sorting *arg1 = (sorting *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Matrix_GetNumRows",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:sorting_extractRefCol",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_sorting, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_GetNumRows" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sorting_extractRefCol" "', argument " "1"" of type '" "sorting *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  result = (int)((Matrix const *)arg1)->GetNumRows();
+  arg1 = reinterpret_cast< sorting * >(argp1);
+  result = (int)(arg1)->extractRefCol();
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -3108,21 +3040,21 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Matrix_GetNumCols(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_sorting_generateIndexArray(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  sorting *arg1 = (sorting *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Matrix_GetNumCols",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:sorting_generateIndexArray",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_sorting, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_GetNumCols" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sorting_generateIndexArray" "', argument " "1"" of type '" "sorting *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  result = (int)((Matrix const *)arg1)->GetNumCols();
+  arg1 = reinterpret_cast< sorting * >(argp1);
+  result = (int)(arg1)->generateIndexArray();
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -3130,39 +3062,131 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Matrix_GetCol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_sorting_SetSortStartIndex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  sorting *arg1 = (sorting *) 0 ;
   int arg2 ;
-  double *arg3 = (double *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Matrix_GetCol",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:sorting_SetSortStartIndex",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_sorting, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_GetCol" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sorting_SetSortStartIndex" "', argument " "1"" of type '" "sorting *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< sorting * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_GetCol" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "sorting_SetSortStartIndex" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3,SWIGTYPE_p_double, 0 |  0 );
-  if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Matrix_GetCol" "', argument " "3"" of type '" "double *""'"); 
+  (arg1)->SetSortStartIndex(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_sorting_SetSortEndIndex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  sorting *arg1 = (sorting *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:sorting_SetSortEndIndex",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_sorting, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "sorting_SetSortEndIndex" "', argument " "1"" of type '" "sorting *""'"); 
   }
-  arg3 = reinterpret_cast< double * >(argp3);
-  result = (int)((Matrix const *)arg1)->GetCol(arg2,arg3);
+  arg1 = reinterpret_cast< sorting * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "sorting_SetSortEndIndex" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  (arg1)->SetSortEndIndex(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *sorting_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_sorting, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_bubble_sort(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Matrix *arg1 = (Matrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bubble_sort *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_bubble_sort",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_bubble_sort" "', argument " "1"" of type '" "Matrix *""'"); 
+  }
+  arg1 = reinterpret_cast< Matrix * >(argp1);
+  result = (bubble_sort *)new bubble_sort(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_bubble_sort, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_bubble_sort(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bubble_sort *arg1 = (bubble_sort *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_bubble_sort",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_bubble_sort, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_bubble_sort" "', argument " "1"" of type '" "bubble_sort *""'"); 
+  }
+  arg1 = reinterpret_cast< bubble_sort * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_bubble_sort_sort_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bubble_sort *arg1 = (bubble_sort *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:bubble_sort_sort_data",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_bubble_sort, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "bubble_sort_sort_data" "', argument " "1"" of type '" "bubble_sort *""'"); 
+  }
+  arg1 = reinterpret_cast< bubble_sort * >(argp1);
+  result = (int)(arg1)->sort_data();
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -3170,47 +3194,197 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Matrix_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_bubble_sort_SetRefColNum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bubble_sort *arg1 = (bubble_sort *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:bubble_sort_SetRefColNum",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_bubble_sort, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "bubble_sort_SetRefColNum" "', argument " "1"" of type '" "bubble_sort *""'"); 
+  }
+  arg1 = reinterpret_cast< bubble_sort * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "bubble_sort_SetRefColNum" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  (arg1)->SetRefColNum(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_bubble_sort_extractRefCol(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bubble_sort *arg1 = (bubble_sort *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:bubble_sort_extractRefCol",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_bubble_sort, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "bubble_sort_extractRefCol" "', argument " "1"" of type '" "bubble_sort *""'"); 
+  }
+  arg1 = reinterpret_cast< bubble_sort * >(argp1);
+  result = (int)(arg1)->extractRefCol();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_bubble_sort_generateIndexArray(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bubble_sort *arg1 = (bubble_sort *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:bubble_sort_generateIndexArray",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_bubble_sort, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "bubble_sort_generateIndexArray" "', argument " "1"" of type '" "bubble_sort *""'"); 
+  }
+  arg1 = reinterpret_cast< bubble_sort * >(argp1);
+  result = (int)(arg1)->generateIndexArray();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_bubble_sort_SetSortStartIndex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bubble_sort *arg1 = (bubble_sort *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:bubble_sort_SetSortStartIndex",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_bubble_sort, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "bubble_sort_SetSortStartIndex" "', argument " "1"" of type '" "bubble_sort *""'"); 
+  }
+  arg1 = reinterpret_cast< bubble_sort * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "bubble_sort_SetSortStartIndex" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  (arg1)->SetSortStartIndex(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_bubble_sort_SetSortEndIndex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  bubble_sort *arg1 = (bubble_sort *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:bubble_sort_SetSortEndIndex",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_bubble_sort, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "bubble_sort_SetSortEndIndex" "', argument " "1"" of type '" "bubble_sort *""'"); 
+  }
+  arg1 = reinterpret_cast< bubble_sort * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "bubble_sort_SetSortEndIndex" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  (arg1)->SetSortEndIndex(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *bubble_sort_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Matrix, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_bubble_sort, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"new_Matrix", _wrap_new_Matrix, METH_VARARGS, NULL},
-	 { (char *)"delete_Matrix", _wrap_delete_Matrix, METH_VARARGS, NULL},
-	 { (char *)"Matrix_GetVal", _wrap_Matrix_GetVal, METH_VARARGS, NULL},
-	 { (char *)"Matrix_SetVal", _wrap_Matrix_SetVal, METH_VARARGS, NULL},
-	 { (char *)"Matrix_GetNumRows", _wrap_Matrix_GetNumRows, METH_VARARGS, NULL},
-	 { (char *)"Matrix_GetNumCols", _wrap_Matrix_GetNumCols, METH_VARARGS, NULL},
-	 { (char *)"Matrix_GetCol", _wrap_Matrix_GetCol, METH_VARARGS, NULL},
-	 { (char *)"Matrix_swigregister", Matrix_swigregister, METH_VARARGS, NULL},
+	 { (char *)"delete_sorting", _wrap_delete_sorting, METH_VARARGS, NULL},
+	 { (char *)"sorting_sort_data", _wrap_sorting_sort_data, METH_VARARGS, NULL},
+	 { (char *)"sorting_SetRefColNum", _wrap_sorting_SetRefColNum, METH_VARARGS, NULL},
+	 { (char *)"sorting_extractRefCol", _wrap_sorting_extractRefCol, METH_VARARGS, NULL},
+	 { (char *)"sorting_generateIndexArray", _wrap_sorting_generateIndexArray, METH_VARARGS, NULL},
+	 { (char *)"sorting_SetSortStartIndex", _wrap_sorting_SetSortStartIndex, METH_VARARGS, NULL},
+	 { (char *)"sorting_SetSortEndIndex", _wrap_sorting_SetSortEndIndex, METH_VARARGS, NULL},
+	 { (char *)"sorting_swigregister", sorting_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_bubble_sort", _wrap_new_bubble_sort, METH_VARARGS, NULL},
+	 { (char *)"delete_bubble_sort", _wrap_delete_bubble_sort, METH_VARARGS, NULL},
+	 { (char *)"bubble_sort_sort_data", _wrap_bubble_sort_sort_data, METH_VARARGS, NULL},
+	 { (char *)"bubble_sort_SetRefColNum", _wrap_bubble_sort_SetRefColNum, METH_VARARGS, NULL},
+	 { (char *)"bubble_sort_extractRefCol", _wrap_bubble_sort_extractRefCol, METH_VARARGS, NULL},
+	 { (char *)"bubble_sort_generateIndexArray", _wrap_bubble_sort_generateIndexArray, METH_VARARGS, NULL},
+	 { (char *)"bubble_sort_SetSortStartIndex", _wrap_bubble_sort_SetSortStartIndex, METH_VARARGS, NULL},
+	 { (char *)"bubble_sort_SetSortEndIndex", _wrap_bubble_sort_SetSortEndIndex, METH_VARARGS, NULL},
+	 { (char *)"bubble_sort_swigregister", bubble_sort_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static void *_p_bubble_sortTo_p_sorting(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((sorting *)  ((bubble_sort *) x));
+}
 static swig_type_info _swigt__p_Matrix = {"_p_Matrix", "Matrix *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_bubble_sort = {"_p_bubble_sort", "bubble_sort *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_sorting = {"_p_sorting", "sorting *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Matrix,
+  &_swigt__p_bubble_sort,
   &_swigt__p_char,
-  &_swigt__p_double,
+  &_swigt__p_sorting,
 };
 
 static swig_cast_info _swigc__p_Matrix[] = {  {&_swigt__p_Matrix, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_bubble_sort[] = {  {&_swigt__p_bubble_sort, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_sorting[] = {  {&_swigt__p_sorting, 0, 0, 0},  {&_swigt__p_bubble_sort, _p_bubble_sortTo_p_sorting, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Matrix,
+  _swigc__p_bubble_sort,
   _swigc__p_char,
-  _swigc__p_double,
+  _swigc__p_sorting,
 };
 
 
