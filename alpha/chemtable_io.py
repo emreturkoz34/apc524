@@ -11,6 +11,7 @@ import deltaPDF
 import convolute
 import trapz
 import helper
+import bubble_sort
 
 # read input file
 fin1 = open('chemtable_inputs')
@@ -27,8 +28,24 @@ print filesmatrix
 print bestC
 
 # sort FILESMATRIX by progress variable
-# will add connectivity to C++ sort later
 print "sorting FILESMATRIX by C"
+filesmatC = matrix.Matrix(nofiles,2)
+for i in range(nofiles):
+    for j in range(2):
+        filesmatC.SetVal(i,j,filesmatrix[i,j])
+sortmethod = iof.read_input("sort method:", inputs, default = 'bubble')
+if "".join(sortmethod) == 'bubble': #only bubble sort supported for this version
+    sorter = bubble_sort.bubble_sort(filesmatC)
+sorter.SetRefColNum(0)
+sorter.SetSortEndIndex(nofiles)
+sorter.SetSortStartIndex(0)
+sorter.generateIndexArray()
+sorter.extractRefCol()
+sorter.sort_data()
+#for i in range(nofiles):
+#    for j in range(2):
+#        print filesmatC.GetVal(i,j),
+#    print " "
 
 # Calculate PDF matrix
 ZPy = np.genfromtxt(datafiles[0], unpack=False, skiprows=2, delimiter = "\t", usecols = 0)
@@ -90,8 +107,8 @@ Conv = convolute.Convolute(ZPoints)
 convolutedC = [0] * nofiles
 convolutedST = [0] * nofiles
 
-for kk in filesmatrix[:,1]: ### future verisons: add loop over [C ST Y1 Y2 etc]
-    file = datafiles[int(kk)]
+for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
+    file = datafiles[int(filesmatC.GetVal(kk,1))]
     massfracs = np.genfromtxt(file, unpack=False, skiprows=2, delimiter = "\t", usecols = bestC[0])
     rxnrates = np.genfromtxt(file, unpack=False, skiprows=2, delimiter = "\t", usecols = rxn_rate_locs)
     if  len(massfracs) != ZPoints:
@@ -105,10 +122,10 @@ for kk in filesmatrix[:,1]: ### future verisons: add loop over [C ST Y1 Y2 etc]
         sourcetermPy[i] = rxnrates[i,:].sum()
     helper.copy_py_to_vector(progvarsPy,progvar)
     helper.copy_py_to_vector(sourcetermPy,sourceterm)
-    convolutedC[int(kk)] = matrix.Matrix(ZvarPoints, ZmeanPoints)
-    convolutedST[int(kk)] = matrix.Matrix(ZvarPoints, ZmeanPoints)
-    ConvReturn = Conv.convVal(pdfValM, progvar, convolutedC[int(kk)], TrapzIntgr)
-    ConvReturn = Conv.convVal(pdfValM, sourceterm, convolutedST[int(kk)], TrapzIntgr)
+    convolutedC[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
+    convolutedST[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
+    ConvReturn = Conv.convVal(pdfValM, progvar, convolutedC[kk], TrapzIntgr)
+    ConvReturn = Conv.convVal(pdfValM, sourceterm, convolutedST[kk], TrapzIntgr)
 ### test later with Zpts =/= ZmeanPts
 print "convolution completed"
 

@@ -7,3 +7,4 @@ Zmean_grid:	Z
 Zvar_max:	0.5
 Zvar_grid:	20
 Zpdf:	delta
+sort method:	bubble
