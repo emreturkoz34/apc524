@@ -5,6 +5,8 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
 	// mean has dimension 2, contains w~ and c~
 	// Interpolate w~ at c~ values given by cgrid input
 	// dataout is 3d matrix (z~, z_v, cgrid), values are wgrid
+
+        int flag = 0; // flag indicating success or failure
 	
 	// Retrieve matrix dimensions
 	const int dim2 = datain->GetNumDim2();
@@ -29,14 +31,15 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
 			for (int k = 0; k < lcgrid; k++) {
 			        flag = interp->Interp(tmat, 1, cgrid[k], tarr, 2);
 				if (flag == 1) { // interpolation failed (tried to extrapolate)
-					delete tmat;
-					return 1;
+				        dataout->SetVal(i, j, k, -1);
+					flag = 1;
+				} else {
+				        dataout->SetVal(i, j, k, tarr[0]);
 				}
-				dataout->SetVal(i, j, k, tarr[0]);
 			}
 		}
 	}
 	
 	delete tmat;
-	return 0; // success
+	return flag;
 }
