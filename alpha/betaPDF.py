@@ -15,20 +15,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_convolute', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_betaPDF', [dirname(__file__)])
         except ImportError:
-            import _convolute
-            return _convolute
+            import _betaPDF
+            return _betaPDF
         if fp is not None:
             try:
-                _mod = imp.load_module('_convolute', fp, pathname, description)
+                _mod = imp.load_module('_betaPDF', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _convolute = swig_import_helper()
+    _betaPDF = swig_import_helper()
     del swig_import_helper
 else:
-    import _convolute
+    import _betaPDF
 del version_info
 try:
     _swig_property = property
@@ -69,21 +69,36 @@ except AttributeError:
     _newclass = 0
 
 
-class Convolute(_object):
+class PDF(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Convolute, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, PDF, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Convolute, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, PDF, name)
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _betaPDF.delete_PDF
+    __del__ = lambda self : None;
+    def pdfVal(self, *args): return _betaPDF.PDF_pdfVal(self, *args)
+PDF_swigregister = _betaPDF.PDF_swigregister
+PDF_swigregister(PDF)
+
+class BetaPDF(PDF):
+    __swig_setmethods__ = {}
+    for _s in [PDF]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, BetaPDF, name, value)
+    __swig_getmethods__ = {}
+    for _s in [PDF]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, BetaPDF, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _convolute.new_Convolute(*args)
+        this = _betaPDF.new_BetaPDF(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _convolute.delete_Convolute
+    __swig_destroy__ = _betaPDF.delete_BetaPDF
     __del__ = lambda self : None;
-    def convVal(self, *args): return _convolute.Convolute_convVal(self, *args)
-Convolute_swigregister = _convolute.Convolute_swigregister
-Convolute_swigregister(Convolute)
+    def pdfVal(self, *args): return _betaPDF.BetaPDF_pdfVal(self, *args)
+BetaPDF_swigregister = _betaPDF.BetaPDF_swigregister
+BetaPDF_swigregister(BetaPDF)
 
 # This file is compatible with both classic and new-style classes.
 

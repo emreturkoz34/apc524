@@ -39,23 +39,18 @@ int DeltaPDF::pdfVal(Vector *Var, Vector *Mean, Matrix3D *pdfValM) {
   for (int m = 0; m < ZmeanPts; m++) {
     Zmean = Mean->GetVal(m);
 
+    // resets points to 0
     for (int k = 0; k < ZmeanPts; k++) {
       temp[k] = 0;
-      /*
-      printf("temp[%d] = %f\n", k, temp[k]);
-      */
     }
 
+    // finds location of Zmean in Z
     i = 0;
-    /*
-    printf("Z[%d] = %f\n", 0, Z[0]);
-    printf("Zmean[%d] = %f\n", m, Zmean);
-    */
     while (Z[i] < Zmean) {
       i = i+1;
     }
 
-    
+    // calculates PDF
     if (i == 0) {
       temp[0] = 1;
     } else {
@@ -63,6 +58,7 @@ int DeltaPDF::pdfVal(Vector *Var, Vector *Mean, Matrix3D *pdfValM) {
       temp[i]   = (Zmean - Z[i-1]) / (Z[i] - Z[i-1]);
     }
 
+    // outputs PDF values into PDFValM
     for (int k = 0; k < ZPts; k++) {
       pdfValM->SetVal(0, m, k, temp[k]);
     }

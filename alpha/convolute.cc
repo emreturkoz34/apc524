@@ -16,14 +16,16 @@ Convolute::~Convolute() {
 
 int Convolute::convVal(const Matrix3D *pdfValues, Vector *data, Matrix *postConvVal, Integrator *intgr) {
 
-  // Calculates integrand with pdf and omega
-  Vector *integrand = new Vector(nPoints_);
-  double temp;
+
 
   int ZvarPts  = pdfValues->GetNumDim1();
   int ZmeanPts = pdfValues->GetNumDim2();
   int ZPts     = pdfValues->GetNumDim3();
-  assert(ZPts == ZmeanPts && "Wrong dimensions of ZmeanPts");
+  //  assert(ZPts == ZmeanPts && "Wrong dimensions of ZmeanPts");
+
+  // Calculates integrand with pdf and omega
+  Vector *integrand = new Vector(ZPts);
+  double temp;
 
   // variance
   for (int n = 0; n < ZvarPts; n++) {
@@ -32,6 +34,7 @@ int Convolute::convVal(const Matrix3D *pdfValues, Vector *data, Matrix *postConv
 
       for (int k = 0; k < ZPts; k++) {
 	integrand->SetVal(k, pdfValues->GetVal(n, m, k) * data->GetVal(k));
+	//	printf("pdfVal = %f, dataVal = %f, integrand = %f\n", pdfValues->GetVal(n,m,k), data->GetVal(k), pdfValues->GetVal(n,m,k) * data->GetVal(k));
       }
       temp = intgr->integrate(integrand);
       postConvVal->SetVal(n, m, temp);

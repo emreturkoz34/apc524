@@ -2934,12 +2934,13 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_Integrator swig_types[0]
-#define SWIGTYPE_p_Trapz swig_types[1]
-#define SWIGTYPE_p_Vector swig_types[2]
-#define SWIGTYPE_p_char swig_types[3]
-static swig_type_info *swig_types[5];
-static swig_module_info swig_module = {swig_types, 4, 0, 0, 0, 0};
+#define SWIGTYPE_p_BetaPDF swig_types[0]
+#define SWIGTYPE_p_Matrix3D swig_types[1]
+#define SWIGTYPE_p_PDF swig_types[2]
+#define SWIGTYPE_p_Vector swig_types[3]
+#define SWIGTYPE_p_char swig_types[4]
+static swig_type_info *swig_types[6];
+static swig_module_info swig_module = {swig_types, 5, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2952,16 +2953,16 @@ static swig_module_info swig_module = {swig_types, 4, 0, 0, 0, 0};
 #endif
 
 /*-----------------------------------------------
-              @(target):= _trapz.so
+              @(target):= _betaPDF.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__trapz
+#  define SWIG_init    PyInit__betaPDF
 
 #else
-#  define SWIG_init    init_trapz
+#  define SWIG_init    init_betaPDF
 
 #endif
-#define SWIG_name    "_trapz"
+#define SWIG_name    "_betaPDF"
 
 #define SWIGVERSION 0x020011 
 #define SWIG_VERSION SWIGVERSION
@@ -3036,11 +3037,15 @@ namespace swig {
 }
 
 
-#include "integrator.h"
-#include "trapz.h"
+#include "pdf.h"
+#include "betaPDF.h"
 
 
-  #define SWIG_From_double   PyFloat_FromDouble 
+SWIGINTERNINLINE PyObject*
+  SWIG_From_int  (int value)
+{
+  return PyInt_FromLong((long) value);
+}
 
 
 #include <limits.h>
@@ -3190,19 +3195,19 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_delete_Integrator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_PDF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Integrator *arg1 = (Integrator *) 0 ;
+  PDF *arg1 = (PDF *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_Integrator",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Integrator, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_PDF",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PDF, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Integrator" "', argument " "1"" of type '" "Integrator *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_PDF" "', argument " "1"" of type '" "PDF *""'"); 
   }
-  arg1 = reinterpret_cast< Integrator * >(argp1);
+  arg1 = reinterpret_cast< PDF * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -3211,45 +3216,63 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Integrator_integrate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_PDF_pdfVal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Integrator *arg1 = (Integrator *) 0 ;
+  PDF *arg1 = (PDF *) 0 ;
   Vector *arg2 = (Vector *) 0 ;
+  Vector *arg3 = (Vector *) 0 ;
+  Matrix3D *arg4 = (Matrix3D *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  double result;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Integrator_integrate",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Integrator, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:PDF_pdfVal",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_PDF, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Integrator_integrate" "', argument " "1"" of type '" "Integrator *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PDF_pdfVal" "', argument " "1"" of type '" "PDF *""'"); 
   }
-  arg1 = reinterpret_cast< Integrator * >(argp1);
+  arg1 = reinterpret_cast< PDF * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_Vector, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Integrator_integrate" "', argument " "2"" of type '" "Vector *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PDF_pdfVal" "', argument " "2"" of type '" "Vector *""'"); 
   }
   arg2 = reinterpret_cast< Vector * >(argp2);
-  result = (double)(arg1)->integrate(arg2);
-  resultobj = SWIG_From_double(static_cast< double >(result));
+  res3 = SWIG_ConvertPtr(obj2, &argp3,SWIGTYPE_p_Vector, 0 |  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "PDF_pdfVal" "', argument " "3"" of type '" "Vector *""'"); 
+  }
+  arg3 = reinterpret_cast< Vector * >(argp3);
+  res4 = SWIG_ConvertPtr(obj3, &argp4,SWIGTYPE_p_Matrix3D, 0 |  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "PDF_pdfVal" "', argument " "4"" of type '" "Matrix3D *""'"); 
+  }
+  arg4 = reinterpret_cast< Matrix3D * >(argp4);
+  result = (int)(arg1)->pdfVal(arg2,arg3,arg4);
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *Integrator_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *PDF_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Integrator, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_PDF, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_Trapz(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_BetaPDF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Vector *arg1 = (Vector *) 0 ;
   int arg2 ;
@@ -3259,40 +3282,40 @@ SWIGINTERN PyObject *_wrap_new_Trapz(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Trapz *result = 0 ;
+  BetaPDF *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:new_Trapz",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_BetaPDF",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vector, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Trapz" "', argument " "1"" of type '" "Vector *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_BetaPDF" "', argument " "1"" of type '" "Vector *""'"); 
   }
   arg1 = reinterpret_cast< Vector * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Trapz" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_BetaPDF" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  result = (Trapz *)new Trapz(arg1,arg2);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Trapz, SWIG_POINTER_NEW |  0 );
+  result = (BetaPDF *)new BetaPDF(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_BetaPDF, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_Trapz(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_BetaPDF(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Trapz *arg1 = (Trapz *) 0 ;
+  BetaPDF *arg1 = (BetaPDF *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_Trapz",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Trapz, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_BetaPDF",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_BetaPDF, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Trapz" "', argument " "1"" of type '" "Trapz *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_BetaPDF" "', argument " "1"" of type '" "BetaPDF *""'"); 
   }
-  arg1 = reinterpret_cast< Trapz * >(argp1);
+  arg1 = reinterpret_cast< BetaPDF * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -3301,82 +3324,104 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Trapz_integrate(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_BetaPDF_pdfVal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Trapz *arg1 = (Trapz *) 0 ;
+  BetaPDF *arg1 = (BetaPDF *) 0 ;
   Vector *arg2 = (Vector *) 0 ;
+  Vector *arg3 = (Vector *) 0 ;
+  Matrix3D *arg4 = (Matrix3D *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  double result;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Trapz_integrate",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Trapz, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:BetaPDF_pdfVal",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_BetaPDF, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Trapz_integrate" "', argument " "1"" of type '" "Trapz *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "BetaPDF_pdfVal" "', argument " "1"" of type '" "BetaPDF *""'"); 
   }
-  arg1 = reinterpret_cast< Trapz * >(argp1);
+  arg1 = reinterpret_cast< BetaPDF * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_Vector, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Trapz_integrate" "', argument " "2"" of type '" "Vector *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "BetaPDF_pdfVal" "', argument " "2"" of type '" "Vector *""'"); 
   }
   arg2 = reinterpret_cast< Vector * >(argp2);
-  result = (double)(arg1)->integrate(arg2);
-  resultobj = SWIG_From_double(static_cast< double >(result));
+  res3 = SWIG_ConvertPtr(obj2, &argp3,SWIGTYPE_p_Vector, 0 |  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "BetaPDF_pdfVal" "', argument " "3"" of type '" "Vector *""'"); 
+  }
+  arg3 = reinterpret_cast< Vector * >(argp3);
+  res4 = SWIG_ConvertPtr(obj3, &argp4,SWIGTYPE_p_Matrix3D, 0 |  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "BetaPDF_pdfVal" "', argument " "4"" of type '" "Matrix3D *""'"); 
+  }
+  arg4 = reinterpret_cast< Matrix3D * >(argp4);
+  result = (int)(arg1)->pdfVal(arg2,arg3,arg4);
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *Trapz_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *BetaPDF_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Trapz, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_BetaPDF, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
-	 { (char *)"delete_Integrator", _wrap_delete_Integrator, METH_VARARGS, NULL},
-	 { (char *)"Integrator_integrate", _wrap_Integrator_integrate, METH_VARARGS, NULL},
-	 { (char *)"Integrator_swigregister", Integrator_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_Trapz", _wrap_new_Trapz, METH_VARARGS, NULL},
-	 { (char *)"delete_Trapz", _wrap_delete_Trapz, METH_VARARGS, NULL},
-	 { (char *)"Trapz_integrate", _wrap_Trapz_integrate, METH_VARARGS, NULL},
-	 { (char *)"Trapz_swigregister", Trapz_swigregister, METH_VARARGS, NULL},
+	 { (char *)"delete_PDF", _wrap_delete_PDF, METH_VARARGS, NULL},
+	 { (char *)"PDF_pdfVal", _wrap_PDF_pdfVal, METH_VARARGS, NULL},
+	 { (char *)"PDF_swigregister", PDF_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_BetaPDF", _wrap_new_BetaPDF, METH_VARARGS, NULL},
+	 { (char *)"delete_BetaPDF", _wrap_delete_BetaPDF, METH_VARARGS, NULL},
+	 { (char *)"BetaPDF_pdfVal", _wrap_BetaPDF_pdfVal, METH_VARARGS, NULL},
+	 { (char *)"BetaPDF_swigregister", BetaPDF_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_TrapzTo_p_Integrator(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((Integrator *)  ((Trapz *) x));
+static void *_p_BetaPDFTo_p_PDF(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((PDF *)  ((BetaPDF *) x));
 }
-static swig_type_info _swigt__p_Integrator = {"_p_Integrator", "Integrator *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Trapz = {"_p_Trapz", "Trapz *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_BetaPDF = {"_p_BetaPDF", "BetaPDF *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Matrix3D = {"_p_Matrix3D", "Matrix3D *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_PDF = {"_p_PDF", "PDF *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Vector = {"_p_Vector", "Vector *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_Integrator,
-  &_swigt__p_Trapz,
+  &_swigt__p_BetaPDF,
+  &_swigt__p_Matrix3D,
+  &_swigt__p_PDF,
   &_swigt__p_Vector,
   &_swigt__p_char,
 };
 
-static swig_cast_info _swigc__p_Integrator[] = {  {&_swigt__p_Trapz, _p_TrapzTo_p_Integrator, 0, 0},  {&_swigt__p_Integrator, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Trapz[] = {  {&_swigt__p_Trapz, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_BetaPDF[] = {  {&_swigt__p_BetaPDF, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Matrix3D[] = {  {&_swigt__p_Matrix3D, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_PDF[] = {  {&_swigt__p_PDF, 0, 0, 0},  {&_swigt__p_BetaPDF, _p_BetaPDFTo_p_PDF, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Vector[] = {  {&_swigt__p_Vector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_Integrator,
-  _swigc__p_Trapz,
+  _swigc__p_BetaPDF,
+  _swigc__p_Matrix3D,
+  _swigc__p_PDF,
   _swigc__p_Vector,
   _swigc__p_char,
 };
