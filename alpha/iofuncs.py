@@ -1,4 +1,4 @@
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 import matrix
 import lininterp
@@ -98,10 +98,10 @@ def get_progvar(progvarvec, testspecies, locs, index = 1):
 
 # function to plot progress variable vs temp
 def plotCvT(Tvec, Cvec, fname="CvsT"):
-    0#plt.figure()
-    #plt.plot(Tvec, Cvec)
-    #plt.xlabel("T (K)")
-    #plt.ylabel("C")
-    #plt.title("Best Progress Variable")
-    #plt.savefig("%s.pdf" % fname)
-    #plt.clf()
+    plt.figure()
+    plt.plot(Tvec, Cvec)
+    plt.xlabel("T (K)")
+    plt.ylabel("C")
+    plt.title("Best Progress Variable")
+    plt.savefig("%s.pdf" % fname)
+    plt.clf()
