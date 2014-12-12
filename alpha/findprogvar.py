@@ -2,13 +2,17 @@ import numpy as np
 import combinations as cs
 import iofuncs as iof
 
-def findC(datafiles, testspecies, bestC, filesmatrix): 
+import matrix
+import bubble_sort
+
+def findC(datafiles, testspecies, bestC): 
 
     # interpolate each datafile, generate a matrix from interpolated data
     nofiles = len(datafiles)
     nocols = len(testspecies)+1
     locs = np.zeros(nocols-1)
     interpdata = np.zeros((nofiles,nocols))
+    filesmatrix = np.zeros((nofiles,2))
 
     for ii in range(nofiles):
         dataobj = iof.ProcFile(datafiles[ii])
@@ -20,6 +24,10 @@ def findC(datafiles, testspecies, bestC, filesmatrix):
         dataobj.interpolate(testspecies, locs, interpdata[ii,:])
     filesmatrix[:,0] = interpdata[:,0]
     filesmatrix[:,1] = range(nofiles)
+    filesmatC = matrix.Matrix(nofiles,2)
+    for i in range(nofiles):
+        for j in range(2):
+            filesmatC.SetVal(i,j,filesmatrix[i,j])
 
     # generate combinations matrix
     combosmatrix = np.zeros((nocols,cs.totnumcoms(nocols-1)+1))
@@ -33,6 +41,15 @@ def findC(datafiles, testspecies, bestC, filesmatrix):
     # will add connectivity to C++ sort later
     print "sorting PROGVARS by temperature"
     print "sorting FILESMATRIX by temperature"
+    sortmethod = 'bubble'
+    if "".join(sortmethod) == 'bubble': #only bubble sort supported for this version
+        sorter = bubble_sort.bubble_sort(filesmatC)
+    sorter.SetRefColNum(0)
+    sorter.SetSortEndIndex(nofiles)
+    sorter.SetSortStartIndex(0)
+    sorter.generateIndexArray()
+    sorter.extractRefCol()
+    sorter.sort_data()
 
     # test monotonicity of PROGVARS
     # will add connectivity to C++ monotonicity check later
@@ -98,4 +115,7 @@ def findC(datafiles, testspecies, bestC, filesmatrix):
     iof.plotCvT(progvars[:,0],progvars[:,bestC[2]])
 
     # write results
-    filesmatrix[:,0] = progvars[:,bestC[2]]
+    for i in range(nofiles):
+        filesmatC.SetVal(i,0,progvars[i,bestC[2]])
+
+    return filesmatC

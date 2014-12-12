@@ -22,17 +22,11 @@ testspecies = iof.read_input("test species:", inputs, 0, ["Y-CO2","Y-CO","Y-H2O"
 # find best progress variable
 bestC = []
 nofiles = len(datafiles)
-filesmatrix = np.zeros((nofiles,2)) # define more generally
-fpv.findC(datafiles, testspecies, bestC, filesmatrix)
-print filesmatrix
+filesmatC = fpv.findC(datafiles, testspecies, bestC) # change so don't have to pre-initialize here
 print bestC
 
 # sort FILESMATRIX by progress variable
-print "sorting FILESMATRIX by C"
-filesmatC = matrix.Matrix(nofiles,2)
-for i in range(nofiles):
-    for j in range(2):
-        filesmatC.SetVal(i,j,filesmatrix[i,j])
+
 sortmethod = iof.read_input("sort method:", inputs, default = 'bubble')
 if "".join(sortmethod) == 'bubble': #only bubble sort supported for this version
     sorter = bubble_sort.bubble_sort(filesmatC)
@@ -42,10 +36,11 @@ sorter.SetSortStartIndex(0)
 sorter.generateIndexArray()
 sorter.extractRefCol()
 sorter.sort_data()
-#for i in range(nofiles):
-#    for j in range(2):
-#        print filesmatC.GetVal(i,j),
-#    print " "
+print "Filesmatrix sorted by C"
+for i in range(nofiles):
+    for j in range(2):
+        print filesmatC.GetVal(i,j),
+    print " "
 
 # Calculate PDF matrix
 ZPy = np.genfromtxt(datafiles[0], unpack=False, skiprows=2, delimiter = "\t", usecols = 0)
