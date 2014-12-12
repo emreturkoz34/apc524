@@ -83,6 +83,7 @@ def findC(datafiles, testspecies, bestC):
     checker = monocheck.MonoCheck(progVar) # Create MonoCheck object
     assert checker.CheckStrictMonoticity(0, monoAry) == 0, "CheckStrictMonoticity ran unsuccessfully.\n" # Check which columns of progVar are strictly increasing or strictly decreasing and store result in monoAry
 
+    checksum = 0
     for i in range(length):
         checksum += monoAry.GetVal(i)
 
