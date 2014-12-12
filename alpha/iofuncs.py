@@ -43,7 +43,7 @@ class ProcFile(object):
         locs[:] = locations[2:]
         
         # generate data matrix
-        data = np.genfromtxt(self._sfile, unpack=False, skiprows=2, delimiter = "\t", usecols = locations)
+        data = np.genfromtxt(self._sfile, unpack=False, skip_header=2, delimiter = "\t", usecols = locations)
 
         # Here we will carry out the interpolation using the C++ function
         # for now, a placeholder

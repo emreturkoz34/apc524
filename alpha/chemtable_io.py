@@ -43,7 +43,7 @@ for i in range(nofiles):
     print " "
 
 # Calculate PDF matrix
-ZPy = np.genfromtxt(datafiles[0], unpack=False, skiprows=2, delimiter = "\t", usecols = 0)
+ZPy = np.genfromtxt(datafiles[0], unpack=False, skip_header=2, delimiter = "\t", usecols = 0)
 Zmean_grid = iof.read_input("Zmean_grid:", inputs, minargs = 0, default = 'Z') # if no Z_grid is specified, Z and Zmean will be equivalent 
 if "".join(Zmean_grid) == 'Z':
     ZmeanPy = ZPy
@@ -104,8 +104,8 @@ convolutedST = [0] * nofiles
 
 for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     file = datafiles[int(filesmatC.GetVal(kk,1))]
-    massfracs = np.genfromtxt(file, unpack=False, skiprows=2, delimiter = "\t", usecols = bestC[0])
-    rxnrates = np.genfromtxt(file, unpack=False, skiprows=2, delimiter = "\t", usecols = rxn_rate_locs)
+    massfracs = np.genfromtxt(file, unpack=False, skip_header=2, delimiter = "\t", usecols = bestC[0])
+    rxnrates = np.genfromtxt(file, unpack=False, skip_header=2, delimiter = "\t", usecols = rxn_rate_locs)
     if  len(massfracs) != ZPoints:
         raise IOError("All file lengths must be the same")
     progvarsPy = np.zeros(ZPoints)
@@ -121,8 +121,9 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     convolutedST[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     ConvReturn = Conv.convVal(pdfValM, progvar, convolutedC[kk], TrapzIntgr)
     ConvReturn = Conv.convVal(pdfValM, sourceterm, convolutedST[kk], TrapzIntgr)
-### test later with Zpts =/= ZmeanPts
 print "convolution completed"
+del convolutedC
+del convolutedST
 
 #for i in range(ZvarPoints):
 #    for j in range(ZmeanPoints):

@@ -72,7 +72,6 @@ def findC(datafiles, testspecies, bestC):
 
     # print results
     monocheckflag = 0
-
     for i in range(length): 
         if monocheck[i] == 3: # Find best monotonic progress variable if it exists
             if monocheckflag != 0:
@@ -83,7 +82,6 @@ def findC(datafiles, testspecies, bestC):
             for j in bestC[1][1:]:
                 print "+ %s" % j
             print '\nThe column numbers of these species are', bestC[0],', respectively'
-
         elif monocheck[i] == 1: # otherwise find least non-monotonic progress variable
             if monocheckflag != 0:
                 raise RuntimeError("error in contents of monocheck vector")
@@ -94,7 +92,6 @@ def findC(datafiles, testspecies, bestC):
             for j in bestC[1][1:]: 
                 print "+ %s" % j
             print '\nThe column numbers of these species are', bestC[0],', respectively'
-
     for i in range(length): # identify other monotonic progress variables 
         if monocheck[i] == 2:
             if monocheckflag < 2:
@@ -117,5 +114,4 @@ def findC(datafiles, testspecies, bestC):
     # write results
     for i in range(nofiles):
         filesmatC.SetVal(i,0,progvars[i,bestC[2]])
-
     return filesmatC
