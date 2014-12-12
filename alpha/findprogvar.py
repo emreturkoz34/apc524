@@ -2,6 +2,8 @@ import numpy as np
 import combinations as cs
 import iofuncs as iof
 
+import sys
+sys.path.append('RunThese/_matrix.so')
 import matrix
 import bubble_sort
 import vector

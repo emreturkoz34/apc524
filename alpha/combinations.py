@@ -46,6 +46,6 @@ def combination_mat(matrix):
         numcombos = numcoms(n,k+1)
         combos(k+1,matrix[:,start:start+numcombos])
         start += numcombos
-    #add check to see if matrix is correct size maybe
+    #add check to see if matrix is correct size in future versions
     return 0
 
