@@ -1,0 +1,22 @@
+TARGET     = monocheck
+WRAPPER	   = $(TARGET)_wrap.cxx
+SRC	   = $(TARGET).cc 
+MATRIXOBJ  = vector.o vector_wrap.o matrix.o matrix_wrap.o
+OBJ	   = $(SRC:.cc=.o) $(WRAPPER:.cxx=.o) $(MATRIXOBJ)
+CXX        = g++
+CXXFLAGS     = -O3 -fPIC
+INTERFACE  = $(TARGET).i
+SWIGOPT    =
+SWIG       = swig
+PYLIB	   = -I/usr/include/python2.7
+
+SO	   = so
+
+python_cpp: $(TARGET).i
+	    swig -c++ -python $(INTERFACE)
+	    $(CXX) $(CXXFLAGS) -c $(SRC) 
+	    $(CXX) $(CXXFLAGS) -c $(WRAPPER) $(PYLIB)
+	    $(CXX) -shared $(OBJ) -o _$(TARGET).$(SO)
+
+python_clean:
+	rm -f *_wrap* *.o *~ *$(SO) mypython *.pyc .~* core

@@ -5,9 +5,15 @@ import iofuncs as iof
 import matrix
 import bubble_sort
 
+import vector
+import monocheck
+import linregression
+import endpointslope
+import helper
+
 def findC(datafiles, testspecies, bestC): 
 
-    # interpolate each datafile, generate a matrix from interpolated data
+    # Interpolate each datafile, generate a matrix from interpolated data
     nofiles = len(datafiles)
     nocols = len(testspecies)+1
     locs = np.zeros(nocols-1)
@@ -20,7 +26,7 @@ def findC(datafiles, testspecies, bestC):
             titles = dataobj.gettitles() 
         else:
             titles1 = dataobj.gettitles()
-            np.testing.assert_array_equal(titles1,titles) # verify that all data files have the same column headers
+            np.testing.assert_array_equal(titles1,titles) # Verify that all data files have the same column headers
         dataobj.interpolate(testspecies, locs, interpdata[ii,:])
     filesmatrix[:,0] = interpdata[:,0]
     filesmatrix[:,1] = range(nofiles)
@@ -29,26 +35,24 @@ def findC(datafiles, testspecies, bestC):
         for j in range(2):
             filesmatC.SetVal(i,j,filesmatrix[i,j])
 
-    # generate combinations matrix
+    # Generate combinations matrix
     combosmatrix = np.zeros((nocols,cs.totnumcoms(nocols-1)+1))
     combosmatrix[0,0] = 1
     cs.combination_mat(combosmatrix[1:,1:])
 
-    # calculate progress variables
+    # Calculate progress variables
     progvars = np.dot(interpdata,combosmatrix)
 
-    # generate progress variable matrix
+    # Generate progress variable matrix
     progVar = matrix.Matrix(nofiles, cs.totnumcoms(nocols-1)+1) 
     for i in range (nofiles):
         for j in range(cs.totnumcoms(nocols-1)+1):
             progVar.SetVal(i,j,progvars[i,j])
 
-    
-    # sort PROGVARS and FILESMATRIX by temperature
-    # will add connectivity to C++ sort later
-    print "sorting PROGVARS by temperature"
+    # Sort PROGVARS and FILESMATRIX by temperature
+    print "Sorting PROGVARS by temperature:\n"
     sortmethod = 'bubble'
-    if "".join(sortmethod) == 'bubble': #only bubble sort supported for this version
+    if "".join(sortmethod) == 'bubble':
         sorter = bubble_sort.bubble_sort(progvVar)
     sorter.SetRefColNum(0)
     sorter.SetSortEndIndex(nofiles)
@@ -58,9 +62,9 @@ def findC(datafiles, testspecies, bestC):
     sorter.sort_data()
 
 
-    print "sorting FILESMATRIX by temperature"
+    print "Sorting FILESMATRIX by temperature:\n"
     sortmethod = 'bubble'
-    if "".join(sortmethod) == 'bubble': #only bubble sort supported for this version
+    if "".join(sortmethod) == 'bubble':
         sorter = bubble_sort.bubble_sort(filesmatC)
     sorter.SetRefColNum(0)
     sorter.SetSortEndIndex(nofiles)
@@ -69,67 +73,73 @@ def findC(datafiles, testspecies, bestC):
     sorter.extractRefCol()
     sorter.sort_data()
 
-    # test monotonicity of PROGVARS
-    # will add connectivity to C++ monotonicity check later
-    print "testing monotonicity"
+    # Test monotonicity of PROGVARS
+    print "Testing monotonicity:\n"
     length = progvars.shape[1]
-    monocheck = np.zeros(length)
-    monocheck[3] = 3 ###
-    monocheck[4] = 3 ###
-    checksum = monocheck.sum()
-    if checksum % 3 != 0:
-        raise RuntimeError("incorrect values in monocheck vector, check monotonicity function")
-    if checksum > 3:
-        # max slop tests in C++ to be connected
-        print "testing max slope"
-        monocheck[3] = 2 ###
-    elif checksum == 0:
-        # non monotonicity check in C++ to be connected
-        print "finding least non-monotonic"
-        monocheck[-1] = 1 ###
+    monoAryPy = np.zeros(length)
+    monoAry = vector.Vector(length)
+    helper.copy_py_to_vector(monoAryPy, monoAry)
 
-    # print results
-    monocheckflag = 0
+    checker = monocheck.MonoCheck(progVar) # Create MonoCheck object
+    assert checker.CheckStrictMonoticity(0, monoAry) == 0, "CheckStrictMonoticity ran unsuccessfully.\n" # Check which columns of progVar are strictly increasing or strictly decreasing and store result in monoAry
+
+    for i in range(length):
+        checksum += monoAry.GetVal(i)
+
+    if checksum % 3 != 0:
+        raise RuntimeError("Incorrect values in monoAry vector, check monotonicity function.\n")
+    if checksum > 3:
+        print "Testing max slope:"
+        maxchecker = linregression.LinRegression(progVar)
+        #maxchecker = endpointslope.EndPointSlope(progVar)
+        assert maxchecker.MostMonotonic(0, monoAry) == 0, "MostMonotonic ran unsuccessfully.\n" # Distinguish the best monotonic progress variables
+    elif checksum == 0:
+        # Least non-monotonic tests to be implemented in beta version
+        print "Finding least non-monotonic:"
+        monoAry[0] = 1
+
+    # Print results
+    monoAryflag = 0 
     for i in range(length): 
-        if monocheck[i] == 3: # Find best monotonic progress variable if it exists
-            if monocheckflag != 0:
-                raise RuntimeError("error in contents of monocheck vector: multiple best selected")
-            monocheckflag = 2
+        if monoAry[i] == 3: # Find best monotonic progress variable if it exists
+            if monoAryflag != 0:
+                raise RuntimeError("Error in contents of monoAry vector: multiple best selected.\n")
+            monoAryflag = 2
             bestC[:] = iof.get_progvar(combosmatrix[1:,i], testspecies, locs, i)
-            print '\nThe best monotonically increasing progress variable is C = %s' % bestC[1][0], 
+            print 'The best strictly monotonic progress variable is C = %s' % bestC[1][0], 
             for j in bestC[1][1:]:
                 print "+ %s" % j
-            print '\nThe column numbers of these species are', bestC[0],', respectively'
-        elif monocheck[i] == 1: # otherwise find least non-monotonic progress variable
-            if monocheckflag != 0:
-                raise RuntimeError("error in contents of monocheck vector")
-            monocheckflag = 1
+            print '\nThe column numbers of these species are ', bestC[0],', respectively.\n'
+        elif monoAry[i] == 1: # Otherwise find least non-monotonic progress variable
+            if monoAryflag != 0:
+                raise RuntimeError("Error in contents of monoAry vector.\n")
+            monoAryflag = 1
             bestC[:] = iof.get_progvar(combosmatrix[1:,i], testspecies, locs, i)
-            print '\nWARNING: no monotonic  progress variables found, but proceeding with best alternative'
+            print 'WARNING: no monotonic progress variables found, but proceeding with best alternative.\n'
             print 'The least non-monotonic progress variable is C = %s' % bestC[1][0], 
             for j in bestC[1][1:]: 
                 print "+ %s" % j
-            print '\nThe column numbers of these species are', bestC[0],', respectively'
-    for i in range(length): # identify other monotonic progress variables 
-        if monocheck[i] == 2:
-            if monocheckflag < 2:
-                raise RuntimeError("error in contents of monocheck vector")
+            print '\nThe column numbers of these species are', bestC[0],', respectively.\n'
+    for i in range(length): # Identify other monotonic progress variables 
+        if monoAry[i] == 2:
+            if monoAryflag < 2:
+                raise RuntimeError("Error in contents of monoAry vector.\n")
             else:
-                print "\nOther candidate monotonic progress variables are:"
+                print "Other candidate monotonic progress variables are:"
             otherC = iof.get_progvar(combosmatrix[1:,i], testspecies, locs, i)
             print 'C = %s' % otherC[1][0], 
             for j in otherC[1][1:]: 
                 print "+ %s" % j
             print "\n"
-            monocheckflag = 3
+            monoAryflag = 3
 
-    if monocheckflag < 1: # give error if no best progress variable is found
-        raise RuntimeError("error: no best progress variable selected")
+    if monoAryflag < 1: # Give error if no best progress variable is found
+        raise RuntimeError("Error: no best progress variable selected.")
 
-    # plot results
+    # Plot results
     iof.plotCvT(progvars[:,0],progvars[:,bestC[2]])
 
-    # write results
+    # Write results
     for i in range(nofiles):
         filesmatC.SetVal(i,0,progvars[i,bestC[2]])
     return filesmatC
