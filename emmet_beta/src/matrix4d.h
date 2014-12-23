@@ -11,14 +11,13 @@ class Matrix4D {
   int GetNumDim2() const;
   int GetNumDim3() const;
   int GetNumDim4() const;
+
  private:
   double *matrix_;
   const int dim1_;
   const int dim2_;
   const int dim3_;
   const int dim4_;
-  
 };
-
 
 #endif // MATRIX4D_H_

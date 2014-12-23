@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 import numpy as np
 
 import sys
@@ -36,10 +35,10 @@ Zvar = np.linspace(ZvarMin, ZvarMax, ZvarPoints)
 
 # create instances of PDF class
 if ZvarPoints == 1:
-    d = pdf.DeltaPDF(Z) 
+    d = pdf.DeltaPDF(Zmean) 
     print "delta PDF created"
 else:
-    d = pdf.BetaPDF(Z)
+    d = pdf.BetaPDF(Zmean, Zvar)
     print "beta PDF created"
 
 pdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
@@ -52,7 +51,7 @@ PDF = np.zeros((ZmeanPoints, ZPoints))
 # Calculates PDF
 #####################################################
 
-test = d.pdfVal(Zvar, Zmean, pdfValM)
+test = d.pdfVal(Z, pdfValM)
 print "PDF calculated"
 
 #####################################################

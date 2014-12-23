@@ -1,8 +1,7 @@
-#include "integrator.h"
 #include "glquad.h"
-#include "math.h"
 #include "assert.h"
 #include "stdio.h"
+
 #include "alglibinternal.h"
 #include "alglibmisc.h"
 #include "ap.h"
@@ -20,8 +19,7 @@
 GLQuad::GLQuad(int Nodes)
   : Nodes_(Nodes),
     x_(new double[Nodes]),
-    w_(new double[Nodes])
-{
+    w_(new double[Nodes]) {
 
   alglib::ae_int_t n = Nodes_;
   alglib::ae_int_t info;
@@ -46,10 +44,11 @@ GLQuad::GLQuad(int Nodes)
     x_[i] = x[i]; // abscissa
     w_[i] = w[i]; // weights
   }
-
 }
 
 GLQuad::~GLQuad() {
+  delete x_;
+  delete w_;
 }
 
 double GLQuad::integrate(double *integrand, double *Z, int ZPoints) {
@@ -72,7 +71,6 @@ double GLQuad::integrate(double *integrand, double *Z, int ZPoints) {
       + integrand[i-1]*(xModRange-Z[i-1])/(Z[i]-Z[i-1]);
   }
 
-
   // Calculates integral
   double temp, f;
   temp = 0;
@@ -84,9 +82,6 @@ double GLQuad::integrate(double *integrand, double *Z, int ZPoints) {
   // Scales integral to account for domain conversion: x = -1,1 to Zmin,Zmax
   temp = temp * (Z[ZPoints-1] - Z[0]) / 2;
 
-  // frees allocated memory
   delete intgrNodeVals;
-
-  // Returns integral result
   return temp;
 }

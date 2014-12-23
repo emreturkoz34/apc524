@@ -1,6 +1,4 @@
-#include <assert.h>
 #include "matrix4d.h"
-
 
 /// Constructor
 Matrix4D::Matrix4D(int dim1, int dim2, int dim3, int dim4)

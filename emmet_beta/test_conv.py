@@ -45,13 +45,13 @@ Zvar = np.linspace(ZvarMin, ZvarMax, ZvarPoints)
 
 # create PDF
 if ZvarPoints == 1:
-    d = pdf.DeltaPDF(Z) 
+    d = pdf.DeltaPDF(Zmean, Zvar) 
     print "delta PDF created"
 else:
-    d = pdf.BetaPDF(Z)
+    d = pdf.BetaPDF(Zmean, Zvar)
     print "beta PDF created"
 pdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
-c = d.pdfVal(Zvar, Zmean, pdfValM)
+c = d.pdfVal(Z, pdfValM)
 print "PDF calculated"
 
 # create Mock Data

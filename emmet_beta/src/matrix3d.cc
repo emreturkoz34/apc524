@@ -1,8 +1,3 @@
-
-
-
-
-#include <assert.h>
 #include "matrix3d.h"
 
 /// Constructor

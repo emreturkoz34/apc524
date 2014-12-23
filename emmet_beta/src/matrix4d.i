@@ -1,4 +1,3 @@
-
 %module matrix4d
 
 %{

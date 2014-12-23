@@ -6,13 +6,13 @@
 
 class DeltaPDF : public PDF {
  public:
-  DeltaPDF(double *Z, int ZPoints);
+  DeltaPDF(double *Zmean, int ZmeanPoints);
   ~DeltaPDF();
-  int pdfVal(double *Zvar, int ZvarPoints, double *Zmean, int ZmeanPoints, Matrix3D *pdfValM);
+  int pdfVal(double *Z, int ZPoints, Matrix3D *pdfValM);
 
  private:
-  double *Z_;
-  int ZPoints_;
+  double *Zmean_;
+  int ZmeanPoints_;
 };
 
 #endif // DELTAPDF_H_

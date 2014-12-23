@@ -6,13 +6,15 @@
 
 class BetaPDF : public PDF {
  public:
-  BetaPDF(double *Z,int ZPoints);
+  BetaPDF(double *Zmean, int ZmeanPoints, double *Zvar, int ZvarPoints);
   ~BetaPDF();
-  int pdfVal(double *Zvar, int ZvarPoints, double *Zmean, int ZmeanPoints, Matrix3D *pdfValM);
+  int pdfVal(double *Z, int ZPoints, Matrix3D *pdfValM);
 
  private:
-  double *Z_;
-  int ZPoints_;
+  double *Zmean_;
+  int ZmeanPoints_;
+  double *Zvar_;
+  int ZvarPoints_;
 };
 
 #endif // BETAPDF_H_
