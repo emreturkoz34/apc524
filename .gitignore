@@ -3,3 +3,6 @@
 *.aux
 *.log
 *.out
+*.so
+*_wrap.*
+*.pyc
