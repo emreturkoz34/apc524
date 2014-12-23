@@ -4,8 +4,9 @@ vpath %.cxx ../src
 
 # SWIG Interface files
 SWIGINT	= $(addsuffix _wrap.cxx,$(ABSCLS)) \
-	$(addsuffix _wrap.cxx,$(OTHER)) \
-	$(addsuffix _wrap.cxx,$(MATRIX))
+	$(addsuffix _wrap.cxx,$(CLASS)) \
+	$(addsuffix _wrap.cxx,$(OTHER))
+
 
 # All objects
 OBJ	= $(addsuffix .o,$(SRC)) $(SWIGINT:.cxx=.o)

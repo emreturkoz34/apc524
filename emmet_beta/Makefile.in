@@ -4,28 +4,23 @@ ALGDIR	= $(HOMEDIR)/alglib
 SRCDIR	= $(HOMEDIR)/src
 OBJDIR	= $(HOMEDIR)/obj
 MODDIR	= $(HOMEDIR)/mod
-PATHS	= $(ALGDIR) $(SRCDIR) $(OBJDIR) $(MODDIR)
-vpath %.i $(SRCDIR)
-vpath %.cc $(SRCDIR)
-vpath %.cxx $(SRCDIR)
-
-
 
 # Files
 MATRIX	= matrix matrix3d matrix4d
 PDFS	= deltaPDF betaPDF
 INTGR	= trapz simpson glquad
+OTHER	= convolute
 
 # Classes
 ABSCLS	= pdf integrator
 DRVCLS	= $(PDFS) $(INTGR)
-OTHER	= convolute
+CLASS	= $(MATRIX)
 
-# All
-SRC	= $(DRVCLS) $(MATRIX) $(OTHER)
+# All *.cc
+SRC	= $(DRVCLS) $(CLASS) $(OTHER)
 
 # Shared Object Targets
-SO	= $(ABSCLS) $(MATRIX) $(OTHER)
+SO	= $(ABSCLS) $(CLASS) $(OTHER)
 
 # External library AlgLib
 ALGLIB	= alglibinternal alglibmisc ap dataanalysis \

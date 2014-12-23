@@ -14,7 +14,7 @@ import pdf
 # Modify these values ONLY
 #####################################################
 
-ZPoints = 215
+ZPoints = 199
 ZmeanPoints = 20
 ZvarPoints = 6 # Delta PDF used if ZvarPoints == 1
 
@@ -32,7 +32,7 @@ ProgMin = 0
 ProgMax = 0.3
 
 # Gauss Legendre Quadrature
-Nodes = 25
+Nodes = 50
 
 #####################################################
 # Creates all arrays and objects needed

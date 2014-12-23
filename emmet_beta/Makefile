@@ -16,5 +16,3 @@ clean:
 
 cleanlib:
 	rm -f $(ALGDIR)/*.o
-
-

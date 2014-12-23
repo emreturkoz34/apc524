@@ -19,7 +19,3 @@ _pdf.so: pdf_wrap.o $(addsuffix .o,$(PDFS)) $(addsuffix .o,$(MATRIX))
 _integrator.so: integrator_wrap.o $(addsuffix .o,$(INTGR)) \
 	$(addsuffix .o,$(MATRIX)) $(addsuffix .o,$(ALGLIB))
 	$(CXX) -shared $^ -o $@
-
-# Convolute shared object
-#_convolute.so:	convolute.o convolute_wrap.o $(addsuffix .o,$(MATRIX))
-#	$(CXX) -shared -o $@ $^
