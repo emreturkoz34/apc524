@@ -1,0 +1,38 @@
+# Directories
+HOMEDIR	= $(shell pwd)
+ALGDIR	= $(HOMEDIR)/alglib
+SRCDIR	= $(HOMEDIR)/src
+OBJDIR	= $(HOMEDIR)/obj
+MODDIR	= $(HOMEDIR)/mod
+PATHS	= $(ALGDIR) $(SRCDIR) $(OBJDIR) $(MODDIR)
+vpath %.i $(SRCDIR)
+vpath %.cc $(SRCDIR)
+vpath %.cxx $(SRCDIR)
+
+
+
+# Files
+MATRIX	= matrix matrix3d matrix4d
+PDFS	= deltaPDF betaPDF
+INTGR	= trapz simpson glquad
+
+# Classes
+ABSCLS	= pdf integrator
+DRVCLS	= $(PDFS) $(INTGR)
+OTHER	= convolute
+
+# All
+SRC	= $(DRVCLS) $(MATRIX) $(OTHER)
+
+# Shared Object Targets
+SO	= $(ABSCLS) $(MATRIX) $(OTHER)
+
+# External library AlgLib
+ALGLIB	= alglibinternal alglibmisc ap dataanalysis \
+	diffequations fasttransforms integration \
+	interpolation linalg optimization solvers \
+	specialfunctions statistics
+
+CXX		= g++
+CXXFLAGS	= -O3 -fPIC
+PYLIB		= -I/usr/include/python2.7
