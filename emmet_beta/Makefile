@@ -1,10 +1,10 @@
 include Makefile.in
 
 all: Makefile Makefile.in
-	cd $(ALGDIR); make
-	cd $(SRCDIR); make
-	cd $(OBJDIR); make
-	cd $(MODDIR); make
+	$(MAKE) -C $(ALGDIR)
+	$(MAKE) -C $(SRCDIR)
+	$(MAKE) -C $(OBJDIR)
+	$(MAKE) -C $(MODDIR)
 	cp $(SRCDIR)/*.py $(MODDIR)
 
 cleanall: clean cleanlib

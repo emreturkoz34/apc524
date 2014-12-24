@@ -16,7 +16,7 @@ import pdf
 
 ZPoints = 199
 ZmeanPoints = 20
-ZvarPoints = 6 # Delta PDF used if ZvarPoints == 1
+ZvarPoints = 1 # Delta PDF used if ZvarPoints == 1
 
 ZMin = 0
 ZMax = 1
@@ -45,7 +45,7 @@ Zvar = np.linspace(ZvarMin, ZvarMax, ZvarPoints)
 
 # create PDF
 if ZvarPoints == 1:
-    d = pdf.DeltaPDF(Zmean, Zvar) 
+    d = pdf.DeltaPDF(Zmean) 
     print "delta PDF created"
 else:
     d = pdf.BetaPDF(Zmean, Zvar)

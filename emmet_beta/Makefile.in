@@ -5,6 +5,7 @@ SRCDIR	= $(HOMEDIR)/src
 OBJDIR	= $(HOMEDIR)/obj
 MODDIR	= $(HOMEDIR)/mod
 
+
 # Files
 MATRIX	= matrix matrix3d matrix4d
 PDFS	= deltaPDF betaPDF
@@ -28,6 +29,10 @@ ALGLIB	= alglibinternal alglibmisc ap dataanalysis \
 	interpolation linalg optimization solvers \
 	specialfunctions statistics
 
+# Include headers from external libraries
+LIBDIR	= $(shell dirname `pwd`)
+EXTLIB	= -I$(LIBDIR)/alglib
+
 CXX		= g++
-CXXFLAGS	= -O3 -fPIC
+CXXFLAGS	= -O3 -fPIC -Wall
 PYLIB		= -I/usr/include/python2.7

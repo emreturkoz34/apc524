@@ -12,9 +12,9 @@
 %}
 
 %apply (double *IN_ARRAY1, int DIM1) {(double *Z, int ZPoints)}
-%apply (double *IN_ARRAY1, int DIM1) {(double *Zmean, int ZmeanPoints),(double *Zvar, int ZvarPoints)}
+%apply (double *IN_ARRAY1, int DIM1) {
+  (double *Zmean, int ZmeanPoints),(double *Zvar, int ZvarPoints)}
 
 %include "pdf.h"
 %include "deltaPDF.h"
 %include "betaPDF.h"
-%include "matrix3d.h"
