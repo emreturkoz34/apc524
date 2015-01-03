@@ -97,7 +97,7 @@ def get_progvar(progvarvec, testspecies, locs, index = 1):
 # function to plot progress variable vs temp
 def plotCvT(Tvec, Cvec, fname="CvsT"):
     plt.figure()
-    plt.plot(Tvec, Cvec)
+    plt.plot(Tvec, Cvec, color='k', marker='o', markerfacecolor='none')
     plt.xlabel("T (K)")
     plt.ylabel("C")
     plt.title("Best Progress Variable")

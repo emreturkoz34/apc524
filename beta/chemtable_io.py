@@ -6,6 +6,7 @@ sys.path.append('./mod')
 import numpy as np
 import iofuncs as iof
 import findprogvar as fpv
+import glob
 
 import vector
 import matrix
@@ -23,8 +24,9 @@ import convolute
 print " "
 fin1 = open('chemtable_inputs')
 inputs = [line.strip().split('\t') for line in fin1]
-datafiles = iof.read_input("data files:", inputs)
-testspecies = iof.read_input("test species:", inputs, 0, ["Y-CO2","Y-CO","Y-H2O"])
+datafiledir = iof.read_input("data files:", inputs)
+datafiles = glob.glob("data/*.kg")
+testspecies = iof.read_input("test species:", inputs, minargs=0, default=["Y-CO2","Y-CO","Y-H2O"])
 
 # find best progress variable
 bestC = []
