@@ -24,8 +24,9 @@ import convolute
 print " "
 fin1 = open('chemtable_inputs')
 inputs = [line.strip().split('\t') for line in fin1]
-datafiledir = iof.read_input("data files:", inputs)
-datafiles = glob.glob("data/*.kg")
+datafiledir = iof.read_input("data file directory:", inputs)
+datafiles = glob.glob("".join(["".join(datafiledir), "/*.kg"]))
+print datafiles
 testspecies = iof.read_input("test species:", inputs, minargs=0, default=["Y-CO2","Y-CO","Y-H2O"])
 
 # find best progress variable
