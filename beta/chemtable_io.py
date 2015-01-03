@@ -25,13 +25,12 @@ print " "
 fin1 = open('chemtable_inputs')
 inputs = [line.strip().split('\t') for line in fin1]
 datafiledir = iof.read_input("data file directory:", inputs)
-datafiles = glob.glob("".join(["".join(datafiledir), "/*.kg"]))
-print datafiles
+datafiles = glob.glob("".join(["".join(datafiledir), "/*.kg"])) #vector of paths of all files in specified directory
 testspecies = iof.read_input("test species:", inputs, minargs=0, default=["Y-CO2","Y-CO","Y-H2O"])
 
 # find best progress variable
 bestC = []
-nofiles = len(datafiles)
+nofiles = len(datafiles)  # Check to see if used later and maybe move
 filesmatC = fpv.findC(datafiles, testspecies, bestC) # change so don't have to pre-initialize here
 
 # sort FILESMATRIX by progress variable
@@ -46,64 +45,48 @@ sorter.extractRefCol()
 sorter.sort_data()
 print "\nSorting filesmatrix by C"
 
+# Plot sorted stoich progress variable vs. stoich temperature
+Cst = [0] * nofiles
+Tst = [0] * nofiles
+for ii in range(nofiles):
+    Cst[ii] = filesmatC.GetVal(ii,0)
+    Tst[ii] = filesmatC.GetVal(ii,2)
+iof.plotCvT(Tst,Cst)
+
 # Calculate PDF matrix
     # Get user inputs
-ZPy = np.genfromtxt(datafiles[0], unpack=False, skip_header=2, delimiter = "\t", usecols = 0)
+Z = np.genfromtxt(datafiles[0], unpack=False, skip_header=2, delimiter = "\t", usecols = 0)
 Zmean_grid = iof.read_input("Zmean_grid:", inputs, minargs = 0, default = 'Z') # if no Z_grid is specified, Z and Zmean will be equivalent 
 if "".join(Zmean_grid) == 'Z':
-    ZmeanPy = ZPy
+    Zmean = Z
 else:
-    ZmeanPy = np.linspace(0,1,int(Zmean_grid[0]))
+    Zmean = np.linspace(0,1,int(Zmean_grid[0]))
 Zpdf = iof.read_input("Zpdf:", inputs)
+
+    # Generate pdf objects
+print "Generating PDF matrix with", Zpdf[0], "PDF"
 if Zpdf[0] == "delta": # delta pdf has variance 0
     Zvar_grid = [1]
     Zvar_max = [0]
+    Zvar = np.linspace(0, float(Zvar_max[0]), int(Zvar_grid[0]))
+    d = pdf.DeltaPDF(Zmean) 
 elif Zpdf[0] == "beta": # must include user specified variances for beta pdf # currently not supported
     Zvar_max = iof.read_input("Zvar_max:", inputs)
     Zvar_grid = iof.read_input("Zvar_grid:", inputs)
-ZvarPy = np.linspace(0, float(Zvar_max[0]), int(Zvar_grid[0]))
-
-    # Copy to C++ readable vectors
-ZPoints = len(ZPy)          # check if these are used later
-ZvarPoints = len(ZvarPy)
-ZmeanPoints = len(ZmeanPy)
-#Z = vector.Vector(ZPoints)
-#Zmean = vector.Vector(ZmeanPoints)
-#Zvar = vector.Vector(ZvarPoints)
-#helper.copy_py_to_vector(ZPy, Z)
-#helper.copy_py_to_vector(ZmeanPy, Zmean)
-#helper.copy_py_to_vector(ZvarPy, Zvar)
-
-
+    Zvar = np.linspace(0, float(Zvar_max[0]), int(Zvar_grid[0]))
+    d = pdf.BetaPDF(Zmean, Zvar)
+else:
+    raise IOError("Incorrect PDF input %s, currently only DELTA and BETA are supported" % Zpdf[0])
 
     # generate PDF matrix
-#print "Generating PDF matrix with", Zpdf[0], "PDF"
-#pdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
-#for i in range(ZvarPoints):
-#    for j in range(ZmeanPoints):
-#        for k in range(ZPoints):
-#            pdfValM.SetVal(i, j, k, 0)
-#if  Zpdf[0] == "delta":
-#    import deltaPDF
-#    d = deltaPDF.DeltaPDF(Z, ZPoints) 
-#elif Zpdf[0] == "beta": # beta PDF support still in progress
-#    import betaPDF
-#    d = betaPDF.BetaPDF(Z, ZPoints)
-#pdfValReturn = d.pdfVal(Zvar, Zmean, pdfValM)
-
-# create arrays
-Z = ZPy
-Zmean = ZmeanPy
-Zvar = ZvarPy
-
-# create PDF
-if ZvarPoints == 1:
-    d = pdf.DeltaPDF(Zmean) 
-    print "delta PDF created"
-else:
-    d = pdf.BetaPDF(Zmean, Zvar)
-    print "beta PDF created"
+ZPoints = len(Z)          
+ZvarPoints = len(Zvar)
+ZmeanPoints = len(Zmean)
 pdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
+for i in range(ZvarPoints):
+    for j in range(ZmeanPoints):
+        for k in range(ZPoints):
+            pdfValM.SetVal(i, j, k, 0)
 pdfValReturn = d.pdfVal(Z, pdfValM)
 print "PDF calculated"
 
@@ -126,8 +109,6 @@ for ii in range(len(rxn_rate_locs)):
         raise IOError("Production rate data for %s is missing" % speciesprodrate)
 
 # Obtain relevant Yi and reaction rates from each file, and convolute
-#TrapzIntgr = trapz.Trapz(Z, ZPoints)
-#Conv = convolute.Convolute(ZPoints) # Convolute is now just a function, not a class
 TrapzIntgr = integrator.Trapz()
 convolutedC = [0] * nofiles
 convolutedST = [0] * nofiles
@@ -138,23 +119,15 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     rxnrates = np.genfromtxt(file, unpack=False, skip_header=2, delimiter = "\t", usecols = rxn_rate_locs)
     if  len(massfracs) != ZPoints:
         raise IOError("All file lengths must be the same")
-    progvarsPy = np.zeros(ZPoints)
-    sourcetermPy = np.zeros(ZPoints)
-    progvar = vector.Vector(ZPoints)
-    sourceterm = vector.Vector(ZPoints)
+    progvar = np.zeros(ZPoints)
+    rxnRates = np.zeros(ZPoints)
     for i in range(len(massfracs)):
-        progvarsPy[i] = massfracs[i,:].sum()
-        sourcetermPy[i] = rxnrates[i,:].sum()
-    #helper.copy_py_to_vector(progvarsPy,progvar)
-    #helper.copy_py_to_vector(sourcetermPy,sourceterm)
-    progVar = progvarsPy
-    rxnRates = sourcetermPy
+        progvar[i] = massfracs[i,:].sum()
+        rxnRates[i] = rxnrates[i,:].sum()
     convolutedC[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     convolutedST[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
-    #ConvReturn = Conv.convVal(pdfValM, progvar, convolutedC[kk], TrapzIntgr)
-    #ConvReturn = Conv.convVal(pdfValM, sourceterm, convolutedST[kk], TrapzIntgr)
-    ConvReturn =  convolute.convVal_func(Z, progVar, pdfValM, convolutedC[kk], TrapzIntgr)
-    ConvReturn =  convolute.convVal_func(Z, progVar, pdfValM, convolutedST[kk], TrapzIntgr)
+    ConvReturn =  convolute.convVal_func(Z, progvar, pdfValM, convolutedC[kk], TrapzIntgr)
+    ConvReturn =  convolute.convVal_func(Z, rxnRates, pdfValM, convolutedST[kk], TrapzIntgr)
     #for i in range(ZvarPoints):
     #    for j in range(ZmeanPoints):
     #        print convolutedC[kk].GetVal(i,j),

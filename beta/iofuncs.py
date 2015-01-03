@@ -5,7 +5,7 @@ import lininterp
 
 class ProcFile(object):
     """returns interpolated data (in datavec) from the given file 
-    for the species given in inputvars. Also returns all columen headers
+    for the species given in inputvars. Also returns all column headers
     from the datafile in titles"""
 
     def __init__(self, sfile):

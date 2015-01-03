@@ -19,7 +19,7 @@ def findC(datafiles, testspecies, bestC):
     nocols = len(testspecies)+1
     locs = np.zeros(nocols-1)
     interpdata = np.zeros((nofiles,nocols))
-    filesmatrix = np.zeros((nofiles,2))
+    filesmatrix = np.zeros((nofiles,3))
     for ii in range(nofiles): # interpolate for each file
         dataobj = iof.ProcFile(datafiles[ii])
         if ii == 0:
@@ -28,11 +28,11 @@ def findC(datafiles, testspecies, bestC):
             titles1 = dataobj.gettitles()
             np.testing.assert_array_equal(titles1,titles) # Verify that all data files have the same column headers
         dataobj.interpolate(testspecies, locs, interpdata[ii,:])
-    filesmatrix[:,0] = interpdata[:,0] # filesmatrix stores file indices in order and interpolated Temps
+    filesmatrix[:,2] = interpdata[:,0] # filesmatrix stores (row1) stoich prog var (row2) file indices (row3) stoich Temps
     filesmatrix[:,1] = range(nofiles)
-    filesmatC = matrix.Matrix(nofiles,2)
+    filesmatC = matrix.Matrix(nofiles,3)
     for i in range(nofiles):
-        for j in range(2):
+        for j in range(3):
             filesmatC.SetVal(i,j,filesmatrix[i,j])
 
     # Generate combinations matrix
@@ -138,9 +138,6 @@ def findC(datafiles, testspecies, bestC):
 
     if monoAryflag < 1: # Give error if no best progress variable is found
         raise RuntimeError("Error: no best progress variable selected.")
-
-    # Plot results
-    iof.plotCvT(progvars[:,0],progvars[:,bestC[2]])
 
     # Write results
     for i in range(nofiles):
