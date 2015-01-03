@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+import sys
+sys.path.append('./mod')
+
 import numpy as np
 import iofuncs as iof
 import findprogvar as fpv
@@ -8,14 +11,13 @@ import vector
 import matrix
 import matrix3d
 import matrix4d
-import deltaPDF
-import betaPDF
-import convolute
-import trapz
+import pdf
+import integrator
 import helper
 import bubble_sort
 import lininterp
 import fittogrid
+import convolute
 
 # read input file
 print " "
@@ -59,30 +61,49 @@ elif Zpdf[0] == "beta": # must include user specified variances for beta pdf # c
 ZvarPy = np.linspace(0, float(Zvar_max[0]), int(Zvar_grid[0]))
 
     # Copy to C++ readable vectors
-ZPoints = len(ZPy)
+ZPoints = len(ZPy)          # check if these are used later
 ZvarPoints = len(ZvarPy)
 ZmeanPoints = len(ZmeanPy)
-Z = vector.Vector(ZPoints)
-Zmean = vector.Vector(ZmeanPoints)
-Zvar = vector.Vector(ZvarPoints)
-helper.copy_py_to_vector(ZPy, Z)
-helper.copy_py_to_vector(ZmeanPy, Zmean)
-helper.copy_py_to_vector(ZvarPy, Zvar)
+#Z = vector.Vector(ZPoints)
+#Zmean = vector.Vector(ZmeanPoints)
+#Zvar = vector.Vector(ZvarPoints)
+#helper.copy_py_to_vector(ZPy, Z)
+#helper.copy_py_to_vector(ZmeanPy, Zmean)
+#helper.copy_py_to_vector(ZvarPy, Zvar)
+
+
 
     # generate PDF matrix
-print "Generating PDF matrix with", Zpdf[0], "PDF"
+#print "Generating PDF matrix with", Zpdf[0], "PDF"
+#pdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
+#for i in range(ZvarPoints):
+#    for j in range(ZmeanPoints):
+#        for k in range(ZPoints):
+#            pdfValM.SetVal(i, j, k, 0)
+#if  Zpdf[0] == "delta":
+#    import deltaPDF
+#    d = deltaPDF.DeltaPDF(Z, ZPoints) 
+#elif Zpdf[0] == "beta": # beta PDF support still in progress
+#    import betaPDF
+#    d = betaPDF.BetaPDF(Z, ZPoints)
+#pdfValReturn = d.pdfVal(Zvar, Zmean, pdfValM)
+
+# create arrays
+Z = ZPy
+Zmean = ZmeanPy
+Zvar = ZvarPy
+
+# create PDF
+if ZvarPoints == 1:
+    d = pdf.DeltaPDF(Zmean) 
+    print "delta PDF created"
+else:
+    d = pdf.BetaPDF(Zmean, Zvar)
+    print "beta PDF created"
 pdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
-for i in range(ZvarPoints):
-    for j in range(ZmeanPoints):
-        for k in range(ZPoints):
-            pdfValM.SetVal(i, j, k, 0)
-if  Zpdf[0] == "delta":
-    import deltaPDF
-    d = deltaPDF.DeltaPDF(Z, ZPoints) 
-elif Zpdf[0] == "beta": # beta PDF support still in progress
-    import betaPDF
-    d = betaPDF.BetaPDF(Z, ZPoints)
-pdfValReturn = d.pdfVal(Zvar, Zmean, pdfValM)
+pdfValReturn = d.pdfVal(Z, pdfValM)
+print "PDF calculated"
+
 
 # Find locations of columns of reaction rate data for species in the best progress variable
 dataobj = iof.ProcFile(datafiles[0])
@@ -102,8 +123,9 @@ for ii in range(len(rxn_rate_locs)):
         raise IOError("Production rate data for %s is missing" % speciesprodrate)
 
 # Obtain relevant Yi and reaction rates from each file, and convolute
-TrapzIntgr = trapz.Trapz(Z, ZPoints)
-Conv = convolute.Convolute(ZPoints)
+#TrapzIntgr = trapz.Trapz(Z, ZPoints)
+#Conv = convolute.Convolute(ZPoints) # Convolute is now just a function, not a class
+TrapzIntgr = integrator.Trapz()
 convolutedC = [0] * nofiles
 convolutedST = [0] * nofiles
 
@@ -120,12 +142,16 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     for i in range(len(massfracs)):
         progvarsPy[i] = massfracs[i,:].sum()
         sourcetermPy[i] = rxnrates[i,:].sum()
-    helper.copy_py_to_vector(progvarsPy,progvar)
-    helper.copy_py_to_vector(sourcetermPy,sourceterm)
+    #helper.copy_py_to_vector(progvarsPy,progvar)
+    #helper.copy_py_to_vector(sourcetermPy,sourceterm)
+    progVar = progvarsPy
+    rxnRates = sourcetermPy
     convolutedC[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     convolutedST[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
-    ConvReturn = Conv.convVal(pdfValM, progvar, convolutedC[kk], TrapzIntgr)
-    ConvReturn = Conv.convVal(pdfValM, sourceterm, convolutedST[kk], TrapzIntgr)
+    #ConvReturn = Conv.convVal(pdfValM, progvar, convolutedC[kk], TrapzIntgr)
+    #ConvReturn = Conv.convVal(pdfValM, sourceterm, convolutedST[kk], TrapzIntgr)
+    ConvReturn =  convolute.convVal_func(Z, progVar, pdfValM, convolutedC[kk], TrapzIntgr)
+    ConvReturn =  convolute.convVal_func(Z, progVar, pdfValM, convolutedST[kk], TrapzIntgr)
     #for i in range(ZvarPoints):
     #    for j in range(ZmeanPoints):
     #        print convolutedC[kk].GetVal(i,j),
