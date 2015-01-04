@@ -11,7 +11,7 @@ MATRIX	= vector matrix matrix3d matrix4d
 PDFS	= deltaPDF betaPDF
 INTGR	= trapz simpson glquad
 INTRP	= #lininterp
-SORT	= bubble_sort
+SORT	= bubble_sort quick_sort
 SLOPE	= endpointslope linregression
 OTHER	= convolute #fittogrid
 
