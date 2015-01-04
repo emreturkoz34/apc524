@@ -7,18 +7,15 @@
 #define ENDPOINTSLOPE_H_
 
 #include <stdio.h>
-#include <vector>
-
-#include "vector.h"
 #include "maxslope.h"
+
 class Matrix;
 
 class EndPointSlope : public MaxSlope {
  public:
   EndPointSlope(const Matrix &progVar);
   ~EndPointSlope();
-  int MostMonotonic(const int col, Vector *monoAry);
-  //int MostMonotonic(const int col, int *monoAry);
+  int MostMonotonic(int *monoAry, const int ncols, const int col);
 
  private:
   const int nrows_; // number of rows in progVar matrix

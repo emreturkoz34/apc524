@@ -1,6 +1,7 @@
 /* Matrix is a class which represents a 2D matrix of size rows x cols with a 1D array of length rows*cols.
- */
 
+ */
+#include <assert.h>
 #include "matrix.h"
 
 /// Constructor
@@ -37,8 +38,17 @@ int Matrix::GetNumCols() const{
 
 /// Return an array containing column j
 int Matrix::GetCol(int j, double *colAry) const{
+  /*
+  if (colAry == NULL) {
+    printf("colAry is not initialized properly.\n");
+    exit(1);
+  }
+  */
   for (int i=0; i<nrows_; ++i) {
     colAry[i] = GetVal(i, j);
   }
   return 0;
 }
+
+
+

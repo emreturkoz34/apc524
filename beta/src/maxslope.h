@@ -4,16 +4,12 @@
 #ifndef MAXSLOPE_H_
 #define MAXSLOPE_H_
 
-#include <stdio.h>
-
-#include "vector.h"
 class Matrix;
 
 class MaxSlope {
  public:
   virtual ~MaxSlope() {}
-
-  virtual int MostMonotonic(const int col, Vector *monoAry) = 0;
+  virtual int MostMonotonic(int *monoAry, const int ncols, const int col) = 0;
 };
 
 #endif // MAXSLOPE_H_

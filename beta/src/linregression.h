@@ -7,18 +7,15 @@
 #define LINREGRESSION_H_
 
 #include <stdio.h>
-#include <vector>
-
-#include "vector.h"
 #include "maxslope.h"
+
 class Matrix;
 
 class LinRegression : public MaxSlope {
  public:
   LinRegression(const Matrix &progVar);
   ~LinRegression();
-  int MostMonotonic(const int col, Vector *monoAry);
-  //int MostMonotonic(const int col, int *monoAry);
+  int MostMonotonic(int *monoAry, const int ncols, const int col);
 
  private:
   const int nrows_; // number of rows in progVar matrix

@@ -6,9 +6,6 @@
 #define MONOCHECK_H_
 
 #include <stdio.h>
-#include <vector>
-
-#include "vector.h"
 
 class Matrix;
 
@@ -16,9 +13,7 @@ class MonoCheck {
  public:
   MonoCheck(const Matrix &progVar);
   ~MonoCheck();
-  int CheckStrictMonoticity(const int col, Vector *monoAry);
-  //int CheckStrictMonoticity(const int col, std::vector <double> *monoAry);
-  //int CheckStrictMonoticity(const int col, int *monoAry);
+  int CheckStrictMonoticity(int *monoAry, const int ncols, int col);
 
  private:
   const int nrows_; // number of rows in progVar matrix

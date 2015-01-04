@@ -1,6 +1,8 @@
 #ifndef MATRIX_H_
 #define MATRIX_H_
 
+#include <stdio.h>
+
 class Matrix {
  public:
   Matrix(int rows, int cols);
