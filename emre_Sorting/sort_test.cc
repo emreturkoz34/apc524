@@ -48,7 +48,7 @@ int GenerateMatrix(Matrix* mat){
 
   j = 1;
   for (int i = 0 ; i< mat->GetNumRows(); i++){
-    val = 10*i;
+    val = i;
     mat->SetVal(i,j, val);
   }
 
@@ -103,20 +103,20 @@ void bubble_sort(int* arr, int n, int* indices){
 int main(){
 
   
-  int arr[] = {1, 3, 5, 7, 6, 4, 8, 8};
-  int *indices = new int[8];
-  for(int i = 0 ; i<8; i++){
+  int arr[] = {1, 3, 5, 7, 6, 4, 8, 8, 9};
+  int *indices = new int[9];
+  for(int i = 0 ; i<9; i++){
     indices[i] = i;
   }
   
   //bubble_sort(arr, 8, indices);
-  for(int i = 0; i<8; i++){
+  for(int i = 0; i<9; i++){
     std::cout<<arr[i]<<" "<<indices[i]<<std::endl;
   }
 
 
 
-  Matrix* data = new Matrix(9,2);
+  Matrix* data = new Matrix(10,2);
 
   assert(GenerateMatrix(data) == 0);
   WriteMatrixToFile(data, (std::string)"sorting_initialMatrix.txt");
@@ -126,13 +126,13 @@ int main(){
 
   //sorting* sort_alg = new brute_sort(data); 
   //sorting* sort_alg = new standard_sort(data);
-  //sorting* sort_alg = new quick_sort(data);
-  sorting* sort_alg = new bubble_sort(data);
+  sorting* sort_alg = new quick_sort(data);
+  //sorting* sort_alg = new bubble_sort(data);
 
   /* Sorting settings and required functions */
 
   sort_alg -> SetRefColNum(0);
-  sort_alg -> SetSortEndIndex(8); 
+  sort_alg -> SetSortEndIndex(9); 
   sort_alg -> SetSortStartIndex(0);
   sort_alg -> generateIndexArray();
   sort_alg -> extractRefCol();
