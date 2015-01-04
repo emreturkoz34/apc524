@@ -8,8 +8,9 @@ import matrix
 import bubble_sort
 import vector
 import monocheck
-import linregression
-import endpointslope
+import maxslope
+#import linregression
+#import endpointslope
 import helper
 
 def findC(datafiles, testspecies, bestC): 
@@ -76,24 +77,25 @@ def findC(datafiles, testspecies, bestC):
     print "Testing monotonicity \n"
     length = progvars.shape[1]
     monoAryPy = np.zeros(length)
-    monoAry = vector.Vector(length)
-    helper.copy_py_to_vector(monoAryPy, monoAry)
+    monoAry = np.zeros(length, dtype=np.int32)#monoAryPy #vector.Vector(length)
+    #helper.copy_py_to_vector(monoAryPy, monoAry)
 
     checker = monocheck.MonoCheck(progVar) # Create MonoCheck object
-    assert checker.CheckStrictMonoticity(0, monoAry) == 0, "CheckStrictMonoticity ran unsuccessfully.\n" 
+    assert checker.CheckStrictMonoticity(monoAry, 0) == 0, "CheckStrictMonoticity ran unsuccessfully.\n" 
     # ^ Check which columns of progVar are strictly increasing or strictly decreasing and store result in monoAry
 
     # Test for maximum slope if multiple monotonic progress variables are returned
     checksum = 0
     for i in range(length):
-        checksum += monoAry.GetVal(i)
+        #########        checksum += monoAry.GetVal(i)
+        checksum = np.sum(monoAry)
     if checksum % 3 != 0:
         raise RuntimeError("Incorrect values in monoAry vector, check monotonicity function.\n")
     if checksum > 3:
         print "Testing max slope:"
-        maxchecker = linregression.LinRegression(progVar)
+        maxchecker = maxslope.LinRegression(progVar)
         #maxchecker = endpointslope.EndPointSlope(progVar)
-        assert maxchecker.MostMonotonic(0, monoAry) == 0, "MostMonotonic ran unsuccessfully.\n" 
+        assert maxchecker.MostMonotonic(monoAry, 0) == 0, "MostMonotonic ran unsuccessfully.\n" 
         # ^ Distinguish the best monotonic progress variables
     elif checksum == 0:
         # Least non-monotonic tests to be implemented in beta version
@@ -103,7 +105,7 @@ def findC(datafiles, testspecies, bestC):
     # Print results
     monoAryflag = 0 
     for i in range(length): 
-        if monoAry.GetVal(i) == 3.0: # Print best monotonic progress variable if it exists
+        if monoAry[i] == 3.0: # Print best monotonic progress variable if it exists
             if monoAryflag != 0:
                 raise RuntimeError("Error in contents of monoAry vector: multiple best selected.\n")
             monoAryflag = 2
@@ -112,7 +114,7 @@ def findC(datafiles, testspecies, bestC):
             for j in bestC[1][1:]:
                 print "+ %s" % j,
             print '\nThe column numbers of these species are ', bestC[0],', respectively.\n'
-        elif monoAry.GetVal(i) == 1.0: # Otherwise print least non-monotonic progress variable
+        elif monoAry[i] == 1.0: # Otherwise print least non-monotonic progress variable
             if monoAryflag != 0:
                 raise RuntimeError("Error in contents of monoAry vector.\n")
             monoAryflag = 1
@@ -124,7 +126,7 @@ def findC(datafiles, testspecies, bestC):
             print '\nThe column numbers of these species are', bestC[0],', respectively.\n'
     
     for i in range(length): # Print/identify other monotonic progress variables 
-        if monoAry.GetVal(i) == 2.0:
+        if monoAry[i] == 2.0:
             if monoAryflag < 2:
                 raise RuntimeError("Error in contents of monoAry vector.\n")
             elif monoAryflag == 2:
