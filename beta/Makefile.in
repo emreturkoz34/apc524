@@ -13,12 +13,13 @@ INTGR	= trapz simpson glquad
 INTRP	= #lininterp
 SORT	= bubble_sort quick_sort
 SLOPE	= endpointslope linregression
+NONMONO	= simplelnm
 OTHER	= convolute #fittogrid
 
 # Classes
 TARGETS	= helper lininterp fittogrid
-ABSCLS	= pdf integrator $(TARGETS) maxslope sorting #interpolator
-DRVCLS	= $(PDFS) $(INTGR) $(INTRP) $(SORT) $(SLOPE)
+ABSCLS	= pdf integrator $(TARGETS) maxslope leastnonmono sorting #interpolator
+DRVCLS	= $(PDFS) $(INTGR) $(INTRP) $(SORT) $(SLOPE) $(NONMONO)
 CLASS	= $(MATRIX) monocheck
 
 

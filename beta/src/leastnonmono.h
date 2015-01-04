@@ -9,7 +9,7 @@ class Matrix;
 class LeastNonMono {
  public:
   virtual ~LeastNonMono() {}
-  virtual int LeastNonMonotonic(int *monoAry, const int ncols, const int col, const double threshold) = 0;
+  virtual int LeastNonMonotonic(int *monoAry, const int ncols, const int col) = 0;
 };
 
 #endif // LEASTNONMONO_H_

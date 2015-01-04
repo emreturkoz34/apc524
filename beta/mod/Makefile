@@ -15,6 +15,10 @@ _%.so: %_wrap.o %.o $(addsuffix .o,$(MATRIX))
 _maxslope.so: maxslope_wrap.o $(addsuffix .o,$(SLOPE)) $(addsuffix .o,$(MATRIX))
 	$(CXX) -shared $^ -o $@
 
+# NonMono shared object
+_leastnonmono.so: leastnonmono_wrap.o $(addsuffix .o,$(NONMONO)) $(addsuffix .o,$(MATRIX))
+	$(CXX) -shared $^ -o $@
+
 # PDF shared object
 _pdf.so: pdf_wrap.o $(addsuffix .o,$(PDFS)) $(addsuffix .o,$(MATRIX))
 	$(CXX) -shared $^ -o $@
