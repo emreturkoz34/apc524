@@ -15,20 +15,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_trapz', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_endpointslope', [dirname(__file__)])
         except ImportError:
-            import _trapz
-            return _trapz
+            import _endpointslope
+            return _endpointslope
         if fp is not None:
             try:
-                _mod = imp.load_module('_trapz', fp, pathname, description)
+                _mod = imp.load_module('_endpointslope', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _trapz = swig_import_helper()
+    _endpointslope = swig_import_helper()
     del swig_import_helper
 else:
-    import _trapz
+    import _endpointslope
 del version_info
 try:
     _swig_property = property
@@ -69,36 +69,36 @@ except AttributeError:
     _newclass = 0
 
 
-class Integrator(_object):
+class MaxSlope(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Integrator, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MaxSlope, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Integrator, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, MaxSlope, name)
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    __swig_destroy__ = _trapz.delete_Integrator
+    __swig_destroy__ = _endpointslope.delete_MaxSlope
     __del__ = lambda self : None;
-    def integrate(self, *args): return _trapz.Integrator_integrate(self, *args)
-Integrator_swigregister = _trapz.Integrator_swigregister
-Integrator_swigregister(Integrator)
+    def MostMonotonic(self, *args): return _endpointslope.MaxSlope_MostMonotonic(self, *args)
+MaxSlope_swigregister = _endpointslope.MaxSlope_swigregister
+MaxSlope_swigregister(MaxSlope)
 
-class Trapz(Integrator):
+class EndPointSlope(MaxSlope):
     __swig_setmethods__ = {}
-    for _s in [Integrator]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Trapz, name, value)
+    for _s in [MaxSlope]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, EndPointSlope, name, value)
     __swig_getmethods__ = {}
-    for _s in [Integrator]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
-    __getattr__ = lambda self, name: _swig_getattr(self, Trapz, name)
+    for _s in [MaxSlope]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, EndPointSlope, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _trapz.new_Trapz(*args)
+        this = _endpointslope.new_EndPointSlope(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _trapz.delete_Trapz
+    __swig_destroy__ = _endpointslope.delete_EndPointSlope
     __del__ = lambda self : None;
-    def integrate(self, *args): return _trapz.Trapz_integrate(self, *args)
-Trapz_swigregister = _trapz.Trapz_swigregister
-Trapz_swigregister(Trapz)
+    def MostMonotonic(self, *args): return _endpointslope.EndPointSlope_MostMonotonic(self, *args)
+EndPointSlope_swigregister = _endpointslope.EndPointSlope_swigregister
+EndPointSlope_swigregister(EndPointSlope)
 
 # This file is compatible with both classic and new-style classes.
 

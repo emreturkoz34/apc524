@@ -15,20 +15,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_trapz', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_fittogrid', [dirname(__file__)])
         except ImportError:
-            import _trapz
-            return _trapz
+            import _fittogrid
+            return _fittogrid
         if fp is not None:
             try:
-                _mod = imp.load_module('_trapz', fp, pathname, description)
+                _mod = imp.load_module('_fittogrid', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _trapz = swig_import_helper()
+    _fittogrid = swig_import_helper()
     del swig_import_helper
 else:
-    import _trapz
+    import _fittogrid
 del version_info
 try:
     _swig_property = property
@@ -69,37 +69,10 @@ except AttributeError:
     _newclass = 0
 
 
-class Integrator(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Integrator, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Integrator, name)
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
-    __repr__ = _swig_repr
-    __swig_destroy__ = _trapz.delete_Integrator
-    __del__ = lambda self : None;
-    def integrate(self, *args): return _trapz.Integrator_integrate(self, *args)
-Integrator_swigregister = _trapz.Integrator_swigregister
-Integrator_swigregister(Integrator)
 
-class Trapz(Integrator):
-    __swig_setmethods__ = {}
-    for _s in [Integrator]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Trapz, name, value)
-    __swig_getmethods__ = {}
-    for _s in [Integrator]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
-    __getattr__ = lambda self, name: _swig_getattr(self, Trapz, name)
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = _trapz.new_Trapz(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = _trapz.delete_Trapz
-    __del__ = lambda self : None;
-    def integrate(self, *args): return _trapz.Trapz_integrate(self, *args)
-Trapz_swigregister = _trapz.Trapz_swigregister
-Trapz_swigregister(Trapz)
-
+def fittogrid_func(*args):
+  return _fittogrid.fittogrid_func(*args)
+fittogrid_func = _fittogrid.fittogrid_func
 # This file is compatible with both classic and new-style classes.
 
 

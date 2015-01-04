@@ -15,20 +15,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_trapz', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_linregression', [dirname(__file__)])
         except ImportError:
-            import _trapz
-            return _trapz
+            import _linregression
+            return _linregression
         if fp is not None:
             try:
-                _mod = imp.load_module('_trapz', fp, pathname, description)
+                _mod = imp.load_module('_linregression', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _trapz = swig_import_helper()
+    _linregression = swig_import_helper()
     del swig_import_helper
 else:
-    import _trapz
+    import _linregression
 del version_info
 try:
     _swig_property = property
@@ -69,36 +69,36 @@ except AttributeError:
     _newclass = 0
 
 
-class Integrator(_object):
+class MaxSlope(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Integrator, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MaxSlope, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Integrator, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, MaxSlope, name)
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    __swig_destroy__ = _trapz.delete_Integrator
+    __swig_destroy__ = _linregression.delete_MaxSlope
     __del__ = lambda self : None;
-    def integrate(self, *args): return _trapz.Integrator_integrate(self, *args)
-Integrator_swigregister = _trapz.Integrator_swigregister
-Integrator_swigregister(Integrator)
+    def MostMonotonic(self, *args): return _linregression.MaxSlope_MostMonotonic(self, *args)
+MaxSlope_swigregister = _linregression.MaxSlope_swigregister
+MaxSlope_swigregister(MaxSlope)
 
-class Trapz(Integrator):
+class LinRegression(MaxSlope):
     __swig_setmethods__ = {}
-    for _s in [Integrator]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Trapz, name, value)
+    for _s in [MaxSlope]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, LinRegression, name, value)
     __swig_getmethods__ = {}
-    for _s in [Integrator]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
-    __getattr__ = lambda self, name: _swig_getattr(self, Trapz, name)
+    for _s in [MaxSlope]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, LinRegression, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _trapz.new_Trapz(*args)
+        this = _linregression.new_LinRegression(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _trapz.delete_Trapz
+    __swig_destroy__ = _linregression.delete_LinRegression
     __del__ = lambda self : None;
-    def integrate(self, *args): return _trapz.Trapz_integrate(self, *args)
-Trapz_swigregister = _trapz.Trapz_swigregister
-Trapz_swigregister(Trapz)
+    def MostMonotonic(self, *args): return _linregression.LinRegression_MostMonotonic(self, *args)
+LinRegression_swigregister = _linregression.LinRegression_swigregister
+LinRegression_swigregister(LinRegression)
 
 # This file is compatible with both classic and new-style classes.
 

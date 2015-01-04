@@ -15,20 +15,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_trapz', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_matrix4d', [dirname(__file__)])
         except ImportError:
-            import _trapz
-            return _trapz
+            import _matrix4d
+            return _matrix4d
         if fp is not None:
             try:
-                _mod = imp.load_module('_trapz', fp, pathname, description)
+                _mod = imp.load_module('_matrix4d', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _trapz = swig_import_helper()
+    _matrix4d = swig_import_helper()
     del swig_import_helper
 else:
-    import _trapz
+    import _matrix4d
 del version_info
 try:
     _swig_property = property
@@ -69,36 +69,26 @@ except AttributeError:
     _newclass = 0
 
 
-class Integrator(_object):
+class Matrix4D(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Integrator, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Matrix4D, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Integrator, name)
-    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
-    __repr__ = _swig_repr
-    __swig_destroy__ = _trapz.delete_Integrator
-    __del__ = lambda self : None;
-    def integrate(self, *args): return _trapz.Integrator_integrate(self, *args)
-Integrator_swigregister = _trapz.Integrator_swigregister
-Integrator_swigregister(Integrator)
-
-class Trapz(Integrator):
-    __swig_setmethods__ = {}
-    for _s in [Integrator]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Trapz, name, value)
-    __swig_getmethods__ = {}
-    for _s in [Integrator]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
-    __getattr__ = lambda self, name: _swig_getattr(self, Trapz, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, Matrix4D, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _trapz.new_Trapz(*args)
+        this = _matrix4d.new_Matrix4D(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _trapz.delete_Trapz
+    __swig_destroy__ = _matrix4d.delete_Matrix4D
     __del__ = lambda self : None;
-    def integrate(self, *args): return _trapz.Trapz_integrate(self, *args)
-Trapz_swigregister = _trapz.Trapz_swigregister
-Trapz_swigregister(Trapz)
+    def GetVal(self, *args): return _matrix4d.Matrix4D_GetVal(self, *args)
+    def SetVal(self, *args): return _matrix4d.Matrix4D_SetVal(self, *args)
+    def GetNumDim1(self): return _matrix4d.Matrix4D_GetNumDim1(self)
+    def GetNumDim2(self): return _matrix4d.Matrix4D_GetNumDim2(self)
+    def GetNumDim3(self): return _matrix4d.Matrix4D_GetNumDim3(self)
+    def GetNumDim4(self): return _matrix4d.Matrix4D_GetNumDim4(self)
+Matrix4D_swigregister = _matrix4d.Matrix4D_swigregister
+Matrix4D_swigregister(Matrix4D)
 
 # This file is compatible with both classic and new-style classes.
 
