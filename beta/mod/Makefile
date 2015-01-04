@@ -19,6 +19,10 @@ _maxslope.so: maxslope_wrap.o $(addsuffix .o,$(SLOPE)) $(addsuffix .o,$(MATRIX))
 _pdf.so: pdf_wrap.o $(addsuffix .o,$(PDFS)) $(addsuffix .o,$(MATRIX))
 	$(CXX) -shared $^ -o $@
 
+# Sort shared object
+_sorting.so: sorting_wrap.o $(addsuffix .o,$(SORT)) $(addsuffix .o,$(MATRIX))
+	$(CXX) -shared $^ -o $@
+
 # Integrator shared object
 _integrator.so: integrator_wrap.o $(addsuffix .o,$(INTGR)) \
 	$(addsuffix .o,$(MATRIX)) $(addsuffix .o,$(ALGLIB))
