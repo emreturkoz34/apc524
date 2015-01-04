@@ -21,7 +21,7 @@ class ProcFile(object):
         fin.close()
         return titles
 
-    def interpolate(self, inputvars, locs, datavec, interpval = 0.055, interpmethod = 'linear'):
+    def interpolate(self, inputvars, locs, datavec, interpval = 0.27, interpmethod = 'linear'):
         # read the columns of the data file corresponding to inputvars,
         # write the column numbers of these columns into locs
         # interpolate at interpval, using the interpolation method 
