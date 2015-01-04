@@ -13,6 +13,7 @@ clean:
 	rm -f $(SRCDIR)/*.cxx $(SRCDIR)/*.py
 	rm -f $(OBJDIR)/*.o
 	rm -f $(MODDIR)/*.so $(MODDIR)/*.py $(MODDIR)/*.pyc
+	rm -f $(PYDIR)/*.pyc 
 
 cleanlib:
 	rm -f $(ALGDIR)/*.o

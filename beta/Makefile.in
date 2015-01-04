@@ -4,7 +4,7 @@ ALGDIR	= $(HOMEDIR)/alglib
 SRCDIR	= $(HOMEDIR)/src
 OBJDIR	= $(HOMEDIR)/obj
 MODDIR	= $(HOMEDIR)/mod
-
+PYDIR	= $(HOMEDIR)/python
 
 # Files
 MATRIX	= matrix matrix3d matrix4d
