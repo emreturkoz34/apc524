@@ -18,6 +18,7 @@ import sorting
 import lininterp
 import fittogrid
 import convolute
+import matplotlib.pyplot as plt
 
 # read input file
 print " "
@@ -188,11 +189,24 @@ if f2gflag == 1:
 FinalData = np.zeros((dim2, lcgrid))
 for i in range(dim2):
     for j in range(lcgrid):
-        FinalData[i,j] = dataout.GetVal(i,0,j)
+        FinalData[i,j] = dataout.GetVal(i,30,j)
 print "\nFinal Data: \n", FinalData, "\n "
 
 #iof.ContourPlot(Zmean,cgrid,FinalData,'contour')
-
+ny, nx = FinalData.shape
+print "ZPoints = " + str(ZPoints)
+print "lcgrid = " + str(lcgrid)
+print "nx = " + str(nx)
+print "ny = " + str(ny)
+y = Zmean
+x = cgrid
+X, Y = np.meshgrid(x, y)
+plt.figure()
+CS = plt.contour(X, Y, FinalData)
+plt.clabel(CS, inline=1, fontsize=10)
+plt.title('Simplest default with labels')
+plt.grid(b = True, which='major', color='b', linestyle='-')
+plt.savefig('contour.pdf')
 
 del convolutedC
 del convolutedST

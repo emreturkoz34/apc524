@@ -4,9 +4,9 @@ more junk
 data file directory:	data_test
 test species:	Y-H2	Y-CO2	Y-H2O
 Zmean_grid:	Z
-Zpdf:	delta
-Zvar_max:	0.5
-Zvar_grid:	20
+Zpdf:	beta
+Zvar_max:	0.25
+Zvar_grid:	50
 sort method:	bubble
 StoichMassFrac:	0.27
 interp method:	linear
