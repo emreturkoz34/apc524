@@ -15,7 +15,7 @@ import matrix4d
 import pdf
 import integrator
 import helper
-import bubble_sort
+import sorting
 import lininterp
 import fittogrid
 import convolute
@@ -27,23 +27,27 @@ inputs = [line.strip().split('\t') for line in fin1]
 datafiledir = iof.read_input("data file directory:", inputs)
 datafiles = glob.glob("".join(["".join(datafiledir), "/*.kg"])) #vector of paths of all files in specified directory
 testspecies = iof.read_input("test species:", inputs, minargs=0, default=["Y-CO2","Y-CO","Y-H2O"])
+options = {} #dictionary stores options
+options["sort method"] = iof.read_input("sort method:", inputs, default = 'bubble')
+options["Zpdf"] = iof.read_input("Zpdf:", inputs)
+options["Zmean grid"] = iof.read_input("Zmean_grid:", inputs, minargs = 0, default = 'Z')
+options["StoichMassFrac"] = iof.read_input("StoichMassFrac:", inputs, minargs=0, default=[0.055])
 
 # find best progress variable
 bestC = []
 nofiles = len(datafiles)  # Check to see if used later and maybe move
-filesmatC = fpv.findC(datafiles, testspecies, bestC) # change so don't have to pre-initialize here
+filesmatC = fpv.findC(datafiles, testspecies, bestC)
 
 # sort FILESMATRIX by progress variable
-sortmethod = iof.read_input("sort method:", inputs, default = 'bubble')
-if "".join(sortmethod) == 'bubble': #only bubble sort supported for this version
-    sorter = bubble_sort.bubble_sort(filesmatC)
+if options["sort method"][0] == 'bubble': #only bubble sort supported for this version
+    sorter = sorting.bubble_sort(filesmatC)
 sorter.SetRefColNum(0)
 sorter.SetSortEndIndex(nofiles)
 sorter.SetSortStartIndex(0)
 sorter.generateIndexArray()
 sorter.extractRefCol()
 sorter.sort_data()
-print "\nSorting filesmatrix by C"
+print "\nSorting filesmatrix by C using %s sort" % options["sort method"][0]
 
 # Plot sorted stoich progress variable vs. stoich temperature
 Cst = [0] * nofiles
@@ -56,12 +60,12 @@ iof.plotCvT(Tst,Cst)
 # Calculate PDF matrix
     # Get user inputs
 Z = np.genfromtxt(datafiles[0], unpack=False, skip_header=2, delimiter = "\t", usecols = 0)
-Zmean_grid = iof.read_input("Zmean_grid:", inputs, minargs = 0, default = 'Z') # if no Z_grid is specified, Z and Zmean will be equivalent 
-if "".join(Zmean_grid) == 'Z':
+# if no Z_grid is specified, Z and Zmean will be equivalent 
+if options["Zmean grid"][0] == 'Z':
     Zmean = Z
 else:
-    Zmean = np.linspace(0,1,int(Zmean_grid[0]))
-Zpdf = iof.read_input("Zpdf:", inputs)
+    Zmean = np.linspace(0,1,int(options["Zmean grid"][0]))
+Zpdf = options["Zpdf"]
 
     # Generate pdf objects
 print "Generating PDF matrix with", Zpdf[0], "PDF"

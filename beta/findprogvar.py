@@ -2,10 +2,8 @@ import numpy as np
 import combinations as cs
 import iofuncs as iof
 
-import sys
-sys.path.append('RunThese/_matrix.so')
 import matrix
-import bubble_sort
+import sorting
 import vector
 import monocheck
 import maxslope
@@ -54,7 +52,7 @@ def findC(datafiles, testspecies, bestC):
     print "Sorting PROGVARS by temperature"
     sortmethod = 'bubble'
     if "".join(sortmethod) == 'bubble':
-        sorter = bubble_sort.bubble_sort(progVar)
+        sorter = sorting.bubble_sort(progVar)
     sorter.SetRefColNum(0)
     sorter.SetSortEndIndex(nofiles)
     sorter.SetSortStartIndex(0)
@@ -65,7 +63,7 @@ def findC(datafiles, testspecies, bestC):
     print "Sorting FILESMATRIX by temperature"
     sortmethod = 'bubble'
     if "".join(sortmethod) == 'bubble':
-        sorter = bubble_sort.bubble_sort(filesmatC)
+        sorter = sorting.bubble_sort(filesmatC)
     sorter.SetRefColNum(0)
     sorter.SetSortEndIndex(nofiles)
     sorter.SetSortStartIndex(0)
@@ -76,19 +74,14 @@ def findC(datafiles, testspecies, bestC):
     # Test monotonicity of PROGVARS
     print "Testing monotonicity \n"
     length = progvars.shape[1]
-    monoAryPy = np.zeros(length)
-    monoAry = np.zeros(length, dtype=np.int32)#monoAryPy #vector.Vector(length)
-    #helper.copy_py_to_vector(monoAryPy, monoAry)
+    monoAry = np.zeros(length, dtype=np.int32)
 
     checker = monocheck.MonoCheck(progVar) # Create MonoCheck object
     assert checker.CheckStrictMonoticity(monoAry, 0) == 0, "CheckStrictMonoticity ran unsuccessfully.\n" 
     # ^ Check which columns of progVar are strictly increasing or strictly decreasing and store result in monoAry
 
     # Test for maximum slope if multiple monotonic progress variables are returned
-    checksum = 0
-    for i in range(length):
-        #########        checksum += monoAry.GetVal(i)
-        checksum = np.sum(monoAry)
+    checksum = np.sum(monoAry)
     if checksum % 3 != 0:
         raise RuntimeError("Incorrect values in monoAry vector, check monotonicity function.\n")
     if checksum > 3:
