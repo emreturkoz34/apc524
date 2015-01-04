@@ -22,8 +22,14 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
   double *temp = new double[ZPoints];
   double ZvarVal, ZmeanVal;
   double alpha, beta, factor;
-  double dz, lnpdf;
+  double dz, lnpdf, f;
   double sum;
+
+  // For refining Z to reduce errors
+  int ModNum = 10000;
+  int ZModLen = (ZPoints-1) * ModNum + 1;
+  double *RMod = new double[ZModLen];
+  double *ZMod = new double[ZModLen];
 
   int i;
   for (int n = 0; n < ZvarPoints_; n++) {
@@ -59,42 +65,45 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 
 	/// BetaPDF
       } else {
+
+	// fill ZMod
+	for (int k = 0; k < ZModLen; k++) {
+	  ZMod[k] = double(k) / double((ZModLen - 1));
+	}
+
 	alpha = ZmeanVal * (ZmeanVal * (1 - ZmeanVal) / ZvarVal - 1);
 	beta = alpha / ZmeanVal - alpha;
 	factor = lgamma(alpha + beta) - lgamma(alpha) - lgamma(beta);
-	
-	/// Left bound: n == 0
-	dz = 0.5 * (Z[1] - Z[0]);
-	lnpdf = alpha * log(dz) + factor;
-	temp[0] = exp(lnpdf) / alpha;
-	
-	/// Right bound: n == ZPts-1
-	dz = 0.5 * (Z[ZPoints-1] - Z[ZPoints-2]);
-	lnpdf = beta * log(dz) + factor;
-	temp[ZPoints-1] = exp(lnpdf) / beta;
-	  
-	/// Middle points: 0 < n < ZPoints-1
-	for (int n = 1; n < ZPoints-1; n++) {
-	  dz = 0.5 * (Z[n+1] - Z[n-1]);
-	  lnpdf = (alpha - 1) * log(Z[n]) + (beta - 1) * log(1 - Z[n]);
-	  temp[n] = exp(lnpdf) * dz;
-	}
-      }
 
-      /// Normalize
-      sum = 0;
-      for (int k = 0; k < ZPoints; k++) {
-	sum = sum + temp[k];
+	/// Middle points: 0 < n < ZPoints-1
+	for (int n = 0; n < ZModLen; n++) {
+	  lnpdf = factor + (alpha - 1) * log(ZMod[n]) + (beta - 1) * log(1 - ZMod[n]);
+	  RMod[n] = exp(lnpdf);
+	}
+	RMod[0] = RMod[1];
+	RMod[ZModLen-1] = RMod[ZModLen-2];
+
+	sum = 0;
+	for (int n = 0; n < ZModLen-1; n++) {
+	  f = 0.5 * (RMod[n+1] + RMod[n]);
+	  dz = ZMod[n+1] - ZMod[n];
+	  sum = sum + f * dz;
+	}
+
+	for (int k = 1; k < ZPoints-1; k++) {
+	  temp[k] = RMod[k*ModNum] / sum;
+	}
       }
 
       /// Set PDF to output
       for (int k = 0; k < ZPoints; k++) {
-	temp[k] = temp[k] / sum;
 	pdfValM->SetVal(n, m, k, temp[k]);
       }
     }
   }
 
-  //  delete temp;
+  delete temp;
+  delete ZMod;
+  delete RMod;
   return 0;
 }
