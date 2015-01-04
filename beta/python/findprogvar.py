@@ -50,6 +50,8 @@ def findC(datafiles, testspecies, bestC, options):
     for i in [progVar, filesmatC]:
         if sortmethod  == 'bubble':
             sorter = sorting.bubble_sort(i)
+        elif sortmethod == 'standard': # need to test
+            sorter = sorting.standard_sort(i)
         elif sortmethod == 'quick': # quick sort is very slow, test later
             sorter = sorting.quick_sort(i)
         else:

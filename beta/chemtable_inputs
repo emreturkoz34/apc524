@@ -13,4 +13,4 @@ interp method:	linear
 max slope test:	end point slope
 integrator:	trapezoid
 glq Number of Nodes:	53
-length Cgrid:	12dvf
+length Cgrid:	12

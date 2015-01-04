@@ -42,9 +42,11 @@ nofiles = len(datafiles)  # Check to see if used later and maybe move
 filesmatC = fpv.findC(datafiles, testspecies, bestC, options)
 
 # sort FILESMATRIX by progress variable
-if options["sort method"][0] == 'bubble': #only bubble sort supported for this version
+if options["sort method"][0] == 'bubble':
     sorter = sorting.bubble_sort(filesmatC)
-elif options["sort method"][0] == 'quick':
+elif options["sort method"][0] == 'standard': # need to test
+    sorter = sorting.standard_sort(filesmatC)
+elif options["sort method"][0] == 'quick': # has speed issues
     sorter = sorting.quick_sort(filesmatC)
 else:
     raise IOError("invalid sorting method (%s) specified, instead use <bubble> sort" % sortmethod)
@@ -161,7 +163,6 @@ dim2 = ZmeanPoints    # dimension of z~
 dim3 = ZvarPoints    # dimension of z_v
 dim4 = nofiles   # number of files
 lcgrid = int(options["LCgrid"][0]); # length of cgrid 
-print lcgrid
 cgrid = np.linspace(0.0, 0.15, lcgrid)
 interpmethod = options["InterpMethod"][0] 
 if interpmethod == 'linear': # add more interpolation options later
@@ -189,6 +190,9 @@ for i in range(dim2):
     for j in range(lcgrid):
         FinalData[i,j] = dataout.GetVal(i,0,j)
 print "\nFinal Data: \n", FinalData, "\n "
+
+#iof.ContourPlot(Zmean,cgrid,FinalData,'contour')
+
 
 del convolutedC
 del convolutedST

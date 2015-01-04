@@ -106,3 +106,5 @@ def plotCvT(Tvec, Cvec, fname="CvsT"):
     plt.title("Best Progress Variable")
     plt.savefig("%s.pdf" % fname)
     plt.clf()
+
+
