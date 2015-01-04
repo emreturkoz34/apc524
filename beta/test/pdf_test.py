@@ -293,6 +293,14 @@ class PDF(unittest.TestCase):
             for j in range(ZmeanPoints):
                 for k in range(ZPoints):
                     bPDF[j,k] = bPdfValM.GetVal(i,j,k)
+        """
+        print "PDF[0,0] = inf, bPDF[0,0] = " + str(bPDF[0,0])
+        print "PDF[0,1] = " + str(PDF[0,1]) + ", bPDF[0,1] = " + str(bPDF[0,20])
+        print "PDF[0,2] = " + str(PDF[0,2]) + ", bPDF[0,2] = " + str(bPDF[0,40])
+        print "PDF[0,3] = " + str(PDF[0,3]) + ", bPDF[0,3] = " + str(bPDF[0,60])
+        print "PDF[0,4] = " + str(PDF[0,4]) + ", bPDF[0,4] = " + str(bPDF[0,80])
+        print "PDF[0,5] = inf, bPDF[0,5] = " + str(bPDF[0,100])
+        """
         self.assertLess(bPDF[0,1*20]-PDF[0,1],0.1)
         self.assertLess(bPDF[0,2*20]-PDF[0,2],0.1)
         self.assertLess(bPDF[0,3*20]-PDF[0,3],0.1)
