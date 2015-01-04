@@ -15,20 +15,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_monocheck', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_matrix', [dirname(__file__)])
         except ImportError:
-            import _monocheck
-            return _monocheck
+            import _matrix
+            return _matrix
         if fp is not None:
             try:
-                _mod = imp.load_module('_monocheck', fp, pathname, description)
+                _mod = imp.load_module('_matrix', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _monocheck = swig_import_helper()
+    _matrix = swig_import_helper()
     del swig_import_helper
 else:
-    import _monocheck
+    import _matrix
 del version_info
 try:
     _swig_property = property
@@ -69,21 +69,25 @@ except AttributeError:
     _newclass = 0
 
 
-class MonoCheck(_object):
+class Matrix(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, MonoCheck, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Matrix, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, MonoCheck, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, Matrix, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _monocheck.new_MonoCheck(*args)
+        this = _matrix.new_Matrix(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _monocheck.delete_MonoCheck
+    __swig_destroy__ = _matrix.delete_Matrix
     __del__ = lambda self : None;
-    def CheckStrictMonoticity(self, *args): return _monocheck.MonoCheck_CheckStrictMonoticity(self, *args)
-MonoCheck_swigregister = _monocheck.MonoCheck_swigregister
-MonoCheck_swigregister(MonoCheck)
+    def GetVal(self, *args): return _matrix.Matrix_GetVal(self, *args)
+    def SetVal(self, *args): return _matrix.Matrix_SetVal(self, *args)
+    def GetNumRows(self): return _matrix.Matrix_GetNumRows(self)
+    def GetNumCols(self): return _matrix.Matrix_GetNumCols(self)
+    def GetCol(self, *args): return _matrix.Matrix_GetCol(self, *args)
+Matrix_swigregister = _matrix.Matrix_swigregister
+Matrix_swigregister(Matrix)
 
 # This file is compatible with both classic and new-style classes.
 

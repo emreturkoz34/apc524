@@ -15,20 +15,20 @@ if version_info >= (2,6,0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_endpointslope', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_maxslope', [dirname(__file__)])
         except ImportError:
-            import _endpointslope
-            return _endpointslope
+            import _maxslope
+            return _maxslope
         if fp is not None:
             try:
-                _mod = imp.load_module('_endpointslope', fp, pathname, description)
+                _mod = imp.load_module('_maxslope', fp, pathname, description)
             finally:
                 fp.close()
             return _mod
-    _endpointslope = swig_import_helper()
+    _maxslope = swig_import_helper()
     del swig_import_helper
 else:
-    import _endpointslope
+    import _maxslope
 del version_info
 try:
     _swig_property = property
@@ -76,10 +76,10 @@ class MaxSlope(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, MaxSlope, name)
     def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    __swig_destroy__ = _endpointslope.delete_MaxSlope
+    __swig_destroy__ = _maxslope.delete_MaxSlope
     __del__ = lambda self : None;
-    def MostMonotonic(self, *args): return _endpointslope.MaxSlope_MostMonotonic(self, *args)
-MaxSlope_swigregister = _endpointslope.MaxSlope_swigregister
+    def MostMonotonic(self, *args): return _maxslope.MaxSlope_MostMonotonic(self, *args)
+MaxSlope_swigregister = _maxslope.MaxSlope_swigregister
 MaxSlope_swigregister(MaxSlope)
 
 class EndPointSlope(MaxSlope):
@@ -91,14 +91,32 @@ class EndPointSlope(MaxSlope):
     __getattr__ = lambda self, name: _swig_getattr(self, EndPointSlope, name)
     __repr__ = _swig_repr
     def __init__(self, *args): 
-        this = _endpointslope.new_EndPointSlope(*args)
+        this = _maxslope.new_EndPointSlope(*args)
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _endpointslope.delete_EndPointSlope
+    __swig_destroy__ = _maxslope.delete_EndPointSlope
     __del__ = lambda self : None;
-    def MostMonotonic(self, *args): return _endpointslope.EndPointSlope_MostMonotonic(self, *args)
-EndPointSlope_swigregister = _endpointslope.EndPointSlope_swigregister
+    def MostMonotonic(self, *args): return _maxslope.EndPointSlope_MostMonotonic(self, *args)
+EndPointSlope_swigregister = _maxslope.EndPointSlope_swigregister
 EndPointSlope_swigregister(EndPointSlope)
+
+class LinRegression(MaxSlope):
+    __swig_setmethods__ = {}
+    for _s in [MaxSlope]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, LinRegression, name, value)
+    __swig_getmethods__ = {}
+    for _s in [MaxSlope]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, LinRegression, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _maxslope.new_LinRegression(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _maxslope.delete_LinRegression
+    __del__ = lambda self : None;
+    def MostMonotonic(self, *args): return _maxslope.LinRegression_MostMonotonic(self, *args)
+LinRegression_swigregister = _maxslope.LinRegression_swigregister
+LinRegression_swigregister(LinRegression)
 
 # This file is compatible with both classic and new-style classes.
 

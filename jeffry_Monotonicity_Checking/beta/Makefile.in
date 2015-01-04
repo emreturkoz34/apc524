@@ -1,0 +1,27 @@
+# Directories
+HOMEDIR	= $(shell pwd)
+SRCDIR	= $(HOMEDIR)/src
+OBJDIR	= $(HOMEDIR)/obj
+MODDIR	= $(HOMEDIR)/mod
+
+
+# Files
+MATRIX	= matrix matrix3d
+MAXSLOPE	= endpointslope linregression
+#LNM	= 
+OTHER	= monocheck
+
+# Classes
+ABSCLS	= maxslope #leastnonmono
+DRVCLS	= $(MAXSLOPE) #$(LNM)
+CLASS	= $(MATRIX)
+
+# All *.cc
+SRC	= $(DRVCLS) $(CLASS) $(OTHER)
+
+# Shared Object Targets
+SO	= $(ABSCLS) $(CLASS) $(OTHER)
+
+CXX		= g++
+CXXFLAGS	= -O3 -fPIC -Wall
+PYLIB		= -I/usr/include/python2.7

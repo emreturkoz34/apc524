@@ -13,6 +13,6 @@
 
 %apply (int *IN_ARRAY1, int DIM1) {(int *monoAry, const int ncols)}
 
-#include "maxslope.h"
-#include "endpointslope.h"
-#include "linregression.h"
+%include "maxslope.h"
+%include "endpointslope.h"
+%include "linregression.h"

@@ -27,7 +27,7 @@ MonoCheck::~MonoCheck()
 /// "col". The output array monoAry must be of length ncols_, where
 /// each cell holds a value of 3 if C is strictly increasing or
 /// strictly decreasing and 0 otherwise.
-int MonoCheck::CheckStrictMonoticity(int *monoAry, const int ncols, const int col){
+int MonoCheck::CheckStrictMonoticity(int *monoAry, const int ncols, int col){
   assert(ncols == ncols_);
 
   if ((col < 0) || (col >= ncols)) {
