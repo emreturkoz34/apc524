@@ -53,7 +53,10 @@ class ProcFile(object):
         for i in range(norows):
             for j in range(nocols):
                 data.SetVal(i,j,dataPy[i,j])
-        interp = lininterp.LinInterp()
+        if interpmethod == 'linear':
+            interp = lininterp.LinInterp()
+        else:
+            raise IOError("Specified interpolation method: %s not supported, use <linear>" % interpmethod)
         flag = 0
         flag = interp.Interp(data, 0, interpval, datavec1)
         if flag == 1:

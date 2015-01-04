@@ -27,19 +27,26 @@ datafiledir = iof.read_input("data file directory:", inputs)
 datafiles = glob.glob("".join(["".join(datafiledir), "/*.kg"])) #vector of paths of all files in specified directory
 testspecies = iof.read_input("test species:", inputs, minargs=0, default=["Y-CO2","Y-CO","Y-H2O"])
 options = {} #dictionary stores options
-options["sort method"] = iof.read_input("sort method:", inputs, default = 'bubble')
+options["sort method"] = iof.read_input("sort method:", inputs, default = ['bubble'])
 options["Zpdf"] = iof.read_input("Zpdf:", inputs)
-options["Zmean grid"] = iof.read_input("Zmean_grid:", inputs, minargs = 0, default = 'Z')
+options["Zmean grid"] = iof.read_input("Zmean_grid:", inputs, minargs = 0, default = ['Z'])
 options["StoichMassFrac"] = iof.read_input("StoichMassFrac:", inputs, minargs=0, default=[0.055])
+options["InterpMethod"] = iof.read_input("interp method:", inputs, minargs=0, default=['linear'])
+options["MaxSlopeTest"] = iof.read_input("max slope test:", inputs, minargs=0, default=['linear regression'])
+options["Integrator"] = iof.read_input("integrator:", inputs, minargs=0, default=['trapezoid'])
 
 # find best progress variable
 bestC = []
 nofiles = len(datafiles)  # Check to see if used later and maybe move
-filesmatC = fpv.findC(datafiles, testspecies, bestC)
+filesmatC = fpv.findC(datafiles, testspecies, bestC, options)
 
 # sort FILESMATRIX by progress variable
 if options["sort method"][0] == 'bubble': #only bubble sort supported for this version
     sorter = sorting.bubble_sort(filesmatC)
+elif options["sort method"][0] == 'quick':
+    sorter = sorting.quick_sort(filesmatC)
+else:
+    raise IOError("invalid sorting method (%s) specified, instead use <bubble> sort" % sortmethod)
 sorter.SetRefColNum(0)
 sorter.SetSortEndIndex(nofiles)
 sorter.SetSortStartIndex(0)
@@ -112,7 +119,16 @@ for ii in range(len(rxn_rate_locs)):
         raise IOError("Production rate data for %s is missing" % speciesprodrate)
 
 # Obtain relevant Yi and reaction rates from each file, and convolute
-TrapzIntgr = integrator.Trapz()
+integ = options["Integrator"][0]
+if integ == 'trapezoid':
+    Intgr = integrator.Trapz()
+elif integ == 'simpson':
+    Intgr = integrator.Simpson()
+elif integ == 'glquad':
+    Intgr = integrator.glquad()
+else:
+    raise IOError("inavlid integrator type (%s) specified, instead use <trapezoid>, <simpson>, or <glquad>" % integ)
+print "Convoluting using %s integration" % integ
 convolutedC = [0] * nofiles
 convolutedST = [0] * nofiles
 
@@ -129,8 +145,8 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
         rxnRates[i] = rxnrates[i,:].sum()
     convolutedC[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     convolutedST[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
-    ConvReturn =  convolute.convVal_func(Z, progvar, pdfValM, convolutedC[kk], TrapzIntgr)
-    ConvReturn =  convolute.convVal_func(Z, rxnRates, pdfValM, convolutedST[kk], TrapzIntgr)
+    ConvReturn =  convolute.convVal_func(Z, progvar, pdfValM, convolutedC[kk], Intgr)
+    ConvReturn =  convolute.convVal_func(Z, rxnRates, pdfValM, convolutedST[kk], Intgr)
     #for i in range(ZvarPoints):
     #    for j in range(ZmeanPoints):
     #        print convolutedC[kk].GetVal(i,j),

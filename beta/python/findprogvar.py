@@ -7,7 +7,7 @@ import sorting
 import monocheck
 import maxslope
 
-def findC(datafiles, testspecies, bestC): 
+def findC(datafiles, testspecies, bestC, options): 
 
     # Interpolate each datafile, generate a matrix from interpolated data
     nofiles = len(datafiles)
@@ -22,7 +22,7 @@ def findC(datafiles, testspecies, bestC):
         else:
             titles1 = dataobj.gettitles()
             np.testing.assert_array_equal(titles1,titles) # Verify that all data files have the same column headers
-        dataobj.interpolate(testspecies, locs, interpdata[ii,:])
+        dataobj.interpolate(testspecies, locs, interpdata[ii,:], interpval=float(options["StoichMassFrac"][0]), interpmethod="".join(options["InterpMethod"]))
     filesmatrix[:,2] = interpdata[:,0] # filesmatrix stores (row1) stoich prog var (row2) file indices (row3) stoich Temps
     filesmatrix[:,1] = range(nofiles)
     filesmatC = matrix.Matrix(nofiles,3)
@@ -45,27 +45,22 @@ def findC(datafiles, testspecies, bestC):
             progVar.SetVal(i,j,progvars[i,j])
 
     # Sort PROGVARS and FILESMATRIX by temperature
-    print "Sorting PROGVARS by temperature"
-    sortmethod = 'bubble'
-    if "".join(sortmethod) == 'bubble':
-        sorter = sorting.bubble_sort(progVar)
-    sorter.SetRefColNum(0)
-    sorter.SetSortEndIndex(nofiles)
-    sorter.SetSortStartIndex(0)
-    sorter.generateIndexArray()
-    sorter.extractRefCol()
-    sorter.sort_data()
-
+    sortmethod = options["sort method"][0]
+    print "Sorting PROGVARS by temperature using %s sort" % sortmethod
+    for i in [progVar, filesmatC]:
+        if sortmethod  == 'bubble':
+            sorter = sorting.bubble_sort(i)
+        elif sortmethod == 'quick': # quick sort is very slow, test later
+            sorter = sorting.quick_sort(i)
+        else:
+            raise IOError("invalid sorting method (%s) specified, instead use <bubble> sort" % sortmethod)
+        sorter.SetRefColNum(0)
+        sorter.SetSortEndIndex(nofiles)
+        sorter.SetSortStartIndex(0)
+        sorter.generateIndexArray()
+        sorter.extractRefCol()
+        sorter.sort_data()
     print "Sorting FILESMATRIX by temperature"
-    sortmethod = 'bubble'
-    if "".join(sortmethod) == 'bubble':
-        sorter = sorting.bubble_sort(filesmatC)
-    sorter.SetRefColNum(0)
-    sorter.SetSortEndIndex(nofiles)
-    sorter.SetSortStartIndex(0)
-    sorter.generateIndexArray()
-    sorter.extractRefCol()
-    sorter.sort_data()
 
     # Test monotonicity of PROGVARS
     print "Testing monotonicity \n"
@@ -81,9 +76,14 @@ def findC(datafiles, testspecies, bestC):
     if checksum % 3 != 0:
         raise RuntimeError("Incorrect values in monoAry vector, check monotonicity function.\n")
     if checksum > 3:
-        print "Testing max slope:"
-        maxchecker = maxslope.LinRegression(progVar)
-        #maxchecker = endpointslope.EndPointSlope(progVar)
+        maxslopetest = options["MaxSlopeTest"][0]
+        print "Testing max slope using %s" % maxslopetest
+        if maxslopetest == 'linear regression':
+            maxchecker = maxslope.LinRegression(progVar)
+        elif maxslopetest == 'end point slope':
+            maxchecker = maxslope.EndPointSlope(progVar)
+        else:
+            raise IOError("invalid maximum slope test (%s) specified, instead use <linear regression>" % maxslopetest)
         assert maxchecker.MostMonotonic(monoAry, 0) == 0, "MostMonotonic ran unsuccessfully.\n" 
         # ^ Distinguish the best monotonic progress variables
     elif checksum == 0:
