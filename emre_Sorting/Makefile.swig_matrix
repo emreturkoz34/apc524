@@ -1,0 +1,21 @@
+TARGET     = matrix
+WRAPPER	   = $(TARGET)_wrap.cxx
+SRC	   = $(TARGET).cc 
+OBJ	   = $(SRC:.cc=.o) $(WRAPPER:.cxx=.o)
+CXX        = g++
+CXXFLAGS     = -O3 -fPIC
+INTERFACE  = $(TARGET).i
+SWIGOPT    =
+SWIG       = swig
+PYLIB	   = -I/usr/include/python2.7
+
+SO	   = so
+
+python_cpp: $(TARGET).i
+	    swig -c++ -python $(INTERFACE)
+	    $(CXX) $(CXXFLAGS) -c $(SRC) 
+	    $(CXX) $(CXXFLAGS) -c $(WRAPPER) $(PYLIB)
+	    $(CXX) -shared $(OBJ) -o _$(TARGET).$(SO)
+
+python_clean:
+	rm -f *_wrap* *.o *~ *$(SO) mypython *.pyc .~* core

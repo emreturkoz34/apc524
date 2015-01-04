@@ -2,11 +2,9 @@
 %module fittogrid
 
 %{
-#ifndef SWIG_FILE_WITH_INIT
 #define SWIG_FILE_WITH_INIT
 #include "interpolator.h"
 #include "fittogrid.h"
-#endif
 %}
 
 %include "numpy.i"
