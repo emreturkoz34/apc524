@@ -12,13 +12,13 @@ PDFS	= deltaPDF betaPDF
 INTGR	= trapz simpson glquad
 INTRP	= #lininterp
 SORT	= #bubble_sort
-SLOPE	= #endpointslope linregression
+SLOPE	= endpointslope linregression
 OTHER	= convolute #fittogrid
 
 # Classes
-TARGETS	=  helper bubble_sort monocheck linregression endpointslope lininterp fittogrid
-ABSCLS	= pdf integrator $(TARGETS) #interpolator sorting maxslope
-DRVCLS	= $(PDFS) $(INTGR) $(INTRP) $(SORT)
+TARGETS	=  helper bubble_sort monocheck lininterp fittogrid
+ABSCLS	= pdf integrator $(TARGETS) maxslope #interpolator sorting maxslope
+DRVCLS	= $(PDFS) $(INTGR) $(INTRP) $(SORT) $(SLOPE)
 CLASS	= $(MATRIX) monocheck
 
 
