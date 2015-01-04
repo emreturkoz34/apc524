@@ -34,6 +34,7 @@ options["StoichMassFrac"] = iof.read_input("StoichMassFrac:", inputs, minargs=0,
 options["InterpMethod"] = iof.read_input("interp method:", inputs, minargs=0, default=['linear'])
 options["MaxSlopeTest"] = iof.read_input("max slope test:", inputs, minargs=0, default=['linear regression'])
 options["Integrator"] = iof.read_input("integrator:", inputs, minargs=0, default=['trapezoid'])
+options["LCgrid"] = iof.read_input("length Cgrid:", inputs, minargs=0, default=[20])
 
 # find best progress variable
 bestC = []
@@ -125,7 +126,8 @@ if integ == 'trapezoid':
 elif integ == 'simpson':
     Intgr = integrator.Simpson()
 elif integ == 'glquad':
-    Intgr = integrator.glquad()
+    NumberNodes = iof.read_input("glq Number of Nodes:", inputs, minargs=0, default=[50])
+    Intgr = integrator.GLQuad(NumberNodes[0])
 else:
     raise IOError("inavlid integrator type (%s) specified, instead use <trapezoid>, <simpson>, or <glquad>" % integ)
 print "Convoluting using %s integration" % integ
@@ -158,12 +160,17 @@ dim1 = 2    # w~ and c~
 dim2 = ZmeanPoints    # dimension of z~
 dim3 = ZvarPoints    # dimension of z_v
 dim4 = nofiles   # number of files
-lcgrid = 10; # length of cgrid ######## Add user input
+lcgrid = int(options["LCgrid"][0]); # length of cgrid 
+print lcgrid
 cgrid = np.linspace(0.0, 0.15, lcgrid)
-interp = lininterp.LinInterp() # use linear interpolator ### add options for interpolator later
+interpmethod = options["InterpMethod"][0] 
+if interpmethod == 'linear': # add more interpolation options later
+    interp = lininterp.LinInterp()
+else:
+    raise IOError("Specified interpolation method: %s not supported, use <linear>" % interpmethod)
 datain = matrix4d.Matrix4D(dim1, dim2, dim3, dim4)
 dataout = matrix3d.Matrix3D(dim2, dim3, lcgrid)
-print "Fitting final data to grid"
+print "Fitting final data to grid using %s interpolation" % interpmethod
 for i in range(2):
     for l in range(nofiles):
         for j in range(ZmeanPoints):
