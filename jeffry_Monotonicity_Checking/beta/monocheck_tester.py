@@ -1,11 +1,13 @@
-import vector
+#!/usr/bin/env python
+import numpy as np
+
+import sys
+sys.path.append('./mod')
+
 import matrix
 import monocheck
 import linregression
 import endpointslope
-
-import helper
-import numpy as np
 
 def printMat(mat): 
 	"Print contents of a Matrix object"
@@ -38,38 +40,32 @@ printMat(progVar)
 
 #***Initial monotonicity check***
 checker = monocheck.MonoCheck(progVar) #Create MonoCheck object
-monoAryPy = helper.Line()
-monoAryPy = np.linspace(0.0, 0.0, cols)
-monoAry = vector.Vector(cols) #monoAry stores monotonicity output
-helper.copy_py_to_vector(monoAryPy, monoAry) #Initialize monoAry as vector of 0s with length cols 
+monoAry = np.linspace(0, 0, cols)
 
-assert checker.CheckStrictMonoticity(0, monoAry) == 0, "CheckStrictMonoticity ran unsuccessfully.\n" #Check which columns of progVar are strictly increasing or strictly decreasing and store result in monoAry
+assert checker.CheckStrictMonoticity(monoAry, cols, 0) == 0, "CheckStrictMonoticity ran unsuccessfully.\n" #Check which columns of progVar are strictly increasing or strictly decreasing and store result in monoAry
 
 print("Strictly monotonic progress variables marked:\n")
 for j in range(cols):
-        print "%6.3f" % monoAry.GetVal(j),
-    #print '{} '.format(repr(monoAry.GetVal(j))) #Print output array filled with 3s or 0s
+        print "%6.3f" % monoAry[j], #Print output array filled with 3s or 0s
 print("\n")
 
 #***Max slope testing commences***
-monoAryCpy = vector.Vector(cols) #monoAryCpy is a copy of monoAry
+monoAryCpy = np.linspace(0, 0, cols) #monoAryCpy is a copy of monoAry
 for j in range(cols):
-    monoAryCpy.SetVal(j, monoAry.GetVal(j))
+    monoAryCpy[j] = monoAry[j]
 
 maxchecker = linregression.LinRegression(progVar) #Create LinRegression object
-assert maxchecker.MostMonotonic(0, monoAry) == 0, "MostMonotonic ran unsuccessfully.\n" #Distinguish the best monotonic progress variables
+assert maxchecker.MostMonotonic(monoAry, cols, 0) == 0, "MostMonotonic ran unsuccessfully.\n" #Distinguish the best monotonic progress variables
 
 print("Best C by linear regression method indicated:\n")
 for j in range(cols):
-        print "%6.3f" % monoAry.GetVal(j),
-    #print '{} '.format(repr(monoAry.GetVal(j))) #Print output array filled with 3s, 2s, and 0s
+        print "%6.3f" % monoAry[j], #Print output array filled with 3s, 2s, and 0s
 print("\n")
 
 maxchecker2 = endpointslope.EndPointSlope(progVar) #Create EndPointSlope object
-assert maxchecker2.MostMonotonic(0, monoAryCpy) == 0, "MostMonotonic ran unsuccessfully.\n" #Distinguish the best monotonic progress variables
+assert maxchecker2.MostMonotonic(monoAryCpy, cols, 0) == 0, "MostMonotonic ran unsuccessfully.\n" #Distinguish the best monotonic progress variables
 
 print("Best C by endpoint slope method indicated:\n")
 for j in range(cols):
-        print "%6.3f" % monoAryCpy.GetVal(j),
-    #print '{} '.format(repr(monoAryCpy.GetVal(j))) #Print output array filled with 3s, 2s, and 0s
+        print "%6.3f" % monoAryCpy[j], #Print output array filled with 3s, 2s, and 0s
 print("\n")
