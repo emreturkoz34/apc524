@@ -2,8 +2,7 @@
 %{
 #define SWIG_FILE_WITH_INIT
 #include "leastnonmono.h"
-#include "endpointslope.h"
-#include "linregression.h"
+#include "simplelnm.h"
 %}
 
 %include "numpy.i"
@@ -13,6 +12,5 @@
 
 %apply (int *IN_ARRAY1, int DIM1) {(int *monoAry, const int ncols)}
 
-#include "leastnonmono.h"
-#include "endpointslope.h"
-#include "linregression.h"
+%include "leastnonmono.h"
+%include "simplelnm.h"

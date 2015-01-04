@@ -15,5 +15,5 @@ _maxslope.so: maxslope_wrap.o $(addsuffix .o,$(MAXSLOPE)) $(addsuffix .o,$(MATRI
 	$(CXX) -shared $^ -o $@
 
 # LeastNonMono shared object
-#_leastnonmono.so: leastnonmono_wrap.o $(addsuffix .o,$(LNM)) $(addsuffix .o,$(MATRIX))
-#	$(CXX) -shared $^ -o $@
+_leastnonmono.so: leastnonmono_wrap.o $(addsuffix .o,$(LNM)) $(addsuffix .o,$(MATRIX))
+	$(CXX) -shared $^ -o $@
