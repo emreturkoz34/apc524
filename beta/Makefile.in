@@ -7,7 +7,7 @@ MODDIR	= $(HOMEDIR)/mod
 
 
 # Files
-MATRIX	= vector matrix matrix3d matrix4d
+MATRIX	= matrix matrix3d matrix4d
 PDFS	= deltaPDF betaPDF
 INTGR	= trapz simpson glquad
 INTRP	= #lininterp
@@ -17,7 +17,7 @@ NONMONO	= simplelnm
 OTHER	= convolute #fittogrid
 
 # Classes
-TARGETS	= helper lininterp fittogrid
+TARGETS	= lininterp fittogrid
 ABSCLS	= pdf integrator $(TARGETS) maxslope leastnonmono sorting #interpolator
 DRVCLS	= $(PDFS) $(INTGR) $(INTRP) $(SORT) $(SLOPE) $(NONMONO)
 CLASS	= $(MATRIX) monocheck

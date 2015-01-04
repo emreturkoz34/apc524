@@ -2,19 +2,18 @@
 
 import sys
 sys.path.append('./mod')
+sys.path.append('./python')
 
 import numpy as np
 import iofuncs as iof
 import findprogvar as fpv
 import glob
 
-import vector
 import matrix
 import matrix3d
 import matrix4d
 import pdf
 import integrator
-import helper
 import sorting
 import lininterp
 import fittogrid
