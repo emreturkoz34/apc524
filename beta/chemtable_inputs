@@ -14,3 +14,4 @@ max slope test:	end point slope
 integrator:	trapezoid
 glq Number of Nodes:	53
 length Cgrid:	12
+output file name:	data_out

@@ -36,6 +36,7 @@ options["InterpMethod"] = iof.read_input("interp method:", inputs, minargs=0, de
 options["MaxSlopeTest"] = iof.read_input("max slope test:", inputs, minargs=0, default=['linear regression'])
 options["Integrator"] = iof.read_input("integrator:", inputs, minargs=0, default=['trapezoid'])
 options["LCgrid"] = iof.read_input("length Cgrid:", inputs, minargs=0, default=[20])
+options["OutputFile"] = iof.read_input("output file name:", inputs, minargs=0, default=['data_output'])
 
 # find best progress variable
 bestC = []
@@ -187,22 +188,30 @@ f2gflag = fittogrid.fittogrid_func(datain, cgrid, interp, dataout)
 if f2gflag == 1:
     print("WARNING: extrapolating to fit to cgrid")
 FinalData = np.zeros((dim2, lcgrid, dim3))
+f = open("".join(["output/",options["OutputFile"][0]]),'w')
+f.write('Zmean    \t C        \t Zvar     \t SourceTerm \n')
 for i in range(dim2):
     for j in range(lcgrid):
         for k in range(dim3):
             FinalData[i,j,k] = dataout.GetVal(i,k,j)
-print "\nFinal Data: \n", FinalData, "\n "
+            f.write('%8.5g\t %8.5g\t %8.5g\t %g\n' % (Z[i], cgrid[j], Zvar[k], FinalData[i,j,k]))
+f.close()
+print "\nFinal Data written to file: output/%s.txt \n\n" % options["OutputFile"][0]
 
 #iof.ContourPlot(Zmean,cgrid,FinalData,'contour')
 #y = Zmean
 #x = cgrid
-for i in [10, 15, 20, 25, 30, 35]: # make general
+for j in range(6): #[10, 15, 20, 25, 30, 35]: # make general
+    i = (j+2)*int(ZvarPoints/10)
     X, Y = np.meshgrid(cgrid, Zmean)
     plt.figure()
     CS = plt.contour(X, Y, FinalData[:,:,i])
-    plt.clabel(CS, inline=1, fontsize=10)
-    plt.title('Simplest default with labels')
-    plt.grid(b = False, which='major', color='k', linestyle='-')
+    #plt.clabel(CS, inline=1, fontsize=10)
+    plt.title('Chemical source term (kg/m^3-s) as a function of Zmean and C for Zvar = %5.3g' % Zvar[i])
+    #plt.grid(b = False, which='major', color='k', linestyle='-')
+    plt.xlabel('C')
+    plt.ylabel('Zmean')
+    plt.colorbar(CS)
     plt.savefig('output/contour_zvar_%5.3g.pdf' % Zvar[i])
 
 del convolutedC
