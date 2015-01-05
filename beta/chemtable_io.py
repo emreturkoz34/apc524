@@ -186,27 +186,24 @@ for i in range(2):
 f2gflag = fittogrid.fittogrid_func(datain, cgrid, interp, dataout)
 if f2gflag == 1:
     print("WARNING: extrapolating to fit to cgrid")
-FinalData = np.zeros((dim2, lcgrid))
+FinalData = np.zeros((dim2, lcgrid, dim3))
 for i in range(dim2):
     for j in range(lcgrid):
-        FinalData[i,j] = dataout.GetVal(i,30,j)
+        for k in range(dim3):
+            FinalData[i,j,k] = dataout.GetVal(i,k,j)
 print "\nFinal Data: \n", FinalData, "\n "
 
 #iof.ContourPlot(Zmean,cgrid,FinalData,'contour')
-ny, nx = FinalData.shape
-print "ZPoints = " + str(ZPoints)
-print "lcgrid = " + str(lcgrid)
-print "nx = " + str(nx)
-print "ny = " + str(ny)
-y = Zmean
-x = cgrid
-X, Y = np.meshgrid(x, y)
-plt.figure()
-CS = plt.contour(X, Y, FinalData)
-plt.clabel(CS, inline=1, fontsize=10)
-plt.title('Simplest default with labels')
-plt.grid(b = True, which='major', color='b', linestyle='-')
-plt.savefig('contour.pdf')
+#y = Zmean
+#x = cgrid
+for i in [10, 15, 20, 25, 30, 35]: # make general
+    X, Y = np.meshgrid(cgrid, Zmean)
+    plt.figure()
+    CS = plt.contour(X, Y, FinalData[:,:,i])
+    plt.clabel(CS, inline=1, fontsize=10)
+    plt.title('Simplest default with labels')
+    plt.grid(b = False, which='major', color='k', linestyle='-')
+    plt.savefig('output/contour_zvar_%5.3g.pdf' % Zvar[i])
 
 del convolutedC
 del convolutedST

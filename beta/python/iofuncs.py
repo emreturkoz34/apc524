@@ -104,7 +104,7 @@ def plotCvT(Tvec, Cvec, fname="CvsT"):
     plt.xlabel("T (K)")
     plt.ylabel("C")
     plt.title("Best Progress Variable")
-    plt.savefig("%s.pdf" % fname)
+    plt.savefig("output/%s.pdf" % fname)
     plt.clf()
 
 
