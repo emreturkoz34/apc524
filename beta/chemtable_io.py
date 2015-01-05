@@ -141,6 +141,7 @@ convolutedC = [0] * nofiles
 convolutedST = [0] * nofiles
 
 maxC = 0
+maxRate = 0
 for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     file = datafiles[int(filesmatC.GetVal(kk,1))]
     massfracs = np.genfromtxt(file, unpack=False, skip_header=2, delimiter = "\t", usecols = bestC[0])
@@ -154,6 +155,8 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
         rxnRates[i] = rxnrates[i,:].sum()
     if progvar.max() > maxC:
         maxC = progvar.max()
+    if rxnRates.max() > maxRate:
+        maxRate = rxnRates.max()
     convolutedC[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     convolutedST[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     ConvReturn =  convolute.convVal_func(Z, progvar, pdfValM, convolutedC[kk], Intgr)
@@ -195,12 +198,12 @@ if f2gflag == 1:
     print("WARNING: extrapolating to fit to cgrid")
 FinalData = np.zeros((dim2, lcgrid, dim3))
 f = open("".join(["output/",options["OutputFile"][0]]),'w')
-f.write('Zmean    \t C        \t Zvar     \t SourceTerm \n')
-for i in range(dim2):
-    for j in range(lcgrid):
+f.write('C        \tZmean      \tZvar      \tSourceTerm \n')
+for j in range(lcgrid):
+    for i in range(dim2):
         for k in range(dim3):
-            FinalData[i,j,k] = dataout.GetVal(i,k,j)
-            f.write('%8.5g\t %8.5g\t %8.5g\t %g\n' % (Z[i], cgrid[j], Zvar[k], FinalData[i,j,k]))
+            FinalData[j,i,k] = dataout.GetVal(i,k,j)
+            f.write('%8.5g\t %8.5g\t %8.5g\t %g\n' % (cgrid[j], Zmean[i], Zvar[k], FinalData[i,j,k]))
 f.close()
 print "\nFinal Data written to file: output/%s.txt \n\n" % options["OutputFile"][0]
 
@@ -218,14 +221,15 @@ else:
     plots = [-1]
 for j in plots: 
     i = int((j+1)*ZvarPoints/(noplots+2))
-    X, Y = np.meshgrid(cgrid, Zmean)
+    X, Y = np.meshgrid(Zmean, cgrid)
     plt.figure()
     #im = plt.imshow(FinalData[:,:,i], interpolation='bilinear', origin='lower',
     #                cmap=cm.jet, extent=(0,1,0,1))#(0,maxC,0,1))
-    CS = plt.contourf(X, Y, FinalData[:,:,i], 50)
-    plt.title('Chemical source term (kg/m^3-s) as a function of Zmean and C for Zvar = %5.3g' % Zvar[i])
-    plt.xlabel('C')
-    plt.ylabel('Zmean')
+    levels=np.linspace(-1, maxRate, 50)
+    CS = plt.contourf(X, Y, FinalData[:,:,i], levels)
+    plt.title('Source term (kg/m^3-s) vs. Zmean and C for Zvar = %5.3g' % Zvar[i])
+    plt.xlabel('Zmean')
+    plt.ylabel('C')
     plt.colorbar(CS)
     plt.savefig('output/contour_zvar_%.3g.pdf' % Zvar[i])
 
