@@ -1,17 +1,18 @@
-junk
-more junk
-
 data file directory:	data_test
 test species:	Y-H2	Y-CO2	Y-H2O
-Zmean_grid:	Z
-Zpdf:	beta
+output file name:	data_out
+
+Zmean_grid:	101
 Zvar_max:	0.25
 Zvar_grid:	26
+
+Zpdf:	beta
 sort method:	bubble
 StoichMassFrac:	0.27
 interp method:	linear
 max slope test:	end point slope
 integrator:	trapezoid
+
 glq Number of Nodes:	10
-length Cgrid:	401
-output file name:	data_out
+length Cgrid:	101
+

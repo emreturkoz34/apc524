@@ -38,6 +38,7 @@ options["MaxSlopeTest"] = iof.read_input("max slope test:", inputs, minargs=0, d
 options["Integrator"] = iof.read_input("integrator:", inputs, minargs=0, default=['trapezoid'])
 options["LCgrid"] = iof.read_input("length Cgrid:", inputs, minargs=0, default=[20])
 options["OutputFile"] = iof.read_input("output file name:", inputs, minargs=0, default=['data_output'])
+#options["Cmax"] = iof.read_input("Cmax:", inputs, minargs=0, default =[0.15])
 
 # find best progress variable
 bestC = []
@@ -139,6 +140,7 @@ print "Convoluting using %s integration" % integ
 convolutedC = [0] * nofiles
 convolutedST = [0] * nofiles
 
+maxC = 0
 for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     file = datafiles[int(filesmatC.GetVal(kk,1))]
     massfracs = np.genfromtxt(file, unpack=False, skip_header=2, delimiter = "\t", usecols = bestC[0])
@@ -150,6 +152,8 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     for i in range(len(massfracs)):
         progvar[i] = massfracs[i,:].sum()
         rxnRates[i] = rxnrates[i,:].sum()
+    if progvar.max() > maxC:
+        maxC = progvar.max()
     convolutedC[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     convolutedST[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     ConvReturn =  convolute.convVal_func(Z, progvar, pdfValM, convolutedC[kk], Intgr)
@@ -158,6 +162,7 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     #    for j in range(ZmeanPoints):
     #        print convolutedC[kk].GetVal(i,j),
 print "Convolution completed"
+print "Maximum value of progress variable is:", maxC
 
 # Run the fit to grid function to generate final data
     # Setup
@@ -166,7 +171,7 @@ dim2 = ZmeanPoints    # dimension of z~
 dim3 = ZvarPoints    # dimension of z_v
 dim4 = nofiles   # number of files
 lcgrid = int(options["LCgrid"][0]); # length of cgrid 
-cgrid = np.linspace(0.0, 0.15, lcgrid)
+cgrid = np.linspace(0.0, maxC, lcgrid)
 interpmethod = options["InterpMethod"][0] 
 if interpmethod == 'linear': # add more interpolation options later
     interp = lininterp.LinInterp()
@@ -202,25 +207,30 @@ print "\nFinal Data written to file: output/%s.txt \n\n" % options["OutputFile"]
 #iof.ContourPlot(Zmean,cgrid,FinalData,'contour')
 #y = Zmean
 #x = cgrid
-for j in range(6): #[10, 15, 20, 25, 30, 35]: # make general
-    i = (j+2)*int(ZvarPoints/10)
+noplots = 10
+if ZvarPoints > (noplots + 1):
+    plots = range(noplots)
+    noplots = 10
+elif ZvarPoints > 1:
+    plots = range(ZvarPoints - 2)
+    noplots = ZvarPoints - 2
+else:
+    plots = [-1]
+for j in plots: 
+    i = int((j+1)*ZvarPoints/(noplots+2))
     X, Y = np.meshgrid(cgrid, Zmean)
     plt.figure()
-    im = plt.imshow(FinalData[:,:,i], interpolation='bilinear', origin='lower',
-                    cmap=cm.jet)
-    CS = plt.contour(X, Y, FinalData[:,:,i])
-    #plt.clabel(CS, inline=1, fontsize=10)
+    #im = plt.imshow(FinalData[:,:,i], interpolation='bilinear', origin='lower',
+    #                cmap=cm.jet, extent=(0,1,0,1))#(0,maxC,0,1))
+    CS = plt.contourf(X, Y, FinalData[:,:,i], 50)
     plt.title('Chemical source term (kg/m^3-s) as a function of Zmean and C for Zvar = %5.3g' % Zvar[i])
-    #plt.grid(b = False, which='major', color='k', linestyle='-')
     plt.xlabel('C')
     plt.ylabel('Zmean')
     plt.colorbar(CS)
-    plt.savefig('output/contour_zvar_%5.3g.pdf' % Zvar[i])
+    plt.savefig('output/contour_zvar_%.3g.pdf' % Zvar[i])
 
 del convolutedC
 del convolutedST
-
-# Contour plots will be used to visualize this data in the beta version
 
 # Future functionality
     # command line changes to arguments
