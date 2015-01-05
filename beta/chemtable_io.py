@@ -19,6 +19,7 @@ import lininterp
 import fittogrid
 import convolute
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 
 # read input file
 print " "
@@ -205,6 +206,8 @@ for j in range(6): #[10, 15, 20, 25, 30, 35]: # make general
     i = (j+2)*int(ZvarPoints/10)
     X, Y = np.meshgrid(cgrid, Zmean)
     plt.figure()
+    im = plt.imshow(FinalData[:,:,i], interpolation='bilinear', origin='lower',
+                    cmap=cm.jet)
     CS = plt.contour(X, Y, FinalData[:,:,i])
     #plt.clabel(CS, inline=1, fontsize=10)
     plt.title('Chemical source term (kg/m^3-s) as a function of Zmean and C for Zvar = %5.3g' % Zvar[i])
