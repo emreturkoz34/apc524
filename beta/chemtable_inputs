@@ -2,7 +2,7 @@ data file directory:	data_test
 test species:	Y-H2	Y-CO2	Y-H2O
 output file name:	data_out
 
-Zmean_grid:	101
+Zmean_grid:	201
 Zvar_max:	0.25
 Zvar_grid:	26
 

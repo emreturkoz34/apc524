@@ -133,7 +133,7 @@ elif integ == 'simpson':
     Intgr = integrator.Simpson()
 elif integ == 'glquad':
     NumberNodes = iof.read_input("glq Number of Nodes:", inputs, minargs=0, default=[50])
-    Intgr = integrator.GLQuad(NumberNodes[0])
+    Intgr = integrator.GLQuad(int(NumberNodes[0]))
 else:
     raise IOError("inavlid integrator type (%s) specified, instead use <trapezoid>, <simpson>, or <glquad>" % integ)
 print "Convoluting using %s integration" % integ
@@ -174,7 +174,7 @@ dim2 = ZmeanPoints    # dimension of z~
 dim3 = ZvarPoints    # dimension of z_v
 dim4 = nofiles   # number of files
 lcgrid = int(options["LCgrid"][0]); # length of cgrid 
-cgrid = np.linspace(0.0, maxC, lcgrid)
+cgrid = np.linspace(0.0, maxC*1.5, lcgrid)
 interpmethod = options["InterpMethod"][0] 
 if interpmethod == 'linear': # add more interpolation options later
     interp = lininterp.LinInterp()
@@ -205,7 +205,7 @@ for j in range(lcgrid):
             FinalData[j,i,k] = dataout.GetVal(i,k,j)
             f.write('%8.5g\t %8.5g\t %8.5g\t %g\n' % (cgrid[j], Zmean[i], Zvar[k], FinalData[j,i,k]))
 f.close()
-print "\nFinal Data written to file: output/%s.txt \n\n" % options["OutputFile"][0]
+print "\nFinal Data written to file: output/%s" % options["OutputFile"][0]
 
 #iof.ContourPlot(Zmean,cgrid,FinalData,'contour')
 #y = Zmean
@@ -219,6 +219,7 @@ elif ZvarPoints > 1:
     noplots = ZvarPoints - 2
 else:
     plots = [-1]
+    noplots = 1
 for j in plots: 
     i = int((j+1)*ZvarPoints/(noplots+2))
     X, Y = np.meshgrid(Zmean, cgrid)
@@ -232,6 +233,8 @@ for j in plots:
     plt.ylabel('C')
     plt.colorbar(CS)
     plt.savefig('output/contour_zvar_%.3g.pdf' % Zvar[i])
+
+print "%d Contour plots created in output directory \n" % noplots
 
 del convolutedC
 del convolutedST
