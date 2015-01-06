@@ -27,7 +27,6 @@ def findC(datafiles, testspecies, bestC, options):
     filesmatrix[:,0] = interpdata[:,0]
     filesmatrix[:,2] = interpdata[:,0] # filesmatrix stores (row1) stoich prog var (row2) file indices (row3) stoich Temps
     filesmatrix[:,1] = range(nofiles)
-    print filesmatrix
     filesmatC = matrix.Matrix(nofiles,3)
     for i in range(nofiles):
         for j in range(3):
@@ -40,7 +39,6 @@ def findC(datafiles, testspecies, bestC, options):
 
     # Calculate progress variables
     progvars = np.dot(interpdata,combosmatrix)
-    print progvars
 
     # Generate progress variable matrix
     progVar = matrix.Matrix(nofiles, cs.totnumcoms(nocols-1)+1) 

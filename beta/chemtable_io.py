@@ -51,8 +51,6 @@ Tst = [0] * nofiles
 for ii in range(nofiles):
     Cst[ii] = filesmatC.GetVal(ii,0)
     Tst[ii] = filesmatC.GetVal(ii,2)
-print Cst
-print Tst
 iof.plotCvT(Tst,Cst)
 
 # sort FILESMATRIX by progress variable
