@@ -26,7 +26,7 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
   double sum;
 
   // For refining Z to reduce errors
-  int ModNum = 1001;
+  int ModNum = 10001;
   double *LowMod = new double[ModNum];
   double *UppMod = new double[ModNum];
 
@@ -112,7 +112,7 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 	}
 
 	for (int k = 0; k < ZPoints; k++) {
-	  temp[k] = temp[k] / sum;
+	  temp[k] = temp[k]  / sum;
 	}
       }
 

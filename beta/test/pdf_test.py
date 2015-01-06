@@ -36,7 +36,7 @@ class PDF(unittest.TestCase):
         
         # expected PDF values
         PDF = np.zeros((ZmeanPoints, ZPoints))
-        PDF[0, 1] = 1
+        PDF[0, 1] = ZPoints-1
 
         # calculate PDF
         test = d.pdfVal(Z, dPdfValM)
@@ -74,8 +74,8 @@ class PDF(unittest.TestCase):
         
         # expected PDF values
         PDF = np.zeros((ZmeanPoints, ZPoints))
-        PDF[0, 1] = 0.75
-        PDF[0, 2] = 0.25
+        PDF[0, 1] = 0.75 * (ZPoints-1)
+        PDF[0, 2] = 0.25 * (ZPoints-1)
 
         # calculate PDF
         test = d.pdfVal(Z, dPdfValM)
@@ -240,8 +240,8 @@ class PDF(unittest.TestCase):
 
         # expected PDF values
         dPDF = np.zeros((ZmeanPoints, ZPoints))
-        dPDF[0, 0] = 0.75
-        dPDF[0, ZPoints-1] = 0.25
+        dPDF[0, 0] = 0.75 * (ZPoints-1)
+        dPDF[0, ZPoints-1] = 0.25 * (ZPoints-1)
 
         # calculate PDF
         bTest = b.pdfVal(Z, bPdfValM)
@@ -254,8 +254,8 @@ class PDF(unittest.TestCase):
                     self.assertAlmostEqual(bPDF[j,k], dPDF[j,k])
         self.assertEqual(bTest, 0)
 
-    def testBetaPDF5(self):
-        print "\n test Beta PDF 5: Beta Distro"
+    def testBetaPDF4(self):
+        print "\n test Beta PDF 4: Infinite Min/Max"
         ZPoints = 101
         ZmeanPoints = 1
         ZvarPoints = 1
@@ -301,10 +301,120 @@ class PDF(unittest.TestCase):
         print "PDF[0,4] = " + str(PDF[0,4]) + ", bPDF[0,4] = " + str(bPDF[0,80])
         print "PDF[0,5] = inf, bPDF[0,5] = " + str(bPDF[0,100])
         """
-        self.assertLess(bPDF[0,1*20]-PDF[0,1],0.1)
-        self.assertLess(bPDF[0,2*20]-PDF[0,2],0.1)
-        self.assertLess(bPDF[0,3*20]-PDF[0,3],0.1)
-        self.assertLess(bPDF[0,4*20]-PDF[0,4],0.1)
+        self.assertLess(bPDF[0,1*20]-PDF[0,1],0.2)
+        self.assertLess(bPDF[0,2*20]-PDF[0,2],0.2)
+        self.assertLess(bPDF[0,3*20]-PDF[0,3],0.2)
+        self.assertLess(bPDF[0,4*20]-PDF[0,4],0.2)
+        self.assertEqual(bTest, 0)
+
+
+    def testBetaPDF6(self):
+        print "\n test Beta PDF 5: Skewed"
+        ZPoints = 101
+        ZmeanPoints = 1
+        ZvarPoints = 1
+        
+        ZMin = 0
+        ZMax = 1
+        ZmeanMin = 0.1
+        ZmeanMax = ZmeanMin
+        ZvarMin = 0.01
+        ZvarMax = ZvarMin
+                
+        # create arrays of type "double *"
+        Z = np.linspace(ZMin, ZMax, ZPoints)
+        Zmean = np.linspace(ZmeanMin, ZmeanMax, ZmeanPoints)
+        Zvar = np.linspace(ZvarMin, ZvarMax, ZvarPoints)
+        
+        # create instances of PDF class
+        b = pdf.BetaPDF(Zmean, Zvar) 
+        bPdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
+        bPDF = np.zeros((ZmeanPoints, ZPoints))        
+        # expected PDF values
+        PDF = np.zeros((ZmeanPoints, ZPoints))
+        #        PDF[0, 0] = 5.93
+        PDF[0, 1] = 1.43
+        PDF[0, 2] = 0.209
+        PDF[0, 3] = 0.01557
+        PDF[0, 4] = 0
+        PDF[0, 5] = 0
+
+        # calculate PDF
+        bTest = b.pdfVal(Z, bPdfValM)
+
+        # test
+        for i in range(ZvarPoints):
+            for j in range(ZmeanPoints):
+                for k in range(ZPoints):
+                    bPDF[j,k] = bPdfValM.GetVal(i,j,20*k)
+
+        print "PDF[0,0] = inf, bPDF[0,0] = " + str(bPDF[0,0])
+        print "PDF[0,1] = " + str(PDF[0,1]) + ", bPDF[0,1] = " + str(bPDF[0,1])
+        print "PDF[0,2] = " + str(PDF[0,2]) + ", bPDF[0,2] = " + str(bPDF[0,2])
+        print "PDF[0,3] = " + str(PDF[0,3]) + ", bPDF[0,3] = " + str(bPDF[0,3])
+        print "PDF[0,4] = " + str(PDF[0,4]) + ", bPDF[0,4] = " + str(bPDF[0,4])
+        print "PDF[0,4] = " + str(PDF[0,5]) + ", bPDF[0,4] = " + str(bPDF[0,5])
+        print "PDF[0,5] = inf, bPDF[0,5] = " + str(bPDF[0,100])
+
+        self.assertLess(bPDF[0,1]-PDF[0,1],0.2)
+        self.assertLess(bPDF[0,2]-PDF[0,2],0.2)
+        self.assertLess(bPDF[0,3]-PDF[0,3],0.2)
+        self.assertLess(bPDF[0,4]-PDF[0,4],0.2)
+        self.assertLess(bPDF[0,5]-PDF[0,5],0.2)
+        self.assertEqual(bTest, 0)
+
+    def testBetaPDF6(self):
+        print "\n test Beta PDF 6: Symmetric"
+        ZPoints = 101
+        ZmeanPoints = 1
+        ZvarPoints = 1
+        
+        ZMin = 0
+        ZMax = 1
+        ZmeanMin = 0.5
+        ZmeanMax = ZmeanMin
+        ZvarMin = 0.05
+        ZvarMax = ZvarMin
+                
+        # create arrays of type "double *"
+        Z = np.linspace(ZMin, ZMax, ZPoints)
+        Zmean = np.linspace(ZmeanMin, ZmeanMax, ZmeanPoints)
+        Zvar = np.linspace(ZvarMin, ZvarMax, ZvarPoints)
+        
+        # create instances of PDF class
+        b = pdf.BetaPDF(Zmean, Zvar) 
+        bPdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
+        bPDF = np.zeros((ZmeanPoints, ZPoints))        
+        # expected PDF values
+        PDF = np.zeros((ZmeanPoints, ZPoints))
+        PDF[0, 0] = 0
+        PDF[0, 1] = 0.96
+        PDF[0, 2] = 1.44
+        PDF[0, 3] = 1.44
+        PDF[0, 4] = 0.96
+        PDF[0, 5] = 0
+
+        # calculate PDF
+        bTest = b.pdfVal(Z, bPdfValM)
+
+        # test
+        for i in range(ZvarPoints):
+            for j in range(ZmeanPoints):
+                for k in range(ZPoints):
+                    bPDF[j,k] = bPdfValM.GetVal(i,j,20*k)
+        """
+        print "PDF[0,0] = " + str(PDF[0,0]) + ", bPDF[0,0] = " + str(bPDF[0,0])
+        print "PDF[0,1] = " + str(PDF[0,1]) + ", bPDF[0,1] = " + str(bPDF[0,1])
+        print "PDF[0,2] = " + str(PDF[0,2]) + ", bPDF[0,2] = " + str(bPDF[0,2])
+        print "PDF[0,3] = " + str(PDF[0,3]) + ", bPDF[0,3] = " + str(bPDF[0,3])
+        print "PDF[0,4] = " + str(PDF[0,4]) + ", bPDF[0,4] = " + str(bPDF[0,4])
+        print "PDF[0,5] = " + str(PDF[0,5]) + ", bPDF[0,5] = " + str(bPDF[0,5])
+        """
+        self.assertLess(bPDF[0,1]-PDF[0,1],0.1)
+        self.assertLess(bPDF[0,2]-PDF[0,2],0.1)
+        self.assertLess(bPDF[0,3]-PDF[0,3],0.1)
+        self.assertLess(bPDF[0,4]-PDF[0,4],0.1)
+        self.assertLess(bPDF[0,5]-PDF[0,5],0.1)
         self.assertEqual(bTest, 0)
 
 

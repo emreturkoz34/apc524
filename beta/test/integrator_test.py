@@ -51,6 +51,32 @@ class Integrator(unittest.TestCase):
         r = integrator.simpson(integrand, domain)
         self.assertAlmostEqual(r, 4)
 
+
+    def testSimpsLin2(self):
+        print "\ntest Simpson rule: doesn't work for delta PDF"
+        NumPoints = 13 # Must be odd
+        DeltaVal = NumPoints - 1.0
+        domain = np.linspace(0,1,NumPoints)
+        integrand = np.zeros(NumPoints)
+
+        for i in range(NumPoints):
+            integrand[i] = DeltaVal
+            correctVal = 1.0
+            if i == 0:
+                incorrectVal = correctVal * 1 / 3
+            elif i == NumPoints-1:
+                incorrectVal = correctVal * 1 / 3
+            elif i % 2 == 0:
+                incorrectVal = correctVal * 2 / 3
+            elif i % 2 == 1:
+                incorrectVal = correctVal * 4 / 3
+            print "i = " + str(i)
+            r = integrator.simpson(integrand, domain)
+            self.assertNotEqual(r, correctVal)
+            self.assertAlmostEqual(r, incorrectVal, 4)
+            integrand[i] = 0
+
+
     def testSimpsQuadratic(self):
         print "\ntest Simpson rule: quadratic function"
         f = lambda x : x**2 - 1

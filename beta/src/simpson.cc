@@ -1,6 +1,5 @@
 #include "simpson.h"
 #include "assert.h"
-#include "stdio.h"
 
 Simpson::Simpson()
 {}
@@ -11,17 +10,8 @@ Simpson::~Simpson() {
 double Simpson::integrate(const double *integrand, const double *Z, const int ZPoints) {
 
   // Assert that inputs arrays are of the correct length
-  assert((ZPoints-1)%2 == 0);
+  //  assert((ZPoints-1)%2 == 0);
 
-  /*
-  const double h = Z[1] - Z[0];
-  for (int n = 1; n < ZPoints-1; n++) {
-    if (h - (Z[n+1]-Z[n]) > h/1000) {
-      printf("ERROR: Nonuniform mesh used with Simpson's Rule\n");
-      assert(h - (Z[n+1]-Z[n]) < h/1000);
-    }
-  }
-  */
   // Calculates integral
   double temp = 0;
   double f, dx;
