@@ -196,14 +196,14 @@ for i in range(2):
 f2gflag = fittogrid.fittogrid_func(datain, cgrid, interp, dataout)
 if f2gflag == 1:
     print("WARNING: extrapolating to fit to cgrid")
-FinalData = np.zeros((dim2, lcgrid, dim3))
+FinalData = np.zeros((lcgrid, dim2, dim3))
 f = open("".join(["output/",options["OutputFile"][0]]),'w')
 f.write('C        \tZmean      \tZvar      \tSourceTerm \n')
 for j in range(lcgrid):
     for i in range(dim2):
         for k in range(dim3):
             FinalData[j,i,k] = dataout.GetVal(i,k,j)
-            f.write('%8.5g\t %8.5g\t %8.5g\t %g\n' % (cgrid[j], Zmean[i], Zvar[k], FinalData[i,j,k]))
+            f.write('%8.5g\t %8.5g\t %8.5g\t %g\n' % (cgrid[j], Zmean[i], Zvar[k], FinalData[j,i,k]))
 f.close()
 print "\nFinal Data written to file: output/%s.txt \n\n" % options["OutputFile"][0]
 
