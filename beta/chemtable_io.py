@@ -58,12 +58,12 @@ if options["sort method"][0] == 'bubble':
     sorter = sorting.bubble_sort(filesmatC)
 elif options["sort method"][0] == 'standard': # need to test
     sorter = sorting.standard_sort(filesmatC)
-elif options["sort method"][0] == 'quick': # has speed issues
-    sorter = sorting.quick_sort(filesmatC)
+elif options["sort method"][0] == 'brute': # has speed issues
+    sorter = sorting.brute_sort(filesmatC)
 else:
     raise IOError("invalid sorting method (%s) specified, instead use <bubble> sort" % sortmethod)
 sorter.SetRefColNum(0)
-sorter.SetSortEndIndex(nofiles)
+sorter.SetSortEndIndex(nofiles-1)
 sorter.SetSortStartIndex(0)
 sorter.generateIndexArray()
 sorter.extractRefCol()

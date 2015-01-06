@@ -63,7 +63,7 @@ int brute_sort::sort_data(){
 	index = j;  
       }
     }
-    refColumn[index] = 9999999;
+    refColumn[index] = 999999;
     indices[i] = index;
     min_ = refColumn[i];
   }

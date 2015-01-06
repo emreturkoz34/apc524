@@ -54,12 +54,12 @@ def findC(datafiles, testspecies, bestC, options):
             sorter = sorting.bubble_sort(i)
         elif sortmethod == 'standard': # need to test
             sorter = sorting.standard_sort(i)
-        elif sortmethod == 'quick': # quick sort is very slow, test later
-            sorter = sorting.quick_sort(i)
+        elif sortmethod == 'brute':
+            sorter = sorting.brute_sort(i)
         else:
             raise IOError("invalid sorting method (%s) specified, instead use <bubble> sort" % sortmethod)
         sorter.SetRefColNum(0)
-        sorter.SetSortEndIndex(nofiles)
+        sorter.SetSortEndIndex(nofiles-1)
         sorter.SetSortStartIndex(0)
         sorter.generateIndexArray()
         sorter.extractRefCol()
