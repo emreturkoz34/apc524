@@ -1,5 +1,5 @@
 data file directory:	data_test
-test species:	Y-CO2	Y-H2	Y-OH	Y-CO	Y-H2O	
+test species:	Y-H2O	Y-CO2	Y-H2
 output file name:	data_out
 
 Zmean_grid:	201
