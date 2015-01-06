@@ -6,6 +6,7 @@ import matrix
 import sorting
 import monocheck
 import maxslope
+import leastnonmono
 
 def findC(datafiles, testspecies, bestC, options): 
 
@@ -90,8 +91,9 @@ def findC(datafiles, testspecies, bestC, options):
         # ^ Distinguish the best monotonic progress variables
     elif checksum == 0:
         # Least non-monotonic tests to be implemented in beta version
-        print "Finding least non-monotonic:"
-        monoAry[0] = 1
+        print "Finding least non-monotonic progress variable"
+        lnm_check = leastnonmono.SimpleLNM(progVar)
+        assert lnm_check.LeastNonMonotonic(monoAry, 0) == 0, "LeastNonMonotonic ran unsuccessfully.\n"
 
     # Print results
     monoAryflag = 0 

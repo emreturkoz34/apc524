@@ -147,12 +147,16 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     massfracs = np.genfromtxt(file, unpack=False, skip_header=2, delimiter = "\t", usecols = bestC[0])
     rxnrates = np.genfromtxt(file, unpack=False, skip_header=2, delimiter = "\t", usecols = rxn_rate_locs)
     if  len(massfracs) != ZPoints:
-        raise IOError("All file lengths must be the same")
+        raise IOError("All file lengths must be the same, file %s does not match" % file)
     progvar = np.zeros(ZPoints)
     rxnRates = np.zeros(ZPoints)
-    for i in range(len(massfracs)):
-        progvar[i] = massfracs[i,:].sum()
-        rxnRates[i] = rxnrates[i,:].sum()
+    if len(bestC[0]) == 1:
+        progvar[:] = massfracs[:]
+        rxnRates[:] = rxnrates[:]
+    else:
+        for i in range(len(massfracs)):
+            progvar[i] = massfracs[i,:].sum()
+            rxnRates[i] = rxnrates[i,:].sum()
     if progvar.max() > maxC:
         maxC = progvar.max()
     if rxnRates.max() > maxRate:
@@ -161,9 +165,6 @@ for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
     convolutedST[kk] = matrix.Matrix(ZvarPoints, ZmeanPoints)
     ConvReturn =  convolute.convVal_func(Z, progvar, pdfValM, convolutedC[kk], Intgr)
     ConvReturn =  convolute.convVal_func(Z, rxnRates, pdfValM, convolutedST[kk], Intgr)
-    #for i in range(ZvarPoints):
-    #    for j in range(ZmeanPoints):
-    #        print convolutedC[kk].GetVal(i,j),
 print "Convolution completed"
 print "Maximum value of progress variable is:", maxC
 
@@ -205,11 +206,9 @@ for j in range(lcgrid):
             FinalData[j,i,k] = dataout.GetVal(i,k,j)
             f.write('%8.5g\t %8.5g\t %8.5g\t %g\n' % (cgrid[j], Zmean[i], Zvar[k], FinalData[j,i,k]))
 f.close()
-print "\nFinal Data written to file: output/%s" % options["OutputFile"][0]
+print "\nFinal data written to file: output/%s" % options["OutputFile"][0]
 
-#iof.ContourPlot(Zmean,cgrid,FinalData,'contour')
-#y = Zmean
-#x = cgrid
+# Create contour plots of the chemical source term
 noplots = 10
 if ZvarPoints > (noplots + 1):
     plots = range(noplots)
@@ -231,14 +230,11 @@ for j in plots:
     plt.title('Source term (kg/m^3-s) vs. Zmean and C for Zvar = %5.3g' % Zvar[i])
     plt.xlabel('Zmean')
     plt.ylabel('C')
-    plt.colorbar(CS)
+    grid = pow(10,np.floor(np.log10(maxRate))-1) * np.ceil(maxRate / pow(10,np.floor(np.log10(maxRate))))
+    plt.colorbar(CS, ticks=np.arange(0,maxRate,grid))
     plt.savefig('output/contour_zvar_%.3g.pdf' % Zvar[i])
-
-print "%d Contour plots created in output directory \n" % noplots
+print "%d contour plots created in output directory \n" % noplots
 
 del convolutedC
 del convolutedST
-
-# Future functionality
-    # command line changes to arguments
 
