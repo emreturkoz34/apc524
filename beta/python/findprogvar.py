@@ -24,8 +24,10 @@ def findC(datafiles, testspecies, bestC, options):
             titles1 = dataobj.gettitles()
             np.testing.assert_array_equal(titles1,titles) # Verify that all data files have the same column headers
         dataobj.interpolate(testspecies, locs, interpdata[ii,:], interpval=float(options["StoichMassFrac"][0]), interpmethod="".join(options["InterpMethod"]))
+    filesmatrix[:,0] = interpdata[:,0]
     filesmatrix[:,2] = interpdata[:,0] # filesmatrix stores (row1) stoich prog var (row2) file indices (row3) stoich Temps
     filesmatrix[:,1] = range(nofiles)
+    print filesmatrix
     filesmatC = matrix.Matrix(nofiles,3)
     for i in range(nofiles):
         for j in range(3):
@@ -38,6 +40,7 @@ def findC(datafiles, testspecies, bestC, options):
 
     # Calculate progress variables
     progvars = np.dot(interpdata,combosmatrix)
+    print progvars
 
     # Generate progress variable matrix
     progVar = matrix.Matrix(nofiles, cs.totnumcoms(nocols-1)+1) 
@@ -136,5 +139,5 @@ def findC(datafiles, testspecies, bestC, options):
 
     # Write results
     for i in range(nofiles):
-        filesmatC.SetVal(i,0,progvars[i,bestC[2]])
+        filesmatC.SetVal(i,0,progVar.GetVal(i,bestC[2]))
     return filesmatC

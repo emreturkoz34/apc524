@@ -45,6 +45,16 @@ bestC = []
 nofiles = len(datafiles)  # Check to see if used later and maybe move
 filesmatC = fpv.findC(datafiles, testspecies, bestC, options)
 
+# Plot sorted stoich progress variable vs. stoich temperature
+Cst = [0] * nofiles
+Tst = [0] * nofiles
+for ii in range(nofiles):
+    Cst[ii] = filesmatC.GetVal(ii,0)
+    Tst[ii] = filesmatC.GetVal(ii,2)
+print Cst
+print Tst
+iof.plotCvT(Tst,Cst)
+
 # sort FILESMATRIX by progress variable
 if options["sort method"][0] == 'bubble':
     sorter = sorting.bubble_sort(filesmatC)
@@ -62,13 +72,7 @@ sorter.extractRefCol()
 sorter.sort_data()
 print "\nSorting filesmatrix by C using %s sort" % options["sort method"][0]
 
-# Plot sorted stoich progress variable vs. stoich temperature
-Cst = [0] * nofiles
-Tst = [0] * nofiles
-for ii in range(nofiles):
-    Cst[ii] = filesmatC.GetVal(ii,0)
-    Tst[ii] = filesmatC.GetVal(ii,2)
-iof.plotCvT(Tst,Cst)
+
 
 # Calculate PDF matrix
     # Get user inputs

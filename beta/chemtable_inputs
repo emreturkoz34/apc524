@@ -1,8 +1,8 @@
 data file directory:	data_test
-test species:	Y-H2O	Y-CO2	Y-H2
+test species:	Y-H2O	Y-H2	Y-CO2
 output file name:	data_out
 
-Zmean_grid:	201
+Zmean_grid:	51
 Zvar_max:	0.25
 Zvar_grid:	26
 
@@ -14,5 +14,5 @@ max slope test:	linear regression
 integrator:	trapezoid
 
 glq Number of Nodes:	10
-length Cgrid:	201
+length Cgrid:	61
 
