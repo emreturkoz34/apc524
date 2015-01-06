@@ -16,12 +16,14 @@ int DeltaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
   assert(pdfValM->GetNumDim2() == ZmeanPoints_);
   assert(pdfValM->GetNumDim3() == ZPoints);
 
-  double ZmeanVal;
+  double ZmeanVal, Weight;
   double *temp = new double[ZPoints];
 
   int i;
   for (int m = 0; m < ZmeanPoints_; m++) {
     ZmeanVal = Zmean_[m];
+
+    Weight = double(ZPoints) - 1;
 
     // resets points to 0
     for (int k = 0; k < ZPoints; k++) {
@@ -29,9 +31,9 @@ int DeltaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
     }
 
     if (ZmeanVal == 1) {
-      temp[ZPoints-1] = 1;
+      temp[ZPoints-1] = Weight * 1;
     } else if (ZmeanVal == 0) {
-      temp[0] = 1;
+      temp[0] = Weight * 1;
     } else {
       // finds location of ZmeanVal in Z
       i = 0;
@@ -41,10 +43,10 @@ int DeltaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 
       // calculates PDF
       if (i == 0) {
-	temp[0] = 1;
+	temp[0] = Weight * 1;
       } else {
-	temp[i-1] = (Z[i]  - ZmeanVal)  / (Z[i] - Z[i-1]);
-	temp[i]   = (ZmeanVal - Z[i-1]) / (Z[i] - Z[i-1]);
+	temp[i-1] = Weight * (Z[i]  - ZmeanVal)  / (Z[i] - Z[i-1]);
+	temp[i]   = Weight * (ZmeanVal - Z[i-1]) / (Z[i] - Z[i-1]);
       }
     }
 

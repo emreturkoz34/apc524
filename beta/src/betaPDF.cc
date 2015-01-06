@@ -20,7 +20,7 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
   assert(pdfValM->GetNumDim3() == ZPoints);
 
   double *temp = new double[ZPoints];
-  double ZvarVal, ZmeanVal;
+  double ZvarVal, ZmeanVal, Weight;
   double alpha, beta, factor;
   double dz, lnpdf, pdf1, pdf2, f;
   double sum;
@@ -38,6 +38,8 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
     for (int m = 0; m < ZmeanPoints_; m++) {
       ZmeanVal = Zmean_[m];
 
+      Weight = double(ZPoints) - 1;
+
       // resets points to 0
       for (int k = 0; k < ZPoints; k++) {
 	temp[k] = 0;
@@ -45,9 +47,9 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 
       /// check for Min or Max mean
       if (ZmeanVal == 1) {
-	temp[ZPoints-1] = 1;
+	temp[ZPoints-1] = Weight * 1;
       } else if (ZmeanVal == 0) {
-	temp[0] = 1;
+	temp[0] = Weight * 1;
 
 	/// Delta PDF for zero variance
       } else if (ZvarVal == 0) {
@@ -55,13 +57,13 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 	while (Z[i] < ZmeanVal) {
 	  i = i+1;
 	}
-	temp[i-1] = (Z[i]  - ZmeanVal)  / (Z[i] - Z[i-1]);
-	temp[i]   = (ZmeanVal - Z[i-1]) / (Z[i] - Z[i-1]);
+	temp[i-1] = Weight * (Z[i]  - ZmeanVal)  / (Z[i] - Z[i-1]);
+	temp[i]   = Weight * (ZmeanVal - Z[i-1]) / (Z[i] - Z[i-1]);
 
 	/// Impossible cases: becomes double delta PDF
       } else if (ZvarVal >= ZmeanVal*(1-ZmeanVal)) {
-	temp[0] = 1-ZmeanVal;
-	temp[ZPoints-1] = ZmeanVal;
+	temp[0] = Weight * (1-ZmeanVal);
+	temp[ZPoints-1] = Weight * ZmeanVal;
 
 	/// BetaPDF
       } else {
