@@ -125,8 +125,8 @@ int main(){
   /* Indicate the sorting class used  */
 
   //sorting* sort_alg = new brute_sort(data); 
-  //sorting* sort_alg = new standard_sort(data);
-  sorting* sort_alg = new quick_sort(data);
+  sorting* sort_alg = new standard_sort(data);
+  // sorting* sort_alg = new quick_sort(data);
   //sorting* sort_alg = new bubble_sort(data);
 
   /* Sorting settings and required functions */
