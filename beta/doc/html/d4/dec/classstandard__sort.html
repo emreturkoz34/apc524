@@ -64,21 +64,35 @@ Inheritance diagram for standard_sort:</div>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af40099379c12e092519a20afbad5c6b9"></a><!-- doxytag: member="standard_sort::~standard_sort" ref="af40099379c12e092519a20afbad5c6b9" args="()" -->
 &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/classstandard__sort.html#af40099379c12e092519a20afbad5c6b9">~standard_sort</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a34a0d914ebac6e328dfe371a1e1a8afb"></a><!-- doxytag: member="standard_sort::sort_data" ref="a34a0d914ebac6e328dfe371a1e1a8afb" args="()" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/classstandard__sort.html#a34a0d914ebac6e328dfe371a1e1a8afb">sort_data</a> ()</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Main <a class="el" href="../../df/d42/classsorting.html">sorting</a> body. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/classstandard__sort.html#a34a0d914ebac6e328dfe371a1e1a8afb">sort_data</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Main function that sorts the given data.  <a href="#a34a0d914ebac6e328dfe371a1e1a8afb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5bf11721c6c6147440c68409b830a31a"></a><!-- doxytag: member="standard_sort::SetRefColNum" ref="a5bf11721c6c6147440c68409b830a31a" args="(int num)" -->
 void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/classstandard__sort.html#a5bf11721c6c6147440c68409b830a31a">SetRefColNum</a> (int num)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the reference column number. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95aea45100dcdc939bfd51e98eefb202"></a><!-- doxytag: member="standard_sort::extractRefCol" ref="a95aea45100dcdc939bfd51e98eefb202" args="()" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>extractRefCol</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af04627915438ee94f478b191fad170c3"></a><!-- doxytag: member="standard_sort::generateIndexArray" ref="af04627915438ee94f478b191fad170c3" args="()" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>generateIndexArray</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adad870016b4f87670dfb333f9923126c"></a><!-- doxytag: member="standard_sort::SetSortStartIndex" ref="adad870016b4f87670dfb333f9923126c" args="(int left)" -->
-void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SetSortStartIndex</b> (int left)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af52b283cc00932d6040282126c90f497"></a><!-- doxytag: member="standard_sort::SetSortEndIndex" ref="af52b283cc00932d6040282126c90f497" args="(int right)" -->
-void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SetSortEndIndex</b> (int right)</td></tr>
 </table>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a34a0d914ebac6e328dfe371a1e1a8afb"></a><!-- doxytag: member="standard_sort::sort_data" ref="a34a0d914ebac6e328dfe371a1e1a8afb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int standard_sort::sort_data </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Main function that sorts the given data. </p>
+<p>The algorithm sends the reference column to the standard <a class="el" href="../../df/d42/classsorting.html">sorting</a> operator that is embedded into the C++ standard library </p>
+
+<p>Implements <a class="el" href="../../df/d42/classsorting.html#a94c4b729732743299f3dcd2505312381">sorting</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="../../db/d68/standard__sort_8h_source.html">standard_sort.h</a></li>
 <li>src/standard_sort.cc</li>
