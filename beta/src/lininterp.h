@@ -4,10 +4,10 @@
 #include "interpolator.h"
 
 class LinInterp : public Interpolator {
-	public: 
-		LinInterp();
-		~LinInterp();
-		int Interp(const Matrix *matin, int col, double ival, double *vecout, int cols);
+ public: 
+  LinInterp();
+  ~LinInterp();
+  int Interp(const Matrix *matin, int col, double ival, double *vecout, int cols);
 };
 
 #endif // LININTERP_H_
