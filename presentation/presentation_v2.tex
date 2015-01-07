@@ -40,11 +40,12 @@ Emre Turkoz}
 
 \section{Introduction}
 \begin{frame}{Introduction}
+Flamelet Modeling for Tubulent Combustion Simulations:
 \begin{figure}
 \includegraphics[width=\textwidth]{scope.pdf}
 \end{figure}
-\vskip 5mm
-Key Capabilities:
+%\vskip 2mm
+Key Data Processing Capabilities:
 \begin{itemize}
 \item Sorting
 \item Monotonicity checking
@@ -54,7 +55,8 @@ Key Capabilities:
 \vspace{12pt}
 SWIG is used to interface C++ and Python.\\
 Git is used for version control.\\
-Doxygen is used for documentation.
+Doxygen is used for documentation.\\ %% Remove ?
+Python Unittest is used for automated testing.
 \end{frame}
 
 
@@ -84,8 +86,42 @@ Doxygen is used for documentation.
 \section{Modules}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Python: User Interface}
-\begin{frame}{Python: User Interface}
+
+\subsection{Python: User Interface and Wrapper}
+\begin{frame}{Python: User Interface and Wrapper}
+Python files:
+%\begin{itemize}
+\begin{itemize}
+\item chemtable\_io.py: Main program run by user: processes inputs, calls findprogvar.py and C++ functions, and generates ouput %%MAKE THESE TITLES BOLD OR ITALIC
+\item findprogvar.py: contains function that determines the best progress variable, calls C++ functions
+\item iofuncs.py: contains functions used by the above for text processing
+\item combinations.py: contains helper functions used by findprogvar.py
+\end{itemize}
+Inputs:
+\begin{itemize}
+\item chemtable\_inputs: text file containing input options from user
+\item flamelet(.kg) data files: stored in a directory specified in the input file
+\end{itemize}
+User specified inputs stored in a Python dictionary
+
+Outputs:
+\begin{itemize}
+\item data\_out: text file containing processed chemical source term data
+\item CvsTemp.pdf: plot of the chosen progress variable vs. temperature
+\item contour\_zvar\_XXX.pdf: contour plots of the chemical source term
+\end{itemize}
+%\item chemtable_io.py:
+%\item findprogvar.py:
+%\item iofuncs.py:
+%\item combinations.py:
+%\end{itemize}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Python/C++ Interface Using SWIG}
+\begin{frame}{Python/C++ Interface Using SWIG}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{python_swig_c++.pdf}
@@ -94,7 +130,8 @@ Doxygen is used for documentation.
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\subsection{Modules: Matrix/Matrix3D/Matrix4D}
 %\begin{frame}{Modules: Matrix/Matrix3D/Matrix4D}
 %Matrix.h/.i, Matrix3D.h/.i, Matrix4d.h/.i
@@ -124,9 +161,12 @@ Doxygen is used for documentation.
 \end{frame}
 
 
+\section{Conclusions}
+
+\begin{frame}{Conclusions}
 
 
-
+\end{frame}
 
 
 
