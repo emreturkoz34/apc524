@@ -155,10 +155,10 @@ def findC(datafiles, testspecies, bestC, options):
         for jj in range(length-1):
             for ii in range(nofiles):
                 Cst[ii] = progVar.GetVal(ii,jj+1)
-            otherplt = plt.plot(Tst, Cst, color='r', marker='none')
+            otherplt, = plt.plot(Tst, Cst, color='r')
     for ii in range(nofiles):
         Cst[ii] = filesmatC.GetVal(ii,0)
-    bestplt = plt.plot(Tst, Cst, color='k', marker='o', markerfacecolor='none')
+    bestplt, = plt.plot(Tst, Cst, color='k', marker='o', markerfacecolor='none')
     if options["PlotAllC"][0] == 'yes':    
         plt.legend([bestplt, otherplt],['Best progress variable','Other candidate progress variables'])
     plt.xlabel("T (K)")
