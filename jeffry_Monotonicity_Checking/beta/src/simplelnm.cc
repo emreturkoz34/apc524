@@ -9,10 +9,10 @@
    percentage of increasing or decreasing values is the least
    non-monotonic progress variable. 
 
-   If two progress variables share the highest percentages, then the
-   progress variable which comes earlier in progVar is
-   selected. Progress variables with neither increasing nor decreasing
-   data are considered strongly non-monotonic.
+   If two or more progress variables share the highest percentage,
+   then the progress variable with the greatest magnitude slope (by
+   endpoints) is selected. Progress variables with neither increasing
+   nor decreasing data are considered strongly non-monotonic.
  */
 #include <assert.h>
 #include <stdlib.h>
@@ -97,12 +97,15 @@ int SimpleLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
 	  largest[j] = decreasing_[j];
 	}
 	else { // increasing_[j] == decreasing_[j])
+	  largest[j] = increasing_[j];
+	  /*
 	  if (increasing_[j] > 1.0/3.0) {
 	    largest[j] = increasing_[j];
 	  }
 	  else { // Progress variable dominated by constant values
 	    largest[j] = 0.0;
 	  }
+	  */
 	}
       }
 
@@ -111,6 +114,7 @@ int SimpleLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
     else { // Reference column
       increasing_[j] = 0.0;
       decreasing_[j] = 0.0;
+      largest[j] = 0.0;
     }
   }
 
@@ -125,14 +129,16 @@ int SimpleLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
     }
   }
 
-  // Check if any two or more progress variables share the same maximum percentage. If so, the progress variable with the largest magnitude slope is the least non-monotonic progress variable.
+  // Check if any two or more progress variables share the same
+  // maximum percentage. If so, the progress variable with the largest
+  // magnitude slope is the least non-monotonic progress variable.
 
   int *maxpercent = new int[ncols]; // Used to store/mark all progress variable which share the maximum percentage with a value of 1; all other progress variables are marked with 0
   int count = 0; // Keep track of number of progress variables which share the maximum percentage
 
   for (int j=0; j<ncols; ++j) {
     maxpercent[j] = 0; // Initialize maxpercent
-    if (largest[j] == maximum) {
+    if (j != col && largest[j] == maximum) {
       maxpercent[j] = 1; // Mark progress variables which have the maximum percentage
       count = count + 1;
     }
@@ -160,8 +166,6 @@ int SimpleLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
     delete [] slopes;
   }
   
-  
-
   assert(index >= 0 && "All progress variables are mainly constant.\n");
 
   // Rewrite monoAry to have a value of 1 for the least non-monotonic

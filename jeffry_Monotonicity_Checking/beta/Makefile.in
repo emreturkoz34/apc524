@@ -8,7 +8,7 @@ MODDIR	= $(HOMEDIR)/mod
 # Files
 MATRIX	= matrix matrix3d
 MAXSLOPE	= endpointslope linregression
-LNM	= simplelnm #advancedlnm
+LNM	= simplelnm advancedlnm
 OTHER	= monocheck
 
 # Classes

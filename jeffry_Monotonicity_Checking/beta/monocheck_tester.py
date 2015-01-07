@@ -133,10 +133,10 @@ for j in range(cols):
         print "%6.3f" % monoAry2[j], #Print output array filled with 0s and one 1
 print("\n")
 
-#lnmchecker2 = leastnonmono.AdvancedLNM(progVar2) #Create AdvancedLNM object
-#assert lnmchecker2.LeastNonMonotonic(monoAryCpy2, 0) == 0, "LeastNonMonotonic ran unsuccessfully.\n" #Distinguish the least non-monotonic progress variable
+lnmchecker2 = leastnonmono.AdvancedLNM(progVar2) #Create AdvancedLNM object
+assert lnmchecker2.LeastNonMonotonic(monoAryCpy2, 0) == 0, "LeastNonMonotonic ran unsuccessfully.\n" #Distinguish the least non-monotonic progress variable
 
-#print("Best C by advanced least non-monotonic method indicated:\n")
-#for j in range(cols):
-#        print "%6.3f" % monoAryCpy2[j], #Print output array filled with 0s and one 1
-#print("\n")
+print("Best C by advanced least non-monotonic method indicated:\n")
+for j in range(cols):
+        print "%6.3f" % monoAryCpy2[j], #Print output array filled with 0s and one 1
+print("\n")

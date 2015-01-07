@@ -100,6 +100,24 @@ class SimpleLNM(LeastNonMono):
 SimpleLNM_swigregister = _leastnonmono.SimpleLNM_swigregister
 SimpleLNM_swigregister(SimpleLNM)
 
+class AdvancedLNM(LeastNonMono):
+    __swig_setmethods__ = {}
+    for _s in [LeastNonMono]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, AdvancedLNM, name, value)
+    __swig_getmethods__ = {}
+    for _s in [LeastNonMono]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, AdvancedLNM, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _leastnonmono.new_AdvancedLNM(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _leastnonmono.delete_AdvancedLNM
+    __del__ = lambda self : None;
+    def LeastNonMonotonic(self, *args): return _leastnonmono.AdvancedLNM_LeastNonMonotonic(self, *args)
+AdvancedLNM_swigregister = _leastnonmono.AdvancedLNM_swigregister
+AdvancedLNM_swigregister(AdvancedLNM)
+
 # This file is compatible with both classic and new-style classes.
 
 
