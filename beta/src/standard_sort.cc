@@ -5,7 +5,7 @@ typedef std::vector<size_t> index_vec_t;
 
 
 
-/// Sequence generator
+/// Sequence generator for the standard sorting algorithm
 class SequenceGen {
 public:
   SequenceGen (int start = 0) : current(start) { }
@@ -16,7 +16,7 @@ private:
 
 
 
-/// Comparator for the sorting algorithm
+/// Comparator for the standard sorting algorithm
 class CompVec{
   double * arr_;
 public:
@@ -56,7 +56,10 @@ void standard_sort::SetRefColNum(int num){
   refColNum_ = num;
 }
 
-/// Main sorting body
+/// Main function that sorts the given data
+/*!
+  The algorithm sends the reference column to the standard sorting operator that is embedded into the C++ standard library
+ */
 int standard_sort::sort_data(){
 
   index_vec_t indices(nrows_);

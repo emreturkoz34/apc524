@@ -70,10 +70,6 @@ def findC(datafiles, testspecies, bestC, options):
         else:
             raise IOError("invalid sorting method (%s) specified, instead use <bubble> sort" % sortmethod)
         sorter.SetRefColNum(0)
-        sorter.SetSortEndIndex(nofiles-1)
-        sorter.SetSortStartIndex(0)
-        sorter.generateIndexArray()
-        sorter.extractRefCol()
         sorter.sort_data()
     print "Sorting FILESMATRIX by temperature"
 

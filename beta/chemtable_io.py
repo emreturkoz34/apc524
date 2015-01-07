@@ -56,10 +56,6 @@ elif options["sort method"][0] == 'brute': # has speed issues
 else:
     raise IOError("invalid sorting method (%s) specified, instead use <bubble> sort" % sortmethod)
 sorter.SetRefColNum(0)
-sorter.SetSortEndIndex(nofiles-1)
-sorter.SetSortStartIndex(0)
-sorter.generateIndexArray()
-sorter.extractRefCol()
 sorter.sort_data()
 print "\nSorting filesmatrix by C using %s sort" % options["sort method"][0]
 
