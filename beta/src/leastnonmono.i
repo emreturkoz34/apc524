@@ -3,6 +3,7 @@
 #define SWIG_FILE_WITH_INIT
 #include "leastnonmono.h"
 #include "simplelnm.h"
+#include "advancedlnm.h"
 %}
 
 %include "numpy.i"
@@ -14,3 +15,4 @@
 
 %include "leastnonmono.h"
 %include "simplelnm.h"
+%include "advancedlnm.h"

@@ -13,7 +13,7 @@ INTGR	= trapz simpson glquad
 INTRP	= #lininterp
 SORT	= bubble_sort standard_sort brute_sort
 SLOPE	= endpointslope linregression
-NONMONO	= simplelnm
+NONMONO	= simplelnm advancedlnm
 OTHER	= convolute #fittogrid
 
 # Classes
