@@ -4,7 +4,9 @@ output file name:	data_out
 plot all progress variables:	
 skip progress variable optimization:	no
 
-Zmean_grid:	51
+number of threads:	1
+
+Zmean_grid:	201
 Zvar_max:	0.25
 Zvar_grid:	26
 
@@ -16,6 +18,6 @@ max slope test:	linear regression
 integrator:	trapezoid
 
 glq Number of Nodes:	10
-length Cgrid:	61
+length Cgrid:	201
 
 

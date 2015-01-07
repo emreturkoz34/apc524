@@ -40,6 +40,7 @@ options["LCgrid"] = iof.read_input("length Cgrid:", inputs, minargs=0, default=[
 options["OutputFile"] = iof.read_input("output file name:", inputs, minargs=0, default=['data_output'])
 options["PlotAllC"] = iof.read_input("plot all progress variables:", inputs, minargs=0, default=['yes'])
 options["SkipProgVar"] = iof.read_input("skip progress variable optimization:", inputs, minargs=0, default=['no'])
+options["nothreads"] = iof.read_input("number of threads:", inputs, minargs=0, default=[1])
 
 # find best progress variable
 bestC = []
@@ -185,7 +186,7 @@ for i in range(2):
                     datain.SetVal(i,j,k,l,convolutedC[l].GetVal(k,j))
 
 # Run fit to grid and print results
-f2gflag = fittogrid.fittogrid_func(datain, cgrid, interp, dataout)
+f2gflag = fittogrid.fittogrid_func(datain, cgrid, interp, dataout, int(options["nothreads"][0]))
 if f2gflag == 1:
     print("WARNING: extrapolating to fit to cgrid")
 FinalData = np.zeros((lcgrid, dim2, dim3))
