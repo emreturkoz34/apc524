@@ -56,7 +56,7 @@ int MonoCheck::CheckStrictMonoticity(int *monoAry, const int ncols, int col){
 			    // the previous element
 
       for (int i=1; i<nrows_; ++i) {
-	if (monoDomain[i] >= monoDomain[i-1]) {
+	if (monoDomain[i] > monoDomain[i-1]) {
 	  if (progVarCol[i] > progVarCol[i-1]) {
 	    biggerCount = biggerCount + 1;
 	  }
@@ -67,7 +67,7 @@ int MonoCheck::CheckStrictMonoticity(int *monoAry, const int ncols, int col){
 	  }
 	}
 	else {
-	  printf("Column %d is not sorted in increasing order.\n", col);
+	  printf("Column %d is not sorted in strictly increasing order.\n", col)
 	  exit(1);
 	}
       }
