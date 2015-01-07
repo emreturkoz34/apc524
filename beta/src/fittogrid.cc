@@ -44,22 +44,22 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
   }
 
   // For a point for which we tried to extrapolate, set the value of that point to
-  // the value of the point which is nearest in (z~, c~) space.
+  // the value of the point which is nearest in (z~, z_v) space.
   int dist = 0;
-  int distmin = dim2*dim2 + lcgrid*lcgrid;
+  int distmin = dim2*dim2 + dim3*dim3;
   double extrapval = 0;
   for (int i = 0; i < dim2; ++i) {
     for (int j = 0; j < dim3; ++j) {
       for (int k = 0; k < lcgrid; ++k) {
 	if (extrap->GetVal(i, j, k) == 1) {
-	  distmin = dim2*dim2 + lcgrid*lcgrid;
+	  distmin = dim2*dim2 + dim3*dim3;
 	  extrapval = 0;
 	  for (int m = 0; m < dim2; ++m) {
-	    for (int n = 0; n < lcgrid; ++n) {
-	      if (extrap->GetVal(m, j, n) == 0) {
-		dist = (m - i)*(m - i) + (n - k)*(n - k);
+	    for (int n = 0; n < dim3; ++n) {
+	      if (extrap->GetVal(m, n, k) == 0) {
+		dist = (m - i)*(m - i) + (n - j)*(n - j);
 		if (dist < distmin) {
-		  extrapval = dataout->GetVal(m, j, n);
+		  extrapval = dataout->GetVal(m, n, k);
 		  distmin = dist;
 		}
 	      }
