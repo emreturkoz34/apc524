@@ -1,6 +1,6 @@
 #include "fittogrid.h"
 
-int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matrix3D *dataout) {
+int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matrix3D *dataout, int nthreads = 1) {
   // Assume datain is 4d matrix (mean, z~, z_v, file)
   // mean has dimension 2, contains w~ and c~
   // Interpolate w~ at c~ values given by cgrid input
@@ -45,32 +45,37 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
 
   // For a point for which we tried to extrapolate, set the value of that point to
   // the value of the point which is nearest in (z~, c~) space.
-  int dist = 0;
-  int distmin = dim2*dim2 + lcgrid*lcgrid;
-  double extrapval = 0;
-  for (int i = 0; i < dim2; ++i) {
-    for (int j = 0; j < dim3; ++j) {
-      for (int k = 0; k < lcgrid; ++k) {
-	if (extrap->GetVal(i, j, k) == 1) {
-	  distmin = dim2*dim2 + lcgrid*lcgrid;
-	  extrapval = 0;
-	  for (int m = 0; m < dim2; ++m) {
-	    for (int n = 0; n < lcgrid; ++n) {
-	      if (extrap->GetVal(m, j, n) == 0) {
-		dist = (m - i)*(m - i) + (n - k)*(n - k);
-		if (dist < distmin) {
-		  extrapval = dataout->GetVal(m, j, n);
-		  distmin = dist;
+  omp_set_num_threads(nthreads); // set the number of threads
+#pragma omp parallel
+  {
+    int dist = 0;
+    int distmin = dim2*dim2 + lcgrid*lcgrid;
+    double extrapval = 0;
+#pragma omp for
+    for (int i = 0; i < dim2; ++i) {
+      for (int j = 0; j < dim3; ++j) {
+	for (int k = 0; k < lcgrid; ++k) {
+	  if (extrap->GetVal(i, j, k) == 1) {
+	    distmin = dim2*dim2 + lcgrid*lcgrid;
+	    extrapval = 0;
+	    for (int m = 0; m < dim2; ++m) {
+	      for (int n = 0; n < lcgrid; ++n) {
+		if (extrap->GetVal(m, j, n) == 0) {
+		  dist = (m - i)*(m - i) + (n - k)*(n - k);
+		  if (dist < distmin) {
+		    extrapval = dataout->GetVal(m, j, n);
+		    distmin = dist;
+		  }
 		}
 	      }
 	    }
+	    dataout->SetVal(i, j, k, extrapval);
 	  }
-	  dataout->SetVal(i, j, k, extrapval);
 	}
       }
     }
   }
-
+ 
   delete tmat;
   delete extrap;
   return flag1;
