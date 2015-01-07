@@ -99,11 +99,11 @@ progVar2.SetVal(3, 2, 4.0);
 progVar2.SetVal(4, 2, 3.0);
 
 # Set column 3 (progress variable 3)
-progVar2.SetVal(0, 3, 6.0);
+progVar2.SetVal(0, 3, 1.0);
 progVar2.SetVal(1, 3, 7.0);
-progVar2.SetVal(2, 3, 5.0);
-progVar2.SetVal(3, 3, 3.0);
-progVar2.SetVal(4, 3, 4.0);
+progVar2.SetVal(2, 3, 9.0);
+progVar2.SetVal(3, 3, 11.0);
+progVar2.SetVal(4, 3, 8.0);
 
 #***Print out matrix progVar2 to ensure proper initialization of values***
 print("Test matrix:\n")

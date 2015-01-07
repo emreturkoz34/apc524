@@ -14,8 +14,6 @@
    selected. Progress variables with neither increasing nor decreasing
    data are considered strongly non-monotonic.
  */
-#include "simplelnm.h"
-
 #include <assert.h>
 #include <stdlib.h>
 #include <cmath>
@@ -118,7 +116,7 @@ int SimpleLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
 
   // Find progress variable with largest percentage & store index of location
   double maximum = 0.0; // Stores value of maximum percentage
-  int index = -1; // Stores location of high percentage
+  int index = -1; // Stores location of largest percentage
 
   for (int j=0; j<ncols; ++j) {
     if(j != col && largest[j] > maximum) {
@@ -126,6 +124,43 @@ int SimpleLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
       index = j;
     }
   }
+
+  // Check if any two or more progress variables share the same maximum percentage. If so, the progress variable with the largest magnitude slope is the least non-monotonic progress variable.
+
+  int *maxpercent = new int[ncols]; // Used to store/mark all progress variable which share the maximum percentage with a value of 1; all other progress variables are marked with 0
+  int count = 0; // Keep track of number of progress variables which share the maximum percentage
+
+  for (int j=0; j<ncols; ++j) {
+    maxpercent[j] = 0; // Initialize maxpercent
+    if (largest[j] == maximum) {
+      maxpercent[j] = 1; // Mark progress variables which have the maximum percentage
+      count = count + 1;
+    }
+  }
+
+  if (count > 1) { // If count = 1, then index = j as previously found
+    double *slopes = new double[ncols];
+    double maxSlope = -1.0; // Store value of greatest slope
+    int indexmaxslope = -1; // Store location of greatest slope
+
+    for (int j=0; j<ncols; ++j) {
+      if (maxpercent[j] == 1) {
+	slopes[j] = std::abs((progVar_.GetVal(nrows_-1, j) - progVar_.GetVal(0, j))/nrows_); // Calculate the magnitude of the slope of the progress variable using endpoints
+	if (slopes[j] > maxSlope) {
+	  maxSlope = slopes[j];
+	  indexmaxslope = j;
+	}
+      }
+      else {
+	slopes[j] = -1.0; // Progress variable isn't considered
+      }
+    }
+
+    index = indexmaxslope; // Set location to progress variable with largest magnitude slope
+    delete [] slopes;
+  }
+  
+  
 
   assert(index >= 0 && "All progress variables are mainly constant.\n");
 
@@ -135,6 +170,7 @@ int SimpleLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
 
   delete [] monoDomain;
   delete [] largest;
+  delete [] maxpercent;
 
   return 0;
 }
