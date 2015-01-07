@@ -1,4 +1,4 @@
-data file directory:	data
+data file directory:	data_test
 test species:	Y-H2O	Y-H2	Y-CO2
 output file name:	data_out
 plot all progress variables:	

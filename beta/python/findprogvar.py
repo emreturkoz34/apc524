@@ -146,8 +146,8 @@ def findC(datafiles, testspecies, bestC, options):
         filesmatC.SetVal(i,0,progVar.GetVal(i,bestC[2]))
 
     # Plot results
-    Cst = [0] * nofiles
-    Tst = [0] * nofiles
+    Cst = np.zeros(nofiles)
+    Tst = np.zeros(nofiles)
     plt.figure()
     for ii in range(nofiles):
         Tst[ii] = progVar.GetVal(ii,0)
@@ -155,14 +155,16 @@ def findC(datafiles, testspecies, bestC, options):
         for jj in range(length-1):
             for ii in range(nofiles):
                 Cst[ii] = progVar.GetVal(ii,jj+1)
+            Cst = Cst/Cst.max()
             otherplt, = plt.plot(Tst, Cst, color='r')
     for ii in range(nofiles):
         Cst[ii] = filesmatC.GetVal(ii,0)
+    Cst = Cst/Cst.max()
     bestplt, = plt.plot(Tst, Cst, color='k', marker='o', markerfacecolor='none')
     if options["PlotAllC"][0] == 'yes':    
-        plt.legend([bestplt, otherplt],['Best progress variable','Other candidate progress variables'])
+        plt.legend([bestplt, otherplt],['Best progress variable','Other candidate progress variables'], loc='lower right')
     plt.xlabel("T (K)")
-    plt.ylabel("C")
+    plt.ylabel("Normalized Progress Variable (C/Cmax)")
     plt.title("Best Progress Variable")
     if skip == 'yes':
         plt.title("User-selected progress variable")
