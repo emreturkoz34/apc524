@@ -1,0 +1,5 @@
+PROFILING CASES:
+prof_Xthr: Zmean by C grid 201x201, 26 Zvar points
+prof_4thr_ZmeanXXX: C grid 201 points, 26 Zvar Points
+prof_4thr_CgridXXX: Zmean 201 points, 26 Zvar Points
+prof_4thr_ZvarXX: Zmean by C grid 201x201

@@ -1,0 +1,16 @@
+set term postscript color enhanced "Helvectica, 27"
+
+set logscale
+
+set nokey
+
+set xlabel 'Threads'
+set ylabel 'Time [s]'
+set output 'plot_threads.pdf'
+
+# Key or Legend
+set nokey
+
+set style line 1 lt 1 lw 4 ps 6 lc rgb "dark-green"
+
+p 'prof_thr' u 1:2 w lp ls 3

@@ -1,0 +1,20 @@
+set term postscript color enhanced "Helvectica, 27"
+
+set logscale
+
+set nokey
+
+set xlabel 'Grid Size'
+set ylabel 'Time [s]'
+set output 'plot_gridsizes.pdf'
+
+# Key or Legend
+set key bottom right samplen 1.5   # Moves key, adjusts key length
+
+set style line 1 lt 1 lw 4 ps 6 lc rgb "dark-green"
+set style line 2 lt 2 lw 4 ps 6 lc rgb "blue"      # hexidecimal color
+set style line 3 lt 2 lw 4 ps 6 lc rgb "red"      # hexidecimal color
+
+p 'prof_Cgrid' u 1:2 w lp ls 3 t 'C',\
+  'prof_Zmean' u 1:2 w lp ls 2 t 'Zmean',\
+  'prof_Zvar' u 1:2 w lp ls 1 t 'Zvar'
