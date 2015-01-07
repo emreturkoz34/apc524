@@ -33,10 +33,19 @@ def findC(datafiles, testspecies, bestC, options):
         for j in range(3):
             filesmatC.SetVal(i,j,filesmatrix[i,j])
 
-    # Generate combinations matrix
-    combosmatrix = np.zeros((nocols,cs.totnumcoms(nocols-1)+1))
+    # Generate combinations matrix - skip this step if user input says to
+    skip = options["SkipProgVar"][0]
+    assert ((skip == 'yes') | (skip == 'no')), "must select input <yes> or <no> for <skip progress variable optimization:>"
+    if skip == 'no':
+        combosmatrix = np.zeros((nocols,cs.totnumcoms(nocols-1)+1))
+        cs.combination_mat(combosmatrix[1:,1:])
+    else:
+        print "Skipping progress variable optimization, using user input"
+        options["PlotAllC"][0] = 'no'
+        combosmatrix = np.zeros((nocols,2))
+        for i in range(nocols-1):
+            combosmatrix[i+1,1] = 1
     combosmatrix[0,0] = 1
-    cs.combination_mat(combosmatrix[1:,1:])
 
     # Calculate progress variables
     progvars = np.dot(interpdata,combosmatrix)
@@ -105,7 +114,7 @@ def findC(datafiles, testspecies, bestC, options):
                 raise RuntimeError("Error in contents of monoAry vector: multiple best selected.\n")
             monoAryflag = 2
             bestC[:] = iof.get_progvar(combosmatrix[1:,i], testspecies, locs, i)
-            print 'The best strictly monotonic progress variable is C = %s' % bestC[1][0], 
+            print 'The chosen progress variable is C = %s' % bestC[1][0], 
             for j in bestC[1][1:]:
                 print "+ %s" % j,
             print '\nThe column numbers of these species are ', bestC[0],', respectively.\n'
@@ -159,6 +168,8 @@ def findC(datafiles, testspecies, bestC, options):
     plt.xlabel("T (K)")
     plt.ylabel("C")
     plt.title("Best Progress Variable")
+    if skip == 'yes':
+        plt.title("User-selected progress variable")
     plt.savefig("output/%s.pdf" % 'CvsTemp')
     plt.clf()
 

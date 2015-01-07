@@ -1,7 +1,8 @@
-data file directory:	data_test
+data file directory:	data
 test species:	Y-H2O	Y-H2	Y-CO2
 output file name:	data_out
 plot all progress variables:	
+skip progress variable optimization:	no
 
 Zmean_grid:	51
 Zvar_max:	0.25

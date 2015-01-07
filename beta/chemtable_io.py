@@ -39,6 +39,7 @@ options["Integrator"] = iof.read_input("integrator:", inputs, minargs=0, default
 options["LCgrid"] = iof.read_input("length Cgrid:", inputs, minargs=0, default=[20])
 options["OutputFile"] = iof.read_input("output file name:", inputs, minargs=0, default=['data_output'])
 options["PlotAllC"] = iof.read_input("plot all progress variables:", inputs, minargs=0, default=['yes'])
+options["SkipProgVar"] = iof.read_input("skip progress variable optimization:", inputs, minargs=0, default=['no'])
 
 # find best progress variable
 bestC = []
