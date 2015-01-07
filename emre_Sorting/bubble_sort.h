@@ -17,13 +17,6 @@ class bubble_sort : public sorting {
   int sort_data();
   void SetRefColNum(int num);
 
-  int extractRefCol();
-  int generateIndexArray();
-
-
-  // unnecessary functions sorting.h
-  void SetSortStartIndex(int left){};
-  void SetSortEndIndex(int right){};
 
  private:
   Matrix* data_;

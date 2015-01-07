@@ -38,13 +38,13 @@ brute_sort::~brute_sort(){
   delete datacopy_;
 }
 
-// Set the reference column number
+/// Set the reference column number
 void brute_sort::SetRefColNum(int num){
   refColNum_ = num;
 }
 
 
-// Main sorting body
+/// Main sorting body
 int brute_sort::sort_data(){
   double *refColumn = new double[nrows_];
   int *indices = new int[nrows_];
@@ -63,7 +63,7 @@ int brute_sort::sort_data(){
 	index = j;  
       }
     }
-    refColumn[index] = 999999;
+    refColumn[index] = 999999; // a value that is high enough
     indices[i] = index;
     min_ = refColumn[i];
   }

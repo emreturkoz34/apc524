@@ -132,11 +132,6 @@ int main(){
   /* Sorting settings and required functions */
 
   sort_alg -> SetRefColNum(0);
-  sort_alg -> SetSortEndIndex(9); 
-  sort_alg -> SetSortStartIndex(0);
-  sort_alg -> generateIndexArray();
-  sort_alg -> extractRefCol();
-
   /* Main routine  */
   sort_alg -> sort_data();
 

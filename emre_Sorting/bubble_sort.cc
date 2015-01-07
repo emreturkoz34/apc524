@@ -9,12 +9,20 @@ bubble_sort::bubble_sort(Matrix *data){
   data_ = data;
   datacopy_ = new Matrix(nrows_, ncols_); // duplicate data
 
+  // Copy the data to the duplicate container
   for(int i = 0; i<nrows_; i++){
     for(int j = 0; j<ncols_; j++){
       datacopy_ -> SetVal(i,j, data->GetVal(i,j));
     }
   }
-
+  
+  // Generate the index array
+  indices_ = new int[nrows_];
+  for(int i = 0; i<nrows_; i++){
+    indices_[i] = i;
+  }
+ 
+ 
 }
 
 // Destructor
@@ -25,30 +33,14 @@ bubble_sort::~bubble_sort(){
 // Set the reference column number
 void bubble_sort::SetRefColNum(int num){
   refColNum_ = num;
-}
-
-
-/// Generate the index array
-int bubble_sort::generateIndexArray(){
-  indices_ = new int[nrows_];
   
-  for(int i = 0; i<nrows_; i++){
-    indices_[i] = i;
-  }
-
-  return 0;
-
-}
-
-/// Extract the reference column
-int bubble_sort::extractRefCol(){
+  // extract the reference column
   refColumn_ = new double[nrows_];
   
   for(int i = 0; i<nrows_; i++){
     refColumn_[i] = data_->GetVal(i, refColNum_);
   }
 
-  return 0;
 }
 
 

@@ -5,7 +5,7 @@ typedef std::vector<size_t> index_vec_t;
 
 
 
-/// Sequence generator
+/// Sequence generator for the standard sorting algorithm
 class SequenceGen {
 public:
   SequenceGen (int start = 0) : current(start) { }
@@ -16,7 +16,7 @@ private:
 
 
 
-/// Comparator for the sorting algorithm
+/// Comparator for the standard sorting algorithm
 class CompVec{
   double * arr_;
 public:
