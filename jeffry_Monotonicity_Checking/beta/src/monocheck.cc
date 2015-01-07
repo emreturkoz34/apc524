@@ -67,7 +67,7 @@ int MonoCheck::CheckStrictMonoticity(int *monoAry, const int ncols, int col){
 	  }
 	}
 	else {
-	  printf("Column %d is not sorted in strictly increasing order.\n", col)
+	  printf("Column %d is not sorted in strictly increasing order.\n", col);
 	  exit(1);
 	}
       }
