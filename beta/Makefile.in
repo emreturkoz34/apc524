@@ -40,5 +40,5 @@ LIBDIR	= $(shell dirname `pwd`)
 EXTLIB	= -I$(LIBDIR)/alglib
 
 CXX		= g++
-CXXFLAGS	= -O3 -fPIC -Wall #-DNDEBUG
+CXXFLAGS	= -O3 -fPIC -Wall -fopenmp #-DNDEBUG
 PYLIB		= -I/usr/include/python2.7

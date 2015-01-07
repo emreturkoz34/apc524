@@ -9,7 +9,7 @@ all: $(TARGET)
 
 # Matrix/Other shared objects
 _%.so: %_wrap.o %.o $(addsuffix .o,$(MATRIX))
-	$(CXX) -shared $^ -o $@
+	$(CXX) -fopenmp -shared $^ -o $@
 
 # MaxSlope shared object
 _maxslope.so: maxslope_wrap.o $(addsuffix .o,$(SLOPE)) $(addsuffix .o,$(MATRIX))
