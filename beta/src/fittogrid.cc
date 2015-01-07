@@ -17,6 +17,7 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
   Matrix *tmat = new Matrix(nfiles, 2); // temp matrix for interpolation
   double tarr [2]; // temporary array for interpolation output
   int flag; // flag indicating status of interpolation
+  Matrix3D *extrap = new Matrix3D(dim2, dim3, lcgrid); // matrix indicating whether or not extrapolation attempted
 
   // Loop over all z~, z_v
   for (int i = 0; i < dim2; ++i) {
@@ -31,10 +32,12 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
       for (int k = 0; k < lcgrid; k++) {
 	flag = interp->Interp(tmat, 1, cgrid[k], tarr, 2);
 	if (flag == 1) { // interpolation failed (tried to extrapolate)
-	  dataout->SetVal(i, j, k, -1);
+	  dataout->SetVal(i, j, k, 0);
 	  flag1 = 1;
+	  extrap->SetVal(i, j, k, 1);
 	} else {
 	  dataout->SetVal(i, j, k, tarr[0]);
+	  extrap->SetVal(i, j, k, 0);
 	}
       }
     }
@@ -43,17 +46,17 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
   // For a point for which we tried to extrapolate, set the value of that point to
   // the value of the point which is nearest in (z~, c~) space.
   int dist = 0;
-  int distmin = dim2*lcgrid;
+  int distmin = dim2*dim2 + lcgrid*lcgrid;
   double extrapval = 0;
   for (int i = 0; i < dim2; ++i) {
     for (int j = 0; j < dim3; ++j) {
       for (int k = 0; k < lcgrid; ++k) {
-	if (dataout->GetVal(i, j, k) == -1) {
-	  distmin = dim2*lcgrid;
+	if (extrap->GetVal(i, j, k) == 1) {
+	  distmin = dim2*dim2 + lcgrid*lcgrid;
 	  extrapval = 0;
 	  for (int m = 0; m < dim2; ++m) {
 	    for (int n = 0; n < lcgrid; ++n) {
-	      if (dataout->GetVal(m, j, n) != -1) {
+	      if (extrap->GetVal(m, j, n) == 0) {
 		dist = (m - i)*(m - i) + (n - k)*(n - k);
 		if (dist < distmin) {
 		  extrapval = dataout->GetVal(m, j, n);
@@ -69,5 +72,6 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
   }
 
   delete tmat;
+  delete extrap;
   return flag1;
 }
