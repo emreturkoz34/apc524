@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # remove
 import numpy as np
 import matrix
 import lininterp
@@ -95,16 +95,5 @@ def get_progvar(progvarvec, testspecies, locs, index = 1):
             progvarlocsFULL.append(int(locs[j]))
             progvarnames.append(testspecies[j])
     return [progvarlocsFULL, progvarnames, index]
-
-
-# function to plot progress variable vs temp
-def plotCvT(Tvec, Cvec, fname="CvsT"):
-    plt.figure()
-    plt.plot(Tvec, Cvec, color='k', marker='o', markerfacecolor='none')
-    plt.xlabel("T (K)")
-    plt.ylabel("C")
-    plt.title("Best Progress Variable")
-    plt.savefig("output/%s.pdf" % fname)
-    plt.clf()
 
 

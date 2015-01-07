@@ -1,6 +1,7 @@
 import numpy as np
 import combinations as cs
 import iofuncs as iof
+import matplotlib.pyplot as plt
 
 import matrix
 import sorting
@@ -39,11 +40,12 @@ def findC(datafiles, testspecies, bestC, options):
 
     # Calculate progress variables
     progvars = np.dot(interpdata,combosmatrix)
+    length = progvars.shape[1]
 
     # Generate progress variable matrix
-    progVar = matrix.Matrix(nofiles, cs.totnumcoms(nocols-1)+1) 
+    progVar = matrix.Matrix(nofiles, length) 
     for i in range (nofiles):
-        for j in range(cs.totnumcoms(nocols-1)+1):
+        for j in range(length):
             progVar.SetVal(i,j,progvars[i,j])
 
     # Sort PROGVARS and FILESMATRIX by temperature
@@ -52,7 +54,7 @@ def findC(datafiles, testspecies, bestC, options):
     for i in [progVar, filesmatC]:
         if sortmethod  == 'bubble':
             sorter = sorting.bubble_sort(i)
-        elif sortmethod == 'standard': # need to test
+        elif sortmethod == 'standard':
             sorter = sorting.standard_sort(i)
         elif sortmethod == 'brute':
             sorter = sorting.brute_sort(i)
@@ -68,7 +70,6 @@ def findC(datafiles, testspecies, bestC, options):
 
     # Test monotonicity of PROGVARS
     print "Testing monotonicity \n"
-    length = progvars.shape[1]
     monoAry = np.zeros(length, dtype=np.int32)
 
     checker = monocheck.MonoCheck(progVar) # Create MonoCheck object
@@ -134,8 +135,31 @@ def findC(datafiles, testspecies, bestC, options):
 
     if monoAryflag < 1: # Give error if no best progress variable is found
         raise RuntimeError("Error: no best progress variable selected.")
-
+    
     # Write results
     for i in range(nofiles):
         filesmatC.SetVal(i,0,progVar.GetVal(i,bestC[2]))
+
+    # Plot results
+    Cst = [0] * nofiles
+    Tst = [0] * nofiles
+    plt.figure()
+    for ii in range(nofiles):
+        Tst[ii] = progVar.GetVal(ii,0)
+    if options["PlotAllC"][0] == 'yes':
+        for jj in range(length-1):
+            for ii in range(nofiles):
+                Cst[ii] = progVar.GetVal(ii,jj+1)
+            otherplt = plt.plot(Tst, Cst, color='r', marker='none')
+    for ii in range(nofiles):
+        Cst[ii] = filesmatC.GetVal(ii,0)
+    bestplt = plt.plot(Tst, Cst, color='k', marker='o', markerfacecolor='none')
+    if options["PlotAllC"][0] == 'yes':    
+        plt.legend([bestplt, otherplt],['Best progress variable','Other candidate progress variables'])
+    plt.xlabel("T (K)")
+    plt.ylabel("C")
+    plt.title("Best Progress Variable")
+    plt.savefig("output/%s.pdf" % 'CvsTemp')
+    plt.clf()
+
     return filesmatC

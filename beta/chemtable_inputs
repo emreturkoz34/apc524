@@ -1,13 +1,14 @@
 data file directory:	data_test
 test species:	Y-H2O	Y-H2	Y-CO2
 output file name:	data_out
+plot all progress variables:	
 
 Zmean_grid:	51
 Zvar_max:	0.25
 Zvar_grid:	26
 
 Zpdf:	beta
-sort method:	brute
+sort method:	standard
 StoichMassFrac:	0.27
 interp method:	linear
 max slope test:	linear regression
@@ -15,4 +16,5 @@ integrator:	trapezoid
 
 glq Number of Nodes:	10
 length Cgrid:	61
+
 

@@ -38,25 +38,17 @@ options["MaxSlopeTest"] = iof.read_input("max slope test:", inputs, minargs=0, d
 options["Integrator"] = iof.read_input("integrator:", inputs, minargs=0, default=['trapezoid'])
 options["LCgrid"] = iof.read_input("length Cgrid:", inputs, minargs=0, default=[20])
 options["OutputFile"] = iof.read_input("output file name:", inputs, minargs=0, default=['data_output'])
-#options["Cmax"] = iof.read_input("Cmax:", inputs, minargs=0, default =[0.15])
+options["PlotAllC"] = iof.read_input("plot all progress variables:", inputs, minargs=0, default=['yes'])
 
 # find best progress variable
 bestC = []
 nofiles = len(datafiles)  # Check to see if used later and maybe move
 filesmatC = fpv.findC(datafiles, testspecies, bestC, options)
 
-# Plot sorted stoich progress variable vs. stoich temperature
-Cst = [0] * nofiles
-Tst = [0] * nofiles
-for ii in range(nofiles):
-    Cst[ii] = filesmatC.GetVal(ii,0)
-    Tst[ii] = filesmatC.GetVal(ii,2)
-iof.plotCvT(Tst,Cst)
-
 # sort FILESMATRIX by progress variable
 if options["sort method"][0] == 'bubble':
     sorter = sorting.bubble_sort(filesmatC)
-elif options["sort method"][0] == 'standard': # need to test
+elif options["sort method"][0] == 'standard':
     sorter = sorting.standard_sort(filesmatC)
 elif options["sort method"][0] == 'brute': # has speed issues
     sorter = sorting.brute_sort(filesmatC)
