@@ -1,0 +1,127 @@
+\begin{theindex}
+
+  \item {BetaPDF}, \hyperpage{19}
+    \subitem {pdfVal}, \hyperpage{19}
+  \item {brute\_\discretionary {-}{}{}sort}, \hyperpage{22}
+  \item {bubble\_\discretionary {-}{}{}sort}, \hyperpage{24}
+
+  \indexspace
+
+  \item {CheckStrictMonoticity}
+    \subitem {MonoCheck}, \hyperpage{52}
+  \item {CompVec}, \hyperpage{25}
+  \item {convolute::\_\discretionary {-}{}{}object}, \hyperpage{7}
+
+  \indexspace
+
+  \item {DeltaPDF}, \hyperpage{26}
+
+  \indexspace
+
+  \item {EndPointSlope}, \hyperpage{28}
+    \subitem {MostMonotonic}, \hyperpage{28}
+
+  \indexspace
+
+  \item {fittogrid::\_\discretionary {-}{}{}object}, \hyperpage{8}
+
+  \indexspace
+
+  \item {GLQuad}, \hyperpage{30}
+
+  \indexspace
+
+  \item {Integrator}, \hyperpage{32}
+  \item {integrator::\_\discretionary {-}{}{}object}, \hyperpage{11}
+  \item {integrator::GLQuad}, \hyperpage{31}
+  \item {integrator::Integrator}, \hyperpage{33}
+  \item {integrator::Simpson}, \hyperpage{61}
+  \item {integrator::Trapz}, \hyperpage{82}
+  \item {Interpolator}, \hyperpage{35}
+  \item {iofuncs::ProcFile}, \hyperpage{55}
+
+  \indexspace
+
+  \item {LeastNonMono}, \hyperpage{36}
+  \item {leastnonmono::\_\discretionary {-}{}{}object}, \hyperpage{15}
+  \item {leastnonmono::LeastNonMono}, \hyperpage{37}
+  \item {leastnonmono::SimpleLNM}, \hyperpage{59}
+  \item {LeastNonMonotonic}
+    \subitem {SimpleLNM}, \hyperpage{60}
+  \item {LinInterp}, \hyperpage{39}
+  \item {lininterp::\_\discretionary {-}{}{}object}, \hyperpage{9}
+  \item {lininterp::Interpolator}, \hyperpage{34}
+  \item {lininterp::LinInterp}, \hyperpage{38}
+  \item {LinRegression}, \hyperpage{40}
+    \subitem {MostMonotonic}, \hyperpage{40}
+
+  \indexspace
+
+  \item {Matrix}, \hyperpage{42}
+  \item {Matrix3D}, \hyperpage{45}
+  \item {matrix3d::\_\discretionary {-}{}{}object}, \hyperpage{12}
+  \item {matrix3d::Matrix3D}, \hyperpage{46}
+  \item {Matrix4D}, \hyperpage{47}
+  \item {matrix4d::\_\discretionary {-}{}{}object}, \hyperpage{13}
+  \item {matrix4d::Matrix4D}, \hyperpage{48}
+  \item {matrix::\_\discretionary {-}{}{}object}, \hyperpage{10}
+  \item {matrix::Matrix}, \hyperpage{43}
+  \item {MaxSlope}, \hyperpage{49}
+  \item {maxslope::\_\discretionary {-}{}{}object}, \hyperpage{14}
+  \item {maxslope::EndPointSlope}, \hyperpage{29}
+  \item {maxslope::LinRegression}, \hyperpage{41}
+  \item {maxslope::MaxSlope}, \hyperpage{50}
+  \item {MonoCheck}, \hyperpage{52}
+    \subitem {CheckStrictMonoticity}, \hyperpage{52}
+  \item {monocheck::\_\discretionary {-}{}{}object}, \hyperpage{16}
+  \item {monocheck::Matrix}, \hyperpage{44}
+  \item {monocheck::MonoCheck}, \hyperpage{51}
+  \item {MostMonotonic}
+    \subitem {EndPointSlope}, \hyperpage{28}
+    \subitem {LinRegression}, \hyperpage{40}
+
+  \indexspace
+
+  \item {PDF}, \hyperpage{53}
+  \item {pdf::\_\discretionary {-}{}{}object}, \hyperpage{17}
+  \item {pdf::BetaPDF}, \hyperpage{20}
+  \item {pdf::DeltaPDF}, \hyperpage{27}
+  \item {pdf::PDF}, \hyperpage{54}
+  \item {pdfVal}
+    \subitem {BetaPDF}, \hyperpage{19}
+
+  \indexspace
+
+  \item {quick\_\discretionary {-}{}{}sort}, \hyperpage{57}
+
+  \indexspace
+
+  \item {SequenceGen}, \hyperpage{58}
+  \item {SimpleLNM}, \hyperpage{60}
+    \subitem {LeastNonMonotonic}, \hyperpage{60}
+  \item {Simpson}, \hyperpage{62}
+  \item {sorting}, \hyperpage{64}
+  \item {sorting::\_\discretionary {-}{}{}object}, \hyperpage{18}
+  \item {sorting::brute\_\discretionary {-}{}{}sort}, \hyperpage{21}
+  \item {sorting::bubble\_\discretionary {-}{}{}sort}, \hyperpage{23}
+  \item {sorting::quick\_\discretionary {-}{}{}sort}, \hyperpage{56}
+  \item {sorting::sorting}, \hyperpage{63}
+  \item {sorting::standard\_\discretionary {-}{}{}sort}, \hyperpage{65}
+  \item {standard\_\discretionary {-}{}{}sort}, \hyperpage{66}
+  \item {swig::SwigPtr\_\discretionary {-}{}{}PyObject}, \hyperpage{73}
+  \item {swig::SwigVar\_\discretionary {-}{}{}PyObject}, \hyperpage{79}
+  \item {swig\_\discretionary {-}{}{}cast\_\discretionary {-}{}{}info}, \hyperpage{67}
+  \item {swig\_\discretionary {-}{}{}const\_\discretionary {-}{}{}info}, \hyperpage{68}
+  \item {swig\_\discretionary {-}{}{}globalvar}, \hyperpage{69}
+  \item {swig\_\discretionary {-}{}{}module\_\discretionary {-}{}{}info}, \hyperpage{70}
+  \item {swig\_\discretionary {-}{}{}type\_\discretionary {-}{}{}info}, \hyperpage{71}
+  \item {swig\_\discretionary {-}{}{}varlinkobject}, \hyperpage{72}
+  \item {SwigPyClientData}, \hyperpage{76}
+  \item {SwigPyObject}, \hyperpage{77}
+  \item {SwigPyPacked}, \hyperpage{78}
+
+  \indexspace
+
+  \item {Trapz}, \hyperpage{81}
+
+\end{theindex}

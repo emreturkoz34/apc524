@@ -1,0 +1,50 @@
+\hypertarget{classBetaPDF}{
+\section{BetaPDF Class Reference}
+\label{de/d4f/classBetaPDF}\index{BetaPDF@{BetaPDF}}
+}
+Inheritance diagram for BetaPDF::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{de/d4f/classBetaPDF}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classBetaPDF_a0b5160ebefdcd8b696a45a131bab3261}{
+{\bfseries BetaPDF} (const double $\ast$Zmean, const int ZmeanPoints, const double $\ast$Zvar, const int ZvarPoints)}
+\label{de/d4f/classBetaPDF_a0b5160ebefdcd8b696a45a131bab3261}
+
+\item 
+int \hyperlink{classBetaPDF_a5c27da056f9c9b17af0888fac7df2c9f}{pdfVal} (const double $\ast$Z, const int ZPoints, \hyperlink{classMatrix3D}{Matrix3D} $\ast$pdfValM)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classBetaPDF_a5c27da056f9c9b17af0888fac7df2c9f}{
+\index{BetaPDF@{BetaPDF}!pdfVal@{pdfVal}}
+\index{pdfVal@{pdfVal}!BetaPDF@{BetaPDF}}
+\subsubsection[{pdfVal}]{\setlength{\rightskip}{0pt plus 5cm}int BetaPDF::pdfVal (const double $\ast$ {\em Z}, \/  const int {\em ZPoints}, \/  {\bf Matrix3D} $\ast$ {\em pdfValM})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{de/d4f/classBetaPDF_a5c27da056f9c9b17af0888fac7df2c9f}
+
+
+check for Min or Max mean
+
+Delta \hyperlink{classPDF}{PDF} for zero variance
+
+Impossible cases: becomes double delta \hyperlink{classPDF}{PDF}
+
+\hyperlink{classBetaPDF}{BetaPDF}
+
+Middle points: 0 $<$ n $<$ ZPoints-\/1
+
+Calculate integral at ends
+
+Set \hyperlink{classPDF}{PDF} to output 
+
+Implements \hyperlink{classPDF}{PDF}.
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+src/betaPDF.h\item 
+src/betaPDF.cc\end{DoxyCompactItemize}

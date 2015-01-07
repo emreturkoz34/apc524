@@ -1,0 +1,33 @@
+\hypertarget{classMonoCheck}{
+\section{MonoCheck Class Reference}
+\label{d8/ddf/classMonoCheck}\index{MonoCheck@{MonoCheck}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classMonoCheck_a4cee9c89dd8a6c19cd01d597343c4d99}{
+\hyperlink{classMonoCheck_a4cee9c89dd8a6c19cd01d597343c4d99}{MonoCheck} (const \hyperlink{classMatrix}{Matrix} \&progVar)}
+\label{d8/ddf/classMonoCheck_a4cee9c89dd8a6c19cd01d597343c4d99}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{classMonoCheck_a97dc563e5cad68eafabd498d66e86590}{
+\hyperlink{classMonoCheck_a97dc563e5cad68eafabd498d66e86590}{$\sim$MonoCheck} ()}
+\label{d8/ddf/classMonoCheck_a97dc563e5cad68eafabd498d66e86590}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+int \hyperlink{classMonoCheck_af34f3d72ec2d1575526d42bfe4cdfe7a}{CheckStrictMonoticity} (int $\ast$monoAry, const int ncols, int col)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classMonoCheck_af34f3d72ec2d1575526d42bfe4cdfe7a}{
+\index{MonoCheck@{MonoCheck}!CheckStrictMonoticity@{CheckStrictMonoticity}}
+\index{CheckStrictMonoticity@{CheckStrictMonoticity}!MonoCheck@{MonoCheck}}
+\subsubsection[{CheckStrictMonoticity}]{\setlength{\rightskip}{0pt plus 5cm}int MonoCheck::CheckStrictMonoticity (int $\ast$ {\em monoAry}, \/  const int {\em ncols}, \/  int {\em col})}}
+\label{d8/ddf/classMonoCheck_af34f3d72ec2d1575526d42bfe4cdfe7a}
+CheckStrictMonoticity checks the monotonicity of each column (AKA progress variable \char`\"{}C\char`\"{}) in progVar with respect to column \char`\"{}col\char`\"{}. The output array monoAry must be of length ncols\_\-, where each cell holds a value of 3 if C is strictly increasing or strictly decreasing and 0 otherwise. 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+src/monocheck.h\item 
+src/monocheck.cc\end{DoxyCompactItemize}

@@ -1,0 +1,91 @@
+\contentsline {chapter}{\numberline {1}Class Index}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Class Hierarchy}{1}{section.1.1}
+\contentsline {chapter}{\numberline {2}Class Index}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Class List}{5}{section.2.1}
+\contentsline {chapter}{\numberline {3}Class Documentation}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}convolute::\_\discretionary {-}{}{}object Class Reference}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}fittogrid::\_\discretionary {-}{}{}object Class Reference}{8}{section.3.2}
+\contentsline {section}{\numberline {3.3}lininterp::\_\discretionary {-}{}{}object Class Reference}{9}{section.3.3}
+\contentsline {section}{\numberline {3.4}matrix::\_\discretionary {-}{}{}object Class Reference}{10}{section.3.4}
+\contentsline {section}{\numberline {3.5}integrator::\_\discretionary {-}{}{}object Class Reference}{11}{section.3.5}
+\contentsline {section}{\numberline {3.6}matrix3d::\_\discretionary {-}{}{}object Class Reference}{12}{section.3.6}
+\contentsline {section}{\numberline {3.7}matrix4d::\_\discretionary {-}{}{}object Class Reference}{13}{section.3.7}
+\contentsline {section}{\numberline {3.8}maxslope::\_\discretionary {-}{}{}object Class Reference}{14}{section.3.8}
+\contentsline {section}{\numberline {3.9}leastnonmono::\_\discretionary {-}{}{}object Class Reference}{15}{section.3.9}
+\contentsline {section}{\numberline {3.10}monocheck::\_\discretionary {-}{}{}object Class Reference}{16}{section.3.10}
+\contentsline {section}{\numberline {3.11}pdf::\_\discretionary {-}{}{}object Class Reference}{17}{section.3.11}
+\contentsline {section}{\numberline {3.12}sorting::\_\discretionary {-}{}{}object Class Reference}{18}{section.3.12}
+\contentsline {section}{\numberline {3.13}BetaPDF Class Reference}{19}{section.3.13}
+\contentsline {subsection}{\numberline {3.13.1}Member Function Documentation}{19}{subsection.3.13.1}
+\contentsline {subsubsection}{\numberline {3.13.1.1}pdfVal}{19}{subsubsection.3.13.1.1}
+\contentsline {section}{\numberline {3.14}pdf::BetaPDF Class Reference}{20}{section.3.14}
+\contentsline {section}{\numberline {3.15}sorting::brute\_\discretionary {-}{}{}sort Class Reference}{21}{section.3.15}
+\contentsline {section}{\numberline {3.16}brute\_\discretionary {-}{}{}sort Class Reference}{22}{section.3.16}
+\contentsline {section}{\numberline {3.17}sorting::bubble\_\discretionary {-}{}{}sort Class Reference}{23}{section.3.17}
+\contentsline {section}{\numberline {3.18}bubble\_\discretionary {-}{}{}sort Class Reference}{24}{section.3.18}
+\contentsline {section}{\numberline {3.19}CompVec Class Reference}{25}{section.3.19}
+\contentsline {subsection}{\numberline {3.19.1}Detailed Description}{25}{subsection.3.19.1}
+\contentsline {section}{\numberline {3.20}DeltaPDF Class Reference}{26}{section.3.20}
+\contentsline {section}{\numberline {3.21}pdf::DeltaPDF Class Reference}{27}{section.3.21}
+\contentsline {section}{\numberline {3.22}EndPointSlope Class Reference}{28}{section.3.22}
+\contentsline {subsection}{\numberline {3.22.1}Member Function Documentation}{28}{subsection.3.22.1}
+\contentsline {subsubsection}{\numberline {3.22.1.1}MostMonotonic}{28}{subsubsection.3.22.1.1}
+\contentsline {section}{\numberline {3.23}maxslope::EndPointSlope Class Reference}{29}{section.3.23}
+\contentsline {section}{\numberline {3.24}GLQuad Class Reference}{30}{section.3.24}
+\contentsline {section}{\numberline {3.25}integrator::GLQuad Class Reference}{31}{section.3.25}
+\contentsline {section}{\numberline {3.26}Integrator Class Reference}{32}{section.3.26}
+\contentsline {section}{\numberline {3.27}integrator::Integrator Class Reference}{33}{section.3.27}
+\contentsline {section}{\numberline {3.28}lininterp::Interpolator Class Reference}{34}{section.3.28}
+\contentsline {section}{\numberline {3.29}Interpolator Class Reference}{35}{section.3.29}
+\contentsline {section}{\numberline {3.30}LeastNonMono Class Reference}{36}{section.3.30}
+\contentsline {section}{\numberline {3.31}leastnonmono::LeastNonMono Class Reference}{37}{section.3.31}
+\contentsline {section}{\numberline {3.32}lininterp::LinInterp Class Reference}{38}{section.3.32}
+\contentsline {section}{\numberline {3.33}LinInterp Class Reference}{39}{section.3.33}
+\contentsline {section}{\numberline {3.34}LinRegression Class Reference}{40}{section.3.34}
+\contentsline {subsection}{\numberline {3.34.1}Member Function Documentation}{40}{subsection.3.34.1}
+\contentsline {subsubsection}{\numberline {3.34.1.1}MostMonotonic}{40}{subsubsection.3.34.1.1}
+\contentsline {section}{\numberline {3.35}maxslope::LinRegression Class Reference}{41}{section.3.35}
+\contentsline {section}{\numberline {3.36}Matrix Class Reference}{42}{section.3.36}
+\contentsline {section}{\numberline {3.37}matrix::Matrix Class Reference}{43}{section.3.37}
+\contentsline {section}{\numberline {3.38}monocheck::Matrix Class Reference}{44}{section.3.38}
+\contentsline {section}{\numberline {3.39}Matrix3D Class Reference}{45}{section.3.39}
+\contentsline {section}{\numberline {3.40}matrix3d::Matrix3D Class Reference}{46}{section.3.40}
+\contentsline {section}{\numberline {3.41}Matrix4D Class Reference}{47}{section.3.41}
+\contentsline {section}{\numberline {3.42}matrix4d::Matrix4D Class Reference}{48}{section.3.42}
+\contentsline {section}{\numberline {3.43}MaxSlope Class Reference}{49}{section.3.43}
+\contentsline {section}{\numberline {3.44}maxslope::MaxSlope Class Reference}{50}{section.3.44}
+\contentsline {section}{\numberline {3.45}monocheck::MonoCheck Class Reference}{51}{section.3.45}
+\contentsline {section}{\numberline {3.46}MonoCheck Class Reference}{52}{section.3.46}
+\contentsline {subsection}{\numberline {3.46.1}Member Function Documentation}{52}{subsection.3.46.1}
+\contentsline {subsubsection}{\numberline {3.46.1.1}CheckStrictMonoticity}{52}{subsubsection.3.46.1.1}
+\contentsline {section}{\numberline {3.47}PDF Class Reference}{53}{section.3.47}
+\contentsline {section}{\numberline {3.48}pdf::PDF Class Reference}{54}{section.3.48}
+\contentsline {section}{\numberline {3.49}iofuncs::ProcFile Class Reference}{55}{section.3.49}
+\contentsline {subsection}{\numberline {3.49.1}Detailed Description}{55}{subsection.3.49.1}
+\contentsline {section}{\numberline {3.50}sorting::quick\_\discretionary {-}{}{}sort Class Reference}{56}{section.3.50}
+\contentsline {section}{\numberline {3.51}quick\_\discretionary {-}{}{}sort Class Reference}{57}{section.3.51}
+\contentsline {section}{\numberline {3.52}SequenceGen Class Reference}{58}{section.3.52}
+\contentsline {subsection}{\numberline {3.52.1}Detailed Description}{58}{subsection.3.52.1}
+\contentsline {section}{\numberline {3.53}leastnonmono::SimpleLNM Class Reference}{59}{section.3.53}
+\contentsline {section}{\numberline {3.54}SimpleLNM Class Reference}{60}{section.3.54}
+\contentsline {subsection}{\numberline {3.54.1}Member Function Documentation}{60}{subsection.3.54.1}
+\contentsline {subsubsection}{\numberline {3.54.1.1}LeastNonMonotonic}{60}{subsubsection.3.54.1.1}
+\contentsline {section}{\numberline {3.55}integrator::Simpson Class Reference}{61}{section.3.55}
+\contentsline {section}{\numberline {3.56}Simpson Class Reference}{62}{section.3.56}
+\contentsline {section}{\numberline {3.57}sorting::sorting Class Reference}{63}{section.3.57}
+\contentsline {section}{\numberline {3.58}sorting Class Reference}{64}{section.3.58}
+\contentsline {section}{\numberline {3.59}sorting::standard\_\discretionary {-}{}{}sort Class Reference}{65}{section.3.59}
+\contentsline {section}{\numberline {3.60}standard\_\discretionary {-}{}{}sort Class Reference}{66}{section.3.60}
+\contentsline {section}{\numberline {3.61}swig\_\discretionary {-}{}{}cast\_\discretionary {-}{}{}info Struct Reference}{67}{section.3.61}
+\contentsline {section}{\numberline {3.62}swig\_\discretionary {-}{}{}const\_\discretionary {-}{}{}info Struct Reference}{68}{section.3.62}
+\contentsline {section}{\numberline {3.63}swig\_\discretionary {-}{}{}globalvar Struct Reference}{69}{section.3.63}
+\contentsline {section}{\numberline {3.64}swig\_\discretionary {-}{}{}module\_\discretionary {-}{}{}info Struct Reference}{70}{section.3.64}
+\contentsline {section}{\numberline {3.65}swig\_\discretionary {-}{}{}type\_\discretionary {-}{}{}info Struct Reference}{71}{section.3.65}
+\contentsline {section}{\numberline {3.66}swig\_\discretionary {-}{}{}varlinkobject Struct Reference}{72}{section.3.66}
+\contentsline {section}{\numberline {3.67}swig::SwigPtr\_\discretionary {-}{}{}PyObject Class Reference}{73}{section.3.67}
+\contentsline {section}{\numberline {3.68}SwigPyClientData Struct Reference}{76}{section.3.68}
+\contentsline {section}{\numberline {3.69}SwigPyObject Struct Reference}{77}{section.3.69}
+\contentsline {section}{\numberline {3.70}SwigPyPacked Struct Reference}{78}{section.3.70}
+\contentsline {section}{\numberline {3.71}swig::SwigVar\_\discretionary {-}{}{}PyObject Struct Reference}{79}{section.3.71}
+\contentsline {section}{\numberline {3.72}Trapz Class Reference}{81}{section.3.72}
+\contentsline {section}{\numberline {3.73}integrator::Trapz Class Reference}{82}{section.3.73}

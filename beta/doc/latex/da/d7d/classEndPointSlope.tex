@@ -1,0 +1,41 @@
+\hypertarget{classEndPointSlope}{
+\section{EndPointSlope Class Reference}
+\label{da/d7d/classEndPointSlope}\index{EndPointSlope@{EndPointSlope}}
+}
+Inheritance diagram for EndPointSlope::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{da/d7d/classEndPointSlope}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classEndPointSlope_aa1c680c5137b40a465d2433e636892ce}{
+\hyperlink{classEndPointSlope_aa1c680c5137b40a465d2433e636892ce}{EndPointSlope} (const \hyperlink{classMatrix}{Matrix} \&progVar)}
+\label{da/d7d/classEndPointSlope_aa1c680c5137b40a465d2433e636892ce}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{classEndPointSlope_a37cf0a75d426b64fc50a8a76f45beb1f}{
+\hyperlink{classEndPointSlope_a37cf0a75d426b64fc50a8a76f45beb1f}{$\sim$EndPointSlope} ()}
+\label{da/d7d/classEndPointSlope_a37cf0a75d426b64fc50a8a76f45beb1f}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+int \hyperlink{classEndPointSlope_a70417721fe8a60669a67d19a7855bef5}{MostMonotonic} (int $\ast$monoAry, const int ncols, const int col)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classEndPointSlope_a70417721fe8a60669a67d19a7855bef5}{
+\index{EndPointSlope@{EndPointSlope}!MostMonotonic@{MostMonotonic}}
+\index{MostMonotonic@{MostMonotonic}!EndPointSlope@{EndPointSlope}}
+\subsubsection[{MostMonotonic}]{\setlength{\rightskip}{0pt plus 5cm}int EndPointSlope::MostMonotonic (int $\ast$ {\em monoAry}, \/  const int {\em ncols}, \/  const int {\em col})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{da/d7d/classEndPointSlope_a70417721fe8a60669a67d19a7855bef5}
+MostMonotonic calculates the slope of the best linear approximation for each progress variable which is strictly increasing or strictly decreasing. The output array monoAry must be of length ncols, where each cell holds a value of 3 if C is strictly monotonic and has the largest slope, 2 if C is strictly monotonic but does not have the largest slope, and 0 for non-\/monotonic C. col is the reference column. 
+
+Implements \hyperlink{classMaxSlope}{MaxSlope}.
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+src/endpointslope.h\item 
+src/endpointslope.cc\end{DoxyCompactItemize}

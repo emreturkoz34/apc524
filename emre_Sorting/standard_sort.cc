@@ -56,7 +56,10 @@ void standard_sort::SetRefColNum(int num){
   refColNum_ = num;
 }
 
-/// Main sorting body
+/// Main function that sorts the given data
+/*!
+  The algorithm sends the reference column to the standard sorting operator that is embedded into the C++ standard library
+ */
 int standard_sort::sort_data(){
 
   index_vec_t indices(nrows_);

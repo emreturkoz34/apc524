@@ -1,0 +1,41 @@
+\hypertarget{classSimpleLNM}{
+\section{SimpleLNM Class Reference}
+\label{d8/dfe/classSimpleLNM}\index{SimpleLNM@{SimpleLNM}}
+}
+Inheritance diagram for SimpleLNM::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{d8/dfe/classSimpleLNM}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSimpleLNM_a45bd676f6bb504baf1b46ddcbf2f8fb8}{
+\hyperlink{classSimpleLNM_a45bd676f6bb504baf1b46ddcbf2f8fb8}{SimpleLNM} (const \hyperlink{classMatrix}{Matrix} \&progVar)}
+\label{d8/dfe/classSimpleLNM_a45bd676f6bb504baf1b46ddcbf2f8fb8}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{classSimpleLNM_a89cbe5270c4846ebba8ab1660149112f}{
+\hyperlink{classSimpleLNM_a89cbe5270c4846ebba8ab1660149112f}{$\sim$SimpleLNM} ()}
+\label{d8/dfe/classSimpleLNM_a89cbe5270c4846ebba8ab1660149112f}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+int \hyperlink{classSimpleLNM_a9d296839ca84467c0f6241b1393bd6d5}{LeastNonMonotonic} (int $\ast$monoAry, const int ncols, const int col)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSimpleLNM_a9d296839ca84467c0f6241b1393bd6d5}{
+\index{SimpleLNM@{SimpleLNM}!LeastNonMonotonic@{LeastNonMonotonic}}
+\index{LeastNonMonotonic@{LeastNonMonotonic}!SimpleLNM@{SimpleLNM}}
+\subsubsection[{LeastNonMonotonic}]{\setlength{\rightskip}{0pt plus 5cm}int SimpleLNM::LeastNonMonotonic (int $\ast$ {\em monoAry}, \/  const int {\em ncols}, \/  const int {\em col})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d8/dfe/classSimpleLNM_a9d296839ca84467c0f6241b1393bd6d5}
+LeastNonMonotonic calculates how much each progress variable is strictly increasing and strictly decreasing. The input array monoAry will initially be filled with 0s since all progress variables are non-\/monotonic. This method will select the least non-\/monotonic and change its value in monoAry to 1. col is the reference column. 
+
+Implements \hyperlink{classLeastNonMono}{LeastNonMono}.
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+src/simplelnm.h\item 
+src/simplelnm.cc\end{DoxyCompactItemize}
