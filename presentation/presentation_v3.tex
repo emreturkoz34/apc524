@@ -45,6 +45,12 @@ Flamelet Modeling for Tubulent Combustion Simulations:
 \includegraphics[width=\textwidth]{scope.pdf}
 \end{figure}
 %\vskip 2mm
+Two main objectives:
+\begin{itemize}
+\item Progress variable selection
+\item Chemical source term tabulation
+\end{itemize}
+\vspace{6pt}
 Key Data Processing Capabilities:
 \begin{itemize}
 \item Sorting
@@ -114,15 +120,19 @@ Tools used:
 \subsection{Python: User Interface and Wrapper}
 \begin{frame}{Python: User Interface and Wrapper}
 Python files:
+\vspace{4pt}
 %\begin{itemize}
 \begin{itemize}
-\item chemtable\_io.py: Main program run by user: processes inputs, calls findprogvar.py and C++ functions, and generates ouput %%MAKE THESE TITLES BOLD OR ITALIC
-\item findprogvar.py: contains function that determines the best progress variable, calls C++ functions
-\item iofuncs.py: contains functions used by the above for text processing
-\item combinations.py: contains helper functions used by findprogvar.py
+\item \textbf{chemtable\_io.py}: main program run by user - processes inputs, calls findprogvar.py and C++ functions, and generates output %%MAKE THESE TITLES BOLD OR ITALIC
+\vspace{4pt}
+\item \textbf{findprogvar.py}: contains function that determines the best progress variable, calls C++ functions
+\vspace{4pt}
+\item \textbf{iofuncs.py}: contains functions used by the above for text processing
+\vspace{4pt}
+\item \textbf{combinations.py}: contains helper functions used by findprogvar.py
 \end{itemize}
 \vspace{12pt}
-User specified inputs stored in a Python dictionary
+User-specified inputs are stored in a Python dictionary for passing between functions.
 %\item chemtable_io.py:
 %\item findprogvar.py:
 %\item iofuncs.py:
@@ -174,10 +184,51 @@ User specified inputs stored in a Python dictionary
 \end{frame}
 
 
+\section{Profiling}
+
+
+
+\begin{frame}{Profiling}
+\vspace{8pt}
+\begin{itemize}
+\item Profiled using cProfile
+\item Grid fitting step is the bottleneck in the program
+\end{itemize}
+
+\begin{figure}
+\includegraphics[scale=0.30]{plot_threads.pdf}
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}{Profiling}
+\vspace{8pt}
+\begin{itemize}
+\item Runtime scales quadratically with grid size for $Z_{mean}$ and C  
+\item Runtime scales linearly with grid size for $Z_{var}$ 
+\end{itemize}
+
+\begin{figure}
+\includegraphics[scale=0.30]{plot_gridsizes.pdf}
+\end{figure}
+
+\end{frame}
+
+
 \section{Conclusions}
 
-\begin{frame}{Conclusions}
-We are better friends now.
+\begin{frame}{What did we learn?}
+\begin{itemize}
+\item Designing a big project using structured building blocks
+\item Makefile generation for a big project
+\item Interfacing Python and C++ with SWIG
+\item Text processing and plotting data with Python
+%\vspace{12pt}
+\item Coffee house at the Grad College does not serve coffee.
+\end{itemize}
+
 
 
 \end{frame}
