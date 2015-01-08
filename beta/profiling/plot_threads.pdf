@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: plot_threads.pdf
-%%Creator: gnuplot 4.2 patchlevel 6 
-%%CreationDate: Wed Jan  7 17:16:02 2015
+%%Creator: gnuplot 4.6 patchlevel 4
+%%CreationDate: Wed Jan  7 19:06:49 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 554 770
 %%Orientation: Landscape
@@ -11,8 +11,8 @@
 /gnudict 256 dict def
 gnudict begin
 %
-% The following 6 true/false flags may be edited by hand if required
-% The unit line width may also be changed
+% The following true/false flags may be edited by hand if desired.
+% The unit line width and grayscale image gamma correction may also be changed.
 %
 /Color true def
 /Blacktext false def
@@ -21,9 +21,13 @@ gnudict begin
 /Landscape true def
 /Level1 false def
 /Rounded false def
+/ClipToBoundingBox false def
+/SuppressPDFMark false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
+/Gamma 1.0 def
+/BackgroundColor {-1.000 -1.000 -1.000} def
 %
 /vshift -90 def
 /dl1 {
@@ -38,24 +42,16 @@ gnudict begin
 /vpt_ 31.5 def
 /hpt hpt_ def
 /vpt vpt_ def
-Level1 {} {
-/SDict 10 dict def
-systemdict /pdfmark known not {
-  userdict /pdfmark systemdict /cleartomark get put
-} if
-SDict begin [
-  /Title (plot_threads.pdf)
-  /Subject (gnuplot plot)
-  /Creator (gnuplot 4.2 patchlevel 6 )
-  /Author (Emmet M. Cleary,MAE,Mueller)
-%  /Producer (gnuplot)
-%  /Keywords ()
-  /CreationDate (Wed Jan  7 17:16:02 2015)
-  /DOCINFO pdfmark
-end
-} ifelse
+/doclip {
+  ClipToBoundingBox {
+    newpath 50 50 moveto 554 50 lineto 554 770 lineto 50 770 lineto closepath
+    clip
+  } if
+} def
 %
-% Gnuplot Prolog Version 4.2 (August 2006)
+% Gnuplot Prolog Version 4.6 (September 2012)
+%
+%/SuppressPDFMark true def
 %
 /M {moveto} bind def
 /L {lineto} bind def
@@ -65,6 +61,8 @@ end
 /Z {closepath} bind def
 /C {setrgbcolor} bind def
 /f {rlineto fill} bind def
+/g {setgray} bind def
+/Gshow {show} def   % May be redefined later in the file to support UTF-8
 /vpt2 vpt 2 mul def
 /hpt2 hpt 2 mul def
 /Lshow {currentpoint stroke M 0 vshift R 
@@ -85,6 +83,7 @@ end
 	dup 1 lt {pop 1} if 10 mul /udl exch def} def
 /PL {stroke userlinewidth setlinewidth
 	Rounded {1 setlinejoin 1 setlinecap} if} def
+3.8 setmiterlimit
 % Default Line colors
 /LCw {1 1 1} def
 /LCb {0 0 0} def
@@ -317,7 +316,8 @@ end
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  gsave 1 setgray fill grestore clip
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+  clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -427,17 +427,18 @@ currentdict end definefont pop
      { 5 get 3 eq {gsave} {grestore} ifelse }
      {dup dup 0 get findfont exch 1 get scalefont setfont
      [ currentpoint ] exch dup 2 get 0 exch R dup 5 get 2 ne {dup dup 6
-     get exch 4 get {show} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
+     get exch 4 get {Gshow} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
      {dup 3 get {2 get neg 0 exch R pop} {pop aload pop M} ifelse} {dup 5
      get 1 eq {dup 2 get exch dup 3 get exch 6 get stringwidth pop -2 div
      dup 0 R} {dup 6 get stringwidth pop -2 div 0 R 6 get
      show 2 index {aload pop M neg 3 -1 roll neg R pop pop} {pop pop pop
      pop aload pop M} ifelse }ifelse }ifelse }
      ifelse }
-   forall} bind def
+   forall} def
+/Gswidth {dup type /stringtype eq {stringwidth} {pop (n) stringwidth} ifelse} def
 /MFwidth {0 exch { dup 5 get 3 ge { 5 get 3 eq { 0 } { pop } ifelse }
  {dup 3 get{dup dup 0 get findfont exch 1 get scalefont setfont
-     6 get stringwidth pop add} {pop} ifelse} ifelse} forall} bind def
+     6 get Gswidth pop add} {pop} ifelse} ifelse} forall} def
 /MLshow { currentpoint stroke M
   0 exch R
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
@@ -449,11 +450,29 @@ currentdict end definefont pop
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
 /XYsave    { [( ) 1 2 true false 3 ()] } bind def
 /XYrestore { [( ) 1 2 true false 4 ()] } bind def
+Level1 SuppressPDFMark or 
+{} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (plot_threads.pdf)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.6 patchlevel 4)
+  /Author (pismire)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Wed Jan  7 19:06:49 2015)
+  /DOCINFO pdfmark
+end
+} ifelse
 end
 %%EndProlog
 %%Page: 1 1
 gnudict begin
 gsave
+doclip
 50 50 translate
 0.100 0.100 scale
 90 rotate
@@ -461,199 +480,214 @@ gsave
 0 setgray
 newpath
 (Helvectica) findfont 270 scalefont setfont
+BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {gsave BackgroundColor C clippath fill grestore} if
 1.000 UL
 LTb
-1809 864 M
+LCb setrgbcolor
+1485 864 M
 63 0 V
-4923 0 R
+5165 0 R
 -63 0 V
 stroke
-1647 864 M
+1323 864 M
 [ [(Helvectica) 270.0 0.0 true true 0 ( 10)]
 ] -90.0 MRshow
 1.000 UL
 LTb
-1809 1444 M
+LCb setrgbcolor
+1485 1444 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 1783 M
+1485 1783 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 2024 M
+1485 2023 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 2210 M
+1485 2210 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 2363 M
+1485 2362 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 2492 M
+1485 2491 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 2603 M
+1485 2603 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
--4955 99 R
+-5197 98 R
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
--4955 88 R
+-5197 89 R
 63 0 V
-4923 0 R
+5165 0 R
 -63 0 V
 stroke
-1647 2790 M
+1323 2790 M
 [ [(Helvectica) 270.0 0.0 true true 0 ( 100)]
 ] -90.0 MRshow
 1.000 UL
 LTb
-1809 3370 M
+LCb setrgbcolor
+1485 3369 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 3709 M
+1485 3708 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 3950 M
+1485 3949 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 4136 M
+1485 4135 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 4289 M
+1485 4288 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 4418 M
+1485 4417 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
-1809 4529 M
+1485 4528 M
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
--4955 99 R
+-5197 99 R
 31 0 V
-4955 0 R
+5197 0 R
 -31 0 V
--4955 88 R
+-5197 88 R
 63 0 V
-4923 0 R
+5165 0 R
 -63 0 V
 stroke
-1647 4716 M
+1323 4715 M
 [ [(Helvectica) 270.0 0.0 true true 0 ( 1000)]
 ] -90.0 MRshow
 1.000 UL
 LTb
-1809 864 M
+LCb setrgbcolor
+1485 864 M
 0 63 V
-0 3789 R
+0 3788 R
 0 -63 V
 stroke
-1809 594 M
+1485 594 M
 [ [(Helvectica) 270.0 0.0 true true 0 ( 1)]
 ] -90.0 MCshow
 1.000 UL
 LTb
-3310 864 M
+LCb setrgbcolor
+3059 864 M
 0 31 V
-0 3821 R
+0 3820 R
 0 -31 V
-4188 864 M
+3979 864 M
 0 31 V
-0 3821 R
+0 3820 R
 0 -31 V
-4811 864 M
+4633 864 M
 0 31 V
-0 3821 R
+0 3820 R
 0 -31 V
-5294 864 M
+5139 864 M
 0 31 V
-0 3821 R
+0 3820 R
 0 -31 V
-5689 864 M
+5553 864 M
 0 31 V
-0 3821 R
+0 3820 R
 0 -31 V
-6023 864 M
+5903 864 M
 0 31 V
-0 3821 R
+0 3820 R
 0 -31 V
-6312 864 M
+6206 864 M
 0 31 V
-0 3821 R
+0 3820 R
 0 -31 V
-6567 864 M
+6474 864 M
 0 31 V
-0 3821 R
+0 3820 R
 0 -31 V
-6795 864 M
+6713 864 M
 0 63 V
-0 3789 R
+0 3788 R
 0 -63 V
 stroke
-6795 594 M
+6713 594 M
 [ [(Helvectica) 270.0 0.0 true true 0 ( 10)]
 ] -90.0 MCshow
 1.000 UL
 LTb
+LCb setrgbcolor
 1.000 UL
 LTb
-1809 4716 N
-0 -3852 V
-4986 0 V
-0 3852 V
--4986 0 V
+LCb setrgbcolor
+1485 4715 N
+0 -3851 V
+5228 0 V
+0 3851 V
+-5228 0 V
 Z stroke
 LCb setrgbcolor
-540 2790 M
-currentpoint gsave translate 90 rotate 0 0 moveto
+216 2789 M
+currentpoint gsave translate -270 rotate 0 0 moveto
 [ [(Helvectica) 270.0 0.0 true true 0 (Time [s])]
 ] -90.0 MCshow
 grestore
 LTb
 LCb setrgbcolor
-4302 189 M
+4099 189 M
 [ [(Helvectica) 270.0 0.0 true true 0 (Threads)]
 ] -90.0 MCshow
 LTb
 1.000 UP
 1.000 UL
 LTb
-1.000 UL
-LT2
-/Helvectica findfont 270 scalefont setfont
-1809 2929 M
-3310 2361 L
-4811 1829 L
-6312 1588 L
-1809 2929 Star
-3310 2361 Star
-4811 1829 Star
-6312 1588 Star
+LCb setrgbcolor
+% Begin plot #1
+4.000 UP
+4.000 UL
+LT0
+0.00 0.39 0.00 C /Helvectica findfont 270 scalefont setfont
+/vshift -90 def
+1485 2929 M
+3059 2361 L
+4633 1829 L
+6206 1588 L
+1485 2929 Pls
+3059 2361 Pls
+4633 1829 Pls
+6206 1588 Pls
+% End plot #1
 1.000 UL
 LTb
-1809 4716 N
-0 -3852 V
-4986 0 V
-0 3852 V
--4986 0 V
+LCb setrgbcolor
+1485 4715 N
+0 -3851 V
+5228 0 V
+0 3851 V
+-5228 0 V
 Z stroke
 1.000 UP
 1.000 UL
 LTb
+LCb setrgbcolor
 stroke
 grestore
 end
