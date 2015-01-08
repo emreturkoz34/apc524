@@ -6,11 +6,16 @@ set nokey
 
 set xlabel 'Threads'
 set ylabel 'Time [s]'
-set output 'plot_threads.pdf'
+set output 'plot_threads.ps'
 
 # Key or Legend
 set nokey
 
-set style line 1 lt 1 lw 4 ps 6 lc rgb "dark-green"
+# Key or Legend
+set key top right samplen 1.5   # Moves key, adjusts key length
 
-p 'prof_thr' u 1:2 w lp ls 3
+set style line 1 lt 1 lw 4 ps 4 lc rgb "dark-green"
+set style line 2 lt 2 lw 4 ps 4 lc rgb "blue"
+
+p 'prof_thr' u 1:2 w lp ls 1 t "FitToGrid",\
+  'prof_thr_CPU' u 1:2 w lp ls 2 t "CPU"
