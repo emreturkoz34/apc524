@@ -11,6 +11,10 @@ all: $(TARGET)
 _%.so: %_wrap.o %.o $(addsuffix .o,$(MATRIX))
 	$(CXX) -fopenmp -shared $^ -o $@
 
+# Fittogrid shared objects
+_fittogrid.so: fittogrid_wrap.o fittogrid.o $(addsuffix .o,$(SORT)) $(addsuffix .o,$(MATRIX))
+	$(CXX) -fopenmp -shared $^ -o $@
+
 # MaxSlope shared object
 _maxslope.so: maxslope_wrap.o $(addsuffix .o,$(SLOPE)) $(addsuffix .o,$(MATRIX))
 	$(CXX) -shared $^ -o $@

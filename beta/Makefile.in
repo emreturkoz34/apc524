@@ -21,12 +21,11 @@ ABSCLS	= pdf integrator maxslope leastnonmono sorting interpolator
 DRVCLS	= $(PDFS) $(INTGR) $(INTRP) $(SORT) $(SLOPE) $(NONMONO)
 CLASS	= $(MATRIX) monocheck
 
-
 # All *.cc
-SRC	= $(DRVCLS) $(CLASS) $(OTHER) $(TARGETS)
+SRC	= $(DRVCLS) $(CLASS) $(OTHER)
 
 # Shared Object Targets
-SO	= $(ABSCLS) $(CLASS) $(OTHER) $(TARGETS)
+SO	= $(ABSCLS) $(CLASS) $(OTHER)
 
 # External library AlgLib
 ALGLIB	= alglibinternal alglibmisc ap dataanalysis \
