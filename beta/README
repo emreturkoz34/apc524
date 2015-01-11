@@ -83,8 +83,9 @@ INPUT:					DEFAULT			<NOTES>
 - data file directory:			data			<can specify a path, eg data/C2H4>
 - test species:				Y-H2O	Y-H2 	Y-CO2
 - output file name:			data_output
-- plot all progress variables:		yes
-- skip progress variable optimization:	no
+- plot all progress variables:		yes			<options: yes, no>
+- skip progress variable optimization:	no			<options: yes, no>
+- extrapolate in fittogrid:		no			<options: yes, no>
 - number of threads:			1			<integer>
 - Zpdf:					[none]			<options: delta, beta>
 - sort method:				bubble			<other options: standard, brute>

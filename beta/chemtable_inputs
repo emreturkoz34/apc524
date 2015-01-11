@@ -1,24 +1,25 @@
 data file directory:	data/C2H4truncated
-test species:	Y-H2O	Y-H2	Y-CO2
+test species:	Y-H2O	Y-H2	Y-CO2	Y-OH
 output file name:	data_out
 plot all progress variables:	
 skip progress variable optimization:	no
+extrapolate in fittogrid:	no
 
-number of threads:	1
+number of threads:	4
 
-Zmean_grid:	51
+Zmean_grid:	201
 Zvar_max:	0.25
 Zvar_grid:	26
 
 Zpdf:	beta
 sort method:	standard
 StoichMassFrac:	0.27
-interp method:	hermite
+interp method:	linear
 max slope test:	linear regression
 integrator:	trapezoid
 least nonmonotonic check:	simple
 
 glq Number of Nodes:	10
-length Cgrid:	51
+length Cgrid:	201
 
 

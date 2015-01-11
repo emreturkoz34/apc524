@@ -110,11 +110,12 @@ RUNNING THE PROGRAM</a></h2>
 <p>Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values.</p>
 <p>INPUT: DEFAULT &lt;NOTES&gt;</p>
 <ul>
-<li>data file directory: data</li>
+<li>data file directory: data &lt;can specify a path, eg data/C2H4&gt;</li>
 <li>test species: Y-H2O Y-H2 Y-CO2</li>
 <li>output file name: data_output</li>
-<li>plot all progress variables: yes</li>
-<li>skip progress variable optimization: no</li>
+<li>plot all progress variables: yes &lt;options: yes, no&gt;</li>
+<li>skip progress variable optimization: no &lt;options: yes, no&gt;</li>
+<li>extrapolate in fittogrid: yes &lt;options: yes, no&gt;</li>
 <li>number of threads: 1 &lt;integer&gt;</li>
 <li>Zpdf: [none] &lt;options: delta, beta&gt;</li>
 <li>sort method: bubble &lt;other options: standard, brute&gt;</li>
@@ -137,6 +138,11 @@ RUNNING THE PROGRAM</a></h2>
 <li>All files must have the same column headers and the same number of rows of data.</li>
 <li>2nd line contains column headers, 3rd line and on contain data</li>
 <li>Column headers for production rate should be: 'ProdRate&lt;SPECIES&gt; [kg/m^3s]'</li>
+</ul>
+<p>Two sets of sample data files are included:</p>
+<ul>
+<li>data/C2H4: full output from FlameMaster for a C2H4 flame</li>
+<li>data/C2H4truncated: a subset of the above selected to be a "well-behaved" test case</li>
 </ul>
 <p>--------------------------------------------------------------------</p>
 <h2><a class="anchor" id="_4_">

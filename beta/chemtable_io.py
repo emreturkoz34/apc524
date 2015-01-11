@@ -80,6 +80,7 @@ options["PlotAllC"] = iof.read_input("plot all progress variables:", inputs, min
 options["SkipProgVar"] = iof.read_input("skip progress variable optimization:", inputs, minargs=0, default=['no'])
 options["nothreads"] = iof.read_input("number of threads:", inputs, minargs=0, default=[1])
 options["lnmcheck"] = iof.read_input("least nonmonotonic check:", inputs, minargs=0, default=['simple'])
+options["gridextrapolate"] = iof.read_input("extrapolate in fittogrid:", inputs, minargs=0, default=['no'])
 
 # find best progress variable
 bestC = []
@@ -171,7 +172,7 @@ convolutedST = [0] * nofiles
 
 maxC = 0
 maxRate = 0
-for kk in range(nofiles): ### future verisons: add loop over [C ST Y1 Y2 etc]
+for kk in range(nofiles): # future verisons: add loop over [C ST Y1 Y2 etc]
     file = datafiles[int(filesmatC.GetVal(kk,1))]
     massfracs = np.genfromtxt(file, unpack=False, skip_header=2, delimiter = "\t", usecols = bestC[0])
     rxnrates = np.genfromtxt(file, unpack=False, skip_header=2, delimiter = "\t", usecols = rxn_rate_locs)
@@ -227,9 +228,15 @@ for i in range(2):
                     datain.SetVal(i,j,k,l,convolutedC[l].GetVal(k,j))
 
 # Run fit to grid and print results
-f2gflag = fittogrid.fittogrid_func(datain, cgrid, interp, dataout, int(options["nothreads"][0]))
-if f2gflag == 1:
-    print("WARNING: extrapolating to fit to cgrid")
+if options["gridextrapolate"][0] == 'yes':
+    extrap = 1
+    print("WARNING: extrapolating to fit to cgrid (may take minutes)")
+elif options["gridextrapolate"][0] == 'no':
+    extrap = 0
+    print("No extrapolation used to fit to grid")
+else:
+    raise IOError ("must say <yes> or <no> for extrapolate in fittogrid:")
+f2gflag = fittogrid.fittogrid_func(datain, cgrid, interp, dataout, int(options["nothreads"][0]), extrap)    
 FinalData = np.zeros((lcgrid, dim2, dim3))
 f = open("".join(["output/",options["OutputFile"][0]]),'w')
 f.write('C        \tZmean      \tZvar      \tSourceTerm \n')
