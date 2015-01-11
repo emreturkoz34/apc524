@@ -14,13 +14,32 @@
 #include "statistics.h"
 using namespace alglib;
 
-// Constructor
+/// Constructor
 HermiteInterp::HermiteInterp() {}
 
-// Destructor
+/// Destructor
 HermiteInterp::~HermiteInterp() {}
 
-// Hermite spline interpolation function
+/// Hermite spline interpolation function
+/*!
+  This function takes in a 2D matrix of data and interpolates an entire row from it using
+  a hermite spline interpolator. Each column of the matrix is treated as a variable, with a
+  specified column being the independent variable. The input data is assumed to be sorted 
+
+  INPUTS:
+  const Matrix *matin    pointer to a Matrix object. This is the input data.
+  int col                integer specifying which column of the input Matrix is the independent
+                         variable
+  double ival            value at which to interpolate
+  double *vecout         pointer to an array which contains the interpolated row. This array has
+                         the same number of columns as the input Matrix.
+  int cols               number of columns of matin/vecout
+
+  OUTPUTS:
+  int                    flag specifying whether or not the function succeeded
+                         = 0: success
+			 = 1: extrapolation attempted
+*/
 int HermiteInterp::Interp(const Matrix *matin, int col, double ival, double *vecout, int cols) {
 
   // Initialize 1d arrays to store x points, y points, and dy/dx at points

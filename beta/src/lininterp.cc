@@ -4,13 +4,32 @@
 #include <stdio.h>
 #include <iostream>
 
-// Constructor
+/// Constructor
 LinInterp::LinInterp() {}
 
-// Destructor
+/// Destructor
 LinInterp::~LinInterp() {}
 
-// Linear interpolation function
+/// Linear interpolation function
+/*!
+  This function takes in a 2D matrix of data and interpolates an entire row from it using
+  a linear interpolator. Each column of the matrix is treated as a variable, with a specified
+  column being the independent variable. The input data is not assumed to be sorted. 
+ 
+  INPUTS:
+  const Matrix *matin    pointer to a Matrix object. This is the input data.
+  int col                integer specifying which column of the input Matrix is the independent 
+                         variable
+  double ival            value at which to interpolate
+  double *vecout         pointer to an array which contains the interpolated row. This array has
+                         the same number of columns as the input Matrix.
+  int cols               number of columns of matin/vecout
+
+  OUTPUTS:
+  int                    flag specifying whether or not the function succeeded
+                         = 0: success
+			 = 1: extrapolation attempted
+ */
 int LinInterp::Interp(const Matrix *matin, int col, double ival, double *vecout, int cols) {
   // Find the rows about which to interpolate
   int row1 = -1, row2 = -1;
