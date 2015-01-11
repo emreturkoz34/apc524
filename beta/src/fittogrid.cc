@@ -48,8 +48,12 @@ int fittogrid(const Matrix4D *datain, const double *cgrid, Interpolator *interp,
 	tmat->SetVal(k, 1, datain->GetVal(1, i, j, k)); // c~
       }
 
+      // Sort the data to be interpolated
+      sorting sorter = new standard_sort(tmat);
+      sorter->SetRefColNum(1);
+      sorter->sort_data();
+
       // Loop over values in cgrid, interpolate to find wgrid
-      
       // Test printing
       printf("\n The following should be sorted by the second column:\n");
       for (int mm = 0; mm < nfiles; ++mm) {
