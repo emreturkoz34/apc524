@@ -1,10 +1,13 @@
 #include "trapz.h"
 
+/// Constructor
 Trapz::Trapz() {
 }
 
+/// Destructor
 Trapz::~Trapz() {
 }
+
 
 double Trapz::integrate(const double *integrand, const double *Z, const int ZPoints) {
 

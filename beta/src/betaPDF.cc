@@ -2,6 +2,7 @@
 #include "math.h"
 #include "assert.h"
 
+/// Constructor
 BetaPDF::BetaPDF(const double *Zmean, const int ZmeanPoints, const double *Zvar, const int ZvarPoints)
   : Zmean_(Zmean),
     ZmeanPoints_(ZmeanPoints),
@@ -9,9 +10,15 @@ BetaPDF::BetaPDF(const double *Zmean, const int ZmeanPoints, const double *Zvar,
     ZvarPoints_(ZvarPoints) {
 }
 
+/// Destructor
 BetaPDF::~BetaPDF() {
 }
 
+
+/*!  The Beta PDF uses statistics (means and variances) to generate a
+  PDF. The PDF values are stored in a Matrix3D object: dim1 is the
+  variance, dim2 is the mean, and dim3 are the data points.
+ */
 int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 
   // Check dimensions of output matrix match dimensions of input arrays
@@ -38,13 +45,13 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 	temp[k] = 0;
       }  
 
-      /// check for Min or Max mean
+      // check for Min or Max mean
       if (ZmeanVal == 1) {
 	temp[ZPoints-1] = Weight * 1;
       } else if (ZmeanVal == 0) {
 	temp[0] = Weight * 1;
 
-	/// Delta PDF for zero variance
+	// Delta PDF for zero variance
       } else if (ZvarVal == 0) {
 	i = 0;
 	while (Z[i] < ZmeanVal) {
@@ -53,19 +60,19 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 	temp[i-1] = Weight * (Z[i]  - ZmeanVal)  / (Z[i] - Z[i-1]);
 	temp[i]   = Weight * (ZmeanVal - Z[i-1]) / (Z[i] - Z[i-1]);
 
-	/// Impossible cases: becomes double delta PDF
+	// Impossible cases: becomes double delta PDF
       } else if (ZvarVal >= ZmeanVal*(1-ZmeanVal)) {
 	temp[0] = Weight * (1-ZmeanVal);
 	temp[ZPoints-1] = Weight * ZmeanVal;
 
-	/// BetaPDF
+	// BetaPDF
       } else {
 
 	alpha = ZmeanVal * (ZmeanVal * (1 - ZmeanVal) / ZvarVal - 1);
 	beta = alpha / ZmeanVal - alpha;
 	factor = lgamma(alpha + beta) - lgamma(alpha) - lgamma(beta);
 
-	/// Middle points: 0 < n < ZPoints-1
+	// Middle points: 0 < n < ZPoints-1
 	for (int n = 1; n < ZPoints-1; n++) {
 	  lnpdf = factor + (alpha - 1) * log(Z[n]) + (beta - 1) * log(1 - Z[n]);
 	  temp[n] = exp(lnpdf);
@@ -80,7 +87,7 @@ int BetaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 	}
       }
 
-      /// Set PDF to output
+      // Set PDF to output
       for (int k = 0; k < ZPoints; k++) {
 	pdfValM->SetVal(n, m, k, temp[k]);
       }

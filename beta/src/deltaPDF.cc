@@ -1,14 +1,21 @@
 #include "deltaPDF.h"
 #include "assert.h"
 
+/// Constructor
 DeltaPDF::DeltaPDF(const double *Zmean, const int ZmeanPoints)
   : Zmean_(Zmean),
     ZmeanPoints_(ZmeanPoints) {
 }
 
+/// Destructor
 DeltaPDF::~DeltaPDF() {
 }
 
+
+/*!  The Delta PDF uses statistics (means) to generate a
+  PDF. The PDF values are stored in a Matrix3D object: dim1 is the
+  variance, dim2 is the mean, and dim3 are the data points.
+ */
 int DeltaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 
   // Check dimensions of output matrix match dimensions of input arrays

@@ -3,6 +3,10 @@
 
 #include "integrator.h"
 
+/// Calculates integral using the trapezoidal method.
+/*!  Trapz takes in an array (the integrand) and returns the integral
+     of that array using the trapezoidal method.
+ */
 class Trapz : public Integrator {
  public:
   Trapz();

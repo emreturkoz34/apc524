@@ -1,12 +1,15 @@
 #include "simpson.h"
 #include "assert.h"
 
+/// Constructor
 Simpson::Simpson()
 {}
 
+/// Destructor
 Simpson::~Simpson() {
 }
 
+/// 
 double Simpson::integrate(const double *integrand, const double *Z, const int ZPoints) {
 
   // Assert that inputs arrays are of the correct length

@@ -3,6 +3,11 @@
 
 #include "integrator.h"
 
+/// Calculates integral using Gauss-Legendre quadrature.
+/*!  GLQuad takes in an array (the integrand) and returns the integral
+     of that array using Gauss-Legendre quadrature. Abscissa are
+     calculated using the external library AlgLib.
+ */
 class GLQuad : public Integrator {
  public:
   GLQuad(int Nodes);

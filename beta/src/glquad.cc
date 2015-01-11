@@ -16,6 +16,7 @@
 #include "specialfunctions.h"
 #include "statistics.h"
 
+/// Constructor
 GLQuad::GLQuad(const int Nodes)
   : Nodes_(Nodes),
     x_(new double[Nodes]),
@@ -46,10 +47,13 @@ GLQuad::GLQuad(const int Nodes)
   }
 }
 
+/// Destructor
 GLQuad::~GLQuad() {
   delete x_;
   delete w_;
 }
+
+
 
 double GLQuad::integrate(const double *integrand, const double *Z, const int ZPoints) {
 

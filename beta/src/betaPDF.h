@@ -4,6 +4,7 @@
 #include "pdf.h"
 #include "matrix3d.h"
 
+/// Evaluates beta PDF and stores values in a Matrix3D object.
 class BetaPDF : public PDF {
  public:
   BetaPDF(const double *Zmean, const int ZmeanPoints, const double *Zvar, const int ZvarPoints);

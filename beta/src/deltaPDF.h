@@ -4,6 +4,7 @@
 #include "pdf.h"
 #include "matrix3d.h"
 
+/// Evaluates delta PDF and stores values in a Matrix3D object.
 class DeltaPDF : public PDF {
  public:
   DeltaPDF(const double *Zmean, const int ZmeanPoints);
