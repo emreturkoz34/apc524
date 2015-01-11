@@ -19,6 +19,9 @@ _maxslope.so: maxslope_wrap.o $(addsuffix .o,$(SLOPE)) $(addsuffix .o,$(MATRIX))
 _leastnonmono.so: leastnonmono_wrap.o $(addsuffix .o,$(NONMONO)) $(addsuffix .o,$(MATRIX))
 	$(CXX) -shared $^ -o $@
 
+# Interpolator shared object
+_interpolator.so: interpolator_wrap.o $(addsuffix .o,$(INTERP)) $(addsuffix .o,$(MATRIX))
+
 # PDF shared object
 _pdf.so: pdf_wrap.o $(addsuffix .o,$(PDFS)) $(addsuffix .o,$(MATRIX))
 	$(CXX) -shared $^ -o $@
