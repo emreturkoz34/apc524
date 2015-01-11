@@ -1,5 +1,25 @@
 #include "fittogrid.h"
 
+/// Function which fits data to a grid
+/*!
+  This function takes in a 4D matrix and fits the data onto a specified grid. 
+
+  INPUTS:
+  Matrix4D *datain       input data stored as a 4D matrix. The structure is (mean, z~, z_v, file), where
+                         mean has dimension 2 and contains w~ and c~. datain can be thought of as two 3D
+                         matrices with structure (z~, z_v, file) containing values of w~ and c~, 
+                         respectively. 
+  const double *cgrid    pointer to an array which contains the values of c~ at which to interpolate
+  Interpolator *interp   pointer to an Interpolator object
+  Matrix3D *dataout      output data stored as a 3D matrix. The structure is (z~, z_v, cgrid), with the 
+                         numbers being interpolated values of w~
+  int numthreads         integer specifying the number of threads to be used (1 = serial, >1 = parallel)
+
+  OUTPUTS:
+  int                    flag specifying whether or not extrapolation was necessary:
+                         = 0: no extrapolation
+			 = 1: extrapolation performed
+*/
 int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matrix3D *dataout, int nthreads) {
   // Assume datain is 4d matrix (mean, z~, z_v, file)
   // mean has dimension 2, contains w~ and c~
