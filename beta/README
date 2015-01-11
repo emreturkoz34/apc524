@@ -1,17 +1,20 @@
 /*!
 
-CHEMTABLE GENERATOR - Beta Version
+\mainpage CHEMTABLE GENERATOR - Beta Version
 
 Emmet Cleary, Daniel Floryan, Jeffry Lew, Bruce Perry, Emre Turkoz
+
 APC524 - Fall 2014
 
 ------------------------------------------------------------------
 
-\section 1 INTRODUCTION
+\section _1_ INTRODUCTION
 
-This file includes instructions for building and running the chemtable generator software. This software processes .kg data files produced by FlameMaster, producing a table of chemical source terms (chemtable) and various plots for visualizing the data. The program is run by executing a single Python script, “chemtable_io.py”, as described below.
+This file includes instructions for building and running the chemtable generator software. This software processes .kg data files produced by FlameMaster, producing a table of chemical source terms (chemtable) and various plots for visualizing the data. The program is run by executing a single Python script (chemtable_io.py) as described below.
 
-\section 2 INSTALLATION
+------------------------------------------------------------------
+
+\section _2_ INSTALLATION
 
 The user interface for this version of the software (and a few helper functions) is written in Python and is ready to use. However, the Python code also contains calls to C++ functions (connected through SWIG) which must be compiled and wrapped before the software can be run, as described below. Building the program generates a variety of shared libraries containing the C++ functions which can be called from Python.
 
@@ -53,48 +56,49 @@ Capabilities of shared library functions:
 
 --------------------------------------------------------------------
 
-\section 3 RUNNING THE PROGRAM 
+\section _3_ RUNNING THE PROGRAM 
 
 After building, the chemtable generation program is run by executing a single Python script (chemtable_io.py) as described below. The program (fittogrid function) has been parallelized using OpenMP and can be run on multiple cores by changing the appropriate value in the input file.
 
 Command: ./chemtable_io.py OR python chemtable_io.py
 
 Inputs:
-     - "chemtable_inputs" text file (must be in same directory as chemtable_io.py)
-     - “*.kg” datafiles (in directory as specified in chemtable_inputs file)
+     - 'chemtable_inputs' text file (must be in same directory as chemtable_io.py)
+     - '*.kg' datafiles (in directory as specified in chemtable_inputs file)
 
 Outputs (written to /output/ directory):
      - text data file (name specified in  chemtable_inputs file) containing tabulated source terms as a function of Cmean, Zmean, and Zvar (4 columns of data)
-     - “CvsTemp.pdf” plot of the chosen progress variable vs. temperature to verify monotonicity
-     - “contour_zvar_XXX.pdf” contour plots of the chemical source term vs. Cmean and Zmean for up to 10 values of Zvar
+     - 'CvsTemp.pdf' plot of the chosen progress variable vs. temperature to verify monotonicity
+     - 'contour_zvar_XXX.pdf' contour plots of the chemical source term vs. Cmean and Zmean for up to 10 values of Zvar
+     - Several status messages, including the identity of the best progress variable, are printed to the terminal
 
 DETAILED INPUT FILE DESCRIPTION:
 
 Inputs are specified with the following syntax:
-<inputname:>\t<inputvalue1>\t<inputvalue2>\t<inputvalue3>…
+<inputname:>\t<inputvalue1>\t<inputvalue2>\t<inputvalue3>... 
 
 Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values.
 
-INPUT					DEFAULT			NOTES		
-data file directory:			data
-test species:				Y-H2O	Y-H2 	Y-CO2
-output file name:			data_output
-plot all progress variables:		yes
-skip progress variable optimization:	no
-number of threads:			1			integer
-Zpdf:					[none]			options: delta, beta
-sort method:				bubble			other options: standard, brute
-interp method:				linear			other options: 
-least nonmonotonic check:		simple			other options: advanced
-max slope test:				linear regression	other options: endpointslope
-integrator:				trapezoid		other options: glquad, simpson
-StoichMassFrac:				0.055
-glq Number of Nodes:			50			integer
-length Cgrid: 				20			integer
-Zvar_max:				[none]			integer
-Zvar_grid:				[none]			integer		
-Zmean_grid:				Z			if Z, set to be same as the Zgrid in
-								Flamelet files, otherwise, an integer
+INPUT:					DEFAULT			<NOTES>		
+- data file directory:			data
+- test species:				Y-H2O	Y-H2 	Y-CO2
+- output file name:			data_output
+- plot all progress variables:		yes
+- skip progress variable optimization:	no
+- number of threads:			1			<integer>
+- Zpdf:					[none]			<options: delta, beta>
+- sort method:				bubble			<other options: standard, brute>
+- interp method:			linear			<other options: hermite, cubic>
+- least nonmonotonic check:		simple			<other options: advanced>
+- max slope test:			linear regression	<other options: endpointslope>
+- integrator:				trapezoid		<other options: glquad, simpson>
+- StoichMassFrac:			0.055
+- glq Number of Nodes:			50			<integer>
+- length Cgrid: 			20			<integer>
+- Zvar_max:				[none]			<integer>
+- Zvar_grid:				[none]			<integer>		
+- Zmean_grid:				Z			<if Z, set to be same as the Zgrid in
+								Flamelet files, otherwise, an integer>
 
 DETAILED DATAFILE DESCRIPTION:
 
@@ -103,11 +107,11 @@ The program is designed specifically to run on .kg datafiles. The first line of 
      - No file may be repeated. 
      - All files must have the same column headers and the same number of rows of data. 
      - 2nd line contains column headers, 3rd line and on contain data
-     - Column headers for production rate should be: “ProdRate<SPECIES> [kg/m^3s]”
+     - Column headers for production rate should be: 'ProdRate<SPECIES> [kg/m^3s]'
 
 --------------------------------------------------------------------
 
-\section 4 DETAILED DOCUMENTATION 
+\section _4_ DETAILED DOCUMENTATION 
 For detailed documentation of all classes and functions used by this program, see the Doxygen-generated HTML documentation.
 
 */
