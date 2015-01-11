@@ -40,7 +40,26 @@ void brute_sort::SetRefColNum(int num){
 }
 
 
-/// Main sorting body
+/// Main function that sorts the given data
+/*!
+  The algortihm processes the reference column and sorts it using the brute sort approach.
+
+  \verbatim
+  INPUT:
+
+  There are no inputs. The data to be sorted is already passed via the constructor
+
+  
+  OUTPUT:
+
+  int          flag specifying whether or not the function succeeded
+                = 0: success
+	       != 0: something went wrong
+
+  \endverbatim
+
+
+ */
 int brute_sort::sort_data(){
   double *refColumn = new double[nrows_];
   int *indices = new int[nrows_];

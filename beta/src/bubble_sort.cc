@@ -50,7 +50,23 @@ void bubble_sort::SetRefColNum(int num){
 
 /// Main sorting body
 /*!
+  This function processes the reference column with the bubble sorting algorithm.
+
   Details of the bubble sort algortihm can be found from the following link: http://en.wikipedia.org/wiki/Bubble_sort
+  
+  \verbatim
+  INPUT
+
+  There are no inputs. The data to be sorted is already passed via the constructor
+
+  OUTPUT:
+
+  int         flag specifying whether or not the function succeeded
+               = 0: success
+	      != 0: something went wrong
+
+  \endverbatim
+
  */
 int bubble_sort::sort_data(){
   bool swapped = true;
