@@ -1,4 +1,4 @@
-/* MaxSlope is an abstract class which provides the framework to
+/*! MaxSlope is an abstract class which provides the framework to
    determine the most monotonic progress variable.
  */
 #ifndef MAXSLOPE_H_

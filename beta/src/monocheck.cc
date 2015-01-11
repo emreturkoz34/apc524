@@ -1,9 +1,8 @@
-/* 
- * monocheck is a class which checks whether a specified progress
- * variable is strictly increasing or strictly decreasing with respect
- * to temperature (or another specified column). That is, C(T1)<C(T2)
- * or C(T1)>C(T2) for T1<T2, where T1 and T2 are any two temperatures
- * and C is the progress variable.
+/*!  monocheck is a class which checks whether a specified progress
+ variable is strictly increasing or strictly decreasing with respect
+ to temperature (or another specified column). That is, C(T1)<C(T2) or
+ C(T1)>C(T2) for T1<T2, where T1 and T2 are any two temperatures and C
+ is the progress variable.
  */
 #include <assert.h>
 #include <stdlib.h>
@@ -22,11 +21,14 @@ MonoCheck::MonoCheck(const Matrix &progVar)
 MonoCheck::~MonoCheck()
 {}
 
-/// CheckStrictMonoticity checks the monotonicity of each column (AKA
-/// progress variable "C") in progVar with respect to column
-/// "col". The output array monoAry must be of length ncols_, where
-/// each cell holds a value of 3 if C is strictly increasing or
-/// strictly decreasing and 0 otherwise.
+/// Method to check whether each progress variable is strictly monotonic
+/*!
+CheckStrictMonoticity checks the monotonicity of each column (AKA
+progress variable "C") in progVar with respect to column
+"col". The output array monoAry must be of length ncols_, where
+each cell holds a value of 3 if C is strictly increasing or
+strictly decreasing and 0 otherwise.
+*/
 int MonoCheck::CheckStrictMonoticity(int *monoAry, const int ncols, int col){
   assert(ncols == ncols_);
 

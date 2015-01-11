@@ -1,4 +1,4 @@
-/* This is the header file simplelnm.h
+/*! This is the header file simplelnm.h
 
    See simplelnm.cc for detailed information about determining the
    least non-monotonic progress variable.
