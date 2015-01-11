@@ -9,6 +9,39 @@ import monocheck
 import maxslope
 import leastnonmono
 
+## @package findprogvar
+# Package containing findC, a function which selects the best progress variable based on the given data files
+
+## Determines the best progress variable for the given data files
+#
+# This function returns a matrix containing the following:
+# (row1) stoich prog var (row2) file indices (row3) stoich Temps, sorted by row1
+#
+# This function also produces plots of the progress variables: output/CvsTemp.pdf.
+# Note that a directory "output" must exist in the directory from which this function is called.
+#
+# The user can skip optimization by specifying options["SkipProgVar"] = 'yes'
+#
+# Note: this Python script relies on C++ functions connected through SWIG, which must generate the 
+# following modules:
+# - matrix
+# - sorting
+# - lininterp
+# - monocheck
+# - maxslope
+# - least nonmono
+#
+# @param datafiles vector of strings specifying file names or paths for the desired data files.
+# Note that the data files should be .kg files produced by FlameMaster
+#
+# @param testspecies vector of strings specifying the species to be considered in the progress variable
+#
+# @param bestC vector containing information about the best progress variable (output)
+#
+# @param options Python dictionary filled with user specified options for the program. Requires        
+# options["sort method"], options["StoichMassFrac"], options["InterpMethod"], options["MaxSlopeTest"],
+# options["PlotAllC"], and options["SkipProgVar"] to be specified
+
 def findC(datafiles, testspecies, bestC, options): 
 
     # Interpolate each datafile, generate a matrix from interpolated data

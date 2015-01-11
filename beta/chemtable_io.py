@@ -8,6 +8,7 @@ import numpy as np
 import iofuncs as iof
 import findprogvar as fpv
 import glob
+import os
 
 import matrix
 import matrix3d
@@ -21,11 +22,48 @@ import convolute
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
+## @package chemtable_io
+# Executable Python script for chemtable generation, including calling findprogvar 
+# to determine the best progress variable 
+#
+# Inputs:
+# - chemtable_inputs: text file containing user options. Each option is written on it's 
+# own line, and if multiple values are required they should be seperated by tabs. Details 
+# of the chemtable_inputs file and it's required contents can be found in the README.
+# -  .kg (FlameMaster output) data files: in a directory specified by the user in chemtable_inputs.
+# All files must be unique. 
+#
+# Outputs:
+# - /output/textfile (name specified by user in chemtable_inputs): 
+# 4 columns of data, representing Cmean, Zmean, Zvar, and the Chemical Source Term
+# - /output/contour_zvar_XXX.pdf *10: 10 contour plots of chemical source term vs. Zmean and Cmean
+# at the values of Zvar specified in the filenames. If the user specifies taht less than 10 values
+# of Zvar should be calculated, then that number of contour plots is generates
+# - /output/CvsTemp.pdf: plot of the best progress variable (and others if the user desries) vs. 
+# Temperature
+#
+# Note: this Python script relies on C++ functions connected through SWIG, which must generate the 
+# following modules:
+# - matrix, matrix3D, matrix4D
+# - pdf
+# - integrator
+# - convolute
+# - sorting
+# - lininterp
+# - fittogrid
+
+
+# Create directory for outputs if one does not alreayd exist
+try:
+    os.stat('output')
+except:
+    os.mkdir('output')
+
 # read input file
 print " "
 fin1 = open('chemtable_inputs')
 inputs = [line.strip().split('\t') for line in fin1]
-datafiledir = iof.read_input("data file directory:", inputs)
+datafiledir = iof.read_input("data file directory:", inputs, default=['data'])
 datafiles = glob.glob("".join(["".join(datafiledir), "/*.kg"])) #vector of paths of all files in specified directory
 testspecies = iof.read_input("test species:", inputs, minargs=0, default=["Y-CO2","Y-CO","Y-H2O"])
 options = {} #dictionary stores options
@@ -59,8 +97,6 @@ else:
 sorter.SetRefColNum(0)
 sorter.sort_data()
 print "\nSorting filesmatrix by C using %s sort" % options["sort method"][0]
-
-
 
 # Calculate PDF matrix
     # Get user inputs
@@ -215,8 +251,6 @@ for j in plots:
     i = int((j+1)*ZvarPoints/(noplots+2))
     X, Y = np.meshgrid(Zmean, cgrid)
     plt.figure()
-    #im = plt.imshow(FinalData[:,:,i], interpolation='bilinear', origin='lower',
-    #                cmap=cm.jet, extent=(0,1,0,1))#(0,maxC,0,1))
     levels=np.linspace(-1, maxRate, 50)
     CS = plt.contourf(X, Y, FinalData[:,:,i], levels)
     plt.title('Source term (kg/m^3-s) vs. Zmean and C for Zvar = %5.3g' % Zvar[i])
