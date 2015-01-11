@@ -1,4 +1,4 @@
-/* This is the header file endpointslope.h
+/*! This is the header file endpointslope.h
 
    See endpointslope.cc for detailed information about determining the
    most monotonic progress variable.
