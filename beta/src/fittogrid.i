@@ -6,6 +6,7 @@
 #define SWIG_FILE_WITH_INIT
 #include "interpolator.h"
 #include "fittogrid.h"
+#include "sorting.h"
 #include "standard_sort.h"
 #endif
 %}
