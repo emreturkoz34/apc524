@@ -39,6 +39,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul>
       <li><a href="../../files.html"><span>File&nbsp;List</span></a></li>
+      <li><a href="../../globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
 <h1>src/convolute.h</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef CONVOLUTE_H_</span>
@@ -48,7 +49,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00005"></a>00005 <span class="preprocessor">#include &quot;matrix3d.h&quot;</span>
 <a name="l00006"></a>00006 <span class="preprocessor">#include &quot;integrator.h&quot;</span>
 <a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="keywordtype">int</span> convVal(<span class="keywordtype">double</span> *Z, <span class="keywordtype">double</span> *data, <a class="code" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> *pdfValM, <a class="code" href="../../d3/d3f/classMatrix.html">Matrix</a> *postConvVal, <a class="code" href="../../da/d05/classIntegrator.html">Integrator</a> *intgr);
+<a name="l00008"></a>00008 <span class="keywordtype">int</span> <a class="code" href="../../d4/db1/convolute_8cc.html#a4dc63393d8024c8d83caa68eed073629" title="Convolution function.">convVal</a>(<span class="keywordtype">double</span> *Z, <span class="keywordtype">double</span> *data, <a class="code" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> *pdfValM, <a class="code" href="../../d3/d3f/classMatrix.html">Matrix</a> *postConvVal, <a class="code" href="../../da/d05/classIntegrator.html">Integrator</a> *intgr);
 <a name="l00009"></a>00009 
 <a name="l00010"></a>00010 <span class="preprocessor">#endif // CONVOLUTE_H_</span>
 </pre></div></div>
@@ -57,7 +58,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
