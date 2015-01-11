@@ -45,7 +45,12 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>BetaPDF Class Reference</h1><!-- doxytag: class="BetaPDF" --><!-- doxytag: inherits="PDF" --><div class="dynheader">
+<h1>BetaPDF Class Reference</h1><!-- doxytag: class="BetaPDF" --><!-- doxytag: inherits="PDF" -->
+<p>Evaluates beta <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> and stores values in a <a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> object.  
+<a href="#_details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../da/d9e/betaPDF_8h_source.html">betaPDF.h</a>&gt;</code></p>
+<div class="dynheader">
 Inheritance diagram for BetaPDF:</div>
 <div class="dynsection">
  <div class="center">
@@ -60,9 +65,16 @@ Inheritance diagram for BetaPDF:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b5160ebefdcd8b696a45a131bab3261"></a><!-- doxytag: member="BetaPDF::BetaPDF" ref="a0b5160ebefdcd8b696a45a131bab3261" args="(const double *Zmean, const int ZmeanPoints, const double *Zvar, const int ZvarPoints)" -->
-&nbsp;</td><td class="memItemRight" valign="bottom"><b>BetaPDF</b> (const double *Zmean, const int ZmeanPoints, const double *Zvar, const int ZvarPoints)</td></tr>
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4f/classBetaPDF.html#a0b5160ebefdcd8b696a45a131bab3261">BetaPDF</a> (const double *Zmean, const int ZmeanPoints, const double *Zvar, const int ZvarPoints)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3394efd2861f7a2d5944365ea0edbe50"></a><!-- doxytag: member="BetaPDF::~BetaPDF" ref="a3394efd2861f7a2d5944365ea0edbe50" args="()" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4f/classBetaPDF.html#a3394efd2861f7a2d5944365ea0edbe50">~BetaPDF</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4f/classBetaPDF.html#a5c27da056f9c9b17af0888fac7df2c9f">pdfVal</a> (const double *Z, const int ZPoints, <a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> *pdfValM)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Main routine that generates the <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> values.  <a href="#a5c27da056f9c9b17af0888fac7df2c9f"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Evaluates beta <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> and stores values in a <a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> object. </p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a5c27da056f9c9b17af0888fac7df2c9f"></a><!-- doxytag: member="BetaPDF::pdfVal" ref="a5c27da056f9c9b17af0888fac7df2c9f" args="(const double *Z, const int ZPoints, Matrix3D *pdfValM)" -->
 <div class="memitem">
@@ -95,14 +107,25 @@ Inheritance diagram for BetaPDF:</div>
 </div>
 <div class="memdoc">
 
-<p><p>check for Min or Max mean</p>
-<p>Delta <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> for zero variance</p>
-<p>Impossible cases: becomes double delta <a class="el" href="../../dc/d2d/classPDF.html">PDF</a></p>
-<p><a class="el" href="../../de/d4f/classBetaPDF.html">BetaPDF</a></p>
-<p>Middle points: 0 &lt; n &lt; ZPoints-1</p>
-<p>Set <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> to output </p>
-</p>
+<p>Main routine that generates the <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> values. </p>
+<p>The Beta <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> uses statistics (means and variances) to generate a <a class="el" href="../../dc/d2d/classPDF.html">PDF</a>. The <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> values are stored in a <a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> object: dim1 is the variance, dim2 is the mean, and dim3 are the data points.</p>
+<div class="fragment"><pre class="fragment">
 
+  INPUTS: 
+  const double* Z        double array containing mixture fraction values coming from the files
+
+  const int ZPoints      number of mixture fraction values in the Z array
+
+  Matrix3D* pdfValM      the Matrix3D type container that stores the PDF values
+
+  
+  OUTPUT:
+
+  int                    flag specifying whether or not the function succeeded
+                          = 0: success
+			 != 0: something went wrong
+
+  </pre></div> 
 <p>Implements <a class="el" href="../../dc/d2d/classPDF.html">PDF</a>.</p>
 
 </div>

@@ -2,7 +2,12 @@
 \section{DeltaPDF Class Reference}
 \label{dd/d98/classDeltaPDF}\index{DeltaPDF@{DeltaPDF}}
 }
-Inheritance diagram for DeltaPDF::\begin{figure}[H]
+
+
+Evaluates delta \hyperlink{classPDF}{PDF} and stores values in a \hyperlink{classMatrix3D}{Matrix3D} object.  
+
+
+{\ttfamily \#include $<$deltaPDF.h$>$}Inheritance diagram for DeltaPDF::\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2cm]{dd/d98/classDeltaPDF}
@@ -12,16 +17,51 @@ Inheritance diagram for DeltaPDF::\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \hypertarget{classDeltaPDF_a6268a222dac459788d7a7589e0bec1c5}{
-{\bfseries DeltaPDF} (const double $\ast$Zmean, const int ZmeanPoints)}
+\hyperlink{classDeltaPDF_a6268a222dac459788d7a7589e0bec1c5}{DeltaPDF} (const double $\ast$Zmean, const int ZmeanPoints)}
 \label{dd/d98/classDeltaPDF_a6268a222dac459788d7a7589e0bec1c5}
 
-\item 
-\hypertarget{classDeltaPDF_a787e205c3bd8d4f95f7c528497e3a617}{
-int {\bfseries pdfVal} (const double $\ast$Z, const int ZPoints, \hyperlink{classMatrix3D}{Matrix3D} $\ast$pdfValM)}
-\label{dd/d98/classDeltaPDF_a787e205c3bd8d4f95f7c528497e3a617}
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{classDeltaPDF_a9539ed9f2f24966af76b6bba4734b2be}{
+\hyperlink{classDeltaPDF_a9539ed9f2f24966af76b6bba4734b2be}{$\sim$DeltaPDF} ()}
+\label{dd/d98/classDeltaPDF_a9539ed9f2f24966af76b6bba4734b2be}
 
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+int \hyperlink{classDeltaPDF_a787e205c3bd8d4f95f7c528497e3a617}{pdfVal} (const double $\ast$Z, const int ZPoints, \hyperlink{classMatrix3D}{Matrix3D} $\ast$pdfValM)
 \end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+Evaluates delta \hyperlink{classPDF}{PDF} and stores values in a \hyperlink{classMatrix3D}{Matrix3D} object. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDeltaPDF_a787e205c3bd8d4f95f7c528497e3a617}{
+\index{DeltaPDF@{DeltaPDF}!pdfVal@{pdfVal}}
+\index{pdfVal@{pdfVal}!DeltaPDF@{DeltaPDF}}
+\subsubsection[{pdfVal}]{\setlength{\rightskip}{0pt plus 5cm}int DeltaPDF::pdfVal (const double $\ast$ {\em Z}, \/  const int {\em ZPoints}, \/  {\bf Matrix3D} $\ast$ {\em pdfValM})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{dd/d98/classDeltaPDF_a787e205c3bd8d4f95f7c528497e3a617}
+The Delta \hyperlink{classPDF}{PDF} uses statistics (means) to generate a \hyperlink{classPDF}{PDF}. The \hyperlink{classPDF}{PDF} values are stored in a \hyperlink{classMatrix3D}{Matrix3D} object: dim1 is the variance, dim2 is the mean, and dim3 are the data points.
+
+\begin{DoxyVerb}
+  
+  INPUTS: 
+  
+  const double *Z           double arrray containing mixture fraction values coming from the files
+
+  const int ZPoints         number of mixture fraction values in the Z array
+
+  Matrix3D* pdfValm         the Matrix3D type container that stores the PDF values
+
+
+  OUTPUT:
+
+  int                       flag specifying whether or not the function succeeded
+                             = 0: success
+			    != 0: something went wrong
+
+  \end{DoxyVerb}
+ 
+
+Implements \hyperlink{classPDF}{PDF}.
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 

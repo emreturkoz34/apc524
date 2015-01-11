@@ -45,7 +45,12 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>DeltaPDF Class Reference</h1><!-- doxytag: class="DeltaPDF" --><!-- doxytag: inherits="PDF" --><div class="dynheader">
+<h1>DeltaPDF Class Reference</h1><!-- doxytag: class="DeltaPDF" --><!-- doxytag: inherits="PDF" -->
+<p>Evaluates delta <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> and stores values in a <a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> object.  
+<a href="#_details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../d4/d96/deltaPDF_8h_source.html">deltaPDF.h</a>&gt;</code></p>
+<div class="dynheader">
 Inheritance diagram for DeltaPDF:</div>
 <div class="dynsection">
  <div class="center">
@@ -60,10 +65,69 @@ Inheritance diagram for DeltaPDF:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6268a222dac459788d7a7589e0bec1c5"></a><!-- doxytag: member="DeltaPDF::DeltaPDF" ref="a6268a222dac459788d7a7589e0bec1c5" args="(const double *Zmean, const int ZmeanPoints)" -->
-&nbsp;</td><td class="memItemRight" valign="bottom"><b>DeltaPDF</b> (const double *Zmean, const int ZmeanPoints)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a787e205c3bd8d4f95f7c528497e3a617"></a><!-- doxytag: member="DeltaPDF::pdfVal" ref="a787e205c3bd8d4f95f7c528497e3a617" args="(const double *Z, const int ZPoints, Matrix3D *pdfValM)" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>pdfVal</b> (const double *Z, const int ZPoints, <a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> *pdfValM)</td></tr>
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d98/classDeltaPDF.html#a6268a222dac459788d7a7589e0bec1c5">DeltaPDF</a> (const double *Zmean, const int ZmeanPoints)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9539ed9f2f24966af76b6bba4734b2be"></a><!-- doxytag: member="DeltaPDF::~DeltaPDF" ref="a9539ed9f2f24966af76b6bba4734b2be" args="()" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d98/classDeltaPDF.html#a9539ed9f2f24966af76b6bba4734b2be">~DeltaPDF</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d98/classDeltaPDF.html#a787e205c3bd8d4f95f7c528497e3a617">pdfVal</a> (const double *Z, const int ZPoints, <a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> *pdfValM)</td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Evaluates delta <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> and stores values in a <a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> object. </p>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a787e205c3bd8d4f95f7c528497e3a617"></a><!-- doxytag: member="DeltaPDF::pdfVal" ref="a787e205c3bd8d4f95f7c528497e3a617" args="(const double *Z, const int ZPoints, Matrix3D *pdfValM)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int DeltaPDF::pdfVal </td>
+          <td>(</td>
+          <td class="paramtype">const double *&nbsp;</td>
+          <td class="paramname"> <em>Z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&nbsp;</td>
+          <td class="paramname"> <em>ZPoints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> *&nbsp;</td>
+          <td class="paramname"> <em>pdfValM</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The Delta <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> uses statistics (means) to generate a <a class="el" href="../../dc/d2d/classPDF.html">PDF</a>. The <a class="el" href="../../dc/d2d/classPDF.html">PDF</a> values are stored in a <a class="el" href="../../d0/dcb/classMatrix3D.html">Matrix3D</a> object: dim1 is the variance, dim2 is the mean, and dim3 are the data points.</p>
+<div class="fragment"><pre class="fragment">
+  
+  INPUTS: 
+  
+  const double *Z           double arrray containing mixture fraction values coming from the files
+
+  const int ZPoints         number of mixture fraction values in the Z array
+
+  Matrix3D* pdfValm         the Matrix3D type container that stores the PDF values
+
+
+  OUTPUT:
+
+  int                       flag specifying whether or not the function succeeded
+                             = 0: success
+			    != 0: something went wrong
+
+  </pre></div> 
+<p>Implements <a class="el" href="../../dc/d2d/classPDF.html">PDF</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="../../d4/d96/deltaPDF_8h_source.html">deltaPDF.h</a></li>
 <li>src/deltaPDF.cc</li>

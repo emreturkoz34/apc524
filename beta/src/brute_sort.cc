@@ -2,11 +2,7 @@
 #include "brute_sort.h"
 
 
-/*
-  This sorting algortihm is built upon the base class developed at sorting.h
-  
-  The main sorting algorithm is executed using sort_data()
-  
+/*!
   This algorithm goes over the each entry (#rows times) at the selected column, finds the
   maximum entry, records its index. This is repeated #rows times until the indices of the 
   entries are obtained in order. Then each column of the matrix is reordered using these
@@ -16,7 +12,7 @@
 
 
 
-// Constructor
+/// Constructor
 brute_sort::brute_sort(Matrix* data){
   ncols_ = data->GetNumCols();
   nrows_ = data->GetNumRows();
@@ -32,7 +28,7 @@ brute_sort::brute_sort(Matrix* data){
 
 }
 
-// Destructor
+/// Destructor
 brute_sort::~brute_sort(){
   //delete data_;
   delete datacopy_;

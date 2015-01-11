@@ -2,7 +2,12 @@
 \section{GLQuad Class Reference}
 \label{db/d06/classGLQuad}\index{GLQuad@{GLQuad}}
 }
-Inheritance diagram for GLQuad::\begin{figure}[H]
+
+
+Calculates integral using Gauss-\/Legendre quadrature.  
+
+
+{\ttfamily \#include $<$glquad.h$>$}Inheritance diagram for GLQuad::\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2cm]{db/d06/classGLQuad}
@@ -11,17 +16,65 @@ Inheritance diagram for GLQuad::\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{classGLQuad_a835d29af2507b6b2716794d3371d2ba8}{GLQuad} (int Nodes)
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{classGLQuad_ad37beb73af53a94ca95ee8eddfe207ab}{
+\hyperlink{classGLQuad_ad37beb73af53a94ca95ee8eddfe207ab}{$\sim$GLQuad} ()}
+\label{db/d06/classGLQuad_ad37beb73af53a94ca95ee8eddfe207ab}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+double \hyperlink{classGLQuad_a951e36d849cfadc749a62218212802b6}{integrate} (const double $\ast$integrand, const double $\ast$Z, const int ZPoints)
+\begin{DoxyCompactList}\small\item\em Integration using Gauss-\/Legendre quadrature. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Calculates integral using Gauss-\/Legendre quadrature. \hyperlink{classGLQuad}{GLQuad} takes in an array (the integrand) and returns the integral of that array using Gauss-\/Legendre quadrature. Abscissa are calculated using the external library AlgLib. 
+
+\subsection{Constructor \& Destructor Documentation}
 \hypertarget{classGLQuad_a835d29af2507b6b2716794d3371d2ba8}{
-{\bfseries GLQuad} (int Nodes)}
+\index{GLQuad@{GLQuad}!GLQuad@{GLQuad}}
+\index{GLQuad@{GLQuad}!GLQuad@{GLQuad}}
+\subsubsection[{GLQuad}]{\setlength{\rightskip}{0pt plus 5cm}GLQuad::GLQuad (int {\em Nodes})}}
 \label{db/d06/classGLQuad_a835d29af2507b6b2716794d3371d2ba8}
 
-\item 
+
+Constructor. Coordinates of abcissas are calculated in this function.
+
+INPUTS:
+
+const int Nodes number of abcissa
+
+OUTPUT:
+
+No particular output objects. Abcissas and weights are stored in x\_\- and w\_\- objects, respectively. 
+
+\subsection{Member Function Documentation}
 \hypertarget{classGLQuad_a951e36d849cfadc749a62218212802b6}{
-double \hyperlink{classGLQuad_a951e36d849cfadc749a62218212802b6}{integrate} (const double $\ast$integrand, const double $\ast$Z, const int ZPoints)}
+\index{GLQuad@{GLQuad}!integrate@{integrate}}
+\index{integrate@{integrate}!GLQuad@{GLQuad}}
+\subsubsection[{integrate}]{\setlength{\rightskip}{0pt plus 5cm}double GLQuad::integrate (const double $\ast$ {\em integrand}, \/  const double $\ast$ {\em Z}, \/  const int {\em ZPoints})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{db/d06/classGLQuad_a951e36d849cfadc749a62218212802b6}
 
-\begin{DoxyCompactList}\small\item\em Virtual function to be inherited by each integration algorithm to integrate the given data set. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
+Integration using Gauss-\/Legendre quadrature. Gauss-\/Legendre quadrature is applied to integrate a given integrand over a given double array, Z. Abcissas and weights are created during the execution of the constructor. The default number of nodes is 20, the number of nodes for the quadrature can be modified from the input file
+
+\begin{DoxyVerb}
+  INPUTS:
+
+  const double *integrand            array that contains function values to be integrated
+
+  const double *Z                    array that contains the mixture fraction values which the integrand will be integrated over
+
+  const int ZPoints                  number of values, size of the integrand and Z containers
+  
+  OUTPUT:
+
+  double                             result of the integration
+
+  \end{DoxyVerb}
+ 
+
+Implements \hyperlink{classIntegrator_a89fbef2f7923ce4e2c979b2ff1d1f4ac}{Integrator}.
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 

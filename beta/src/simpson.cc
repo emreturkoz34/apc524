@@ -9,7 +9,27 @@ Simpson::Simpson()
 Simpson::~Simpson() {
 }
 
-/// 
+/// Main function that integrates a given data set using Simpson's Rule
+/*!
+  Simpson's rule is applied to integrate a given integrand over a given double array, Z.
+
+  \verbatim
+  INPUTS: 
+
+  const double *integrand           array that contains function values to be integrated
+
+  const double *Z                   array that contains the mixture fraction values which the integrand will be integrated over
+
+  const int ZPoints                 number of values, size of the integrand and Z arrays
+
+
+  OUTPUT:
+
+  double                            result of the integration
+
+  \endverbatim
+
+ */
 double Simpson::integrate(const double *integrand, const double *Z, const int ZPoints) {
 
   // Assert that inputs arrays are of the correct length

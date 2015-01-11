@@ -45,7 +45,12 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>Trapz Class Reference</h1><!-- doxytag: class="Trapz" --><!-- doxytag: inherits="Integrator" --><div class="dynheader">
+<h1>Trapz Class Reference</h1><!-- doxytag: class="Trapz" --><!-- doxytag: inherits="Integrator" -->
+<p>Calculates integral using the trapezoidal method.  
+<a href="#_details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../d3/ddd/trapz_8h_source.html">trapz.h</a>&gt;</code></p>
+<div class="dynheader">
 Inheritance diagram for Trapz:</div>
 <div class="dynsection">
  <div class="center">
@@ -59,10 +64,71 @@ Inheritance diagram for Trapz:</div>
 <p><a href="../../dc/d98/classTrapz-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8aee327ed631f75ef3dea7e458f71cca"></a><!-- doxytag: member="Trapz::integrate" ref="a8aee327ed631f75ef3dea7e458f71cca" args="(const double *integrand, const double *Z, const int ZPoints)" -->
-double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da8/classTrapz.html#a8aee327ed631f75ef3dea7e458f71cca">integrate</a> (const double *integrand, const double *Z, const int ZPoints)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Virtual function to be inherited by each integration algorithm to integrate the given data set. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a464cc7e5b33620d799cb89f69f70f1b4"></a><!-- doxytag: member="Trapz::Trapz" ref="a464cc7e5b33620d799cb89f69f70f1b4" args="()" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da8/classTrapz.html#a464cc7e5b33620d799cb89f69f70f1b4">Trapz</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adff2586590ecb48620b749a0966f32a7"></a><!-- doxytag: member="Trapz::~Trapz" ref="adff2586590ecb48620b749a0966f32a7" args="()" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da8/classTrapz.html#adff2586590ecb48620b749a0966f32a7">~Trapz</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/da8/classTrapz.html#a8aee327ed631f75ef3dea7e458f71cca">integrate</a> (const double *integrand, const double *Z, const int ZPoints)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Main function that integrates a given data set using Trapezoidal Rule.  <a href="#a8aee327ed631f75ef3dea7e458f71cca"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Calculates integral using the trapezoidal method. </p>
+<p><a class="el" href="../../d8/da8/classTrapz.html" title="Calculates integral using the trapezoidal method.">Trapz</a> takes in an array (the integrand) and returns the integral of that array using the trapezoidal method. </p>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a8aee327ed631f75ef3dea7e458f71cca"></a><!-- doxytag: member="Trapz::integrate" ref="a8aee327ed631f75ef3dea7e458f71cca" args="(const double *integrand, const double *Z, const int ZPoints)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Trapz::integrate </td>
+          <td>(</td>
+          <td class="paramtype">const double *&nbsp;</td>
+          <td class="paramname"> <em>integrand</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&nbsp;</td>
+          <td class="paramname"> <em>Z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&nbsp;</td>
+          <td class="paramname"> <em>ZPoints</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Main function that integrates a given data set using Trapezoidal Rule. </p>
+<p>Trapezoidal rule is applied to integrate a given integrand over a given double array, Z.</p>
+<div class="fragment"><pre class="fragment">
+  INPUTS:
+
+  const double *integrand          array that contains function values to be integrated
+
+  const double *Z                  array that contains the mixture fraction values which the integrand will be integrated over
+
+  const int ZPoints                number of values, size of the integrand and Z containers
+
+  
+  OUTPUT:
+
+  double                           result of the integration
+ 
+  </pre></div> 
+<p>Implements <a class="el" href="../../da/d05/classIntegrator.html#a89fbef2f7923ce4e2c979b2ff1d1f4ac">Integrator</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="../../d3/ddd/trapz_8h_source.html">trapz.h</a></li>
 <li>src/trapz.cc</li>

@@ -11,11 +11,13 @@ Inheritance diagram for brute\_\-sort::\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classbrute__sort_a2dbbb3b1c89d6a5720d79a5bf150ad1f}{
-{\bfseries brute\_\-sort} (\hyperlink{classMatrix}{Matrix} $\ast$data)}
-\label{d3/d39/classbrute__sort_a2dbbb3b1c89d6a5720d79a5bf150ad1f}
+\hyperlink{classbrute__sort_a2dbbb3b1c89d6a5720d79a5bf150ad1f}{brute\_\-sort} (\hyperlink{classMatrix}{Matrix} $\ast$data)
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{classbrute__sort_a0c5f47456d59d36d8b2370196d953b81}{
+\hyperlink{classbrute__sort_a0c5f47456d59d36d8b2370196d953b81}{$\sim$brute\_\-sort} ()}
+\label{d3/d39/classbrute__sort_a0c5f47456d59d36d8b2370196d953b81}
 
-\item 
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
 \hypertarget{classbrute__sort_a377b8811e92553a66cdb6780c43e16e6}{
 int \hyperlink{classbrute__sort_a377b8811e92553a66cdb6780c43e16e6}{sort\_\-data} ()}
 \label{d3/d39/classbrute__sort_a377b8811e92553a66cdb6780c43e16e6}
@@ -25,28 +27,18 @@ int \hyperlink{classbrute__sort_a377b8811e92553a66cdb6780c43e16e6}{sort\_\-data}
 void \hyperlink{classbrute__sort_a7d43275af73d67695f2736dcada07b86}{SetRefColNum} (int num)}
 \label{d3/d39/classbrute__sort_a7d43275af73d67695f2736dcada07b86}
 
-\begin{DoxyCompactList}\small\item\em Set the reference column number. \item\end{DoxyCompactList}\item 
-\hypertarget{classbrute__sort_a548e41cbd5295cef67b18e4d88751ca7}{
-int {\bfseries extractRefCol} ()}
-\label{d3/d39/classbrute__sort_a548e41cbd5295cef67b18e4d88751ca7}
+\begin{DoxyCompactList}\small\item\em Set the reference column number. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
-\item 
-\hypertarget{classbrute__sort_ac430d83982bdd362c5e870b56b70eccb}{
-int {\bfseries generateIndexArray} ()}
-\label{d3/d39/classbrute__sort_ac430d83982bdd362c5e870b56b70eccb}
 
-\item 
-\hypertarget{classbrute__sort_a4e18e2ae0ca7c37d657a1447060992ab}{
-void {\bfseries SetSortStartIndex} (int left)}
-\label{d3/d39/classbrute__sort_a4e18e2ae0ca7c37d657a1447060992ab}
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrute__sort_a2dbbb3b1c89d6a5720d79a5bf150ad1f}{
+\index{brute\_\-sort@{brute\_\-sort}!brute\_\-sort@{brute\_\-sort}}
+\index{brute\_\-sort@{brute\_\-sort}!brute_sort@{brute\_\-sort}}
+\subsubsection[{brute\_\-sort}]{\setlength{\rightskip}{0pt plus 5cm}brute\_\-sort::brute\_\-sort ({\bf Matrix} $\ast$ {\em data})}}
+\label{d3/d39/classbrute__sort_a2dbbb3b1c89d6a5720d79a5bf150ad1f}
 
-\item 
-\hypertarget{classbrute__sort_a7fc765a30ed771ca56ecbc782076b0dc}{
-void {\bfseries SetSortEndIndex} (int right)}
-\label{d3/d39/classbrute__sort_a7fc765a30ed771ca56ecbc782076b0dc}
 
-\end{DoxyCompactItemize}
-
+Constructor. This algorithm goes over the each entry (rows times) at the selected column, finds the maximum entry, records its index. This is repeated rows times until the indices of the entries are obtained in order. Then each column of the matrix is reordered using these indices. 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 

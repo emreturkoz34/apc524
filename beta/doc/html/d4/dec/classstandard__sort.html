@@ -59,9 +59,8 @@ Inheritance diagram for standard_sort:</div>
 <p><a href="../../de/dc1/classstandard__sort-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a70a7e1ba1cae2d294b252f6182f81436"></a><!-- doxytag: member="standard_sort::standard_sort" ref="a70a7e1ba1cae2d294b252f6182f81436" args="(Matrix *data)" -->
-&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/classstandard__sort.html#a70a7e1ba1cae2d294b252f6182f81436">standard_sort</a> (<a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> *data)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/classstandard__sort.html#a70a7e1ba1cae2d294b252f6182f81436">standard_sort</a> (<a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> *data)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#a70a7e1ba1cae2d294b252f6182f81436"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af40099379c12e092519a20afbad5c6b9"></a><!-- doxytag: member="standard_sort::~standard_sort" ref="af40099379c12e092519a20afbad5c6b9" args="()" -->
 &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/classstandard__sort.html#af40099379c12e092519a20afbad5c6b9">~standard_sort</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor. <br/></td></tr>
@@ -71,6 +70,28 @@ Inheritance diagram for standard_sort:</div>
 void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dec/classstandard__sort.html#a5bf11721c6c6147440c68409b830a31a">SetRefColNum</a> (int num)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the reference column number. <br/></td></tr>
 </table>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a70a7e1ba1cae2d294b252f6182f81436"></a><!-- doxytag: member="standard_sort::standard_sort" ref="a70a7e1ba1cae2d294b252f6182f81436" args="(Matrix *data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">standard_sort::standard_sort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> *&nbsp;</td>
+          <td class="paramname"> <em>data</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructor. </p>
+<p>The data to be sorted is passed to the constructor. A duplicate of the data is produced to be later at this stage </p>
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a34a0d914ebac6e328dfe371a1e1a8afb"></a><!-- doxytag: member="standard_sort::sort_data" ref="a34a0d914ebac6e328dfe371a1e1a8afb" args="()" -->
 <div class="memitem">
@@ -88,8 +109,19 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 <div class="memdoc">
 
 <p>Main function that sorts the given data. </p>
-<p>The algorithm sends the reference column to the standard <a class="el" href="../../df/d42/classsorting.html">sorting</a> operator that is embedded into the C++ standard library </p>
+<p>The algorithm sends the reference column to the standard <a class="el" href="../../df/d42/classsorting.html">sorting</a> operator that is embedded into the C++ standard library</p>
+<div class="fragment"><pre class="fragment">
+  INPUT 
 
+  There are no inputs. The data to be sorted is already passed via the constructor
+
+  OUTPUT:
+
+  int       flag specifying whether or not the function succeeded
+             = 0: success
+	    != 0: something went wrong
+
+</pre></div> 
 <p>Implements <a class="el" href="../../df/d42/classsorting.html#a94c4b729732743299f3dcd2505312381">sorting</a>.</p>
 
 </div>

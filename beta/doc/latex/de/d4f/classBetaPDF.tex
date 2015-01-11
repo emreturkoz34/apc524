@@ -2,7 +2,12 @@
 \section{BetaPDF Class Reference}
 \label{de/d4f/classBetaPDF}\index{BetaPDF@{BetaPDF}}
 }
-Inheritance diagram for BetaPDF::\begin{figure}[H]
+
+
+Evaluates beta \hyperlink{classPDF}{PDF} and stores values in a \hyperlink{classMatrix3D}{Matrix3D} object.  
+
+
+{\ttfamily \#include $<$betaPDF.h$>$}Inheritance diagram for BetaPDF::\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2cm]{de/d4f/classBetaPDF}
@@ -12,13 +17,21 @@ Inheritance diagram for BetaPDF::\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \hypertarget{classBetaPDF_a0b5160ebefdcd8b696a45a131bab3261}{
-{\bfseries BetaPDF} (const double $\ast$Zmean, const int ZmeanPoints, const double $\ast$Zvar, const int ZvarPoints)}
+\hyperlink{classBetaPDF_a0b5160ebefdcd8b696a45a131bab3261}{BetaPDF} (const double $\ast$Zmean, const int ZmeanPoints, const double $\ast$Zvar, const int ZvarPoints)}
 \label{de/d4f/classBetaPDF_a0b5160ebefdcd8b696a45a131bab3261}
 
-\item 
-int \hyperlink{classBetaPDF_a5c27da056f9c9b17af0888fac7df2c9f}{pdfVal} (const double $\ast$Z, const int ZPoints, \hyperlink{classMatrix3D}{Matrix3D} $\ast$pdfValM)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{classBetaPDF_a3394efd2861f7a2d5944365ea0edbe50}{
+\hyperlink{classBetaPDF_a3394efd2861f7a2d5944365ea0edbe50}{$\sim$BetaPDF} ()}
+\label{de/d4f/classBetaPDF_a3394efd2861f7a2d5944365ea0edbe50}
 
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+int \hyperlink{classBetaPDF_a5c27da056f9c9b17af0888fac7df2c9f}{pdfVal} (const double $\ast$Z, const int ZPoints, \hyperlink{classMatrix3D}{Matrix3D} $\ast$pdfValM)
+\begin{DoxyCompactList}\small\item\em Main routine that generates the \hyperlink{classPDF}{PDF} values. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Evaluates beta \hyperlink{classPDF}{PDF} and stores values in a \hyperlink{classMatrix3D}{Matrix3D} object. 
 
 \subsection{Member Function Documentation}
 \hypertarget{classBetaPDF_a5c27da056f9c9b17af0888fac7df2c9f}{
@@ -28,17 +41,26 @@ int \hyperlink{classBetaPDF_a5c27da056f9c9b17af0888fac7df2c9f}{pdfVal} (const do
 \label{de/d4f/classBetaPDF_a5c27da056f9c9b17af0888fac7df2c9f}
 
 
-check for Min or Max mean
+Main routine that generates the \hyperlink{classPDF}{PDF} values. The Beta \hyperlink{classPDF}{PDF} uses statistics (means and variances) to generate a \hyperlink{classPDF}{PDF}. The \hyperlink{classPDF}{PDF} values are stored in a \hyperlink{classMatrix3D}{Matrix3D} object: dim1 is the variance, dim2 is the mean, and dim3 are the data points.
 
-Delta \hyperlink{classPDF}{PDF} for zero variance
+\begin{DoxyVerb}
 
-Impossible cases: becomes double delta \hyperlink{classPDF}{PDF}
+  INPUTS: 
+  const double* Z        double array containing mixture fraction values coming from the files
 
-\hyperlink{classBetaPDF}{BetaPDF}
+  const int ZPoints      number of mixture fraction values in the Z array
 
-Middle points: 0 $<$ n $<$ ZPoints-\/1
+  Matrix3D* pdfValM      the Matrix3D type container that stores the PDF values
 
-Set \hyperlink{classPDF}{PDF} to output 
+  
+  OUTPUT:
+
+  int                    flag specifying whether or not the function succeeded
+                          = 0: success
+			 != 0: something went wrong
+
+  \end{DoxyVerb}
+ 
 
 Implements \hyperlink{classPDF}{PDF}.
 

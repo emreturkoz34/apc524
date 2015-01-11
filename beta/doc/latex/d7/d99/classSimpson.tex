@@ -2,7 +2,12 @@
 \section{Simpson Class Reference}
 \label{d7/d99/classSimpson}\index{Simpson@{Simpson}}
 }
-Inheritance diagram for Simpson::\begin{figure}[H]
+
+
+Calculates integral using Simpson's rule.  
+
+
+{\ttfamily \#include $<$simpson.h$>$}Inheritance diagram for Simpson::\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2cm]{d7/d99/classSimpson}
@@ -11,12 +16,51 @@ Inheritance diagram for Simpson::\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hypertarget{classSimpson_a67630263e3dafdfaa033f566324b4799}{
+\hyperlink{classSimpson_a67630263e3dafdfaa033f566324b4799}{Simpson} ()}
+\label{d7/d99/classSimpson_a67630263e3dafdfaa033f566324b4799}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{classSimpson_a92c73e59a11fdf7a156b3682676de6b8}{
+\hyperlink{classSimpson_a92c73e59a11fdf7a156b3682676de6b8}{$\sim$Simpson} ()}
+\label{d7/d99/classSimpson_a92c73e59a11fdf7a156b3682676de6b8}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+double \hyperlink{classSimpson_ab90da2fb197efe2f4a669bf5029a16f4}{integrate} (const double $\ast$integrand, const double $\ast$Z, const int ZPoints)
+\begin{DoxyCompactList}\small\item\em Main function that integrates a given data set using Simpson's Rule. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Calculates integral using Simpson's rule. \hyperlink{classSimpson}{Simpson} takes in an array (the integrand) and returns the integral of that array using Simpson's rule. 
+
+\subsection{Member Function Documentation}
 \hypertarget{classSimpson_ab90da2fb197efe2f4a669bf5029a16f4}{
-double \hyperlink{classSimpson_ab90da2fb197efe2f4a669bf5029a16f4}{integrate} (const double $\ast$integrand, const double $\ast$Z, const int ZPoints)}
+\index{Simpson@{Simpson}!integrate@{integrate}}
+\index{integrate@{integrate}!Simpson@{Simpson}}
+\subsubsection[{integrate}]{\setlength{\rightskip}{0pt plus 5cm}double Simpson::integrate (const double $\ast$ {\em integrand}, \/  const double $\ast$ {\em Z}, \/  const int {\em ZPoints})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{d7/d99/classSimpson_ab90da2fb197efe2f4a669bf5029a16f4}
 
-\begin{DoxyCompactList}\small\item\em Virtual function to be inherited by each integration algorithm to integrate the given data set. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
+Main function that integrates a given data set using Simpson's Rule. Simpson's rule is applied to integrate a given integrand over a given double array, Z.
+
+\begin{DoxyVerb}
+  INPUTS: 
+
+  const double *integrand           array that contains function values to be integrated
+
+  const double *Z                   array that contains the mixture fraction values which the integrand will be integrated over
+
+  const int ZPoints                 number of values, size of the integrand and Z arrays
+
+
+  OUTPUT:
+
+  double                            result of the integration
+
+  \end{DoxyVerb}
+ 
+
+Implements \hyperlink{classIntegrator_a89fbef2f7923ce4e2c979b2ff1d1f4ac}{Integrator}.
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 

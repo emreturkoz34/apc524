@@ -47,19 +47,20 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &quot;integrator.h&quot;</span>
 <a name="l00005"></a>00005 
-<a name="l00006"></a><a class="code" href="../../db/d06/classGLQuad.html">00006</a> <span class="keyword">class </span><a class="code" href="../../db/d06/classGLQuad.html">GLQuad</a> : <span class="keyword">public</span> <a class="code" href="../../da/d05/classIntegrator.html">Integrator</a> {
-<a name="l00007"></a>00007  <span class="keyword">public</span>:
-<a name="l00008"></a>00008   <a class="code" href="../../db/d06/classGLQuad.html">GLQuad</a>(<span class="keywordtype">int</span> Nodes);
-<a name="l00009"></a>00009   ~<a class="code" href="../../db/d06/classGLQuad.html">GLQuad</a>();
-<a name="l00010"></a>00010   <span class="keywordtype">double</span> <a class="code" href="../../db/d06/classGLQuad.html#a951e36d849cfadc749a62218212802b6" title="Virtual function to be inherited by each integration algorithm to integrate the given...">integrate</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> *integrand, <span class="keyword">const</span> <span class="keywordtype">double</span> *Z, <span class="keyword">const</span> <span class="keywordtype">int</span> ZPoints);
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012  <span class="keyword">private</span>:
-<a name="l00013"></a>00013   <span class="keyword">const</span> <span class="keywordtype">int</span> Nodes_;
-<a name="l00014"></a>00014   <span class="keywordtype">double</span> *x_;
-<a name="l00015"></a>00015   <span class="keywordtype">double</span> *w_;
-<a name="l00016"></a>00016 };
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018 <span class="preprocessor">#endif // GLQuad_H_</span>
+<a name="l00007"></a>00007 
+<a name="l00011"></a><a class="code" href="../../db/d06/classGLQuad.html">00011</a> <span class="keyword">class </span><a class="code" href="../../db/d06/classGLQuad.html" title="Calculates integral using Gauss-Legendre quadrature.">GLQuad</a> : <span class="keyword">public</span> <a class="code" href="../../da/d05/classIntegrator.html">Integrator</a> {
+<a name="l00012"></a>00012  <span class="keyword">public</span>:
+<a name="l00013"></a>00013   <a class="code" href="../../db/d06/classGLQuad.html#a835d29af2507b6b2716794d3371d2ba8" title="Constructor.">GLQuad</a>(<span class="keywordtype">int</span> Nodes);
+<a name="l00014"></a>00014   <a class="code" href="../../db/d06/classGLQuad.html#ad37beb73af53a94ca95ee8eddfe207ab" title="Destructor.">~GLQuad</a>();
+<a name="l00015"></a>00015   <span class="keywordtype">double</span> <a class="code" href="../../db/d06/classGLQuad.html#a951e36d849cfadc749a62218212802b6" title="Integration using Gauss-Legendre quadrature.">integrate</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> *integrand, <span class="keyword">const</span> <span class="keywordtype">double</span> *Z, <span class="keyword">const</span> <span class="keywordtype">int</span> ZPoints);
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017  <span class="keyword">private</span>:
+<a name="l00018"></a>00018   <span class="keyword">const</span> <span class="keywordtype">int</span> Nodes_;
+<a name="l00019"></a>00019   <span class="keywordtype">double</span> *x_;
+<a name="l00020"></a>00020   <span class="keywordtype">double</span> *w_;
+<a name="l00021"></a>00021 };
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="preprocessor">#endif // GLQuad_H_</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

@@ -45,7 +45,12 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   </div>
 </div>
 <div class="contents">
-<h1>GLQuad Class Reference</h1><!-- doxytag: class="GLQuad" --><!-- doxytag: inherits="Integrator" --><div class="dynheader">
+<h1>GLQuad Class Reference</h1><!-- doxytag: class="GLQuad" --><!-- doxytag: inherits="Integrator" -->
+<p>Calculates integral using Gauss-Legendre quadrature.  
+<a href="#_details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../da/d86/glquad_8h_source.html">glquad.h</a>&gt;</code></p>
+<div class="dynheader">
 Inheritance diagram for GLQuad:</div>
 <div class="dynsection">
  <div class="center">
@@ -59,12 +64,95 @@ Inheritance diagram for GLQuad:</div>
 <p><a href="../../d0/d84/classGLQuad-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a835d29af2507b6b2716794d3371d2ba8"></a><!-- doxytag: member="GLQuad::GLQuad" ref="a835d29af2507b6b2716794d3371d2ba8" args="(int Nodes)" -->
-&nbsp;</td><td class="memItemRight" valign="bottom"><b>GLQuad</b> (int Nodes)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a951e36d849cfadc749a62218212802b6"></a><!-- doxytag: member="GLQuad::integrate" ref="a951e36d849cfadc749a62218212802b6" args="(const double *integrand, const double *Z, const int ZPoints)" -->
-double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d06/classGLQuad.html#a951e36d849cfadc749a62218212802b6">integrate</a> (const double *integrand, const double *Z, const int ZPoints)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Virtual function to be inherited by each integration algorithm to integrate the given data set. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d06/classGLQuad.html#a835d29af2507b6b2716794d3371d2ba8">GLQuad</a> (int Nodes)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#a835d29af2507b6b2716794d3371d2ba8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad37beb73af53a94ca95ee8eddfe207ab"></a><!-- doxytag: member="GLQuad::~GLQuad" ref="ad37beb73af53a94ca95ee8eddfe207ab" args="()" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d06/classGLQuad.html#ad37beb73af53a94ca95ee8eddfe207ab">~GLQuad</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d06/classGLQuad.html#a951e36d849cfadc749a62218212802b6">integrate</a> (const double *integrand, const double *Z, const int ZPoints)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Integration using Gauss-Legendre quadrature.  <a href="#a951e36d849cfadc749a62218212802b6"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Calculates integral using Gauss-Legendre quadrature. </p>
+<p><a class="el" href="../../db/d06/classGLQuad.html" title="Calculates integral using Gauss-Legendre quadrature.">GLQuad</a> takes in an array (the integrand) and returns the integral of that array using Gauss-Legendre quadrature. Abscissa are calculated using the external library AlgLib. </p>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a835d29af2507b6b2716794d3371d2ba8"></a><!-- doxytag: member="GLQuad::GLQuad" ref="a835d29af2507b6b2716794d3371d2ba8" args="(int Nodes)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLQuad::GLQuad </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>Nodes</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructor. </p>
+<p>Coordinates of abcissas are calculated in this function.</p>
+<p>INPUTS:</p>
+<p>const int Nodes number of abcissa</p>
+<p>OUTPUT:</p>
+<p>No particular output objects. Abcissas and weights are stored in x_ and w_ objects, respectively. </p>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a951e36d849cfadc749a62218212802b6"></a><!-- doxytag: member="GLQuad::integrate" ref="a951e36d849cfadc749a62218212802b6" args="(const double *integrand, const double *Z, const int ZPoints)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double GLQuad::integrate </td>
+          <td>(</td>
+          <td class="paramtype">const double *&nbsp;</td>
+          <td class="paramname"> <em>integrand</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&nbsp;</td>
+          <td class="paramname"> <em>Z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&nbsp;</td>
+          <td class="paramname"> <em>ZPoints</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Integration using Gauss-Legendre quadrature. </p>
+<p>Gauss-Legendre quadrature is applied to integrate a given integrand over a given double array, Z. Abcissas and weights are created during the execution of the constructor. The default number of nodes is 20, the number of nodes for the quadrature can be modified from the input file</p>
+<div class="fragment"><pre class="fragment">
+  INPUTS:
+
+  const double *integrand            array that contains function values to be integrated
+
+  const double *Z                    array that contains the mixture fraction values which the integrand will be integrated over
+
+  const int ZPoints                  number of values, size of the integrand and Z containers
+  
+  OUTPUT:
+
+  double                             result of the integration
+
+  </pre></div> 
+<p>Implements <a class="el" href="../../da/d05/classIntegrator.html#a89fbef2f7923ce4e2c979b2ff1d1f4ac">Integrator</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="../../da/d86/glquad_8h_source.html">glquad.h</a></li>
 <li>src/glquad.cc</li>

@@ -15,6 +15,26 @@ DeltaPDF::~DeltaPDF() {
 /*!  The Delta PDF uses statistics (means) to generate a
   PDF. The PDF values are stored in a Matrix3D object: dim1 is the
   variance, dim2 is the mean, and dim3 are the data points.
+
+  \verbatim
+  
+  INPUTS: 
+  
+  const double *Z           double arrray containing mixture fraction values coming from the files
+
+  const int ZPoints         number of mixture fraction values in the Z array
+
+  Matrix3D* pdfValm         the Matrix3D type container that stores the PDF values
+
+
+  OUTPUT:
+
+  int                       flag specifying whether or not the function succeeded
+                             = 0: success
+			    != 0: something went wrong
+
+  \endverbatim
+
  */
 int DeltaPDF::pdfVal(const double *Z, const int ZPoints, Matrix3D *pdfValM) {
 

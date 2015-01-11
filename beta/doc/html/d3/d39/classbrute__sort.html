@@ -59,23 +59,40 @@ Inheritance diagram for brute_sort:</div>
 <p><a href="../../d6/ddd/classbrute__sort-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2dbbb3b1c89d6a5720d79a5bf150ad1f"></a><!-- doxytag: member="brute_sort::brute_sort" ref="a2dbbb3b1c89d6a5720d79a5bf150ad1f" args="(Matrix *data)" -->
-&nbsp;</td><td class="memItemRight" valign="bottom"><b>brute_sort</b> (<a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> *data)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d39/classbrute__sort.html#a2dbbb3b1c89d6a5720d79a5bf150ad1f">brute_sort</a> (<a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> *data)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#a2dbbb3b1c89d6a5720d79a5bf150ad1f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c5f47456d59d36d8b2370196d953b81"></a><!-- doxytag: member="brute_sort::~brute_sort" ref="a0c5f47456d59d36d8b2370196d953b81" args="()" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d39/classbrute__sort.html#a0c5f47456d59d36d8b2370196d953b81">~brute_sort</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a377b8811e92553a66cdb6780c43e16e6"></a><!-- doxytag: member="brute_sort::sort_data" ref="a377b8811e92553a66cdb6780c43e16e6" args="()" -->
 int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d39/classbrute__sort.html#a377b8811e92553a66cdb6780c43e16e6">sort_data</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Main <a class="el" href="../../df/d42/classsorting.html">sorting</a> body. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d43275af73d67695f2736dcada07b86"></a><!-- doxytag: member="brute_sort::SetRefColNum" ref="a7d43275af73d67695f2736dcada07b86" args="(int num)" -->
 void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d39/classbrute__sort.html#a7d43275af73d67695f2736dcada07b86">SetRefColNum</a> (int num)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the reference column number. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a548e41cbd5295cef67b18e4d88751ca7"></a><!-- doxytag: member="brute_sort::extractRefCol" ref="a548e41cbd5295cef67b18e4d88751ca7" args="()" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>extractRefCol</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac430d83982bdd362c5e870b56b70eccb"></a><!-- doxytag: member="brute_sort::generateIndexArray" ref="ac430d83982bdd362c5e870b56b70eccb" args="()" -->
-int&nbsp;</td><td class="memItemRight" valign="bottom"><b>generateIndexArray</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e18e2ae0ca7c37d657a1447060992ab"></a><!-- doxytag: member="brute_sort::SetSortStartIndex" ref="a4e18e2ae0ca7c37d657a1447060992ab" args="(int left)" -->
-void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SetSortStartIndex</b> (int left)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7fc765a30ed771ca56ecbc782076b0dc"></a><!-- doxytag: member="brute_sort::SetSortEndIndex" ref="a7fc765a30ed771ca56ecbc782076b0dc" args="(int right)" -->
-void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SetSortEndIndex</b> (int right)</td></tr>
 </table>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a2dbbb3b1c89d6a5720d79a5bf150ad1f"></a><!-- doxytag: member="brute_sort::brute_sort" ref="a2dbbb3b1c89d6a5720d79a5bf150ad1f" args="(Matrix *data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">brute_sort::brute_sort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> *&nbsp;</td>
+          <td class="paramname"> <em>data</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructor. </p>
+<p>This algorithm goes over the each entry (rows times) at the selected column, finds the maximum entry, records its index. This is repeated rows times until the indices of the entries are obtained in order. Then each column of the matrix is reordered using these indices. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="../../de/dc3/brute__sort_8h_source.html">brute_sort.h</a></li>
 <li>src/brute_sort.cc</li>
