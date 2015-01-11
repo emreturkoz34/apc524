@@ -20,7 +20,7 @@
                          = 0: no extrapolation
 			 = 1: extrapolation performed
 */
-int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matrix3D *dataout, int nthreads) {
+int fittogrid(const Matrix4D *datain, const double *cgrid, Interpolator *interp, Matrix3D *dataout, int nthreads) {
   // Assume datain is 4d matrix (mean, z~, z_v, file)
   // mean has dimension 2, contains w~ and c~
   // Interpolate w~ at c~ values given by cgrid input
