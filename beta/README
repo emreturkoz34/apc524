@@ -80,7 +80,7 @@ Inputs are specified with the following syntax:
 Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values.
 
 INPUT:					DEFAULT			<NOTES>		
-- data file directory:			data
+- data file directory:			data			<can specify a path, eg data/C2H4>
 - test species:				Y-H2O	Y-H2 	Y-CO2
 - output file name:			data_output
 - plot all progress variables:		yes
@@ -108,6 +108,10 @@ The program is designed specifically to run on .kg datafiles. The first line of 
      - All files must have the same column headers and the same number of rows of data. 
      - 2nd line contains column headers, 3rd line and on contain data
      - Column headers for production rate should be: 'ProdRate<SPECIES> [kg/m^3s]'
+
+Two sets of sample data files are included:
+     - data/C2H4: full output from FlameMaster for a C2H4 flame
+     - data/C2H4truncated: a subset of the above selected to be a "well-behaved" test case
 
 --------------------------------------------------------------------
 
