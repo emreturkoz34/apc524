@@ -18,6 +18,6 @@ max slope test:	linear regression
 integrator:	trapezoid
 
 glq Number of Nodes:	10
-length Cgrid: 51
+length Cgrid:	51
 
 
