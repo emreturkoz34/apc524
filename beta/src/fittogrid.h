@@ -8,6 +8,6 @@
 #include "standard_sort.h"
 #include <omp.h>
 
-int fittogrid(const Matrix4D *datain, const double *cgrid, Interpolator *interp, Matrix3D *dataout, int nthreads);
+int fittogrid(const Matrix4D *datain, const double *cgrid, Interpolator *interp, Matrix3D *dataout, int nthreads, int ex);
 
 #endif // FITTOGRID_H_
