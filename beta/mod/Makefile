@@ -20,7 +20,8 @@ _leastnonmono.so: leastnonmono_wrap.o $(addsuffix .o,$(NONMONO)) $(addsuffix .o,
 	$(CXX) -shared $^ -o $@
 
 # Interpolator shared object
-_interpolator.so: interpolator_wrap.o $(addsuffix .o,$(INTRP)) $(addsuffix .o,$(MATRIX))
+_interpolator.so: interpolator_wrap.o $(addsuffix .o,$(INTRP)) \
+	$(addsuffix .o,$(MATRIX)) $(addsuffix .o,$(ALGLIB))
 	$(CXX) -shared $^ -o $@
 
 # PDF shared object

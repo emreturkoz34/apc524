@@ -17,8 +17,7 @@ NONMONO	= simplelnm advancedlnm
 OTHER	= convolute fittogrid
 
 # Classes
-#TARGETS	= lininterp fittogrid
-ABSCLS	= pdf integrator maxslope leastnonmono sorting interpolator #$(TARGETS) maxslope leastnonmono sorting #interpolator
+ABSCLS	= pdf integrator maxslope leastnonmono sorting interpolator
 DRVCLS	= $(PDFS) $(INTGR) $(INTRP) $(SORT) $(SLOPE) $(NONMONO)
 CLASS	= $(MATRIX) monocheck
 
