@@ -34,7 +34,26 @@ Constructor. monocheck is a class which checks whether a specified progress vari
 \label{d8/ddf/classMonoCheck_af34f3d72ec2d1575526d42bfe4cdfe7a}
 
 
-Method to check whether each progress variable is strictly monotonic. CheckStrictMonoticity checks the monotonicity of each column (AKA progress variable \char`\"{}C\char`\"{}) in progVar with respect to column \char`\"{}col\char`\"{}. The output array monoAry must be of length ncols\_\-, where each cell holds a value of 3 if C is strictly increasing or strictly decreasing and 0 otherwise. 
+Method to check whether each progress variable is strictly monotonic. CheckStrictMonoticity checks the monotonicity of each column (AKA progress variable \char`\"{}C\char`\"{}) in progVar with respect to column \char`\"{}col\char`\"{}. The output array monoAry must be of length ncols\_\-, where each cell holds a value of 3 if C is strictly increasing or strictly decreasing and 0 otherwise.
+
+\begin{DoxyVerb}
+INPUTS:
+
+int *monoAry        array containing integer flags that denote the monotonicity of candidate progress variables
+
+const int ncols     number of columns of monoAry
+
+const int col       the reference column
+
+
+OUTPUT:
+
+int                 flag specifying whether or not the function succeeded
+                     = 0: success
+		    != 0: something went wrong
+
+\end{DoxyVerb}
+ 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 

@@ -112,8 +112,24 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="memdoc">
 
 <p>Method to check whether each progress variable is strictly monotonic. </p>
-<p>CheckStrictMonoticity checks the monotonicity of each column (AKA progress variable "C") in progVar with respect to column "col". The output array monoAry must be of length ncols_, where each cell holds a value of 3 if C is strictly increasing or strictly decreasing and 0 otherwise. </p>
+<p>CheckStrictMonoticity checks the monotonicity of each column (AKA progress variable "C") in progVar with respect to column "col". The output array monoAry must be of length ncols_, where each cell holds a value of 3 if C is strictly increasing or strictly decreasing and 0 otherwise.</p>
+<div class="fragment"><pre class="fragment">
+INPUTS:
 
+int *monoAry        array containing integer flags that denote the monotonicity of candidate progress variables
+
+const int ncols     number of columns of monoAry
+
+const int col       the reference column
+
+
+OUTPUT:
+
+int                 flag specifying whether or not the function succeeded
+                     = 0: success
+		    != 0: something went wrong
+
+</pre></div> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

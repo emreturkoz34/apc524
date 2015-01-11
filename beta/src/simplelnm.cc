@@ -42,6 +42,25 @@ strictly increasing and strictly decreasing. The input array monoAry
 will initially be filled with 0s since all progress variables are
 non-monotonic. This method will select the least non-monotonic and
 change its value in monoAry to 1. col is the reference column.
+
+\verbatim
+INPUTS: 
+
+int *monoAry      array containing integer flags that denote the monotonicity of candidate slope variables
+
+const int ncols   number of columns of monoAry
+
+const int col     the reference column
+
+OUTPUT:
+
+int               flag specifying whether or not the function succeeded 
+                   = 0: success
+		  != 0: something went wrong
+
+\endverbatim
+
+
 */
 int SimpleLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
   assert(ncols == ncols_);

@@ -28,6 +28,25 @@ progress variable "C") in progVar with respect to column
 "col". The output array monoAry must be of length ncols_, where
 each cell holds a value of 3 if C is strictly increasing or
 strictly decreasing and 0 otherwise.
+
+\verbatim
+INPUTS:
+
+int *monoAry        array containing integer flags that denote the monotonicity of candidate progress variables
+
+const int ncols     number of columns of monoAry
+
+const int col       the reference column
+
+
+OUTPUT:
+
+int                 flag specifying whether or not the function succeeded
+                     = 0: success
+		    != 0: something went wrong
+
+\endverbatim
+
 */
 int MonoCheck::CheckStrictMonoticity(int *monoAry, const int ncols, int col){
   assert(ncols == ncols_);

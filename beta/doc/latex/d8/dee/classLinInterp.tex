@@ -35,9 +35,29 @@ int \hyperlink{classLinInterp_a26aeb03c387bf5c8ea5db0ed111b5cd7}{Interp} (const 
 
 Linear interpolation function. This function takes in a 2D matrix of data and interpolates an entire row from it using a linear interpolator. Each column of the matrix is treated as a variable, with a specified column being the independent variable. The input data is not assumed to be sorted.
 
-INPUTS: const \hyperlink{classMatrix}{Matrix} $\ast$matin pointer to a \hyperlink{classMatrix}{Matrix} object. This is the input data. int col integer specifying which column of the input \hyperlink{classMatrix}{Matrix} is the independent variable double ival value at which to interpolate double $\ast$vecout pointer to an array which contains the interpolated row. This array has the same number of columns as the input \hyperlink{classMatrix}{Matrix}. int cols number of columns of matin/vecout
+\begin{DoxyVerb}
+  INPUTS:
 
-OUTPUTS: int flag specifying whether or not the function succeeded = 0: success = 1: extrapolation attempted 
+  const Matrix *matin    pointer to a Matrix object. This is the input data.
+
+  int col                integer specifying which column of the input Matrix is the independent 
+                         variable
+
+  double ival            value at which to interpolate
+
+  double *vecout         pointer to an array which contains the interpolated row. This array has
+                         the same number of columns as the input Matrix.
+
+  int cols               number of columns of matin/vecout
+
+
+  OUTPUTS:
+
+  int                    flag specifying whether or not the function succeeded
+                         = 0: success
+			 = 1: extrapolation attempted
+\end{DoxyVerb}
+ 
 
 Implements \hyperlink{classInterpolator_a2238defccb009047f624bda33cc47c73}{Interpolator}.
 

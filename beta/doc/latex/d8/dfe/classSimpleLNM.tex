@@ -42,7 +42,25 @@ If two or more progress variables share the highest percentage, then the progres
 \label{d8/dfe/classSimpleLNM_a9d296839ca84467c0f6241b1393bd6d5}
 
 
-Method to find the least non monotonic progress variable. LeastNonMonotonic calculates how much each progress variable is strictly increasing and strictly decreasing. The input array monoAry will initially be filled with 0s since all progress variables are non-\/monotonic. This method will select the least non-\/monotonic and change its value in monoAry to 1. col is the reference column. 
+Method to find the least non monotonic progress variable. LeastNonMonotonic calculates how much each progress variable is strictly increasing and strictly decreasing. The input array monoAry will initially be filled with 0s since all progress variables are non-\/monotonic. This method will select the least non-\/monotonic and change its value in monoAry to 1. col is the reference column.
+
+\begin{DoxyVerb}
+INPUTS: 
+
+int *monoAry      array containing integer flags that denote the monotonicity of candidate slope variables
+
+const int ncols   number of columns of monoAry
+
+const int col     the reference column
+
+OUTPUT:
+
+int               flag specifying whether or not the function succeeded 
+                   = 0: success
+		  != 0: something went wrong
+
+\end{DoxyVerb}
+ 
 
 Implements \hyperlink{classLeastNonMono}{LeastNonMono}.
 
