@@ -1,6 +1,6 @@
 import numpy as np
 import matrix
-import lininterp
+import interpolator
 
 ## @package iofuncs
 # \brief Module containing text file processing functions used by other python scripts 
@@ -115,7 +115,11 @@ class ProcFile(object):
             for j in range(nocols):
                 data.SetVal(i,j,dataPy[i,j])
         if interpmethod == 'linear':
-            interp = lininterp.LinInterp()
+            interp = interpolator.LinInterp()
+        elif interpmethod == 'hermite':
+            interp = interpolator.HermiteInterp()
+        elif interpmethod == 'cubic':
+            interp = interpolator.CubicInterp()
         else:
             raise IOError("Specified interpolation method: %s not supported, use <linear>" % interpmethod)
         flag = 0

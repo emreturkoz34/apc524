@@ -26,7 +26,7 @@ import leastnonmono
 # following modules:
 # - matrix
 # - sorting
-# - lininterp
+# - interpolator
 # - monocheck
 # - maxslope
 # - least nonmono
@@ -40,7 +40,7 @@ import leastnonmono
 #
 # @param options Python dictionary filled with user specified options for the program. Requires        
 # options["sort method"], options["StoichMassFrac"], options["InterpMethod"], options["MaxSlopeTest"],
-# options["PlotAllC"], and options["SkipProgVar"] to be specified
+# options["PlotAllC"], options["lnmcheck"], and options["SkipProgVar"] to be specified
 
 def findC(datafiles, testspecies, bestC, options): 
 
@@ -131,8 +131,14 @@ def findC(datafiles, testspecies, bestC, options):
         # ^ Distinguish the best monotonic progress variables
     elif checksum == 0:
         # Least non-monotonic tests to be implemented in beta version
-        print "Finding least non-monotonic progress variable"
-        lnm_check = leastnonmono.SimpleLNM(progVar)
+        lnmoption = options["lnmcheck"][0]
+        print "Finding least non-monotonic progress variable using %s nonmono check" % lnmoption
+        if lnmoption == 'simple':
+            lnm_check = leastnonmono.SimpleLNM(progVar)
+        elif lnmoption == 'advanced':
+            lnm_check = leastnonmono.AdvancedLNM(progVar)
+        else:
+            raise IOError("invalid lnm test (%s) specified, instead use <simple> or <advanced>" % maxslopetest)
         assert lnm_check.LeastNonMonotonic(monoAry, 0) == 0, "LeastNonMonotonic ran unsuccessfully.\n"
 
     # Print results
