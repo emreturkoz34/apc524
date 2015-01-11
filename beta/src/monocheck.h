@@ -1,6 +1,7 @@
-/* This is the header file monocheck.h
+/*! This is the header file monocheck.h
    
-   See monocheck.cc for detailed information about monotonicity checking.
+   See monocheck.cc for detailed information about monotonicity
+   checking.
  */
 #ifndef MONOCHECK_H_
 #define MONOCHECK_H_

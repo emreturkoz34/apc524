@@ -1,11 +1,11 @@
-/* EndPointSlope is a class that determines the most monotonic
- * progress variable with respect to temperature (or another specified
- * column). It calculates the slope from the first and last endpoints
- * of each progress variable column and selects the progress variable
- * with the largest magnitude slope.
- *
- * The slope is given by [C_i(N)-C_i(1)]/N
- */
+/*! EndPointSlope is a class that determines the most monotonic
+ progress variable with respect to temperature (or another specified
+ column). It calculates the slope from the first and last endpoints of
+ each progress variable column and selects the progress variable with
+ the largest magnitude slope.
+ 
+ The slope is given by  \f$ \frac{C_i(N) - C_i(1)}{N}  \f$
+*/
 #include <assert.h>
 #include <stdlib.h>
 #include <cmath>
@@ -26,14 +26,32 @@ EndPointSlope::~EndPointSlope() {
   delete [] slopes_;
 }
 
-/// MostMonotonic calculates the slope of the best linear
-/// approximation for each progress variable which is strictly
-/// increasing or strictly decreasing. The output array monoAry must
-/// be of length ncols, where each cell holds a value of 3 if C is
-/// strictly monotonic and has the largest slope, 2 if C is strictly
-/// monotonic but does not have the largest slope, and 0 for
-/// non-monotonic C. col is the reference column.
+/// Method to find the most monotonic progress variable
+/*!  MostMonotonic calculates the slope of the best linear
+approximation for each progress variable which is strictly increasing
+or strictly decreasing. The output array monoAry must be of length
+ncols, where each cell holds a value of 3 if C is strictly monotonic
+and has the largest slope, 2 if C is strictly monotonic but does not
+have the largest slope, and 0 for non-monotonic C. col is the
+reference column.
 
+\verbatim
+INPUTS:
+
+int *monoAry       array containing integer flags that denote the monotonicity of candidate progress variables
+
+const int ncols    number of columns of monoAry
+
+const int col      the reference column
+
+OUTPUT:
+
+int                flag specifying whether or not the function succeeded 
+                    = 0: success
+		   != 0: something went wrong 
+\endverbatim
+
+*/
 int EndPointSlope::MostMonotonic(int *monoAry, const int ncols, const int col){
   assert(ncols == ncols_);
 

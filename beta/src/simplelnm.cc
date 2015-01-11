@@ -1,4 +1,4 @@
-/* SimpleLNM is a class that determines the least non-monotonic
+/*! SimpleLNM is a class that determines the least non-monotonic
    progress variable with respect to temperature (or another specified
    column). It determines the percentage which the progress variable
    is strictly increasing and the percentage which the progress
@@ -7,7 +7,7 @@
    decreasing, but will also be compared with the percentages of other
    progress variables. The progress variable with the largest
    percentage of increasing or decreasing values is the least
-   non-monotonic progress variable. 
+   non-monotonic progress variable.
 
    If two or more progress variables share the highest percentage,
    then the progress variable with the greatest magnitude slope (by
@@ -36,12 +36,32 @@ SimpleLNM::~SimpleLNM() {
   delete [] decreasing_;
 }
 
-/// LeastNonMonotonic calculates how much each progress variable is
-/// strictly increasing and strictly decreasing. The input array
-/// monoAry will initially be filled with 0s since all progress
-/// variables are non-monotonic. This method will select the least
-/// non-monotonic and change its value in monoAry to 1. col is the
-/// reference column.
+/// Method to find the least non monotonic progress variable
+/*!  LeastNonMonotonic calculates how much each progress variable is
+strictly increasing and strictly decreasing. The input array monoAry
+will initially be filled with 0s since all progress variables are
+non-monotonic. This method will select the least non-monotonic and
+change its value in monoAry to 1. col is the reference column.
+
+\verbatim
+INPUTS: 
+
+int *monoAry      array containing integer flags that denote the monotonicity of candidate slope variables
+
+const int ncols   number of columns of monoAry
+
+const int col     the reference column
+
+OUTPUT:
+
+int               flag specifying whether or not the function succeeded 
+                   = 0: success
+		  != 0: something went wrong
+
+\endverbatim
+
+
+*/
 int SimpleLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
   assert(ncols == ncols_);
 

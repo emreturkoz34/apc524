@@ -18,6 +18,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul>
       <li><a href="../../index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -38,13 +39,10 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul>
       <li><a href="../../files.html"><span>File&nbsp;List</span></a></li>
+      <li><a href="../../globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
-<h1>src/endpointslope.h</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/* This is the header file endpointslope.h</span>
-<a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">   See endpointslope.cc for detailed information about determining the</span>
-<a name="l00004"></a>00004 <span class="comment">   most monotonic progress variable.</span>
-<a name="l00005"></a>00005 <span class="comment">*/</span>
+<h1>src/endpointslope.h</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
 <a name="l00006"></a>00006 <span class="preprocessor">#ifndef ENDPOINTSLOPE_H_</span>
 <a name="l00007"></a>00007 <span class="preprocessor"></span><span class="preprocessor">#define ENDPOINTSLOPE_H_</span>
 <a name="l00008"></a>00008 <span class="preprocessor"></span>
@@ -57,7 +55,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a name="l00015"></a>00015  <span class="keyword">public</span>:
 <a name="l00016"></a>00016   <a class="code" href="../../da/d7d/classEndPointSlope.html#aa1c680c5137b40a465d2433e636892ce" title="Constructor.">EndPointSlope</a>(<span class="keyword">const</span> <a class="code" href="../../d3/d3f/classMatrix.html">Matrix</a> &amp;progVar);
 <a name="l00017"></a>00017   <a class="code" href="../../da/d7d/classEndPointSlope.html#a37cf0a75d426b64fc50a8a76f45beb1f" title="Destructor.">~EndPointSlope</a>();
-<a name="l00018"></a>00018   <span class="keywordtype">int</span> <a class="code" href="../../da/d7d/classEndPointSlope.html#a70417721fe8a60669a67d19a7855bef5">MostMonotonic</a>(<span class="keywordtype">int</span> *monoAry, <span class="keyword">const</span> <span class="keywordtype">int</span> ncols, <span class="keyword">const</span> <span class="keywordtype">int</span> col);
+<a name="l00018"></a>00018   <span class="keywordtype">int</span> <a class="code" href="../../da/d7d/classEndPointSlope.html#a70417721fe8a60669a67d19a7855bef5" title="Method to find the most monotonic progress variable.">MostMonotonic</a>(<span class="keywordtype">int</span> *monoAry, <span class="keyword">const</span> <span class="keywordtype">int</span> ncols, <span class="keyword">const</span> <span class="keywordtype">int</span> col);
 <a name="l00019"></a>00019 
 <a name="l00020"></a>00020  <span class="keyword">private</span>:
 <a name="l00021"></a>00021   <span class="keyword">const</span> <span class="keywordtype">int</span> nrows_; <span class="comment">// number of rows in progVar matrix</span>
@@ -73,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </iframe>
 </div>
 
-<hr size="1"/><address style="text-align: right;"><small>Generated on 7 Jan 2015 for CHEMTABLE by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on 11 Jan 2015 for CHEMTABLE by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

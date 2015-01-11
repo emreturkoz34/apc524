@@ -1,6 +1,14 @@
 #include "convolute.h"
 #include "math.h"
 
+
+
+/** @file */
+
+/// Convolution function 
+/*! 
+  Convolutes date and pdf.
+ */
 int convVal(double *Z, double *data, Matrix3D *pdfValues, Matrix *postConvVal, Integrator *intgr) {
 
   int ZvarPoints  = pdfValues->GetNumDim1();

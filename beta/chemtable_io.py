@@ -16,7 +16,7 @@ import matrix4d
 import pdf
 import integrator
 import sorting
-import lininterp
+import interpolator
 import fittogrid
 import convolute
 import matplotlib.pyplot as plt
@@ -49,7 +49,7 @@ import matplotlib.cm as cm
 # - integrator
 # - convolute
 # - sorting
-# - lininterp
+# - interpolator
 # - fittogrid
 
 
@@ -79,6 +79,7 @@ options["OutputFile"] = iof.read_input("output file name:", inputs, minargs=0, d
 options["PlotAllC"] = iof.read_input("plot all progress variables:", inputs, minargs=0, default=['yes'])
 options["SkipProgVar"] = iof.read_input("skip progress variable optimization:", inputs, minargs=0, default=['no'])
 options["nothreads"] = iof.read_input("number of threads:", inputs, minargs=0, default=[1])
+options["lnmcheck"] = iof.read_input("least nonmonotonic check:", inputs, minargs=0, default=['simple'])
 
 # find best progress variable
 bestC = []
@@ -206,7 +207,11 @@ lcgrid = int(options["LCgrid"][0]); # length of cgrid
 cgrid = np.linspace(0.0, maxC*1.5, lcgrid)
 interpmethod = options["InterpMethod"][0] 
 if interpmethod == 'linear': # add more interpolation options later
-    interp = lininterp.LinInterp()
+    interp = interpolator.LinInterp()
+elif interpmethod == 'hermite':
+    interp = interpolator.HermiteInterp()
+elif interpmethod == 'cubic':
+    interp = interpolator.CubicInterp()
 else:
     raise IOError("Specified interpolation method: %s not supported, use <linear>" % interpmethod)
 datain = matrix4d.Matrix4D(dim1, dim2, dim3, dim4)
@@ -260,7 +265,4 @@ for j in plots:
     plt.colorbar(CS, ticks=np.arange(0,maxRate,grid))
     plt.savefig('output/contour_zvar_%.3g.pdf' % Zvar[i])
 print "%d contour plots created in output directory \n" % noplots
-
-del convolutedC
-del convolutedST
 

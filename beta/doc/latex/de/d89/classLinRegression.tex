@@ -11,10 +11,7 @@ Inheritance diagram for LinRegression::\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classLinRegression_a0d747e38f7a8997765be15f43062290c}{
-\hyperlink{classLinRegression_a0d747e38f7a8997765be15f43062290c}{LinRegression} (const \hyperlink{classMatrix}{Matrix} \&progVar)}
-\label{de/d89/classLinRegression_a0d747e38f7a8997765be15f43062290c}
-
+\hyperlink{classLinRegression_a0d747e38f7a8997765be15f43062290c}{LinRegression} (const \hyperlink{classMatrix}{Matrix} \&progVar)
 \begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
 \hypertarget{classLinRegression_a4ea5ffb8032172bdf54d1f2d4041d520}{
 \hyperlink{classLinRegression_a4ea5ffb8032172bdf54d1f2d4041d520}{$\sim$LinRegression} ()}
@@ -22,8 +19,20 @@ Inheritance diagram for LinRegression::\begin{figure}[H]
 
 \begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
 int \hyperlink{classLinRegression_a1f245c4e47637f3f1d94f6129861406d}{MostMonotonic} (int $\ast$monoAry, const int ncols, const int col)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Method to find the most monotonic progress variable. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classLinRegression_a0d747e38f7a8997765be15f43062290c}{
+\index{LinRegression@{LinRegression}!LinRegression@{LinRegression}}
+\index{LinRegression@{LinRegression}!LinRegression@{LinRegression}}
+\subsubsection[{LinRegression}]{\setlength{\rightskip}{0pt plus 5cm}LinRegression::LinRegression (const {\bf Matrix} \& {\em progVar})}}
+\label{de/d89/classLinRegression_a0d747e38f7a8997765be15f43062290c}
+
+
+Constructor. \hyperlink{classLinRegression}{LinRegression} is a class that determines the most monotonic progress variable with respect to temperature (or another specified column). It calculates the slope of the best linear approximation for each progress variable and selects the largest magnitude.
+
+The slope is given by \{sum\_\-i=1\_\-i=N (C\_\-i-\/C\_\-ave)(T\_\-i-\/T\_\-ave)\}/\{sum\_\-i=1\_\-i=N (T\_\-i-\/T\_\-ave)$^\wedge$2\} 
 
 \subsection{Member Function Documentation}
 \hypertarget{classLinRegression_a1f245c4e47637f3f1d94f6129861406d}{
@@ -31,9 +40,11 @@ int \hyperlink{classLinRegression_a1f245c4e47637f3f1d94f6129861406d}{MostMonoton
 \index{MostMonotonic@{MostMonotonic}!LinRegression@{LinRegression}}
 \subsubsection[{MostMonotonic}]{\setlength{\rightskip}{0pt plus 5cm}int LinRegression::MostMonotonic (int $\ast$ {\em monoAry}, \/  const int {\em ncols}, \/  const int {\em col})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{de/d89/classLinRegression_a1f245c4e47637f3f1d94f6129861406d}
-MostMonotonic calculates the slope of the best linear approximation for each progress variable which is strictly increasing or strictly decreasing. The output array monoAry must be of length ncols, where each cell holds a value of 3 if C is strictly monotonic and has the largest slope, 2 if C is strictly monotonic but does not have the largest slope, and 0 for non-\/monotonic C. col is the reference column. 
 
-Implements \hyperlink{classMaxSlope}{MaxSlope}.
+
+Method to find the most monotonic progress variable. MostMonotonic calculates the slope of the best linear approximation for each progress variable which is strictly increasing or strictly decreasing. The output array monoAry must be of length ncols, where each cell holds a value of 3 if C is strictly monotonic and has the largest slope, 2 if C is strictly monotonic but does not have the largest slope, and 0 for non-\/monotonic C. col is the reference column. 
+
+Implements \hyperlink{classMaxSlope_a494b1b1ae073d3b29fe7cdc023ce7861}{MaxSlope}.
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 

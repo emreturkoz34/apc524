@@ -11,12 +11,55 @@ Inheritance diagram for LinInterp::\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hypertarget{classLinInterp_a56a58464dae6196cc671749133f1de12}{
+\hyperlink{classLinInterp_a56a58464dae6196cc671749133f1de12}{LinInterp} ()}
+\label{d8/dee/classLinInterp_a56a58464dae6196cc671749133f1de12}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+\hypertarget{classLinInterp_a301177227b3013bcf9ea45e1c66fc468}{
+\hyperlink{classLinInterp_a301177227b3013bcf9ea45e1c66fc468}{$\sim$LinInterp} ()}
+\label{d8/dee/classLinInterp_a301177227b3013bcf9ea45e1c66fc468}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+int \hyperlink{classLinInterp_a26aeb03c387bf5c8ea5db0ed111b5cd7}{Interp} (const \hyperlink{classMatrix}{Matrix} $\ast$matin, int col, double ival, double $\ast$vecout, int cols)
+\begin{DoxyCompactList}\small\item\em Linear interpolation function. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
 \hypertarget{classLinInterp_a26aeb03c387bf5c8ea5db0ed111b5cd7}{
-int {\bfseries Interp} (const \hyperlink{classMatrix}{Matrix} $\ast$matin, int col, double ival, double $\ast$vecout, int cols)}
+\index{LinInterp@{LinInterp}!Interp@{Interp}}
+\index{Interp@{Interp}!LinInterp@{LinInterp}}
+\subsubsection[{Interp}]{\setlength{\rightskip}{0pt plus 5cm}int LinInterp::Interp (const {\bf Matrix} $\ast$ {\em matin}, \/  int {\em col}, \/  double {\em ival}, \/  double $\ast$ {\em vecout}, \/  int {\em cols})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{d8/dee/classLinInterp_a26aeb03c387bf5c8ea5db0ed111b5cd7}
 
-\end{DoxyCompactItemize}
 
+Linear interpolation function. This function takes in a 2D matrix of data and interpolates an entire row from it using a linear interpolator. Each column of the matrix is treated as a variable, with a specified column being the independent variable. The input data is not assumed to be sorted.
+
+\begin{DoxyVerb}
+  INPUTS:
+
+  const Matrix *matin    pointer to a Matrix object. This is the input data.
+
+  int col                integer specifying which column of the input Matrix is the independent 
+                         variable
+
+  double ival            value at which to interpolate
+
+  double *vecout         pointer to an array which contains the interpolated row. This array has
+                         the same number of columns as the input Matrix.
+
+  int cols               number of columns of matin/vecout
+
+
+  OUTPUTS:
+
+  int                    flag specifying whether or not the function succeeded
+                         = 0: success
+			 = 1: extrapolation attempted
+\end{DoxyVerb}
+ 
+
+Implements \hyperlink{classInterpolator_a2238defccb009047f624bda33cc47c73}{Interpolator}.
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 

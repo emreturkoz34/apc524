@@ -1,26 +1,40 @@
 #include "fittogrid.h"
 
+/** @file */
+
+
 /// Function which fits data to a grid
 /*!
   This function takes in a 4D matrix and fits the data onto a specified grid. 
 
+
+\verbatim
   INPUTS:
+
   Matrix4D *datain       input data stored as a 4D matrix. The structure is (mean, z~, z_v, file), where
                          mean has dimension 2 and contains w~ and c~. datain can be thought of as two 3D
                          matrices with structure (z~, z_v, file) containing values of w~ and c~, 
                          respectively. 
+
   const double *cgrid    pointer to an array which contains the values of c~ at which to interpolate
+
   Interpolator *interp   pointer to an Interpolator object
+
   Matrix3D *dataout      output data stored as a 3D matrix. The structure is (z~, z_v, cgrid), with the 
                          numbers being interpolated values of w~
+
   int numthreads         integer specifying the number of threads to be used (1 = serial, >1 = parallel)
 
+
   OUTPUTS:
+
   int                    flag specifying whether or not extrapolation was necessary:
                          = 0: no extrapolation
 			 = 1: extrapolation performed
+\endverbatim
+
 */
-int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matrix3D *dataout, int nthreads) {
+int fittogrid(const Matrix4D *datain, const double *cgrid, Interpolator *interp, Matrix3D *dataout, int nthreads) {
   // Assume datain is 4d matrix (mean, z~, z_v, file)
   // mean has dimension 2, contains w~ and c~
   // Interpolate w~ at c~ values given by cgrid input
@@ -48,7 +62,19 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
 	tmat->SetVal(k, 1, datain->GetVal(1, i, j, k)); // c~
       }
 
+      // Sort the data to be interpolated
+      sorting *sorter = new standard_sort(tmat);
+      sorter->SetRefColNum(1);
+      sorter->sort_data();
+
       // Loop over values in cgrid, interpolate to find wgrid
+      // Test printing
+      printf("\n The following should be sorted by the second column:\n");
+      for (int mm = 0; mm < nfiles; ++mm) {
+	printf("%6.3f %6.3f\n", tmat->GetVal(mm, 0), tmat->GetVal(mm, 1));
+      }
+      printf("\n");
+
       for (int k = 0; k < lcgrid; k++) {
 	flag = interp->Interp(tmat, 1, cgrid[k], tarr, 2);
 	if (flag == 1) { // interpolation failed (tried to extrapolate)
@@ -65,7 +91,7 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
 
   // For a point for which we tried to extrapolate, set the value of that point to
   // the value of the point which is nearest in (z~, c~) space.
-  omp_set_num_threads(nthreads); // set the number of threads
+  /*  omp_set_num_threads(nthreads); // set the number of threads
 #pragma omp parallel
   {
     int dist = 0;
@@ -95,7 +121,7 @@ int fittogrid(Matrix4D *datain, const double *cgrid, Interpolator *interp, Matri
       }
     }
   }
- 
+  */
   delete tmat;
   delete extrap;
   return flag1;

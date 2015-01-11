@@ -1,4 +1,4 @@
-/* This is the header file advancedlnm.h
+/*! This is the header file advancedlnm.h
 
    See advancedlnm.cc for detailed information about determining the
    least non-monotonic progress variable.

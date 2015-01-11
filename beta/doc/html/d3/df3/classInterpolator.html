@@ -18,6 +18,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul>
       <li><a href="../../index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -50,7 +51,9 @@ Inheritance diagram for Interpolator:</div>
  <div class="center">
   <img src="../../d3/df3/classInterpolator.gif" usemap="#Interpolator_map" alt=""/>
   <map id="Interpolator_map" name="Interpolator_map">
-<area href="../../d8/dee/classLinInterp.html" alt="LinInterp" shape="rect" coords="0,56,76,80"/>
+<area href="../../dd/de9/classCubicInterp.html" alt="CubicInterp" shape="rect" coords="0,56,87,80"/>
+<area href="../../dd/d1b/classHermiteInterp.html" alt="HermiteInterp" shape="rect" coords="97,56,184,80"/>
+<area href="../../d8/dee/classLinInterp.html" alt="LinInterp" shape="rect" coords="194,56,281,80"/>
 </map>
  </div>
 </div>
@@ -59,7 +62,8 @@ Inheritance diagram for Interpolator:</div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2238defccb009047f624bda33cc47c73"></a><!-- doxytag: member="Interpolator::Interp" ref="a2238defccb009047f624bda33cc47c73" args="(const Matrix *matin, int col, double ival, double *vecout, int cols)=0" -->
-virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><b>Interp</b> (const <a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> *matin, int col, double ival, double *vecout, int cols)=0</td></tr>
+virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/df3/classInterpolator.html#a2238defccb009047f624bda33cc47c73">Interp</a> (const <a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> *matin, int col, double ival, double *vecout, int cols)=0</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Virtual function to be inherited by each interpolation algorithm to interpolate the given data. <br/></td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/<a class="el" href="../../d6/d18/interpolator_8h_source.html">interpolator.h</a></li>
@@ -70,7 +74,7 @@ virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><b>Interp</b> (co
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -79,7 +83,7 @@ virtual int&nbsp;</td><td class="memItemRight" valign="bottom"><b>Interp</b> (co
 </iframe>
 </div>
 
-<hr size="1"/><address style="text-align: right;"><small>Generated on 7 Jan 2015 for CHEMTABLE by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on 11 Jan 2015 for CHEMTABLE by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

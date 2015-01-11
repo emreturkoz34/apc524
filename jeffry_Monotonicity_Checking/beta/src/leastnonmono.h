@@ -1,4 +1,4 @@
-/* LeastNonMono is an abstract class which provides the framework to
+/*! LeastNonMono is an abstract class which provides the framework to
    determine the least non-monotonic progress variable.
  */
 #ifndef LEASTNONMONO_H_

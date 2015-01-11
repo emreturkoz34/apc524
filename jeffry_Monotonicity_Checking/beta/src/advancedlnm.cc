@@ -1,4 +1,4 @@
-/* AdvancedLNM is a class that determines the least non-monotonic
+/*! AdvancedLNM is a class that determines the least non-monotonic
    progress variable with respect to temperature (or another specified
    column). It determines the progress variable with the smallest
    percentage of non-unique (one-to-one) points and selects it as the
@@ -30,11 +30,13 @@ AdvancedLNM::~AdvancedLNM() {
   delete [] decreasing_;
 }
 
-/// LeastNonMonotonic calculates the percentage of non-unique
-/// points. The input array monoAry will initially be filled with 0s
-/// since all progress variables are non-monotonic. This method will
-/// select the least non-monotonic and change its value in monoAry to
-/// 1. col is the reference column.
+/// Method to find least monotonic progress variable
+/*!  LeastNonMonotonic calculates the percentage of non-unique
+points. The input array monoAry will initially be filled with 0s since
+all progress variables are non-monotonic. This method will select the
+least non-monotonic and change its value in monoAry to 1. col is the
+reference column.
+*/
 int AdvancedLNM::LeastNonMonotonic(int *monoAry, const int ncols, const int col){
   assert(ncols == ncols_);
 
