@@ -1,4 +1,4 @@
-0;136;0c#include "glquad.h"
+#include "glquad.h"
 #include "assert.h"
 #include "stdio.h"
 
