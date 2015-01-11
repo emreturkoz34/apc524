@@ -3,7 +3,7 @@ import matrix
 import lininterp
 
 ## @package iofuncs
-# Module containing text file processing functions used by other python scripts 
+# \brief Module containing text file processing functions used by other python scripts 
 
 ## Function that extracts input options from a text file
 #
