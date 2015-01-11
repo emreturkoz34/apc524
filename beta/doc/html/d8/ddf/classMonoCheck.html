@@ -18,6 +18,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul>
       <li><a href="../../index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -48,14 +49,36 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <p><a href="../../de/d1f/classMonoCheck-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cee9c89dd8a6c19cd01d597343c4d99"></a><!-- doxytag: member="MonoCheck::MonoCheck" ref="a4cee9c89dd8a6c19cd01d597343c4d99" args="(const Matrix &amp;progVar)" -->
-&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddf/classMonoCheck.html#a4cee9c89dd8a6c19cd01d597343c4d99">MonoCheck</a> (const <a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> &amp;progVar)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddf/classMonoCheck.html#a4cee9c89dd8a6c19cd01d597343c4d99">MonoCheck</a> (const <a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> &amp;progVar)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#a4cee9c89dd8a6c19cd01d597343c4d99"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a97dc563e5cad68eafabd498d66e86590"></a><!-- doxytag: member="MonoCheck::~MonoCheck" ref="a97dc563e5cad68eafabd498d66e86590" args="()" -->
 &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddf/classMonoCheck.html#a97dc563e5cad68eafabd498d66e86590">~MonoCheck</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/ddf/classMonoCheck.html#af34f3d72ec2d1575526d42bfe4cdfe7a">CheckStrictMonoticity</a> (int *monoAry, const int ncols, int col)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Method to check whether each progress variable is strictly monotonic.  <a href="#af34f3d72ec2d1575526d42bfe4cdfe7a"></a><br/></td></tr>
 </table>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a4cee9c89dd8a6c19cd01d597343c4d99"></a><!-- doxytag: member="MonoCheck::MonoCheck" ref="a4cee9c89dd8a6c19cd01d597343c4d99" args="(const Matrix &amp;progVar)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MonoCheck::MonoCheck </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>progVar</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructor. </p>
+<p>monocheck is a class which checks whether a specified progress variable is strictly increasing or strictly decreasing with respect to temperature (or another specified column). That is, C(T1)&lt;C(T2) or C(T1)&gt;C(T2) for T1&lt;T2, where T1 and T2 are any two temperatures and C is the progress variable. </p>
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="af34f3d72ec2d1575526d42bfe4cdfe7a"></a><!-- doxytag: member="MonoCheck::CheckStrictMonoticity" ref="af34f3d72ec2d1575526d42bfe4cdfe7a" args="(int *monoAry, const int ncols, int col)" -->
 <div class="memitem">
@@ -87,6 +110,8 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
       </table>
 </div>
 <div class="memdoc">
+
+<p>Method to check whether each progress variable is strictly monotonic. </p>
 <p>CheckStrictMonoticity checks the monotonicity of each column (AKA progress variable "C") in progVar with respect to column "col". The output array monoAry must be of length ncols_, where each cell holds a value of 3 if C is strictly increasing or strictly decreasing and 0 otherwise. </p>
 
 </div>
@@ -101,7 +126,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -110,7 +135,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </iframe>
 </div>
 
-<hr size="1"/><address style="text-align: right;"><small>Generated on 7 Jan 2015 for CHEMTABLE by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on 11 Jan 2015 for CHEMTABLE by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

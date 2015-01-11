@@ -11,10 +11,7 @@ Inheritance diagram for SimpleLNM::\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classSimpleLNM_a45bd676f6bb504baf1b46ddcbf2f8fb8}{
-\hyperlink{classSimpleLNM_a45bd676f6bb504baf1b46ddcbf2f8fb8}{SimpleLNM} (const \hyperlink{classMatrix}{Matrix} \&progVar)}
-\label{d8/dfe/classSimpleLNM_a45bd676f6bb504baf1b46ddcbf2f8fb8}
-
+\hyperlink{classSimpleLNM_a45bd676f6bb504baf1b46ddcbf2f8fb8}{SimpleLNM} (const \hyperlink{classMatrix}{Matrix} \&progVar)
 \begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
 \hypertarget{classSimpleLNM_a89cbe5270c4846ebba8ab1660149112f}{
 \hyperlink{classSimpleLNM_a89cbe5270c4846ebba8ab1660149112f}{$\sim$SimpleLNM} ()}
@@ -22,8 +19,20 @@ Inheritance diagram for SimpleLNM::\begin{figure}[H]
 
 \begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
 int \hyperlink{classSimpleLNM_a9d296839ca84467c0f6241b1393bd6d5}{LeastNonMonotonic} (int $\ast$monoAry, const int ncols, const int col)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Method to find the least non monotonic progress variable. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSimpleLNM_a45bd676f6bb504baf1b46ddcbf2f8fb8}{
+\index{SimpleLNM@{SimpleLNM}!SimpleLNM@{SimpleLNM}}
+\index{SimpleLNM@{SimpleLNM}!SimpleLNM@{SimpleLNM}}
+\subsubsection[{SimpleLNM}]{\setlength{\rightskip}{0pt plus 5cm}SimpleLNM::SimpleLNM (const {\bf Matrix} \& {\em progVar})}}
+\label{d8/dfe/classSimpleLNM_a45bd676f6bb504baf1b46ddcbf2f8fb8}
+
+
+Constructor. \hyperlink{classSimpleLNM}{SimpleLNM} is a class that determines the least non-\/monotonic progress variable with respect to temperature (or another specified column). It determines the percentage which the progress variable is strictly increasing and the percentage which the progress variable is strictly decreasing. The larger percentage not only determines whether the progress variable is increasing or decreasing, but will also be compared with the percentages of other progress variables. The progress variable with the largest percentage of increasing or decreasing values is the least non-\/monotonic progress variable.
+
+If two or more progress variables share the highest percentage, then the progress variable with the greatest magnitude slope (by endpoints) is selected. Progress variables with neither increasing nor decreasing data are considered strongly non-\/monotonic. 
 
 \subsection{Member Function Documentation}
 \hypertarget{classSimpleLNM_a9d296839ca84467c0f6241b1393bd6d5}{
@@ -31,7 +40,9 @@ int \hyperlink{classSimpleLNM_a9d296839ca84467c0f6241b1393bd6d5}{LeastNonMonoton
 \index{LeastNonMonotonic@{LeastNonMonotonic}!SimpleLNM@{SimpleLNM}}
 \subsubsection[{LeastNonMonotonic}]{\setlength{\rightskip}{0pt plus 5cm}int SimpleLNM::LeastNonMonotonic (int $\ast$ {\em monoAry}, \/  const int {\em ncols}, \/  const int {\em col})\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
 \label{d8/dfe/classSimpleLNM_a9d296839ca84467c0f6241b1393bd6d5}
-LeastNonMonotonic calculates how much each progress variable is strictly increasing and strictly decreasing. The input array monoAry will initially be filled with 0s since all progress variables are non-\/monotonic. This method will select the least non-\/monotonic and change its value in monoAry to 1. col is the reference column. 
+
+
+Method to find the least non monotonic progress variable. LeastNonMonotonic calculates how much each progress variable is strictly increasing and strictly decreasing. The input array monoAry will initially be filled with 0s since all progress variables are non-\/monotonic. This method will select the least non-\/monotonic and change its value in monoAry to 1. col is the reference column. 
 
 Implements \hyperlink{classLeastNonMono}{LeastNonMono}.
 

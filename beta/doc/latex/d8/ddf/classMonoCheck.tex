@@ -5,10 +5,7 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classMonoCheck_a4cee9c89dd8a6c19cd01d597343c4d99}{
-\hyperlink{classMonoCheck_a4cee9c89dd8a6c19cd01d597343c4d99}{MonoCheck} (const \hyperlink{classMatrix}{Matrix} \&progVar)}
-\label{d8/ddf/classMonoCheck_a4cee9c89dd8a6c19cd01d597343c4d99}
-
+\hyperlink{classMonoCheck_a4cee9c89dd8a6c19cd01d597343c4d99}{MonoCheck} (const \hyperlink{classMatrix}{Matrix} \&progVar)
 \begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
 \hypertarget{classMonoCheck_a97dc563e5cad68eafabd498d66e86590}{
 \hyperlink{classMonoCheck_a97dc563e5cad68eafabd498d66e86590}{$\sim$MonoCheck} ()}
@@ -16,8 +13,18 @@
 
 \begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
 int \hyperlink{classMonoCheck_af34f3d72ec2d1575526d42bfe4cdfe7a}{CheckStrictMonoticity} (int $\ast$monoAry, const int ncols, int col)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Method to check whether each progress variable is strictly monotonic. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMonoCheck_a4cee9c89dd8a6c19cd01d597343c4d99}{
+\index{MonoCheck@{MonoCheck}!MonoCheck@{MonoCheck}}
+\index{MonoCheck@{MonoCheck}!MonoCheck@{MonoCheck}}
+\subsubsection[{MonoCheck}]{\setlength{\rightskip}{0pt plus 5cm}MonoCheck::MonoCheck (const {\bf Matrix} \& {\em progVar})}}
+\label{d8/ddf/classMonoCheck_a4cee9c89dd8a6c19cd01d597343c4d99}
+
+
+Constructor. monocheck is a class which checks whether a specified progress variable is strictly increasing or strictly decreasing with respect to temperature (or another specified column). That is, C(T1)$<$C(T2) or C(T1)$>$C(T2) for T1$<$T2, where T1 and T2 are any two temperatures and C is the progress variable. 
 
 \subsection{Member Function Documentation}
 \hypertarget{classMonoCheck_af34f3d72ec2d1575526d42bfe4cdfe7a}{
@@ -25,7 +32,9 @@ int \hyperlink{classMonoCheck_af34f3d72ec2d1575526d42bfe4cdfe7a}{CheckStrictMono
 \index{CheckStrictMonoticity@{CheckStrictMonoticity}!MonoCheck@{MonoCheck}}
 \subsubsection[{CheckStrictMonoticity}]{\setlength{\rightskip}{0pt plus 5cm}int MonoCheck::CheckStrictMonoticity (int $\ast$ {\em monoAry}, \/  const int {\em ncols}, \/  int {\em col})}}
 \label{d8/ddf/classMonoCheck_af34f3d72ec2d1575526d42bfe4cdfe7a}
-CheckStrictMonoticity checks the monotonicity of each column (AKA progress variable \char`\"{}C\char`\"{}) in progVar with respect to column \char`\"{}col\char`\"{}. The output array monoAry must be of length ncols\_\-, where each cell holds a value of 3 if C is strictly increasing or strictly decreasing and 0 otherwise. 
+
+
+Method to check whether each progress variable is strictly monotonic. CheckStrictMonoticity checks the monotonicity of each column (AKA progress variable \char`\"{}C\char`\"{}) in progVar with respect to column \char`\"{}col\char`\"{}. The output array monoAry must be of length ncols\_\-, where each cell holds a value of 3 if C is strictly increasing or strictly decreasing and 0 otherwise. 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 

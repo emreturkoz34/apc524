@@ -5,28 +5,47 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classiofuncs_1_1ProcFile_aaf57101eb0b922217a240ca283fc5d9d}{
-def {\bfseries \_\-\_\-init\_\-\_\-}}
-\label{d3/d16/classiofuncs_1_1ProcFile_aaf57101eb0b922217a240ca283fc5d9d}
-
-\item 
-\hypertarget{classiofuncs_1_1ProcFile_a88f142260af3fd70b1b8613da471f858}{
-def {\bfseries gettitles}}
-\label{d3/d16/classiofuncs_1_1ProcFile_a88f142260af3fd70b1b8613da471f858}
-
-\item 
-\hypertarget{classiofuncs_1_1ProcFile_ae7f8d6213747a8d1e41b771ec71cd2be}{
-def {\bfseries interpolate}}
-\label{d3/d16/classiofuncs_1_1ProcFile_ae7f8d6213747a8d1e41b771ec71cd2be}
-
-\end{DoxyCompactItemize}
+def \hyperlink{classiofuncs_1_1ProcFile_aaf57101eb0b922217a240ca283fc5d9d}{\_\-\_\-init\_\-\_\-}
+\begin{DoxyCompactList}\small\item\em The Constructor. \item\end{DoxyCompactList}\item 
+def \hyperlink{classiofuncs_1_1ProcFile_a88f142260af3fd70b1b8613da471f858}{gettitles}
+\begin{DoxyCompactList}\small\item\em Function that returns a vector containing the column headers in the 2nd row of the data file. \item\end{DoxyCompactList}\item 
+def \hyperlink{classiofuncs_1_1ProcFile_ae7f8d6213747a8d1e41b771ec71cd2be}{interpolate}
+\begin{DoxyCompactList}\small\item\em Interpolate function extracts/interpolates a row of data in the data file at the specified value in the first column. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\begin{DoxyVerb}returns interpolated data (in datavec) from the given file 
-for the species given in inputvars. Also returns all column headers
-from the datafile in titles\end{DoxyVerb}
+\begin{DoxyVerb}Class for processing .kg datafiles, including extracting column headers and interpolating a row of data.\end{DoxyVerb}
  
+
+\subsection{Member Function Documentation}
+\hypertarget{classiofuncs_1_1ProcFile_aaf57101eb0b922217a240ca283fc5d9d}{
+\index{iofuncs::ProcFile@{iofuncs::ProcFile}!\_\-\_\-init\_\-\_\-@{\_\-\_\-init\_\-\_\-}}
+\index{\_\-\_\-init\_\-\_\-@{\_\-\_\-init\_\-\_\-}!iofuncs::ProcFile@{iofuncs::ProcFile}}
+\subsubsection[{\_\-\_\-init\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def iofuncs::ProcFile::\_\-\_\-init\_\-\_\- ( {\em self}, \/   {\em sfile})}}
+\label{d3/d16/classiofuncs_1_1ProcFile_aaf57101eb0b922217a240ca283fc5d9d}
+
+
+The Constructor. SFILE: a string contiaining the name of the data file to be processed or path to that file \hypertarget{classiofuncs_1_1ProcFile_a88f142260af3fd70b1b8613da471f858}{
+\index{iofuncs::ProcFile@{iofuncs::ProcFile}!gettitles@{gettitles}}
+\index{gettitles@{gettitles}!iofuncs::ProcFile@{iofuncs::ProcFile}}
+\subsubsection[{gettitles}]{\setlength{\rightskip}{0pt plus 5cm}def iofuncs::ProcFile::gettitles ( {\em self})}}
+\label{d3/d16/classiofuncs_1_1ProcFile_a88f142260af3fd70b1b8613da471f858}
+
+
+Function that returns a vector containing the column headers in the 2nd row of the data file. Ignores 1st row, returns contents of 2nd row as elements of a vector (assuming datafile is tab delimited). \hypertarget{classiofuncs_1_1ProcFile_ae7f8d6213747a8d1e41b771ec71cd2be}{
+\index{iofuncs::ProcFile@{iofuncs::ProcFile}!interpolate@{interpolate}}
+\index{interpolate@{interpolate}!iofuncs::ProcFile@{iofuncs::ProcFile}}
+\subsubsection[{interpolate}]{\setlength{\rightskip}{0pt plus 5cm}def iofuncs::ProcFile::interpolate ( {\em self}, \/   {\em inputvars}, \/   {\em locs}, \/   {\em datavec}, \/   {\em interpval} = {\ttfamily 0.27}, \/   {\em interpmethod} = {\ttfamily 'linear'})}}
+\label{d3/d16/classiofuncs_1_1ProcFile_ae7f8d6213747a8d1e41b771ec71cd2be}
+
+
+Interpolate function extracts/interpolates a row of data in the data file at the specified value in the first column. Read the columns of the data file with headers matching the strings in the INPUTVARS vector.
+
+Write the column numbers corresponding to these column headers into LOCS vector.
+
+Interpolate to find values of each column corresponding to INTERPVAL in the 1st column, using interpolation method specified by the INTERPMETHOD string.
+
+Write interpolated values to DATAVEC. 
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 

@@ -13,19 +13,29 @@ CubicInterp::~CubicInterp() {}
   specified column being the independent variable. The input data is assumed to be sorted
   by the independent variable.
 
+
+  \verbatim
   INPUTS:
+
   const Matrix *matin    pointer to a Matrix object. This is the input data.
+
   int col                integer specifying which column of the input Matrix is the independent
                          variable
+
   double ival            value at which to interpolate
+
   double *vecout         pointer to an array which contains the interpolated row. This array has
                          the same number of columns as the input Matrix.
+
   int cols               number of columns of matin/vecout
 
   OUTPUTS:
+
   int                    flag specifying whether or not the function succeeded
                          = 0: success
 			 = 1: extrapolation attempted
+  \endverbatim
+
 */
 int CubicInterp::Interp(const Matrix *matin, int col, double ival, double *vecout, int cols) {
 

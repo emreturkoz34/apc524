@@ -18,6 +18,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul>
       <li><a href="../../index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -58,14 +59,37 @@ Inheritance diagram for LinRegression:</div>
 <p><a href="../../d3/de3/classLinRegression-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d747e38f7a8997765be15f43062290c"></a><!-- doxytag: member="LinRegression::LinRegression" ref="a0d747e38f7a8997765be15f43062290c" args="(const Matrix &amp;progVar)" -->
-&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d89/classLinRegression.html#a0d747e38f7a8997765be15f43062290c">LinRegression</a> (const <a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> &amp;progVar)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d89/classLinRegression.html#a0d747e38f7a8997765be15f43062290c">LinRegression</a> (const <a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> &amp;progVar)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#a0d747e38f7a8997765be15f43062290c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ea5ffb8032172bdf54d1f2d4041d520"></a><!-- doxytag: member="LinRegression::~LinRegression" ref="a4ea5ffb8032172bdf54d1f2d4041d520" args="()" -->
 &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d89/classLinRegression.html#a4ea5ffb8032172bdf54d1f2d4041d520">~LinRegression</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructor. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d89/classLinRegression.html#a1f245c4e47637f3f1d94f6129861406d">MostMonotonic</a> (int *monoAry, const int ncols, const int col)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Method to find the most monotonic progress variable.  <a href="#a1f245c4e47637f3f1d94f6129861406d"></a><br/></td></tr>
 </table>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a0d747e38f7a8997765be15f43062290c"></a><!-- doxytag: member="LinRegression::LinRegression" ref="a0d747e38f7a8997765be15f43062290c" args="(const Matrix &amp;progVar)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LinRegression::LinRegression </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d3/d3f/classMatrix.html">Matrix</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>progVar</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Constructor. </p>
+<p><a class="el" href="../../de/d89/classLinRegression.html">LinRegression</a> is a class that determines the most monotonic progress variable with respect to temperature (or another specified column). It calculates the slope of the best linear approximation for each progress variable and selects the largest magnitude.</p>
+<p>The slope is given by {sum_i=1_i=N (C_i-C_ave)(T_i-T_ave)}/{sum_i=1_i=N (T_i-T_ave)^2} </p>
+
+</div>
+</div>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a1f245c4e47637f3f1d94f6129861406d"></a><!-- doxytag: member="LinRegression::MostMonotonic" ref="a1f245c4e47637f3f1d94f6129861406d" args="(int *monoAry, const int ncols, const int col)" -->
 <div class="memitem">
@@ -97,6 +121,8 @@ Inheritance diagram for LinRegression:</div>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Method to find the most monotonic progress variable. </p>
 <p>MostMonotonic calculates the slope of the best linear approximation for each progress variable which is strictly increasing or strictly decreasing. The output array monoAry must be of length ncols, where each cell holds a value of 3 if C is strictly monotonic and has the largest slope, 2 if C is strictly monotonic but does not have the largest slope, and 0 for non-monotonic C. col is the reference column. </p>
 
 <p>Implements <a class="el" href="../../d0/d39/classMaxSlope.html">MaxSlope</a>.</p>
@@ -113,7 +139,7 @@ Inheritance diagram for LinRegression:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -122,7 +148,7 @@ Inheritance diagram for LinRegression:</div>
 </iframe>
 </div>
 
-<hr size="1"/><address style="text-align: right;"><small>Generated on 7 Jan 2015 for CHEMTABLE by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on 11 Jan 2015 for CHEMTABLE by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

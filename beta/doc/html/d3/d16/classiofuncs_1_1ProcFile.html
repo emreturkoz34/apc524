@@ -18,6 +18,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul>
       <li><a href="../../index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -42,7 +43,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
       <li><a href="../../functions.html"><span>Class&nbsp;Members</span></a></li>
     </ul>
   </div>
-  <div class="navpath"><b>iofuncs</b>::<a class="el" href="../../d3/d16/classiofuncs_1_1ProcFile.html">ProcFile</a>
+  <div class="navpath"><a class="el" href="../../d7/dcd/namespaceiofuncs.html">iofuncs</a>::<a class="el" href="../../d3/d16/classiofuncs_1_1ProcFile.html">ProcFile</a>
   </div>
 </div>
 <div class="contents">
@@ -50,17 +51,124 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <p><a href="../../d1/dc6/classiofuncs_1_1ProcFile-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf57101eb0b922217a240ca283fc5d9d"></a><!-- doxytag: member="iofuncs::ProcFile::__init__" ref="aaf57101eb0b922217a240ca283fc5d9d" args="" -->
-def&nbsp;</td><td class="memItemRight" valign="bottom"><b>__init__</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a88f142260af3fd70b1b8613da471f858"></a><!-- doxytag: member="iofuncs::ProcFile::gettitles" ref="a88f142260af3fd70b1b8613da471f858" args="" -->
-def&nbsp;</td><td class="memItemRight" valign="bottom"><b>gettitles</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7f8d6213747a8d1e41b771ec71cd2be"></a><!-- doxytag: member="iofuncs::ProcFile::interpolate" ref="ae7f8d6213747a8d1e41b771ec71cd2be" args="" -->
-def&nbsp;</td><td class="memItemRight" valign="bottom"><b>interpolate</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">def&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d16/classiofuncs_1_1ProcFile.html#aaf57101eb0b922217a240ca283fc5d9d">__init__</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The Constructor.  <a href="#aaf57101eb0b922217a240ca283fc5d9d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">def&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d16/classiofuncs_1_1ProcFile.html#a88f142260af3fd70b1b8613da471f858">gettitles</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Function that returns a vector containing the column headers in the 2nd row of the data file.  <a href="#a88f142260af3fd70b1b8613da471f858"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">def&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d16/classiofuncs_1_1ProcFile.html#ae7f8d6213747a8d1e41b771ec71cd2be">interpolate</a></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Interpolate function extracts/interpolates a row of data in the data file at the specified value in the first column.  <a href="#ae7f8d6213747a8d1e41b771ec71cd2be"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<div class="fragment"><pre class="fragment">returns interpolated data (in datavec) from the given file 
-for the species given in inputvars. Also returns all column headers
-from the datafile in titles</pre></div> <hr/>The documentation for this class was generated from the following file:<ul>
+<div class="fragment"><pre class="fragment">Class for processing .kg datafiles, including extracting column headers and interpolating a row of data.</pre></div> <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="aaf57101eb0b922217a240ca283fc5d9d"></a><!-- doxytag: member="iofuncs::ProcFile::__init__" ref="aaf57101eb0b922217a240ca283fc5d9d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def iofuncs::ProcFile::__init__ </td>
+          <td>(</td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>sfile</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>The Constructor. </p>
+<p>SFILE: a string contiaining the name of the data file to be processed or path to that file </p>
+
+</div>
+</div>
+<a class="anchor" id="a88f142260af3fd70b1b8613da471f858"></a><!-- doxytag: member="iofuncs::ProcFile::gettitles" ref="a88f142260af3fd70b1b8613da471f858" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def iofuncs::ProcFile::gettitles </td>
+          <td>(</td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>self</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Function that returns a vector containing the column headers in the 2nd row of the data file. </p>
+<p>Ignores 1st row, returns contents of 2nd row as elements of a vector (assuming datafile is tab delimited). </p>
+
+</div>
+</div>
+<a class="anchor" id="ae7f8d6213747a8d1e41b771ec71cd2be"></a><!-- doxytag: member="iofuncs::ProcFile::interpolate" ref="ae7f8d6213747a8d1e41b771ec71cd2be" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def iofuncs::ProcFile::interpolate </td>
+          <td>(</td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>inputvars</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>locs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>datavec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>interpval</em> = <code>0.27</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>interpmethod</em> = <code>'linear'</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Interpolate function extracts/interpolates a row of data in the data file at the specified value in the first column. </p>
+<p>Read the columns of the data file with headers matching the strings in the INPUTVARS vector.</p>
+<p>Write the column numbers corresponding to these column headers into LOCS vector.</p>
+<p>Interpolate to find values of each column corresponding to INTERPVAL in the 1st column, using interpolation method specified by the INTERPMETHOD string.</p>
+<p>Write interpolated values to DATAVEC. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>python/iofuncs.py</li>
 </ul>
 </div>
@@ -69,7 +177,7 @@ from the datafile in titles</pre></div> <hr/>The documentation for this class wa
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -78,7 +186,7 @@ from the datafile in titles</pre></div> <hr/>The documentation for this class wa
 </iframe>
 </div>
 
-<hr size="1"/><address style="text-align: right;"><small>Generated on 7 Jan 2015 for CHEMTABLE by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on 11 Jan 2015 for CHEMTABLE by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
