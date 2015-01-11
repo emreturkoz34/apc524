@@ -1,6 +1,7 @@
 include Makefile.in
 
 all: Makefile Makefile.in
+	doxygen
 	$(MAKE) -C $(ALGDIR)
 	$(MAKE) -C $(SRCDIR)
 	$(MAKE) -C $(OBJDIR)

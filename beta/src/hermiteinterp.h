@@ -2,7 +2,7 @@
 #define HERMITEINTERP_H_
 
 #include "interpolator.h"
-#include "interpolation.h"
+//#include "interpolation.h"
 
 class HermiteInterp : public Interpolator {
  public:
