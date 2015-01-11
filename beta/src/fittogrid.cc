@@ -65,7 +65,7 @@ int fittogrid(const Matrix4D *datain, const double *cgrid, Interpolator *interp,
 
   // For a point for which we tried to extrapolate, set the value of that point to
   // the value of the point which is nearest in (z~, c~) space.
-  omp_set_num_threads(nthreads); // set the number of threads
+  /*  omp_set_num_threads(nthreads); // set the number of threads
 #pragma omp parallel
   {
     int dist = 0;
@@ -95,7 +95,7 @@ int fittogrid(const Matrix4D *datain, const double *cgrid, Interpolator *interp,
       }
     }
   }
- 
+  */
   delete tmat;
   delete extrap;
   return flag1;
