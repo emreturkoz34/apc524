@@ -49,6 +49,14 @@ int fittogrid(const Matrix4D *datain, const double *cgrid, Interpolator *interp,
       }
 
       // Loop over values in cgrid, interpolate to find wgrid
+      
+      // Test printing
+      printf("\n The following should be sorted by the second column:\n");
+      for (int mm = 0; mm < nfiles; ++mm) {
+	printf("%6.3f %6.3f\n", tmat->GetVal(mm, 0), tmat->GetVal(mm, 1));
+      }
+      printf("\n");
+
       for (int k = 0; k < lcgrid; k++) {
 	flag = interp->Interp(tmat, 1, cgrid[k], tarr, 2);
 	if (flag == 1) { // interpolation failed (tried to extrapolate)
