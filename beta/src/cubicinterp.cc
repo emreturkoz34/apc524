@@ -92,7 +92,7 @@ int CubicInterp::Interp(const Matrix *matin, int col, double ival, double *vecou
    
    // Free memory
    delete[] h;
-   delete[] b;
+   delete[] p;
    delete[] u;
    delete[] v;
    delete[] z;
