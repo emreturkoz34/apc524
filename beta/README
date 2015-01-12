@@ -16,7 +16,7 @@ This file includes instructions for building and running the chemtable generator
 
 \section _2_ INSTALLATION
 
-The user interface for this version of the software (and a few helper functions) is written in Python and is ready to use. However, the Python code also contains calls to C++ functions (connected through SWIG) which must be compiled and wrapped before the software can be run, as described below. Building the program generates a variety of shared libraries containing the C++ functions which can be called from Python.
+The user interface for this version of the software (and a few helper functions) is written in Python and is ready to use. However, the Python code also contains calls to C++ functions (connected through SWIG) which must be compiled and wrapped before the software can be run, as described below. Building the program generates a variety of shared libraries containing the C++ functions which can be called from Python. 
 
 Building the program (compiling and wrapping C++ functions):
      - From the current (home) directory, type "make".
@@ -77,7 +77,7 @@ DETAILED INPUT FILE DESCRIPTION:
 Inputs are specified with the following syntax:
 <inputname:>\t<inputvalue1>\t<inputvalue2>\t<inputvalue3>... 
 
-Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values.
+Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values. Setting 'extrapolate in fottogrid' to 'yes' populates all elements of the final chemtable, but may greatly increase run time. If this option is set to 'no' then values which would require extrapolation are set to -1.  
 
 INPUT:					DEFAULT			<NOTES>		
 - data file directory:			data			<can specify a path, eg data/C2H4>
@@ -94,10 +94,10 @@ INPUT:					DEFAULT			<NOTES>
 - max slope test:			linear regression	<other options: endpointslope>
 - integrator:				trapezoid		<other options: glquad, simpson>
 - StoichMassFrac:			0.055
-- glq Number of Nodes:			50			<integer>
+- glq Number of Nodes:			50			<integer, only required when using glquad inter.> 
 - length Cgrid: 			20			<integer>
-- Zvar_max:				[none]			<integer>
-- Zvar_grid:				[none]			<integer>		
+- Zvar_max:				[none]			<integer, only required for beta PDF>
+- Zvar_grid:				[none]			<integer, only required for beta PDF>		
 - Zmean_grid:				Z			<if Z, set to be same as the Zgrid in
 								Flamelet files, otherwise, an integer>
 
@@ -116,7 +116,24 @@ Two sets of sample data files are included:
 
 --------------------------------------------------------------------
 
-\section _4_ DETAILED DOCUMENTATION 
+\section _4_ TESTING
+
+Several test functions for both the Python and C++ portions of the code are available in the /test/ directory. All tests are run using Python unites (C++ functions are tested through their SWIG wrappers). The following test functions are available:
+
+combinations_test.py  findprogvar_test.py   iofuncs_test.py       sorting_test.py	
+maxslope_test.py      convolute_test.py     integrator_test.py    pdf_test.py      
+monotonic_test.py     leastnonmono_test.py  interpolator_test.py  fittogrid_test.py
+
+Command: python XXXX_test.py (runs individual tests)
+
+In addition, there is a Bash script "test_all" which can be used to run all tests with one command.
+
+Command: ./test_all (runs all tests)
+
+--------------------------------------------------------------------
+
+\section _5_ DETAILED DOCUMENTATION 
+
 For detailed documentation of all classes and functions used by this program, see the Doxygen-generated HTML documentation.
 
 */
