@@ -6,10 +6,10 @@ import unittest
 import sys
 sys.path.append('../mod')
 
-import monocheck
+import maxslope
 import matrix
 
-class MonoCheck(unittest.TestCase):
+class MaxSlope(unittest.TestCase):
 
     # Test strictly increasing progress variable case
     def testStrictlyIncreasing(self):

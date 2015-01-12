@@ -115,13 +115,6 @@ class MonoCheck(unittest.TestCase):
         checker.CheckStrictMonoticity(monoAry, 0)
         self.assertEqual(monoAry[1], 0)
 
-    def assertRaisesWithMessage(self, msg, func, *args, **kwargs):
-        try:
-            func(*args, **kwargs)
-            self.assertFail()
-        except Exception as inst:
-            self.assertEqual(inst.message, msg)
-
     # Test constant progress variable case
     def testConstant(self):
         print "\nTest Monotonicity Checking: Constant"
