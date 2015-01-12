@@ -107,7 +107,7 @@ RUNNING THE PROGRAM</a></h2>
 </ul>
 <p>DETAILED INPUT FILE DESCRIPTION:</p>
 <p>Inputs are specified with the following syntax: &lt;inputname:&gt;&lt;inputvalue1&gt;&lt;inputvalue2&gt;&lt;inputvalue3&gt;...</p>
-<p>Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values.</p>
+<p>Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values. Setting 'extrapolate in fottogrid' to 'yes' populates all elements of the final chemtable, but may greatly increase run time. If this option is set to 'no' then values which would require extrapolation are set to -1.</p>
 <p>INPUT: DEFAULT &lt;NOTES&gt;</p>
 <ul>
 <li>data file directory: data &lt;can specify a path, eg data/C2H4&gt;</li>
@@ -124,10 +124,10 @@ RUNNING THE PROGRAM</a></h2>
 <li>max slope test: linear regression &lt;other options: endpointslope&gt;</li>
 <li>integrator: trapezoid &lt;other options: glquad, simpson&gt;</li>
 <li>StoichMassFrac: 0.055</li>
-<li>glq Number of Nodes: 50 &lt;integer&gt;</li>
+<li>glq Number of Nodes: 50 &lt;integer, only required when using glquad inter.&gt;</li>
 <li>length Cgrid: 20 &lt;integer&gt;</li>
-<li>Zvar_max: [none] &lt;integer&gt;</li>
-<li>Zvar_grid: [none] &lt;integer&gt;</li>
+<li>Zvar_max: [none] &lt;integer, only required for beta <a class="el" href="dc/d2d/classPDF.html">PDF</a>&gt;</li>
+<li>Zvar_grid: [none] &lt;integer, only required for beta <a class="el" href="dc/d2d/classPDF.html">PDF</a>&gt;</li>
 <li>Zmean_grid: Z &lt;if Z, set to be same as the Zgrid in Flamelet files, otherwise, an integer&gt;</li>
 </ul>
 <p>DETAILED DATAFILE DESCRIPTION:</p>
@@ -146,6 +146,14 @@ RUNNING THE PROGRAM</a></h2>
 </ul>
 <p>--------------------------------------------------------------------</p>
 <h2><a class="anchor" id="_4_">
+TESTING</a></h2>
+<p>Several test functions for both the Python and C++ portions of the code are available in the /test/ directory. All tests are run using Python unites (C++ functions are tested through their SWIG wrappers). The following test functions are available:</p>
+<p>combinations_test.py findprogvar_test.py iofuncs_test.py sorting_test.py maxslope_test.py convolute_test.py integrator_test.py pdf_test.py monotonic_test.py leastnonmono_test.py interpolator_test.py fittogrid_test.py</p>
+<p>Command: python XXXX_test.py (runs individual tests)</p>
+<p>In addition, there is a Bash script "test_all" which can be used to run all tests with one command.</p>
+<p>Command: ./test_all (runs all tests)</p>
+<p>--------------------------------------------------------------------</p>
+<h2><a class="anchor" id="_5_">
 DETAILED DOCUMENTATION</a></h2>
 <p>For detailed documentation of all classes and functions used by this program, see the Doxygen-generated HTML documentation. </p>
 </div>
