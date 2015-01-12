@@ -53,7 +53,7 @@ class Integrator(unittest.TestCase):
 
 
     def testSimpsLin2(self):
-        print "\ntest Simpson rule: doesn't work for delta PDF"
+        print "\ntest Simpson rule: won't work for delta PDF"
         NumPoints = 13 # Must be odd
         DeltaVal = NumPoints - 1.0
         domain = np.linspace(0,1,NumPoints)
@@ -70,7 +70,6 @@ class Integrator(unittest.TestCase):
                 incorrectVal = correctVal * 2 / 3
             elif i % 2 == 1:
                 incorrectVal = correctVal * 4 / 3
-            print "i = " + str(i)
             r = integrator.simpson(integrand, domain)
             self.assertNotEqual(r, correctVal)
             self.assertAlmostEqual(r, incorrectVal, 4)
@@ -101,14 +100,6 @@ class Integrator(unittest.TestCase):
         integrand = f(domain)
         r = integrator.glquad(integrand, domain, 40)
         self.assertAlmostEqual(r, -0.6667, 3)
-    """
-    def testGLQuadNonLinDomain(self):
-        print "\ntest Gauss Legendre Quadrature rule: nonlinear domain"
-        f = lambda x : 2 * x
-        domain = np.logspace(0, 1, 100)
-        integrand = f(domain)
-        r = integrator.glquad(integrand, domain, 30)
-        self.assertAlmostEqual(r, 99)
-    """
+
 if __name__ == '__main__':
     unittest.main()

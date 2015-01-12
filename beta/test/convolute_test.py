@@ -45,20 +45,17 @@ class PDF(unittest.TestCase):
         dPdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
         
         # expected PDF values
-        PDF = np.zeros((ZmeanPoints, ZPoints))
-        PDF[0, 1] = 1 * (ZPoints-1)
+        PDF = np.zeros(ZPoints)
+        PDF[1] = 1 * (ZPoints-1)
 
         # calculate PDF
         test = d.pdfVal(Z, dPdfValM)
-        PDFCalc = np.zeros((ZmeanPoints, ZPoints))
+        PDFCalc = np.zeros(ZPoints)
 
         # test
-        for i in range(ZvarPoints):
-            for j in range(ZmeanPoints):
-                for k in range(ZPoints):
-                    PDFCalc[j,k] = dPdfValM.GetVal(i,j,k)
         for k in range(ZPoints):
-            self.assertAlmostEqual(PDF[0,k], PDFCalc[0,k])
+            PDFCalc[k] = dPdfValM.GetVal(0,0,k)
+            self.assertAlmostEqual(PDF[k], PDFCalc[k])
 
         # create Integrators
         Trapz = integrator.Trapz()
@@ -69,8 +66,8 @@ class PDF(unittest.TestCase):
         postQuadr  = matrix.Matrix(ZvarPoints, ZmeanPoints)
 
         # create matrix for printing
-        filterTrapz = np.zeros((ZvarPoints, ZmeanPoints))
-        filterQuadr = np.zeros((ZvarPoints, ZmeanPoints))
+        filterTrapz = np.zeros(ZmeanPoints)
+        filterQuadr = np.zeros(ZmeanPoints)
 
         # create test data
         testData = np.ones(ZPoints)
@@ -79,14 +76,11 @@ class PDF(unittest.TestCase):
         c = convolute.convVal_func(Z, testData, dPdfValM, postTrapz, Trapz)
         c = convolute.convVal_func(Z, testData, dPdfValM, postQuadr, Quadr)
 
-        for i in range(ZvarPoints):
-            for j in range(ZmeanPoints):
-                filterTrapz[i,j] = postTrapz.GetVal(i,j)
-                filterQuadr[i,j] = postQuadr.GetVal(i,j)
-                
-        for i in range(ZmeanPoints):
-            self.assertEqual(filterTrapz[0,i], 1)
-            self.assertAlmostEqual(filterQuadr[0,i], 1, 1)
+        for j in range(ZmeanPoints):
+            filterTrapz[j] = postTrapz.GetVal(0,j)
+            filterQuadr[j] = postQuadr.GetVal(0,j)
+            self.assertEqual(filterTrapz[j], 1)
+            self.assertAlmostEqual(filterQuadr[j], 1, 1)
 
     """
     NOTE: Simpson's Rule doesn't work for Delta PDFs and 
@@ -119,20 +113,17 @@ class PDF(unittest.TestCase):
         bPdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
         
         # expected PDF values
-        PDF = np.zeros((ZmeanPoints, ZPoints))
-        PDF[0, 1] = 1 * (ZPoints-1)
+        PDF = np.zeros(ZPoints)
+        PDF[1] = 1 * (ZPoints-1)
 
         # calculate PDF
         test = b.pdfVal(Z, bPdfValM)
-        PDFCalc = np.zeros((ZmeanPoints, ZPoints))
+        PDFCalc = np.zeros(ZPoints)
 
         # test
-        for i in range(ZvarPoints):
-            for j in range(ZmeanPoints):
-                for k in range(ZPoints):
-                    PDFCalc[j,k] = bPdfValM.GetVal(i,j,k)
         for k in range(ZPoints):
-            self.assertAlmostEqual(PDF[0,k], PDFCalc[0,k])
+            PDFCalc[k] = bPdfValM.GetVal(0,0,k)
+            self.assertAlmostEqual(PDF[k], PDFCalc[k])
 
         # create Integrators
         Trapz = integrator.Trapz()
@@ -143,8 +134,8 @@ class PDF(unittest.TestCase):
         postQuadr  = matrix.Matrix(ZvarPoints, ZmeanPoints)
 
         # create matrix for printing
-        filterTrapz = np.zeros((ZvarPoints, ZmeanPoints))
-        filterQuadr = np.zeros((ZvarPoints, ZmeanPoints))
+        filterTrapz = np.zeros(ZmeanPoints)
+        filterQuadr = np.zeros(ZmeanPoints)
 
         # create test data
         testData = np.ones(ZPoints)
@@ -153,22 +144,16 @@ class PDF(unittest.TestCase):
         c = convolute.convVal_func(Z, testData, bPdfValM, postTrapz, Trapz)
         c = convolute.convVal_func(Z, testData, bPdfValM, postQuadr, Quadr)
 
-        for i in range(ZvarPoints):
-            for j in range(ZmeanPoints):
-                filterTrapz[i,j] = postTrapz.GetVal(i,j)
-                filterQuadr[i,j] = postQuadr.GetVal(i,j)
-                
-        for i in range(ZmeanPoints):
-            self.assertEqual(filterTrapz[0,i], 1)
-            self.assertAlmostEqual(filterQuadr[0,i], 1, 1)
+
+        for j in range(ZmeanPoints):
+            filterTrapz[j] = postTrapz.GetVal(0,j)
+            filterQuadr[j] = postQuadr.GetVal(0,j)
+            self.assertEqual(filterTrapz[j], 1)
+            self.assertAlmostEqual(filterQuadr[j], 1, 1)
 
 
-    """
-    NOTE: There are huge errors for trapezoid rule integration
-    on a skewed BetaPDF. Quadrature works far better.
-    """
     def testBetaPDF2(self):
-        print "\n Beta PDF 2: Skewed"
+        print "\n Beta PDF 2: Infinite at Zmin/Zmax"
 
         Points = 6
         ZPoints = 101
@@ -193,6 +178,7 @@ class PDF(unittest.TestCase):
         b = pdf.BetaPDF(Zmean, Zvar) 
         bPdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
         bPDF = np.zeros(Points)        
+
         # expected PDF values
         PDF = np.zeros(Points)
         PDF[0] = 5.93
@@ -217,10 +203,10 @@ class PDF(unittest.TestCase):
         print "PDF[5] = inf, bPDF[5] = " + str(bPDF[5])
         """
 
-        self.assertLess(bPDF[1]-PDF[1],0.2)
-        self.assertLess(bPDF[2]-PDF[2],0.2)
-        self.assertLess(bPDF[3]-PDF[3],0.2)
-        self.assertLess(bPDF[4]-PDF[4],0.2)
+        self.assertLess(np.abs(bPDF[1]-PDF[1]),0.2)
+        self.assertLess(np.abs(bPDF[2]-PDF[2]),0.2)
+        self.assertLess(np.abs(bPDF[3]-PDF[3]),0.2)
+        self.assertLess(np.abs(bPDF[4]-PDF[4]),0.2)
         self.assertEqual(bTest, 0)
 
         # create Integrators
@@ -232,8 +218,8 @@ class PDF(unittest.TestCase):
         postQuadr  = matrix.Matrix(ZvarPoints, ZmeanPoints)
 
         # create matrix for printing
-        filterTrapz = np.zeros((ZvarPoints, ZmeanPoints))
-        filterQuadr = np.zeros((ZvarPoints, ZmeanPoints))
+        filterTrapz = np.zeros(ZmeanPoints)
+        filterQuadr = np.zeros(ZmeanPoints)
 
         # create test data
         testData = np.ones(ZPoints)
@@ -242,14 +228,11 @@ class PDF(unittest.TestCase):
         c = convolute.convVal_func(Z, testData, bPdfValM, postTrapz, Trapz)
         c = convolute.convVal_func(Z, testData, bPdfValM, postQuadr, Quadr)
 
-        for i in range(ZvarPoints):
-            for j in range(ZmeanPoints):
-                filterTrapz[i,j] = postTrapz.GetVal(i,j)
-                filterQuadr[i,j] = postQuadr.GetVal(i,j)
-        
-        for i in range(ZmeanPoints):
-            self.assertGreater(filterTrapz[0,i]-1, 10)
-            self.assertLess(filterQuadr[0,i]-1, 0.01)
+        for j in range(ZmeanPoints):
+            filterTrapz[j] = postTrapz.GetVal(0,j)
+            filterQuadr[j] = postQuadr.GetVal(0,j)
+            self.assertLess(np.abs(filterTrapz[j]-1), 0.5)
+            self.assertLess(np.abs(filterQuadr[j]-1), 0.5)
 
 
     def testBetaPDF3(self):
@@ -279,13 +262,13 @@ class PDF(unittest.TestCase):
         bPdfValM = matrix3d.Matrix3D(ZvarPoints, ZmeanPoints, ZPoints)
         bPDF = np.zeros(Points)        
         # expected PDF values
-        PDF = np.zeros((ZmeanPoints, ZPoints))
-        PDF[0, 0] = 0
-        PDF[0, 1] = 0.96
-        PDF[0, 2] = 1.44
-        PDF[0, 3] = 1.44
-        PDF[0, 4] = 0.96
-        PDF[0, 5] = 0
+        PDF = np.zeros(ZPoints)
+        PDF[0] = 0
+        PDF[1] = 0.96
+        PDF[2] = 1.44
+        PDF[3] = 1.44
+        PDF[4] = 0.96
+        PDF[5] = 0
 
         # calculate PDF
         bTest = b.pdfVal(Z, bPdfValM)
@@ -294,17 +277,17 @@ class PDF(unittest.TestCase):
         for k in range(Points):
             bPDF[k] = bPdfValM.GetVal(0,0,20*k)
         """
-        print "PDF[0,0] = inf, bPDF[0,0] = " + str(bPDF[0,0])
-        print "PDF[0,1] = " + str(PDF[0,1]) + ", bPDF[0,1] = " + str(bPDF[0,20])
-        print "PDF[0,2] = " + str(PDF[0,2]) + ", bPDF[0,2] = " + str(bPDF[0,40])
-        print "PDF[0,3] = " + str(PDF[0,3]) + ", bPDF[0,3] = " + str(bPDF[0,60])
-        print "PDF[0,4] = " + str(PDF[0,4]) + ", bPDF[0,4] = " + str(bPDF[0,80])
-        print "PDF[0,5] = inf, bPDF[0,5] = " + str(bPDF[0,100])
+        print "PDF[0] = inf, bPDF[0] = " + str(bPDF[0])
+        print "PDF[1] = " + str(PDF[1]) + ", bPDF[1] = " + str(bPDF[1])
+        print "PDF[2] = " + str(PDF[2]) + ", bPDF[2] = " + str(bPDF[2])
+        print "PDF[3] = " + str(PDF[3]) + ", bPDF[3] = " + str(bPDF[3])
+        print "PDF[4] = " + str(PDF[4]) + ", bPDF[4] = " + str(bPDF[4])
+        print "PDF[5] = inf, bPDF[5] = " + str(bPDF[5])
         """
-        self.assertLess(bPDF[1]-PDF[0,1],0.2)
-        self.assertLess(bPDF[2]-PDF[0,2],0.2)
-        self.assertLess(bPDF[3]-PDF[0,3],0.2)
-        self.assertLess(bPDF[4]-PDF[0,4],0.2)
+        self.assertLess(np.abs(bPDF[1]-PDF[1]),0.2)
+        self.assertLess(np.abs(bPDF[2]-PDF[2]),0.2)
+        self.assertLess(np.abs(bPDF[3]-PDF[3]),0.2)
+        self.assertLess(np.abs(bPDF[4]-PDF[4]),0.2)
         self.assertEqual(bTest, 0)
 
 
@@ -317,8 +300,8 @@ class PDF(unittest.TestCase):
         postQuadr  = matrix.Matrix(ZvarPoints, ZmeanPoints)
 
         # create matrix for printing
-        filterTrapz = np.zeros((ZvarPoints, ZmeanPoints))
-        filterQuadr = np.zeros((ZvarPoints, ZmeanPoints))
+        filterTrapz = np.zeros(ZmeanPoints)
+        filterQuadr = np.zeros(ZmeanPoints)
 
         # create test data
         testData = np.ones(ZPoints)
@@ -327,14 +310,11 @@ class PDF(unittest.TestCase):
         c = convolute.convVal_func(Z, testData, bPdfValM, postTrapz, Trapz)
         c = convolute.convVal_func(Z, testData, bPdfValM, postQuadr, Quadr)
 
-        for i in range(ZvarPoints):
-            for j in range(ZmeanPoints):
-                filterTrapz[i,j] = postTrapz.GetVal(i,j)
-                filterQuadr[i,j] = postQuadr.GetVal(i,j)
-        
-        for i in range(ZmeanPoints):
-            self.assertLess(filterTrapz[0,i]-1, 0.01)
-            self.assertLess(filterQuadr[0,i]-1, 0.01)
+        for j in range(ZmeanPoints):
+            filterTrapz[j] = postTrapz.GetVal(0,j)
+            filterQuadr[j] = postQuadr.GetVal(0,j)
+            self.assertLess(np.abs(filterTrapz[j]-1), 0.01)
+            self.assertLess(np.abs(filterQuadr[j]-1), 0.01)
 
 
 if __name__ == '__main__':
