@@ -4,8 +4,8 @@
  each progress variable column and selects the progress variable with
  the largest magnitude slope.
  
- The slope is given by [C_i(N)-C_i(1)]/N
- */
+ The slope is given by  \f$ \frac{C_i(N) - C_i(1)}{N}  \f$
+*/
 #include <assert.h>
 #include <stdlib.h>
 #include <cmath>
@@ -34,8 +34,24 @@ ncols, where each cell holds a value of 3 if C is strictly monotonic
 and has the largest slope, 2 if C is strictly monotonic but does not
 have the largest slope, and 0 for non-monotonic C. col is the
 reference column.
-*/
 
+\verbatim
+INPUTS:
+
+int *monoAry       array containing integer flags that denote the monotonicity of candidate progress variables
+
+const int ncols    number of columns of monoAry
+
+const int col      the reference column
+
+OUTPUT:
+
+int                flag specifying whether or not the function succeeded 
+                    = 0: success
+		   != 0: something went wrong 
+\endverbatim
+
+*/
 int EndPointSlope::MostMonotonic(int *monoAry, const int ncols, const int col){
   assert(ncols == ncols_);
 
