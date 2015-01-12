@@ -21,9 +21,33 @@
 \maketitle
 
 \section{Introduction}
-Turbulent combustion simulations require closure of chemical source terms (reaction rates). This is not trivial, as the chemical source terms follow highly nonlinear Arrhenius kinetics and can depend on numerous stiffly-coupled chemical reactions. One approach, rather than evaluating these terms on the fly, is to calculate a set of thermochemical states \textit{a priori} and use these when solving conservation equations. When applied to flamelet models\footnote{Pierce \textit{et al.}, J. Fluid Mech. (2004) vol. 504, pp. 73-97.}, chemical source term tabulation greatly facilitates large eddy simulations (LES) of turbulent reacting flows.
+Turbulent combustion simulations require closure of chemical source
+terms (reaction rates). This is not trivial, as the chemical source
+terms follow highly nonlinear Arrhenius kinetics and can depend on
+numerous stiffly-coupled chemical reactions. One approach, rather than
+evaluating these terms on the fly, is to calculate a set of
+thermochemical states \textit{a priori} and use these when solving
+conservation equations. When applied to flamelet
+models\footnote{Pierce \textit{et al.}, J. Fluid Mech. (2004)
+  vol. 504, pp. 73-97.}, chemical source term tabulation greatly
+facilitates large eddy simulations (LES) of turbulent reacting flows.
 
-The challenge with these tabulation methods is knowing how to identify each term as needed.  This is done by tabulating source terms against a predetermined variable. The trick is to select a single variable that uniquely identifies each thermochemical state. Temperature is the most obvious one: the more a reaction proceeds, the more heat is released. However, filtering the energy conservation equation for LES leads to a closure problem. It is much simpler to filter species conservation equations, but a single chemical species is usually insufficient to identify the thermochemical state uniquely. Rather, one must take linear combinations of several species, called a progress variable, to define a mass-based conservation equation that is suitable for turbulent combustion simulations. Once a progress variable is chosen, the thermochemical states can be sorted, convoluted with a probability density function (PDF) to calculate filtered quantities for LES, and interpolated as needed to generate a table for chemical source terms (a “chemtable”) on a predefined grid.
+The challenge with these tabulation methods is knowing how to identify
+each term as needed.  This is done by tabulating source terms against
+a predetermined variable. The trick is to select a single variable
+that uniquely identifies each thermochemical state. Temperature is the
+most obvious one: the more a reaction proceeds, the more heat is
+released. However, filtering the energy conservation equation for LES
+leads to a closure problem. It is much simpler to filter species
+conservation equations, but a single chemical species is usually
+insufficient to identify the thermochemical state uniquely. Rather,
+one must take linear combinations of several species, called a
+progress variable, to define a mass-based conservation equation that
+is suitable for turbulent combustion simulations. Once a progress
+variable is chosen, the thermochemical states can be sorted,
+convoluted with a probability density function (PDF) to calculate
+filtered quantities for LES, and interpolated as needed to generate a
+table for chemical source terms (a “chemtable”) on a predefined grid.
 
 \begin{figure} [h]
 \centering
@@ -31,27 +55,82 @@ The challenge with these tabulation methods is knowing how to identify each term
 \caption{\label{fig:overview} Context of project in relation to existing research codes.}
 \end{figure}
 
-Our project uses outputs from an existing research code called FlameMaster to facilitate and automate the selection of progress variables. Our project also processes output data from FlameMaster to create a chemtable through sorting based on the selected progress variable, convoluting, and interpolating. A variety of interpolation schemes, integration methods, and PDFs are incorporated into the code to ensure that it is easily adaptable. The automated selection of progress variable has not been implemented in any existing code. Furthermore, although there does exist code to create chemtables after the progress variable has been defined, it lacks generality and must be rewritten or substantially modified when requirements for the chemtable change. A modular program for this task developed with a well-defined interfaces will significantly improve the generality and usability of the chemtable code. 
+Our project uses outputs from an existing research code called
+FlameMaster to facilitate and automate the selection of progress
+variables. Our project also processes output data from FlameMaster to
+create a chemtable through sorting based on the selected progress
+variable, convoluting, and interpolating. A variety of interpolation
+schemes, integration methods, and PDFs are incorporated into the code
+to ensure that it is easily adaptable. The automated selection of
+progress variable has not been implemented in any existing
+code. Furthermore, although there does exist code to create chemtables
+after the progress variable has been defined, it lacks generality and
+must be rewritten or substantially modified when requirements for the
+chemtable change. A modular program for this task developed with a
+well-defined interfaces will significantly improve the generality and
+usability of the chemtable code.
 
 \section{Design Process}
-The design process for this project began with identifying deficiencies in existing combustion research codes used by the Computation Reacting Turbulent Flow Laboratory (CTRFL). We identified several routines that could be made modular: sorting, integrating, interpolating, and PDFs. Next, we outlined the overall process of our software by drawing flowcharts (Fig.~\ref{fig:flow1} and ~\ref{fig:flow2}). This also helped structure our interfaces, as the flowcharts helped us identify inputs and outputs of the various routines. During the process of determining the steps of our program, we deliberated “make versus buy” decisions. After identifying which routines could take advantage of polymorphism, we examined the strengths of programming languages covered during lectures and decided that C++ was best for data processing and computation-heavy functions that may be parallelized. Python is selected to be the data messenger between C++ functions, since it can interface with C++ and allows plots of results to be generated quickly. Before writing any code, we determined how information needed to flow between each routine, and designed concrete interfaces for our code. Only a few minor changes were required to the interfaces as the program developed. 
+The design process for this project began with identifying
+deficiencies in existing combustion research codes used by the
+Computation Reacting Turbulent Flow Laboratory (CTRFL). We identified
+several routines that could be made modular: sorting, integrating,
+interpolating, and PDFs. Next, we outlined the overall process of our
+software by drawing flowcharts (Fig.~\ref{fig:flow1} and
+~\ref{fig:flow2}). This also helped structure our interfaces, as the
+flowcharts helped us identify inputs and outputs of the various
+routines. During the process of determining the steps of our program,
+we deliberated “make versus buy” decisions. After identifying which
+routines could take advantage of polymorphism, we examined the
+strengths of programming languages covered during lectures and decided
+that C++ was best for data processing and computation-heavy functions
+that may be parallelized. Python is selected to be the data messenger
+between C++ functions, since it can interface with C++ and allows
+plots of results to be generated quickly. Before writing any code, we
+determined how information needed to flow between each routine, and
+designed concrete interfaces for our code. Only a few minor changes
+were required to the interfaces as the program developed.
 
-Increasing the amount of functionality by intermediate milestones has presented us the opportunity to receive feedback from the class and improve future iterations of our program as well as ensure our project can achieve its core goals. Specifics on the tools used during the design process (such as for testing and profiling) are provided in the “Architecture” section.
+Increasing the amount of functionality by intermediate milestones has
+presented us the opportunity to receive feedback from the class and
+improve future iterations of our program as well as ensure our project
+can achieve its core goals. Specifics on the tools used during the
+design process (such as for testing and profiling) are provided in the
+“Architecture” section.
 
 \subsection{Make vs. Buy}
-Many routines used exist in external libraries (e.g. interpolators, integrators, PDFs). The decision to write original codes versus use libraries was determined by the simplicity of routine, our interfaces, and the expected performance time. 
+Many routines used exist in external libraries (e.g. interpolators,
+integrators, PDFs). The decision to write original codes versus use
+libraries was determined by the simplicity of routine, our interfaces,
+and the expected performance time.
 
-For simple integrators and interpolators, original codes were written. Some of the more complicated routines (e.g. quadrature integration or Hermite interpolation) use orthogonal polynomials that are far more challenging to write and test, so the external library AlgLib was used. 
+For simple integrators and interpolators, original codes were
+written. Some of the more complicated routines (e.g. quadrature
+integration or Hermite interpolation) use orthogonal polynomials that
+are far more challenging to write and test, so the external library
+AlgLib was used.
 
-Interfaces posed a slight problem for the PDFs. In our design review, it was suggested that we use external libraries to calculate values for the Beta PDF. This could have worked if we calculated PDF values on the fly during convolution. Instead, our approach required knowing full distributions over a range of statistics. It was far easier to calculate numerous PDF values at once and store them in a matrix. 
+Interfaces posed a slight problem for the PDFs. In our design review,
+it was suggested that we use external libraries to calculate values
+for the Beta PDF. This could have worked if we calculated PDF values
+on the fly during convolution. Instead, our approach required knowing
+full distributions over a range of statistics. It was far easier to
+calculate numerous PDF values at once and store them in a matrix.
 
-Lastly, original routines had negligible influence on the total runtime (see Profiling). In terms of runtime, there is little benefit to using better-optimized, professionally-written code. 
+Lastly, original routines had negligible influence on the total
+runtime (see Profiling). In terms of runtime, there is little benefit
+to using better-optimized, professionally-written code.
  
 \section{Architecture}
-Our project consists of two related parts: determining the best progress variable (Fig.~\ref{fig:flow1}) and generating the chemtables (Fig.~\ref{fig:flow2}). Our program is based in C++. SWIG is used to interface the C++ functions with Python. Python 2.7 will be used. The following tools are used during software development:
+Our project consists of two related parts: determining the best
+progress variable (Fig.~\ref{fig:flow1}) and generating the chemtables
+(Fig.~\ref{fig:flow2}). Our program is based in C++. SWIG is used to
+interface the C++ functions with Python. Python 2.7 will be used. The
+following tools are used during software development:
 
 \begin{itemize}
-\item Tests are implemented using Python Unittest as functionality is added throughout the development process.
+\item Tests are implemented using Python Unittest as functionality is
+  added throughout the development process.
 \item Documentation of the program is performed using Doxygen.
 \item Git is used for version control.
 \item Valgrind is used for memory leak checks.
@@ -71,34 +150,87 @@ Our project consists of two related parts: determining the best progress variabl
 \end{figure}
 
 \subsection{Progress Variable, $C$}
-As shown in Fig.~\ref{fig:flow1}, inputs to the progress variable section of our program include a text input file containing the user’s selection of options to be used during run time and many combustion data files containing thermochemical state information. The final output in Fig.~\ref{fig:flow1} is the best progress variable, which is passed to the table generation section of our program in Fig.~\ref{fig:flow2}. Detailed descriptions of the processes in Fig.~\ref{fig:flow1} are below.
+As shown in Fig.~\ref{fig:flow1}, inputs to the progress variable
+section of our program include a text input file containing the user’s
+selection of options to be used during run time and many combustion
+data files containing thermochemical state information. The final
+output in Fig.~\ref{fig:flow1} is the best progress variable, which is
+passed to the table generation section of our program in
+Fig.~\ref{fig:flow2}. Detailed descriptions of the processes in
+Fig.~\ref{fig:flow1} are below.
 
 \begin{enumerate} 
-\item Input files contain a user-specified stoichiometric mixture fraction value, a user-specified list of species mass fractions, and a set of full thermochemical states represented as columns of temperature, species mass fraction, and chemical source terms in mixture fraction space. All combinations of mass fractions in the user-specified list are candidates for the progress variable.
-\item Python code exports two rows from each thermochemical state to be interpolated at the stoichiometric mixture fraction.
-\item Python code calculates all progress variable candidates at these interpolated values.
-\item C++ code sorts all progress variables by the stoichiometric temperature through various sort functions, generating arrays of temperature and all progress variables. These arrays are the only data used for the rest of this section.
-\item All progress variables are tested for monotonicity with temperature in C++ code.
-\item Monotonic progress variables will be ranked by various tests, \textit{e.g.} an average slope test.
-\item If no monotonic progress variables exist, the variables will be tested to pick the one that is least non-monotonic, \textit{e.g.} monotonic over the greatest range. 
-\item The best progress variable will be sent to the table generation section.
+\item Input files contain a user-specified stoichiometric mixture
+  fraction value, a user-specified list of species mass fractions, and
+  a set of full thermochemical states represented as columns of
+  temperature, species mass fraction, and chemical source terms in
+  mixture fraction space. All combinations of mass fractions in the
+  user-specified list are candidates for the progress variable.
+\item Python code exports two rows from each thermochemical state to
+  be interpolated at the stoichiometric mixture fraction.
+\item Python code calculates all progress variable candidates at these
+  interpolated values.
+\item C++ code sorts all progress variables by the stoichiometric
+  temperature through various sort functions, generating arrays of
+  temperature and all progress variables. These arrays are the only
+  data used for the rest of this section.
+\item All progress variables are tested for monotonicity with
+  temperature in C++ code.
+\item Monotonic progress variables will be ranked by various tests,
+  \textit{e.g.} an average slope test.
+\item If no monotonic progress variables exist, the variables will be
+  tested to pick the one that is least non-monotonic, \textit{e.g.}
+  monotonic over the greatest range.
+\item The best progress variable will be sent to the table generation
+  section.
 \end{enumerate}
 
 \subsection{Table Generation}
-The table generation portion of our project is shown in Fig.~\ref{fig:flow2}.  Inputs include the best progress variable from the previous section, thermochemical states (data files), a grid input file, and a text input file containing the user’s selection of options to be used during run time (same text input file from Fig.~\ref{fig:flow1}).  The final output of this part of the code is a chemtable, which can be fed into another program for further processing.  Detailed descriptions of the processes in Fig.~\ref{fig:flow2} are below.
+The table generation portion of our project is shown in
+Fig.~\ref{fig:flow2}.  Inputs include the best progress variable from
+the previous section, thermochemical states (data files), a grid input
+file, and a text input file containing the user’s selection of options
+to be used during run time (same text input file from
+Fig.~\ref{fig:flow1}).  The final output of this part of the code is a
+chemtable, which can be fed into another program for further
+processing.  Detailed descriptions of the processes in
+Fig.~\ref{fig:flow2} are below.
 
 
 \begin{enumerate}
-\item The input data files are the same inputs used for the progress variable selection. The best progress variable, as determined by the processes depicted in Fig.~\ref{fig:flow1}, is also an input.  
-\item Progress variable is calculated for each data file and interpolated to find the value at the stoichiometric mixture fraction $C_{st}$. Various interpolation schemes are used in the required sections of the program. User selection of the interpolation methods for each process is determined from the text input file which contains the chosen scheme.
-\item The data files are sorted by the stoichiometric progress variable, again using inheritance and polymorphism for the sorting functions. The algorithm used is read from the text input file.
-\item Numerical integration schemes are used in the convolution step.  Like interpolation and sorting, these numerical integration schemes exploit inheritance and polymorphism. Again, the numerical integration scheme is determined by the user in the text input file.
-\item The progress variable is convoluted with PDFs. The user specifies which PDF to use for convolution.  The implementation is polymorphic and the PDF to be used is specified in the text input file.  The output is an array of values to be passed to the next process.
-\item These values are interpolated onto a table (grid) that is specified by the grid input file.  This is the chemtable that is the final output of our program.  
+\item The input data files are the same inputs used for the progress
+  variable selection. The best progress variable, as determined by the
+  processes depicted in Fig.~\ref{fig:flow1}, is also an input.
+\item Progress variable is calculated for each data file and
+  interpolated to find the value at the stoichiometric mixture
+  fraction $C_{st}$. Various interpolation schemes are used in the
+  required sections of the program. User selection of the
+  interpolation methods for each process is determined from the text
+  input file which contains the chosen scheme.
+\item The data files are sorted by the stoichiometric progress
+  variable, again using inheritance and polymorphism for the sorting
+  functions. The algorithm used is read from the text input file.
+\item Numerical integration schemes are used in the convolution step.
+  Like interpolation and sorting, these numerical integration schemes
+  exploit inheritance and polymorphism. Again, the numerical
+  integration scheme is determined by the user in the text input file.
+\item The progress variable is convoluted with PDFs. The user
+  specifies which PDF to use for convolution.  The implementation is
+  polymorphic and the PDF to be used is specified in the text input
+  file.  The output is an array of values to be passed to the next
+  process.
+\item These values are interpolated onto a table (grid) that is
+  specified by the grid input file.  This is the chemtable that is the
+  final output of our program.
 \end{enumerate}
 
 \subsection{Implemented Routines}
-Several of the steps in both section of the program are conducive to polymorphism - for example, specific styles of interpolation are employed as classes which inherit from an abstract interpolation class. Multiple integration methods, sorting schemes, and probability density functions are implemented in a similar manner. The polymorphic classes that we use in our code in different sections are listed here. 
+Several of the steps in both section of the program are conducive to
+polymorphism - for example, specific styles of interpolation are
+employed as classes which inherit from an abstract interpolation
+class. Multiple integration methods, sorting schemes, and probability
+density functions are implemented in a similar manner. The polymorphic
+classes that we use in our code in different sections are listed here.
 
 \subsubsection{Sort}
 \begin{itemize}
@@ -130,28 +262,40 @@ Several of the steps in both section of the program are conducive to polymorphis
 
 \subsection{External Functions}
 
-We have used the following outside functions and packages to facilitate the development of our software:
-\begin{enumerate} 
+We have used the following outside functions and packages to
+facilitate the development of our software:
+\begin{itemize} 
 \item C++ Standard Library
 \item Numpy - matrix and vector calculations in Python
 \item Matplotlib - contour plots of chemtable results
 \item SWIG - interface between Python and C++
 \item Numpy.i - SWIG typemapping
-\item FlameMaster (existing research software) - our code will not interact with FlameMaster, but the data files (*.kg) generated by FlameMaster will serve as inputs to our code
-\end{enumerate}
+\item FlameMaster (existing research software) - our code will not
+  interact with FlameMaster, but the data files (*.kg) generated by
+  FlameMaster will serve as inputs to our code
+\end{itemize}
 
 \subsection{Utilization of SWIG: Python - C++ Interface}
-C++ is interfaced with Python using SWIG. SWIG is the interface compiler that connects C - C++ functions with scripting languages like Python, Perl or Ruby. We have implemented the wrapper for our separate routines as depicted in Fig.  \ref{fig:swig}. This figure represents the python wrapping of the integrator module as an example. Compilation with SWIG generates *\_wrap.cxx, *.py and *.so files. Generated shared objects can be imported by a Python script and the routines written in C++ can be called from the Python file.
+C++ is interfaced with Python using SWIG. SWIG is the interface
+compiler that connects C - C++ functions with scripting languages like
+Python, Perl or Ruby. We have implemented the wrapper for our separate
+routines as depicted in Fig.  \ref{fig:swig}. This figure represents
+the python wrapping of the integrator module as an
+example. Compilation with SWIG generates *\_wrap.cxx, *.py and *.so
+files. Generated shared objects can be imported by a Python script and
+the routines written in C++ can be called from the Python file.
 
 \begin{figure} [h]
 \centering
-\includegraphics[width=\textwidth]{python_swig_c++}
+\includegraphics[width=0.7\textwidth]{python_swig_c++}
 \caption{\label{fig:swig} Role of SWIG in interface between Python and C++ as shown through the integrator example.}
 \end{figure}
 
 
 \section{Versions}
-\textbf{Prototype - 12/5/2014}: This version included at least one derived class from each step working separately. C++ code was compiled separately and no Makefiles were submitted. A primitive demo of reading flamelet files, creating candidate progress variables, and plotting was also included.
+
+\subsection{Prototype - 12/5/2014}
+This version included at least one derived class from each step working separately. C++ code was compiled separately and no Makefiles were submitted. A primitive demo of reading flamelet files, creating candidate progress variables, and plotting was also included.
 %\begin{itemize}
 %\item Interface between functions (All)
 %\item Interpolation routines (Daniel)
@@ -162,7 +306,8 @@ C++ is interfaced with Python using SWIG. SWIG is the interface compiler that co
 %\item I/O text processing (Emre, Bruce)
 %\end{itemize}
 \\
-\textbf{Alpha version - 12/12/2014}: This version included C++ code for at least one abstract class for each derived class. SWIG was used to create one module per abstract class. All code was compiled using separate Makefiles for each derived class, each called by a single executable bash script. Python code interacts with a text input file, calls each module accordingly and prints out tabulated data in the terminal.
+\subsection{Alpha version - 12/12/2014}
+This version included C++ code for at least one abstract class for each derived class. SWIG was used to create one module per abstract class. All code was compiled using separate Makefiles for each derived class, each called by a single executable bash script. Python code interacts with a text input file, calls each module accordingly and prints out tabulated data in the terminal.
 %\begin{itemize}
 %\item Preliminary Python wrapper will be implemented using SWIG and will allow for some %user interaction. (Emre, Emmet) 
 %\item One routine from each step (1 interpolator, 1 sorting algorithm, the basic monotonicity %check, maximum slope check, 1 integration scheme along with 1 PDF) will be implemented %in C++. (All)
@@ -171,7 +316,8 @@ C++ is interfaced with Python using SWIG. SWIG is the interface compiler that co
 %\item Basic plotting capability will be incorporated for visualization of the preliminary results.  %(Bruce)
 %\end{itemize}
 
-\textbf{Beta version - 01/15/2015}: All abstract classes were written. SWIG now generates one module per derived class. Python code interacts with a text input file, uses full data sets, call each module accordingly, prints out tabulated data in a text files, and generates contour plots of the tabulated data. All C++ and Python code were tested using Python UnitTest. All files are organized in separate directories containing source code, objects, modules, test functions, and data. All code is now compiled from a single Makefile. Parallelization using OpenMP was implemented reduce runtimes of FitToGrid.
+\subsection{Beta version - 01/15/2015}
+All abstract classes were written. SWIG now generates one module per derived class. Python code interacts with a text input file, uses full data sets, call each module accordingly, prints out tabulated data in a text files, and generates contour plots of the tabulated data. All C++ and Python code were tested using Python UnitTest. All files are organized in separate directories containing source code, objects, modules, test functions, and data. All code is now compiled from a single Makefile. Parallelization using OpenMP was implemented reduce runtimes of FitToGrid.
 %\begin{itemize}
 %\item Fully-operational Python wrapper allows for autonomous and interactive use.
 %\item Based on the interface we will already have built for the alpha function, we will %implement alternative functions for interpolation, least non-monotonicity checking, %integration, PDFs, and sorting.
@@ -225,17 +371,25 @@ Profiling our code was done using cProfile. For all cases, we used reasonable nu
 
 Our results point to FitToGrid as the bottleneck in our code. Results from tests with 201 grid points for Zmean and Cgrid, and 26 grid points for Zvar took FitToGrid 126 s to run and the entire program 142 s. FitToGrid performs two tasks, namely interpolation and extrapolation. We attribute the long runtimes to the extrapolation part of this function, which contains 5 nested for loops. These for loops are necessary to search through a 3-dimensional matrix, and then for each point, to search through the same matrix again for the point’s nearest neighbor. Our only choice to speed up this part of the code was through parallelizing these loops. We chose to parallelize using OpenMP for its simplicity. Furthermore, even after all future work is implemented (see future work section), our expected runtime should not exceed several hours. This runtime is negligible compared to any LES that will use these chemtables, so parallelizing with MPI to use >16 nodes was deemed unnecessary.
 
-Fig. \ref{fig:fittogrid} shows runtimes using 1, 2, 4, and 8 threads. Again, grid sizes were taken to be 201 points for Zmean and Cgrid, and 26 points for Zvar. For all cases, the total runtime is about 16 s longer than the FitToGrid times. For 1, 2, and 4 threads used, FitToGrid times roughly decrease by half as the number of threads doubles, indicating an $\mathcal{O}(n^{-1})$ dependence on thread number, as expected. INCLUDE SOMETHING ABOUT 8 THREADS NOT FITTING THIS TREND. 
+Fig. \ref{fig:fittogrid} shows runtimes using 1, 2, 4, and 8
+threads. Again, grid sizes were taken to be 201 points for Zmean and
+Cgrid, and 26 points for Zvar. For all cases, the total runtime is
+about 16 s longer than the FitToGrid times. For 1, 2, and 4 threads
+used, FitToGrid times roughly decrease by half as the number of
+threads doubles, indicating an $\mathcal{O}(n^{-1})$ dependence on
+thread number, as expected. The times for 8 threads deviates from this
+trends simply because the cost of parallelizing to 8 threads becomes
+comparable to the speedup.
 
 \begin{figure} [h]
 \centering
-\includegraphics[width=0.8\textwidth]{plot_threads}
+\includegraphics[width=0.6\textwidth]{plot_threads}
 \caption{\label{fig:fittogrid} Comparison of runtimes for FitToGrid and total runtime (CPU).}
 \end{figure}
 
 \begin{figure} [h]
 \centering
-\includegraphics[width=0.8\textwidth]{plot_gridsizes}
+\includegraphics[width=0.6\textwidth]{plot_gridsizes}
 \caption{\label{fig:gridsensitivity} Sensitivity of parallelized code to grid size.}
 \end{figure}
 
@@ -244,7 +398,7 @@ Using linear interpolation gave results which made sense, but Hermite and cubic 
 
 \begin{figure} [h]
 \centering
-\includegraphics[width=0.7\textwidth]{interpolator}
+\includegraphics[width=0.6\textwidth]{interpolator}
 \caption{\label{fig:interpolator} Interpolating along a grid using cubic Hermite interpolation.}
 \end{figure}
 
@@ -357,8 +511,9 @@ Final data written to file: output/data\_out \\
 \vspace{12pt}
 
 
-
+\newpage
 Output for the truncated data case:
+\vspace{12pt}
 
 \hfill\begin{minipage}{\dimexpr\textwidth-3cm}
 
