@@ -14,9 +14,34 @@ This file includes instructions for building and running the chemtable generator
 
 ------------------------------------------------------------------
 
-\section _2_ INSTALLATION
+\section _2_ BETA DIRECTORY CONTENTS
+
+This directory contains the following files:
+     - README 
+     - Makefile - generates C++ code 
+     - Makefile.in - called by Makefile
+     - Doxyfile - generates documentation
+     - chemtable_io.py - Python script which executes the program
+     - chemtable_inputs - stores user inputs for chemtable_io.py
+
+The contents of the subdirectories are:
+     - src - all C++ source code including .cc, .hm and .i (SWIG) files
+     - python - contains Python files with helper functions for chemtable_io.py
+     - obj - object files are stored here after building
+     - mod - SWIG-generated Python modules are stored here after building
+     - alglib - source code for the external library, AlgLib v. 3.9cpp
+     - test - tests for classes and functions used in the program
+     - data - sample data sets to be processed by the program 
+     - profiling - results of profiling studies
+     - output - generated when chemtable_io.py is run, stores program outputs
+
+------------------------------------------------------------------
+
+\section _3_ INSTALLATION
 
 The user interface for this version of the software (and a few helper functions) is written in Python and is ready to use. However, the Python code also contains calls to C++ functions (connected through SWIG) which must be compiled and wrapped before the software can be run, as described below. Building the program generates a variety of shared libraries containing the C++ functions which can be called from Python. 
+
+NOTE: when building the program the compiler may issue warnings due to AlgLib and SWIG, but the functions the original code does not generate warnings.
 
 Building the program (compiling and wrapping C++ functions):
      - From the current (home) directory, type "make".
@@ -56,7 +81,7 @@ Capabilities of shared library functions:
 
 --------------------------------------------------------------------
 
-\section _3_ RUNNING THE PROGRAM 
+\section _4_ RUNNING THE PROGRAM 
 
 After building, the chemtable generation program is run by executing a single Python script (chemtable_io.py) as described below. The program (fittogrid function) has been parallelized using OpenMP and can be run on multiple cores by changing the appropriate value in the input file.
 
@@ -116,7 +141,7 @@ Two sets of sample data files are included:
 
 --------------------------------------------------------------------
 
-\section _4_ TESTING
+\section _5_ TESTING
 
 Several test functions for both the Python and C++ portions of the code are available in the /test/ directory. All tests are run using Python unites (C++ functions are tested through their SWIG wrappers). The following test functions are available:
 
@@ -132,7 +157,7 @@ Command: ./test_all (runs all tests)
 
 --------------------------------------------------------------------
 
-\section _5_ DETAILED DOCUMENTATION 
+\section _6_ DETAILED DOCUMENTATION 
 
 For detailed documentation of all classes and functions used by this program, see the Doxygen-generated HTML documentation.
 
