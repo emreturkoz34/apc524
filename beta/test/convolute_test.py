@@ -203,10 +203,10 @@ class PDF(unittest.TestCase):
         print "PDF[5] = inf, bPDF[5] = " + str(bPDF[5])
         """
 
-        self.assertLess(np.abs(bPDF[1]-PDF[1]),0.2)
-        self.assertLess(np.abs(bPDF[2]-PDF[2]),0.2)
-        self.assertLess(np.abs(bPDF[3]-PDF[3]),0.2)
-        self.assertLess(np.abs(bPDF[4]-PDF[4]),0.2)
+        self.assertTrue(np.abs(bPDF[1]-PDF[1]),0.2)
+        self.assertTrue(np.abs(bPDF[2]-PDF[2]),0.2)
+        self.assertTrue(np.abs(bPDF[3]-PDF[3]),0.2)
+        self.assertTrue(np.abs(bPDF[4]-PDF[4]),0.2)
         self.assertEqual(bTest, 0)
 
         # create Integrators
@@ -231,8 +231,8 @@ class PDF(unittest.TestCase):
         for j in range(ZmeanPoints):
             filterTrapz[j] = postTrapz.GetVal(0,j)
             filterQuadr[j] = postQuadr.GetVal(0,j)
-            self.assertLess(np.abs(filterTrapz[j]-1), 0.5)
-            self.assertLess(np.abs(filterQuadr[j]-1), 0.5)
+            self.assertTrue(np.abs(filterTrapz[j]-1)< 0.5)
+            self.assertTrue(np.abs(filterQuadr[j]-1)< 0.5)
 
 
     def testBetaPDF3(self):
@@ -284,10 +284,10 @@ class PDF(unittest.TestCase):
         print "PDF[4] = " + str(PDF[4]) + ", bPDF[4] = " + str(bPDF[4])
         print "PDF[5] = inf, bPDF[5] = " + str(bPDF[5])
         """
-        self.assertLess(np.abs(bPDF[1]-PDF[1]),0.2)
-        self.assertLess(np.abs(bPDF[2]-PDF[2]),0.2)
-        self.assertLess(np.abs(bPDF[3]-PDF[3]),0.2)
-        self.assertLess(np.abs(bPDF[4]-PDF[4]),0.2)
+        self.assertTrue(np.abs(bPDF[1]-PDF[1])<0.2)
+        self.assertTrue(np.abs(bPDF[2]-PDF[2])<0.2)
+        self.assertTrue(np.abs(bPDF[3]-PDF[3])<0.2)
+        self.assertTrue(np.abs(bPDF[4]-PDF[4])<0.2)
         self.assertEqual(bTest, 0)
 
 
@@ -313,8 +313,8 @@ class PDF(unittest.TestCase):
         for j in range(ZmeanPoints):
             filterTrapz[j] = postTrapz.GetVal(0,j)
             filterQuadr[j] = postQuadr.GetVal(0,j)
-            self.assertLess(np.abs(filterTrapz[j]-1), 0.01)
-            self.assertLess(np.abs(filterQuadr[j]-1), 0.01)
+            self.assertTrue(np.abs(filterTrapz[j]-1)< 0.01)
+            self.assertTrue(np.abs(filterQuadr[j]-1)< 0.01)
 
 
 if __name__ == '__main__':

@@ -17,7 +17,7 @@ class PDF(unittest.TestCase):
         ZPoints = 6
         ZmeanPoints = 1
         ZvarPoints = 1
-        
+
         ZMin = 0
         ZMax = 1
         ZmeanMin = 0.2
@@ -285,10 +285,10 @@ class PDF(unittest.TestCase):
         print "PDF[0,4] = " + str(PDF[0,4]) + ", bPDF[0,4] = " + str(bPDF[0,80])
         print "PDF[0,5] = inf, bPDF[0,5] = " + str(bPDF[0,100])
         """
-        self.assertLess(np.abs(bPDF[1]-PDF[1]),0.01)
-        self.assertLess(np.abs(bPDF[2]-PDF[2]),0.01)
-        self.assertLess(np.abs(bPDF[3]-PDF[3]),0.01)
-        self.assertLess(np.abs(bPDF[4]-PDF[4]),0.01)
+        self.assertTrue(np.abs(bPDF[1]-PDF[1])<0.01)
+        self.assertTrue(np.abs(bPDF[2]-PDF[2])<0.01)
+        self.assertTrue(np.abs(bPDF[3]-PDF[3])<0.01)
+        self.assertTrue(np.abs(bPDF[4]-PDF[4])<0.01)
         self.assertEqual(bTest, 0)
 
 
@@ -338,12 +338,12 @@ class PDF(unittest.TestCase):
         print "PDF[4] = " + str(PDF[4]) + ", bPDF[4] = " + str(bPDF[4])
         print "PDF[5] = " + str(PDF[5]) + ", bPDF[4] = " + str(bPDF[5])
         print "PDF[6] = inf, bPDF[5] = " + str(bPDF[6])
-        """
-        self.assertLess(np.abs(bPDF[1]-PDF[1]),0.01)
-        self.assertLess(np.abs(bPDF[2]-PDF[2]),0.01)
-        self.assertLess(np.abs(bPDF[3]-PDF[3]),0.01)
-        self.assertLess(np.abs(bPDF[4]-PDF[4]),0.01)
-        self.assertLess(np.abs(bPDF[5]-PDF[5]),0.01)
+        """ 
+        self.assertTrue(np.abs(bPDF[1]-PDF[1])<0.01)
+        self.assertTrue(np.abs(bPDF[2]-PDF[2])<0.01)
+        self.assertTrue(np.abs(bPDF[3]-PDF[3])<0.01)
+        self.assertTrue(np.abs(bPDF[4]-PDF[4])<0.01)
+        self.assertTrue(np.abs(bPDF[5]-PDF[5])<0.01)
         self.assertEqual(bTest, 0)
 
     def testBetaPDF7(self):
@@ -391,11 +391,11 @@ class PDF(unittest.TestCase):
         print "PDF[4] = " + str(PDF[4]) + ", bPDF[4] = " + str(bPDF[4])
         print "PDF[5] = " + str(PDF[5]) + ", bPDF[5] = " + str(bPDF[5])
         """
-        self.assertLess(np.abs(bPDF[1]-PDF[1]),0.1)
-        self.assertLess(np.abs(bPDF[2]-PDF[2]),0.1)
-        self.assertLess(np.abs(bPDF[3]-PDF[3]),0.1)
-        self.assertLess(np.abs(bPDF[4]-PDF[4]),0.1)
-        self.assertLess(np.abs(bPDF[5]-PDF[5]),0.1)
+        self.assertTrue(np.abs(bPDF[1]-PDF[1])<0.1)
+        self.assertTrue(np.abs(bPDF[2]-PDF[2])<0.1)
+        self.assertTrue(np.abs(bPDF[3]-PDF[3])<0.1)
+        self.assertTrue(np.abs(bPDF[4]-PDF[4])<0.1)
+        self.assertTrue(np.abs(bPDF[5]-PDF[5])<0.1)
         self.assertEqual(bTest, 0)
 
 
