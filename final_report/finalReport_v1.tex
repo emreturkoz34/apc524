@@ -307,7 +307,13 @@ This version included at least one derived class from each step working separate
 %\end{itemize}
 \\
 \subsection{Alpha version - 12/12/2014}
-This version included C++ code for at least one abstract class for each derived class. SWIG was used to create one module per abstract class. All code was compiled using separate Makefiles for each derived class, each called by a single executable bash script. Python code interacts with a text input file, calls each module accordingly and prints out tabulated data in the terminal.
+This version included C++ code for at least one derived class per
+abstract class. SWIG was used to create one module per derived
+class. SWIG typecasting was done using standard vectors. All code was
+compiled using separate Makefiles for each derived class, each called
+by a single executable bash script. Python code interacts with a text
+input file, calls each module accordingly and prints out tabulated
+data in the terminal.
 %\begin{itemize}
 %\item Preliminary Python wrapper will be implemented using SWIG and will allow for some %user interaction. (Emre, Emmet) 
 %\item One routine from each step (1 interpolator, 1 sorting algorithm, the basic monotonicity %check, maximum slope check, 1 integration scheme along with 1 PDF) will be implemented %in C++. (All)
@@ -317,15 +323,15 @@ This version included C++ code for at least one abstract class for each derived 
 %\end{itemize}
 
 \subsection{Beta version - 01/15/2015}
-All abstract classes were written. SWIG now generates one module per
-derived class. Python code interacts with a text input file, uses full
-data sets, call each module accordingly, prints out tabulated data in
-a text files, and generates contour plots of the tabulated data. All
-C++ and Python code were tested using Python UnitTest. All files are
-organized in separate directories containing source code, objects,
-modules, test functions, and data. All code is now compiled from a
-single Makefile. Parallelization using OpenMP was implemented reduce
-runtimes of FitToGrid.
+All derived classes were written. SWIG now generates one module per
+abstract class. Python code interacts with a text input file, uses
+full data sets, calls each module accordingly, prints out tabulated
+data in a text file, and generates contour plots of the tabulated
+data. All C++ and Python code were tested using Python UnitTest. All
+files are organized in separate directories containing source code,
+objects, modules, test functions, data, and output. All code is now
+compiled from a single Makefile. Parallelization using OpenMP was
+implemented reduce runtimes of FitToGrid.
 %\begin{itemize}
 %\item Fully-operational Python wrapper allows for autonomous and
 %  interactive use.
@@ -369,7 +375,7 @@ Other tasks were assigned to individual team members:
 \begin{itemize}
 \item DOxygen documentation: Emre
 \item Beta version Makefiles: Emmet
-\item README: Bruce
+\item Beta version README: Bruce
 \end{itemize}
 
 There are discrepancies between team members in the Git repository
@@ -497,34 +503,35 @@ interpolation schemes which are susceptible to such effects.
   cubic Hermite interpolation.}
 \end{figure}
 
-\section{Future Work}
-Identifying a truly bijective mapping between progress variable and
-thermochemical state is among the most challenging and arbitrary parts
-of turbulent combustion simulations using flamelet models. This
-software greatly facilitates the progress variable selection process
-and will likely be used by researchers in the Computational Reacting
-Turbulent Flow Laboratory (CTRFL). While this software does meet all
-of our project objectives, there is future work to be done.
+%\section{Future Work}
+%Identifying a truly bijective mapping between progress variable and
+% thermochemical state is among the most challenging and arbitrary
+% parts of turbulent combustion simulations using flamelet
+% models. This software greatly facilitates the progress variable
+% selection process and will likely be used by researchers in the
+% Computational Turbulent Reacting Flow Laboratory (CTRFL). While this
+% software does meet all of our project objectives, there is future
+% work to be done.
 
-\begin{itemize}
-\item Software should be extended to filter all chemical species
-  individually in addition to filtering chemical source terms as it
-  already does. Only filtered chemical source terms are needed to run
-  LES, but filtered species mass fractions and temperature are needed
-  for visualization of LES results.
-\item Mathematically rigorous algorithms for finding the least
-  non-monotonic progress variable can be incorporated based on current
-  mathematics research. For example, an index of
-  non-decreasingness\footnote{Qoyyimi \textit{et al.}, SSRN. (2014),
-    pp. 1-23.} can be implemented. Their applicability to progress
-  variable selection is, to date, unknown, but would be an interesting
-  topic of research.
-\item Manual selection of the best progress variable from a plot
-  generated at the end of the section shown in
-  Fig.~\ref{fig:flow1}. Currently, our program allows manual selection
-  of the best progress variable at the very beginning, where the user
-  is unable to view all the possible options.
-\end{itemize}
+%\begin{itemize}
+%\item Software should be extended to filter all chemical species
+%  individually in addition to filtering chemical source terms as it
+%  already does. Only filtered chemical source terms are needed to run
+%  LES, but filtered species mass fractions and temperature are needed
+%  for visualization of LES results.
+%\item Mathematically rigorous algorithms for finding the least
+%  non-monotonic progress variable can be incorporated based on current
+%  mathematics research. For example, an index of
+%  non-decreasingness\footnote{Qoyyimi \textit{et al.}, SSRN. (2014),
+%    pp. 1-23.} can be implemented. Their applicability to progress
+%  variable selection is, to date, unknown, but would be an interesting
+%  topic of research.
+%\item Manual selection of the best progress variable from a plot
+%  generated at the end of the section shown in
+%  Fig.~\ref{fig:flow1}. Currently, our program allows manual selection
+%  of the best progress variable at the very beginning, where the user
+%  is unable to view all the possible options.
+%\end{itemize}
 
 % We also think that the runtime of our code may be an issue for large
 % data sets and for the cases which require large number progress
@@ -576,15 +583,15 @@ difficult to learn, but was incredibly useful. By interfacing C++ with
 python, we were able to handle IO text processing in python, as well
 as test our C++ code using python UnitTest.
 
-\section{Conclusion}
+\section{Conclusion/Future Work}
 Identifying a truly bijective mapping between progress variable and
 thermochemical state is among the most challenging and arbitrary parts
 of turbulent combustion simulations using flamelet models. This
 software greatly facilitates the progress variable selection process
-and will likely be used by researchers in the Computational Reacting
-Turbulent Flow Laboratory (CTRFL). While this software does meet all
-of our project objectives, there remains future work that could
-further enhance the functionality and usability of this code:
+and will likely be used by researchers in the Computational Turbulent
+Reacting Flow Laboratory (CTRFL). While this software does meet all of
+our project objectives, there remains future work that could further
+enhance the functionality and usability of this code:
 
 \begin{itemize}
 \item Software should be extended to filter all chemical species
