@@ -10,7 +10,7 @@ APC524 - Fall 2014
 
 \section _1_ INTRODUCTION
 
-This file includes instructions for building and running the chemtable generator software. This software processes .kg data files produced by FlameMaster, producing a table of chemical source terms (chemtable) and various plots for visualizing the data. The program is run by executing a single Python script (chemtable_io.py) as described below.
+This file includes instructions for building and running the chemtable generator software. This software processes .kg data files produced by FlameMaster to create a table of chemical source terms (chemtable) and various plots for visualizing the data. The program is run by executing a single Python script (chemtable_io.py) as described below.
 
 ------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ This directory contains the following files:
      - chemtable_inputs - stores user inputs for chemtable_io.py
 
 The contents of the subdirectories are:
-     - src - all C++ source code including .cc, .hm and .i (SWIG) files
+     - src - all C++ source code including .cc, .h and .i (SWIG) files
      - python - contains Python files with helper functions for chemtable_io.py
      - obj - object files are stored here after building
      - mod - SWIG-generated Python modules are stored here after building
@@ -42,7 +42,7 @@ The contents of the subdirectories are:
 
 The user interface for this version of the software (and a few helper functions) is written in Python and is ready to use. However, the Python code also contains calls to C++ functions (connected through SWIG) which must be compiled and wrapped before the software can be run, as described below. Building the program generates a variety of shared libraries containing the C++ functions which can be called from Python. 
 
-NOTE: when building the program the compiler may issue warnings due to AlgLib and SWIG, but the functions the original code does not generate warnings.
+NOTE: when building the program the compiler may issue warnings due to AlgLib and SWIG, but the original code does not generate warnings.
 
 Building the program (compiling and wrapping C++ functions):
      - From the current (home) directory, type "make".
@@ -103,7 +103,7 @@ DETAILED INPUT FILE DESCRIPTION:
 Inputs are specified with the following syntax:
 <inputname:>\t<inputvalue1>\t<inputvalue2>\t<inputvalue3>... 
 
-Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values. Setting 'extrapolate in fottogrid' to 'yes' populates all elements of the final chemtable, but may greatly increase run time. If this option is set to 'no' then values which would require extrapolation are set to -1.  
+Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values. Setting 'extrapolate in fittogrid' to 'yes' populates all elements of the final chemtable, but may greatly increase run time. If this option is set to 'no' then values which would require extrapolation are set to -1.  
 
 INPUT:					DEFAULT			<NOTES>		
 - data file directory:			data			<can specify a path, eg data/C2H4>
@@ -129,16 +129,16 @@ INPUT:					DEFAULT			<NOTES>
 
 DETAILED DATAFILE DESCRIPTION:
 
-The program is designed specifically to run on .kg datafiles. The first line of the datafiles is expected to be blank and is ignored. The following requirements exist for processing the datafiles:
+The program is designed specifically to run on .kg datafiles. The first line of each datafile is expected to be blank and is ignored. The following requirements exist for processing the datafiles:
      - All files in the data file directory specified by the user must be .kg files
-     - No file may be repeated. 
-     - All files must have the same column headers and the same number of rows of data. 
+     - No file may be repeated 
+     - All files must have the same column headers and the same number of rows of data 
      - 2nd line contains column headers, 3rd line and on contain data
      - Column headers for production rate should be: 'ProdRate<SPECIES> [kg/m^3s]'
 
 Two sets of sample data files are included:
      - data/C2H4: full output from FlameMaster for a C2H4 flame
-     - data/C2H4truncated: a subset of the above selected to be a "well-behaved" test case
+     - data/C2H4truncated: a subset of the above selected to be a well-behaved test case
 
 --------------------------------------------------------------------
 
