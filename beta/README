@@ -34,6 +34,7 @@ The contents of the subdirectories are:
      - data - sample data sets to be processed by the program 
      - profiling - results of profiling studies
      - output - generated when chemtable_io.py is run, stores program outputs
+     - doc - contains Doxygen generated documentation
 
 ------------------------------------------------------------------
 
