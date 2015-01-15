@@ -43,7 +43,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>------------------------------------------------------------------</p>
 <h2><a class="anchor" id="_1_">
 INTRODUCTION</a></h2>
-<p>This file includes instructions for building and running the chemtable generator software. This software processes .kg data files produced by FlameMaster, producing a table of chemical source terms (chemtable) and various plots for visualizing the data. The program is run by executing a single Python script (chemtable_io.py) as described below.</p>
+<p>This file includes instructions for building and running the chemtable generator software. This software processes .kg data files produced by FlameMaster to create a table of chemical source terms (chemtable) and various plots for visualizing the data. The program is run by executing a single Python script (chemtable_io.py) as described below.</p>
 <p>------------------------------------------------------------------</p>
 <h2><a class="anchor" id="_2_">
 BETA DIRECTORY CONTENTS</a></h2>
@@ -58,7 +58,7 @@ BETA DIRECTORY CONTENTS</a></h2>
 </ul>
 <p>The contents of the subdirectories are:</p>
 <ul>
-<li>src - all C++ source code including .cc, .hm and .i (SWIG) files</li>
+<li>src - all C++ source code including .cc, .h and .i (SWIG) files</li>
 <li>python - contains Python files with helper functions for chemtable_io.py</li>
 <li>obj - object files are stored here after building</li>
 <li>mod - SWIG-generated Python modules are stored here after building</li>
@@ -73,7 +73,7 @@ BETA DIRECTORY CONTENTS</a></h2>
 <h2><a class="anchor" id="_3_">
 INSTALLATION</a></h2>
 <p>The user interface for this version of the software (and a few helper functions) is written in Python and is ready to use. However, the Python code also contains calls to C++ functions (connected through SWIG) which must be compiled and wrapped before the software can be run, as described below. Building the program generates a variety of shared libraries containing the C++ functions which can be called from Python.</p>
-<p>NOTE: when building the program the compiler may issue warnings due to AlgLib and SWIG, but the functions the original code does not generate warnings.</p>
+<p>NOTE: when building the program the compiler may issue warnings due to AlgLib and SWIG, but the original code does not generate warnings.</p>
 <p>Building the program (compiling and wrapping C++ functions):</p>
 <ul>
 <li>From the current (home) directory, type "make".</li>
@@ -133,7 +133,7 @@ RUNNING THE PROGRAM</a></h2>
 </ul>
 <p>DETAILED INPUT FILE DESCRIPTION:</p>
 <p>Inputs are specified with the following syntax: &lt;inputname:&gt;&lt;inputvalue1&gt;&lt;inputvalue2&gt;&lt;inputvalue3&gt;...</p>
-<p>Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values. Setting 'extrapolate in fottogrid' to 'yes' populates all elements of the final chemtable, but may greatly increase run time. If this option is set to 'no' then values which would require extrapolation are set to -1.</p>
+<p>Each input name must appear on only one line. A value for every input must be specified unless it has a DEFAULT value specified. The table below lists the possible inputs and indicates which have default values. Setting 'extrapolate in fittogrid' to 'yes' populates all elements of the final chemtable, but may greatly increase run time. If this option is set to 'no' then values which would require extrapolation are set to -1.</p>
 <p>INPUT: DEFAULT &lt;NOTES&gt;</p>
 <ul>
 <li>data file directory: data &lt;can specify a path, eg data/C2H4&gt;</li>
@@ -157,18 +157,18 @@ RUNNING THE PROGRAM</a></h2>
 <li>Zmean_grid: Z &lt;if Z, set to be same as the Zgrid in Flamelet files, otherwise, an integer&gt;</li>
 </ul>
 <p>DETAILED DATAFILE DESCRIPTION:</p>
-<p>The program is designed specifically to run on .kg datafiles. The first line of the datafiles is expected to be blank and is ignored. The following requirements exist for processing the datafiles:</p>
+<p>The program is designed specifically to run on .kg datafiles. The first line of each datafile is expected to be blank and is ignored. The following requirements exist for processing the datafiles:</p>
 <ul>
 <li>All files in the data file directory specified by the user must be .kg files</li>
-<li>No file may be repeated.</li>
-<li>All files must have the same column headers and the same number of rows of data.</li>
+<li>No file may be repeated</li>
+<li>All files must have the same column headers and the same number of rows of data</li>
 <li>2nd line contains column headers, 3rd line and on contain data</li>
 <li>Column headers for production rate should be: 'ProdRate&lt;SPECIES&gt; [kg/m^3s]'</li>
 </ul>
 <p>Two sets of sample data files are included:</p>
 <ul>
 <li>data/C2H4: full output from FlameMaster for a C2H4 flame</li>
-<li>data/C2H4truncated: a subset of the above selected to be a "well-behaved" test case</li>
+<li>data/C2H4truncated: a subset of the above selected to be a well-behaved test case</li>
 </ul>
 <p>--------------------------------------------------------------------</p>
 <h2><a class="anchor" id="_5_">
