@@ -28,7 +28,7 @@ class Sorting(unittest.TestCase):
     def testBubbleSort(self):
         print "\ntest Bubble sort simple case"
         m = n
-        sorter = sorting.bubble_sort(m)
+        sorter = sorting.BubbleSort(m)
         sorter.SetRefColNum(0)
         sorter.sort_data()
         arr = []
@@ -40,7 +40,7 @@ class Sorting(unittest.TestCase):
     def testStandardSort(self):
         print "\ntest Standard sort simple case"
         m = n
-        sorter = sorting.standard_sort(m)
+        sorter = sorting.StandardSort(m)
         sorter.SetRefColNum(0)
         sorter.sort_data()
         arr = []
@@ -53,7 +53,7 @@ class Sorting(unittest.TestCase):
     def testBruteSort(self):
         print "\ntest Brute sort simple case"
         m = n
-        sorter = sorting.brute_sort(m)
+        sorter = sorting.BruteSort(m)
         sorter.SetRefColNum(0)
         sorter.sort_data()
         arr = []
