@@ -3,10 +3,10 @@
 
 #include <stdio.h>
 
-class sorting{
+class Sorting{
 
  public:
-  virtual ~sorting(){};
+  virtual ~Sorting(){};
   
   /// Virtual function to be inherited by each sorting algorithm to sort the give data
   virtual int sort_data() = 0; 

@@ -7,7 +7,7 @@
 #include "interpolator.h"
 #include "fittogrid.h"
 #include "sorting.h"
-#include "standard_sort.h"
+#include "standardsort.h"
 #endif
 %}
 

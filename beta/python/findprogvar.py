@@ -95,11 +95,11 @@ def findC(datafiles, testspecies, bestC, options):
     print "Sorting PROGVARS by temperature using %s sort" % sortmethod
     for i in [progVar, filesmatC]:
         if sortmethod  == 'bubble':
-            sorter = sorting.bubble_sort(i)
+            sorter = sorting.BubbleSort(i)
         elif sortmethod == 'standard':
-            sorter = sorting.standard_sort(i)
+            sorter = sorting.StandardSort(i)
         elif sortmethod == 'brute':
-            sorter = sorting.brute_sort(i)
+            sorter = sorting.BruteSort(i)
         else:
             raise IOError("invalid sorting method (%s) specified, instead use <bubble> sort" % sortmethod)
         sorter.SetRefColNum(0)

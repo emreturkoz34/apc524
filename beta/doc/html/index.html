@@ -46,8 +46,33 @@ INTRODUCTION</a></h2>
 <p>This file includes instructions for building and running the chemtable generator software. This software processes .kg data files produced by FlameMaster, producing a table of chemical source terms (chemtable) and various plots for visualizing the data. The program is run by executing a single Python script (chemtable_io.py) as described below.</p>
 <p>------------------------------------------------------------------</p>
 <h2><a class="anchor" id="_2_">
+BETA DIRECTORY CONTENTS</a></h2>
+<p>This directory contains the following files:</p>
+<ul>
+<li>README</li>
+<li>Makefile - generates C++ code</li>
+<li>Makefile.in - called by Makefile</li>
+<li>Doxyfile - generates documentation</li>
+<li>chemtable_io.py - Python script which executes the program</li>
+<li>chemtable_inputs - stores user inputs for chemtable_io.py</li>
+</ul>
+<p>The contents of the subdirectories are:</p>
+<ul>
+<li>src - all C++ source code including .cc, .hm and .i (SWIG) files</li>
+<li>python - contains Python files with helper functions for chemtable_io.py</li>
+<li>obj - object files are stored here after building</li>
+<li>mod - SWIG-generated Python modules are stored here after building</li>
+<li>alglib - source code for the external library, AlgLib v. 3.9cpp</li>
+<li>test - tests for classes and functions used in the program</li>
+<li>data - sample data sets to be processed by the program</li>
+<li>profiling - results of profiling studies</li>
+<li>output - generated when chemtable_io.py is run, stores program outputs</li>
+</ul>
+<p>------------------------------------------------------------------</p>
+<h2><a class="anchor" id="_3_">
 INSTALLATION</a></h2>
 <p>The user interface for this version of the software (and a few helper functions) is written in Python and is ready to use. However, the Python code also contains calls to C++ functions (connected through SWIG) which must be compiled and wrapped before the software can be run, as described below. Building the program generates a variety of shared libraries containing the C++ functions which can be called from Python.</p>
+<p>NOTE: when building the program the compiler may issue warnings due to AlgLib and SWIG, but the functions the original code does not generate warnings.</p>
 <p>Building the program (compiling and wrapping C++ functions):</p>
 <ul>
 <li>From the current (home) directory, type "make".</li>
@@ -82,14 +107,14 @@ INSTALLATION</a></h2>
 <p>Capabilities of shared library functions:</p>
 <ul>
 <li>Monotonicity checks and slope tests</li>
-<li>Sorting</li>
+<li><a class="el" href="da/d2c/classSorting.html">Sorting</a></li>
 <li>Probability Density Functions (PDFs)</li>
 <li>Convolution with delta or beta PDFs</li>
 <li>Grid fitting</li>
 <li>Interpolation</li>
 </ul>
 <p>--------------------------------------------------------------------</p>
-<h2><a class="anchor" id="_3_">
+<h2><a class="anchor" id="_4_">
 RUNNING THE PROGRAM</a></h2>
 <p>After building, the chemtable generation program is run by executing a single Python script (chemtable_io.py) as described below. The program (fittogrid function) has been parallelized using OpenMP and can be run on multiple cores by changing the appropriate value in the input file.</p>
 <p>Command: ./chemtable_io.py OR python chemtable_io.py</p>
@@ -145,7 +170,7 @@ RUNNING THE PROGRAM</a></h2>
 <li>data/C2H4truncated: a subset of the above selected to be a "well-behaved" test case</li>
 </ul>
 <p>--------------------------------------------------------------------</p>
-<h2><a class="anchor" id="_4_">
+<h2><a class="anchor" id="_5_">
 TESTING</a></h2>
 <p>Several test functions for both the Python and C++ portions of the code are available in the /test/ directory. All tests are run using Python unites (C++ functions are tested through their SWIG wrappers). The following test functions are available:</p>
 <p>combinations_test.py findprogvar_test.py iofuncs_test.py sorting_test.py maxslope_test.py convolute_test.py integrator_test.py pdf_test.py monotonic_test.py leastnonmono_test.py interpolator_test.py fittogrid_test.py</p>
@@ -153,7 +178,7 @@ TESTING</a></h2>
 <p>In addition, there is a Bash script "test_all" which can be used to run all tests with one command.</p>
 <p>Command: ./test_all (runs all tests)</p>
 <p>--------------------------------------------------------------------</p>
-<h2><a class="anchor" id="_5_">
+<h2><a class="anchor" id="_6_">
 DETAILED DOCUMENTATION</a></h2>
 <p>For detailed documentation of all classes and functions used by this program, see the Doxygen-generated HTML documentation. </p>
 </div>
@@ -171,7 +196,7 @@ DETAILED DOCUMENTATION</a></h2>
 </iframe>
 </div>
 
-<hr size="1"/><address style="text-align: right;"><small>Generated on 11 Jan 2015 for CHEMTABLE by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on 14 Jan 2015 for CHEMTABLE by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

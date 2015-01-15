@@ -7,10 +7,10 @@
 #include "sorting.h"
 #include "matrix.h"
 
-class standard_sort : public sorting {
+class StandardSort : public Sorting {
  public:
-  standard_sort(Matrix* data);
-  ~standard_sort();
+  StandardSort(Matrix* data);
+  ~StandardSort();
 
   int sort_data();
   void SetRefColNum(int num);

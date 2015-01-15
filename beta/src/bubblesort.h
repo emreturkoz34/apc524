@@ -8,11 +8,11 @@
 #include "matrix.h"
 
 
-class bubble_sort : public sorting {
+class BubbleSort : public Sorting {
 
  public: 
-  bubble_sort(Matrix* data);
-  ~bubble_sort();
+  BubbleSort(Matrix* data);
+  ~BubbleSort();
 
   int sort_data();
   void SetRefColNum(int num);

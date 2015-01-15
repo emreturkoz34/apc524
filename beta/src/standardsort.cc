@@ -1,5 +1,5 @@
 
-#include "standard_sort.h"
+#include "standardsort.h"
 
 typedef std::vector<size_t> index_vec_t;
 
@@ -33,7 +33,7 @@ public:
 /*!
   The data to be sorted is passed to the constructor. A duplicate of the data is produced to be later at this stage
  */
-standard_sort::standard_sort(Matrix* data){
+StandardSort::StandardSort(Matrix* data){
   ncols_ = data->GetNumCols();
   nrows_ = data->GetNumRows();
 
@@ -49,13 +49,13 @@ standard_sort::standard_sort(Matrix* data){
 }
 
 /// Destructor
-standard_sort::~standard_sort(){
+StandardSort::~StandardSort(){
   delete datacopy_;
 }
 
 
 /// Set the reference column number
-void standard_sort::SetRefColNum(int num){
+void StandardSort::SetRefColNum(int num){
   refColNum_ = num;
 }
 
@@ -77,7 +77,7 @@ void standard_sort::SetRefColNum(int num){
 \endverbatim
   
  */
-int standard_sort::sort_data(){
+int StandardSort::sort_data(){
 
   index_vec_t indices(nrows_);
   std::generate(indices.begin(), indices.end(), SequenceGen(0));

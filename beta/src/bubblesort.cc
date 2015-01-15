@@ -1,12 +1,12 @@
 
-#include "bubble_sort.h"
+#include "bubblesort.h"
 
 // Constructor
 /*!
   The constructor duplicates the data from the matrix pointer to datacopy_ object. It also generates the array containing the indices to be used during sorting. 
 
  */
-bubble_sort::bubble_sort(Matrix *data){
+BubbleSort::BubbleSort(Matrix *data){
   nrows_ = data->GetNumRows();
   ncols_ = data->GetNumCols();
 
@@ -30,12 +30,12 @@ bubble_sort::bubble_sort(Matrix *data){
 }
 
 /// Destructor
-bubble_sort::~bubble_sort(){
+BubbleSort::~BubbleSort(){
   delete datacopy_;
 }
 
 /// Set the reference column number and extract the data of the reference column to the container refColumn_
-void bubble_sort::SetRefColNum(int num){
+void BubbleSort::SetRefColNum(int num){
   refColNum_ = num;
   
   // extract the reference column
@@ -68,7 +68,7 @@ void bubble_sort::SetRefColNum(int num){
   \endverbatim
 
  */
-int bubble_sort::sort_data(){
+int BubbleSort::sort_data(){
   bool swapped = true;
   int j = 0;
   double tmp;

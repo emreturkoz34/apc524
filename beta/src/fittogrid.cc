@@ -65,7 +65,7 @@ int fittogrid(const Matrix4D *datain, const double *cgrid, Interpolator *interp,
       }
 
       // Sort the data to be interpolated
-      sorting *sorter = new standard_sort(tmat);
+      Sorting *sorter = new StandardSort(tmat);
       sorter->SetRefColNum(1);
       sorter->sort_data();
 

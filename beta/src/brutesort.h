@@ -7,10 +7,10 @@
 #include "matrix.h"
 
 
-class brute_sort : public sorting {
+class BruteSort : public Sorting {
  public:
-  brute_sort(Matrix* data);
-  ~brute_sort();
+  BruteSort(Matrix* data);
+  ~BruteSort();
   
   int sort_data();
   void SetRefColNum(int num);

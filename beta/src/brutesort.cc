@@ -1,5 +1,5 @@
 
-#include "brute_sort.h"
+#include "brutesort.h"
 
 
 /*!
@@ -13,7 +13,7 @@
 
 
 /// Constructor
-brute_sort::brute_sort(Matrix* data){
+BruteSort::BruteSort(Matrix* data){
   ncols_ = data->GetNumCols();
   nrows_ = data->GetNumRows();
 
@@ -29,13 +29,13 @@ brute_sort::brute_sort(Matrix* data){
 }
 
 /// Destructor
-brute_sort::~brute_sort(){
+BruteSort::~BruteSort(){
   //delete data_;
   delete datacopy_;
 }
 
 /// Set the reference column number
-void brute_sort::SetRefColNum(int num){
+void BruteSort::SetRefColNum(int num){
   refColNum_ = num;
 }
 
@@ -60,7 +60,7 @@ void brute_sort::SetRefColNum(int num){
 
 
  */
-int brute_sort::sort_data(){
+int BruteSort::sort_data(){
   double *refColumn = new double[nrows_];
   int *indices = new int[nrows_];
 

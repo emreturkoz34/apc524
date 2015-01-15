@@ -89,11 +89,11 @@ filesmatC = fpv.findC(datafiles, testspecies, bestC, options)
 
 # sort FILESMATRIX by progress variable
 if options["sort method"][0] == 'bubble':
-    sorter = sorting.bubble_sort(filesmatC)
+    sorter = sorting.BubbleSort(filesmatC)
 elif options["sort method"][0] == 'standard':
-    sorter = sorting.standard_sort(filesmatC)
+    sorter = sorting.StandardSort(filesmatC)
 elif options["sort method"][0] == 'brute': # has speed issues
-    sorter = sorting.brute_sort(filesmatC)
+    sorter = sorting.BruteSort(filesmatC)
 else:
     raise IOError("invalid sorting method (%s) specified, instead use <bubble> sort" % sortmethod)
 sorter.SetRefColNum(0)
