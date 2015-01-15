@@ -32,6 +32,8 @@ BubbleSort::BubbleSort(Matrix *data){
 /// Destructor
 BubbleSort::~BubbleSort(){
   delete datacopy_;
+  delete [] indices_;
+  delete [] refColumn_;
 }
 
 /// Set the reference column number and extract the data of the reference column to the container refColumn_

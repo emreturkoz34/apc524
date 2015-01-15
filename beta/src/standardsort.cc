@@ -97,7 +97,7 @@ int StandardSort::sort_data(){
     }
   }
 
-
+  
   delete [] refColumn;
 
   return 0;

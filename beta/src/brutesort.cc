@@ -39,6 +39,8 @@ BruteSort::BruteSort(Matrix* data){
 BruteSort::~BruteSort(){
   //delete data_;
   delete datacopy_;
+  delete [] refColumn_;
+  delete [] indices_;
 }
 
 /// Set the reference column number
