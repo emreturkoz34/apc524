@@ -26,6 +26,13 @@ BruteSort::BruteSort(Matrix* data){
     }
   }
 
+  // Generate the index array
+  indices_ = new int[nrows_];
+  for (int i = 0; i<nrows_; i++){
+    indices_[i] = i;
+  }
+
+
 }
 
 /// Destructor
@@ -37,6 +44,14 @@ BruteSort::~BruteSort(){
 /// Set the reference column number
 void BruteSort::SetRefColNum(int num){
   refColNum_ = num;
+
+  // extract the reference column
+  refColumn_ = new double[nrows_];
+
+  for (int  i = 0; i<nrows_; i++){
+    refColumn_[i] = data_->GetVal(i, refColNum_);
+  }
+
 }
 
 
@@ -61,36 +76,28 @@ void BruteSort::SetRefColNum(int num){
 
  */
 int BruteSort::sort_data(){
-  double *refColumn = new double[nrows_];
-  int *indices = new int[nrows_];
 
-  for(int i = 0; i<nrows_; i++){
-    refColumn[i] = data_->GetVal(i, refColNum_);
-  }
-
-  double min_ = refColumn[0];
+  double min_ = refColumn_[0];
   int index = 0;
   for (int i = 0; i<nrows_; i++){
     for(int j = 0; j<nrows_; j++){
       
-      if(refColumn[j] <= min_){
-	min_ = refColumn[j];
+      if(refColumn_[j] <= min_){
+	min_ = refColumn_[j];
 	index = j;  
       }
     }
-    refColumn[index] = 999999; // a value that is high enough
-    indices[i] = index;
-    min_ = refColumn[i];
+    refColumn_[index] = 999999; // a value that is high enough
+    indices_[i] = index;
+    min_ = refColumn_[i];
   }
   
   for(int i = 0; i< nrows_; i++){
     for(int j = 0; j<ncols_; j++){
-      data_->SetVal(i,j, datacopy_->GetVal(indices[i], j));
+      data_->SetVal(i,j, datacopy_->GetVal(indices_[i], j));
     }
   }
 
-  delete [] indices;
-  delete [] refColumn;  
-
+ 
   return 0;
 }

@@ -12,7 +12,7 @@ Zvar_max:	0.25
 Zvar_grid:	26
 
 Zpdf:	beta
-sort method:	standard
+sort method:	brute
 StoichMassFrac:	0.27
 interp method:	linear
 max slope test:	linear regression

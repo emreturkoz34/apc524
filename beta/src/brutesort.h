@@ -21,6 +21,9 @@ class BruteSort : public Sorting {
   Matrix* datacopy_;
   int ncols_, nrows_;
   int refColNum_;
+
+  int* indices_;
+  double* refColumn_;
   
 
 };
